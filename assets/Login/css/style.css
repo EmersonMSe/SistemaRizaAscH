@@ -1,0 +1,491 @@
+@charset "utf-8";
+
+/*==============================================================
+
+	Name:style.css
+	Version:1.0.0
+
+================================================================
+
+	Table of contents
+
+		01. Common Styles Initials
+		02. Header Style
+		03. Login with social
+		04. Login Style 1
+		05. Login Style 2
+		06. Login Style 3
+		07. Login Style 4
+		08. Login Style 5
+		09. Login Style 6
+		10. Login Style 7
+
+==============================================================*/
+
+/*==============================================================
+	01. Common Styles Initials
+==============================================================*/
+html {
+	-webkit-text-size-adjust: none;
+	/* Prevent font scaling in landscape */
+	width: 100%;
+	height: 100%;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+input[type="submit"] {
+	-webkit-appearance: none;
+}
+
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	-webkit-font-smoothing: antialiased;
+	font-family: 'gidoleregular';
+	font-weight: 400;
+	width: 100%;
+	min-height: 100%;
+	color: #222222;
+	width: 100%;
+	height: 100%;
+	font-size: 18px;
+}
+
+a {
+	outline: none;
+	text-decoration: none;
+	color: #555;
+}
+
+a:hover,
+a:focus {
+	outline: none;
+	text-decoration: none;
+}
+
+img {
+	border: 0;
+}
+
+input,
+textarea,
+select {
+	outline: none;
+	resize: none;
+	font-family: 'gidoleregular';
+}
+
+a,
+input,
+button {
+	outline: none !important;
+}
+
+button::-moz-focus-inner {
+	border: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	font-family: 'BloggerSans';
+	text-shadow: 2px 2px rgb(0, 0, 0);
+}
+
+img {
+	border: 0;
+	vertical-align: top;
+	max-width: 100%;
+	height: auto;
+}
+
+ul,
+ol {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+p {
+	margin: 0 0 15px 0;
+	padding: 0;
+}
+
+::-webkit-scrollbar {
+	-webkit-appearance: none;
+	width: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background: rgba(46, 56, 71, .5);
+	border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+	cursor: pointer;
+	border-radius: 0px;
+	background: rgba(29, 37, 71, 1);
+	-webkit-transition: color 0.2s ease;
+	-moz-transition: color 0.2s ease;
+	-o-transition: color 0.2s ease;
+	transition: color 0.2s ease;
+}
+
+.container {
+	max-width: 1700px;
+	width: 100%;
+}
+
+.height-100-percentage {
+	height: 100%;
+}
+
+.width-100-percentage {
+	width: 100%;
+}
+
+.padding-top-15px {
+	padding-top: 15px;
+}
+
+.padding-10px {
+	padding: 10px;
+}
+
+.padding-30px {
+	padding: 30px;
+}
+
+.padding-40px {
+	padding: 40px;
+}
+
+.margin-bottom-30px {
+	margin-bottom: 30px;
+}
+
+.max-width-400 {
+	max-width: 400px;
+}
+
+.margin-0-auto {
+	margin: 0 auto;
+}
+
+/*==============================================================
+	03. Login with social
+==============================================================*/
+.login-with {
+	color: #ffffff;
+	text-align: center;
+}
+
+.login-with h3 {
+	font-size: 24px;
+	font-weight: 400;
+	font-family: 'gidoleregular';
+	margin-bottom: 15px;
+}
+
+.social-login-btn {}
+
+.social-login-btn li {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 5px;
+}
+
+.social-login-btn li a {
+	display: block;
+	background: #ffffff;
+	color: #222222;
+	padding: 5px 30px;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+}
+
+.social-login-btn li.facebook-btn a i {
+	color: #405499;
+}
+
+.social-login-btn li.twitter-btn a i {
+	color: #55acee;
+}
+
+.social-login-btn li.google-btn a img {
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -4px;
+}
+
+.login-form-slider {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.login-form-slider .slide {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+.login-form-slider .slide.login-slide {
+	display: block;
+}
+
+.login-form-slider .slide.signup-slide {}
+
+.login-form-slider .slide.forgot-password-slide {}
+
+/*==============================================================
+	04. Login Style 1
+==============================================================*/
+
+.index .style1 {
+	background: url(../images/banner2.jpg) no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+
+.style1 {}
+
+.style1 .login-box {
+	max-width: 1000px;
+	margin: 0 auto;
+	width: 100%;
+	background: url(../images/bgLogin.jpg) #ffffff no-repeat;
+	height: 765px;
+	background-size: cover;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	position: relative;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&display=swap');
+
+.style1 .login-box h1.title {
+	position: absolute;
+	left: 45px;
+	top: 27%;
+	color: #ffffff;
+	font-size: 65px;
+	font-family: 'Alumni Sans Collegiate One', sans-serif;
+}
+
+.style1 .login-box h3.subtitle {
+	position: absolute;
+	left: 50px;
+	top: 37%;
+	font-weight: 400;
+	color: #ffffff;
+	font-size: 25px;
+}
+
+.style1 .login-form-box {
+	background: #ffffff no-repeat;
+	background-size: cover;
+	background-position: center bottom;
+	width: 400px;
+	height: 600px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	position: absolute;
+	overflow: hidden;
+	right: -55px;
+	-webkit-box-shadow: 20px 22px 58px 3px rgba(0, 0, 0, .50);
+	-moz-box-shadow: 20px 22px 58px 3px rgba(0, 0, 0, .50);
+	box-shadow: 20px 22px 58px 3px rgba(0, 0, 0, .50);
+}
+
+.login-style1 {
+	background: url(../images/style2img.jpg) no-repeat;
+	padding: 50px 50px 10px;
+	color: #ffffff;
+}
+
+.login-style1 .label {
+	letter-spacing: 0.050em;
+	font-weight: 400;
+	margin-bottom: 0;
+	padding-left: 15px;
+}
+
+.login-style1 .form-control {
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	height: 45px;
+	background: rgba(255, 255, 255, 0.5);
+	border: 0;
+	box-shadow: none;
+	color: #222222;
+	font-size: 20px;
+	padding: 0 15px;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.login-style1 .form-control:focus {
+	background: rgba(255, 255, 255, 1);
+}
+
+.login-style1 .custom-control {
+	margin-left: 15px;
+}
+
+.login-style1 .submit {
+	display: block;
+	width: 100%;
+	height: 45px;
+	color: #ffffff;
+	background: -webkit-gradient(linear, left top, right top, from(#17ead9), to(#6078ea));
+	background: -webkit-linear-gradient(top, #17ead9, #6078ea);
+	background: -moz-linear-gradient(top, #17ead9, #6078ea);
+	background: -o-linear-gradient(top, #17ead9, #6078ea);
+	background: -ms-linear-gradient(top, #17ead9, #6078ea);
+	background: linear-gradient(top, #17ead9, #6078ea);
+	background-color: #17ead9;
+	border: 0;
+	letter-spacing: 0.1em;
+	font-style: 20px;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	cursor: pointer;
+	font-weight: 500;
+	font-family: 'Poppins', sans-serif;
+}
+
+.login-style1 a {
+	color: #ffffff;
+}
+
+.login-style1 .sign-up-txt {
+	font-size: 18px;
+	color: #ffffff;
+	font-weight: 400;
+	letter-spacing: 0.050em;
+	padding-bottom: 15px;
+	padding-top: 15px;
+}
+
+.login-style1 .sign-up-txt a {
+	color: #01e3f7;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.login-style1 .sign-up-txt a:hover {
+	color: #ffffff;
+}
+
+.login-style1 .forgot-txt {
+	padding-bottom: 30px;
+}
+
+.login-style1 .forgot-txt a {
+	color: rgba(255, 255, 255, 0.8);
+	display: inline-block;
+	font-size: 18px;
+	line-height: 18px;
+	letter-spacing: 0.050em;
+	border-bottom: 1px dashed rgba(255, 255, 255, 0.8);
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.login-style1 .forgot-txt a:hover {
+	color: #ffffff;
+}
+
+/* social icons start */
+.socials {
+	position: relative;
+	margin-top: 1rem;
+	align-items: center;
+	text-align: center;
+  }
+  
+  .socials .social-icons {
+	padding-left: 0;
+	margin-bottom: 0;
+	list-style: none;
+  }
+  
+  .socials .social-icons li {
+	display: inline-block;
+	margin-bottom: 14px;
+  }
+  
+  .social-icons a {
+	font-size: 2rem;
+	display: inline-block;
+	line-height: 44px;
+	color: #00d9ff;
+	background-color: #09011b;
+	width: 44px;
+	height: 44px;
+	text-align: center;
+	margin-right: 8px;
+	border-radius: 100%;
+	-webkit-transition: all 0.2s linear;
+	-o-transition: all 0.2s linear;
+	transition: all 0.2s linear;
+  }
+  
+  .social-icons a:active,
+  .social-icons a:focus,
+  .social-icons a:hover {
+	color: #fff;
+	background-color: #0685da;
+  }
+  
+  .social-icons a.github:hover {
+	background-color: #0e0e0e;
+  }
+  
+  .social-icons a.twitter:hover {
+	background-color: #00aced;
+  }
+  
+  .social-icons a.linkedin:hover {
+	background-color: #007bb6;
+  }
+  
+  .social-icons a.dev:hover {
+	background-color: #070707;
+  }
+  
+  .social-icons a.instagram:hover {
+	background-color: #ee00da;
+  }
