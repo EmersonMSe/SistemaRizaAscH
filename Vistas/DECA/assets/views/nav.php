@@ -109,6 +109,14 @@ include "header.php"
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="LosaMacisa.php" class="nav-link">
+                        <i class="ri-stack-fill"></i>
+                        <p>
+                            DISEÑO DE LOSA MACISA
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="Col_flexo_Compresion.php" class="nav-link">
                         <i class="ri-ruler-2-line"></i>
                         <p>
