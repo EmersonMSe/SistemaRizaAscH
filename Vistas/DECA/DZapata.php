@@ -1,7 +1,4 @@
-<?php
-session_start();
-if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
-    ?>
+
     <title>Adm | DISEÑO DE ZAPATAS</title>
     <?php
     include_once "assets/views/header.php";
@@ -458,7 +455,5 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
     </div>
     <?php
     include_once "assets/views/footer.php";
-} else {
-    header('Location: ../login.php');
-}
+
 ?>
