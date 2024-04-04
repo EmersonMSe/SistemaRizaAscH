@@ -5,6 +5,12 @@ include_once "assets/views/nav.php";
 ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js" integrity="sha512-7U4rRB8aGAHGVad3u2jiC7GA5/1YhQcQjxKeaVms/bT66i3LVBMRcBI9KwABNWnxOSwulkuSXxZLGuyfvo7V1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.15/paper-full.min.js"></script>
+<style>
+    canvas {
+        border: 1px solid black;
+    }
+</style>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -29,7 +35,7 @@ include_once "assets/views/nav.php";
             <div class="row">
                 <!-- Primera columna datos generales -->
                 <div class="col-3">
-                    <div class="card-dark" style="height: 700px; overflow-y: auto;">
+                    <div class="card-dark" style="height: 900px; overflow-y: auto;">
                         <div class="card-header">
                             <h3 class="card-title">1. Datos Principales &nbsp;&nbsp;&nbsp;&nbsp;<small>Método de la NTP
                                     E.030</small></h3>
@@ -384,14 +390,17 @@ include_once "assets/views/nav.php";
                                             </div>
                                             <div class="col-md-12 mb-3">
                                                 <div class="input-group">
-                                                    <span class="input-group-text col-3">L₁</span>
-                                                    <input type="number" step="any" name="l1" class="form-control text-center" id="l1" value="50" min="0" required>
+                                                    <span class="input-group-text col-3">L <sub>2</sub></span>
+                                                    <input type="number" step="any" name="l2" class="form-control text-center" id="l2" value="3.2" min="0" required>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">m</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 mb-3">
+                                                <div class="col-12">
+                                                    <label>Factor de amplificación de cargas muertas</label>
+                                                </div>
                                                 <div class="input-group">
                                                     <span class="input-group-text col-3">α<sub>D</sub></span>
                                                     <input nameplacehoder="1.4 " value="1.4" type="number" step="any" name="fact_ampli_cm" class="form-control text-center" id="fact_ampli_cm" min="0" required>
@@ -401,6 +410,9 @@ include_once "assets/views/nav.php";
                                                 </div>
                                             </div>
                                             <div class="col-md-12 mb-3">
+                                                <div class="col-12">
+                                                    <label>Factor de amplificación de cargas vivas</label>
+                                                </div>
                                                 <div class="input-group">
                                                     <span class="input-group-text col-3">α<sub>L</sub></span>
                                                     <input id="fact_ampli_cv" placehoder="1.7 " value="1.7" type="number" step="any" name="fact_ampli_cv" class="form-control text-center" value="50" min="0" required>
@@ -410,46 +422,31 @@ include_once "assets/views/nav.php";
                                                 </div>
                                             </div>
                                             <div class="col-md-12 mb-3">
+                                                <div class="col-12">
+                                                    <label>Factor de amplificación de cargas muertas</label>
+                                                </div>
                                                 <div class="input-group">
                                                     <span class="input-group-text col-3">α<sub>D</sub></span>
-                                                    <input id="fact_ampli_cm_c2" nameplacehoder="1.4 " value="1.4" type="number"  step="any" name="fact_ampli_cm_c2" class="form-control text-center" min="0" required>
+                                                    <input id="fact_ampli_cm_c2" nameplacehoder="1.25 " value="1.25" type="number" step="any" name="fact_ampli_cm_c2" class="form-control text-center" min="0" required>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text"></span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 mb-3">
+                                                <div class="col-12">
+                                                    <label>Factor de amplificación de cargas vivas</label>
+                                                </div>
                                                 <div class="input-group">
                                                     <span class="input-group-text col-3">α<sub>L</sub></span>
-                                                    <input id="fact_ampli_cv_c2" placehoder="1.7 " value="1.7" type="number" step="any" name="fact_ampli_cv_c2" class="form-control text-center" value="50" min="0" required>
+                                                    <input id="fact_ampli_cv_c2" placehoder="1.25 " value="1.25" type="number" step="any" name="fact_ampli_cv_c2" class="form-control text-center" value="50" min="0" required>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text"></span>
                                                     </div>
                                                 </div>
                                             </div>
 
-
-
-                                            <!-- <h4>2.1 Preciones amplificadas</h4><br>
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-12">
-                                                <label>Capacidad portante admisible neta</label>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">qₙₑₜₐ</span>
-                                                    <input type="number" name="qneta" class="form-control text-center" id="qneta" placeholder="4" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">kgf/cm<sup>2</sup></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
-
                                         </div>
-
-                                        <hr>
-                                        <h4>3. Zapata Combinada</h4><br>
 
 
                                         <div class="row">
@@ -466,31 +463,38 @@ include_once "assets/views/nav.php";
                             </form>
                         </div>
                         <div class="card-footer">
-                            <div class="group-form">
+                            <!-- <div class="group-form">
                                 <button class="btn btn-primary" type="submit">DISEÑAR</button>
+                            </div> -->
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card col-9 card-info" style="height: 900px; overflow-y: auto;">
+                    <div class="card">
+                        <canvas id="myCanvas" width="1000" height="300"></canvas>
+                    </div>
+                    <div class="card-header ">
+                        <h3>Resultados</h3>
+                    </div>
+                    <div class="card-body col-12">
+                        <div class="container">
+                            <div class="table-responsive" id="ObtenerResultados">
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="card col-9 card-info" style="height: 700px; overflow-y: auto;">
-                    <div class="card-header ">
-                        <h3>Resultados</h3>
-                    </div>
-                    <div class="card-body col-12" id="ObtenerResultados">
-                    </div>
-                </div>
+
+
             </div>
-
-        </div>
-</div>
-<br>
-</section>
-<!-- Main content -->
+            <br>
+    </section>
+    <!-- Main content -->
 
 
-<script src="js/zapata.js"></script>
-
+    <script src="js/zapata.js"></script>
+    <script type="text/javascript" src="grafica.js"></script>
 </div>
 <?php
 include_once "assets/views/footer.php";
