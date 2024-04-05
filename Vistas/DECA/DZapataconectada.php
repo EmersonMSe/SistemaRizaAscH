@@ -3,6 +3,46 @@
 include_once "assets/views/header.php";
 include_once "assets/views/nav.php";
 ?>
+<style>
+    /* Estilos generales del select */
+    select.form-select {
+        display: block;
+        width: 100%;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    /* Estilo cuando el select está en foco */
+    select.form-select:focus {
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 .25rem rgba(0, 123, 255, .25);
+    }
+
+    /* Estilo cuando el select está desactivado */
+    select.form-select:disabled {
+        background-color: #e9ecef;
+    }
+
+    /* Estilo para la flecha del select */
+    select.form-select::-ms-expand {
+        border: 0;
+        background-color: transparent;
+    }
+
+    /* Estilo para el borde y el fondo del dropdown */
+    select.form-select:-moz-focusring {
+        color: transparent;
+        text-shadow: 0 0 0 #212529;
+    }
+</style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js" integrity="sha512-7U4rRB8aGAHGVad3u2jiC7GA5/1YhQcQjxKeaVms/bT66i3LVBMRcBI9KwABNWnxOSwulkuSXxZLGuyfvo7V1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.15/paper-full.min.js"></script>
@@ -54,193 +94,169 @@ include_once "assets/views/nav.php";
             <div class="row">
                 <!-- Primera columna datos generales -->
                 <div class="col-3">
-                    <div class="card-dark" style="height: 900px; overflow-y: auto;">
-                        <div class="card-header">
-                            <h3 class="card-title">1. Datos para el diseño</h3>
-                        </div>
-                        <div class="card-body">
-                            <div>
-                                <div class="row mb-3">
-                                    <div class="col-md-12">
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-12">
-                                                <label>Dimensiones de la columna 1</label>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">ancho</span>
-                                                    <input type="number" name="anchoCol1" class="form-control text-center" id="anchoCol1" placeholder="0.6" step="any" value="0.6" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
+                    <form id="DataZapata">
+                        <div class="card-dark" style="height: 900px; overflow-y: auto;">
+                            <div class="card-header">
+                                <h3 class="card-title">1. Datos para el diseño</h3>
+                            </div>
+                            <div class="card-body">
+                                <div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <div class="row mb-3 text-center">
+                                                <div class="col-12">
+                                                    <label>Dimensiones de la columna 1</label>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">Ancho</span>
+                                                        <input type="number" name="anchoCol1" class="form-control text-center" id="anchoCol1" placeholder="0.6" step="any" value="0.6" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">m</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">Largo</span>
+                                                        <input type="number" name="largoCol1" class="form-control text-center" id="largoCol1" placeholder="0.4" step="any" value="0.4" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">m</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 mb-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">largo</span>
-                                                    <input type="number" name="largoCol1" class="form-control text-center" id="largoCol1" placeholder="0.4" step="any" value="0.4" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
+                                            <div class="row mb-3 text-center">
+                                                <div class="col-12">
+                                                    <label>Dimensiones de la columna 2</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">Ancho</span>
+                                                        <input type="number" name="anchoCol2" class="form-control text-center" id="anchoCol2" placeholder="0.8" step="any" value="0.8" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">m</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">Largo</span>
+                                                        <input type="number" name="largoCol2" class="form-control text-center" id="largoCol2" placeholder="0.4" step="any" value="0.4" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">m</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-12">
-                                                <label>Dimensiones de la columna 2</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">ancho</span>
-                                                    <input type="number" name="anchoCol2" class="form-control text-center" id="anchoCol2" placeholder="0.8" step="any" value="0.8" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
+                                            <div class="row mb-3 text-center">
+                                                <div class="col-12">
+                                                    <label>Dimensiones de la Zapata 1</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">Ancho</span>
+                                                        <input type="number" name="anchoZap1" class="form-control text-center" id="anchoZap1" placeholder="1.2" step="any" value="1.2" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">m</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">Largo</span>
+                                                        <input type="number" name="largoZap1" class="form-control text-center" id="largoZap1" placeholder="1.5" step="any" value="1.5" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">m</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">largo</span>
-                                                    <input type="number" name="largoCol2" class="form-control text-center" id="largoCol2" placeholder="0.4" step="any" value="0.4" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
+                                            <div class="row mb-3 text-center">
+                                                <div class="col-12">
+                                                    <label>Dimensiones de la Zapata 2</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">Ancho</span>
+                                                        <input type="number" name="anchoZap2" class="form-control text-center" id="anchoZap2" placeholder="1.5" step="any" value="1.5" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">m</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">Largo</span>
+                                                        <input type="number" name="largoZap2" class="form-control text-center" id="largoZap2" placeholder="1.5" step="any" value="1.5" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">m</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-12">
-                                                <label>Dimensiones de la Zapata 1</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">ancho</span>
-                                                    <input type="number" name="anchoZap1" class="form-control text-center" id="anchoZap1" placeholder="1.2" step="any" value="1.2" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
+                                            <div class="row mb-3 text-center">
+                                                <div class="col-12">
+                                                    <label>Viga</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">Ancho</span>
+                                                        <input type="number" name="anchoViga" class="form-control text-center" id="anchoViga" placeholder="0.4" step="any" value="0.3" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">m</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">largo</span>
-                                                    <input type="number" name="largoZap1" class="form-control text-center" id="largoZap1" placeholder="1.5" step="any" value="1.5" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
+                                            <div class="row mb-3 text-center">
+                                                <div class="col-12">
+                                                    <label>Luz libre entre columnas</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">ln</span>
+                                                        <input type="number" name="lndiseño" class="form-control text-center" id="lndiseño" placeholder="5" step="any" value="5" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">m</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-12">
-                                                <label>Dimensiones de la Zapata 2</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">ancho</span>
-                                                    <input type="number" name="anchoZap2" class="form-control text-center" id="anchoZap2" placeholder="1.5" step="any" value="1.5" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">largo</span>
-                                                    <input type="number" name="largoZap2" class="form-control text-center" id="largoZap2" placeholder="1.5" step="any" value="1.5" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3 text-center">
 
-                                            <div class="col-md-12">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">ln</span>
-                                                    <input type="number" name="lndiseño" class="form-control text-center" id="lndiseño" placeholder="5" step="any" value="5" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
-                                                    </div>
+
+                                            <div class="row ">
+                                                <div class="col-12 text-center">
+                                                    <label>Tipos de diseño</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <select id="tipoDiseño" class="form-select" aria-label="Seleccionar tipo de diseño">
+                                                        <option value="1">Tipo 1</option>
+                                                        <option value="2">Tipo 2</option>
+                                                        <option value="3">Tipo 3</option>
+                                                        <option value="4">Tipo 4</option>
+                                                        <option value="5">Tipo 5</option>
+                                                        <option value="6">Tipo 6</option>
+                                                        <option value="7">Tipo 7</option>
+                                                        <option value="8">Tipo 8</option>
+                                                        <option value="9">Tipo 9</option>
+                                                    </select>
                                                 </div>
                                             </div>
-
-                                        </div>
-                                        <div class="row mb-3">
-
-                                            <div class="col-md-7">
-                                                <select id="tipoDiseño" class="form-select" aria-label="Seleccionar tipo de diseño">
-                                                    <option value="1">Tipo 1</option>
-                                                    <option value="2">Tipo 2</option>
-                                                    <option value="3">Tipo 3</option>
-                                                    <option value="4">Tipo 4</option>
-                                                    <option value="5">Tipo 5</option>
-                                                    <option value="6">Tipo 6</option>
-                                                    <option value="7">Tipo 7</option>
-                                                    <option value="8">Tipo 8</option>
-                                                    <option value="9">Tipo 9</option>
-                                                </select>
-                                            </div>
-                                            <!-- <div class="col-md-5">
-                                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#infoModal">
-                                                    <i class="bi bi-info-circle"></i> ver tipos de diseño
-                                                </button>
-                                            </div> -->
                                         </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-header">
-                            <h3 class="card-title">2. Datos Principales</h3>
-                        </div>
-                        <div class="card-body">
-                            <form id="DataZapata">
+                            <div class="card-header">
+                                <h3 class="card-title">2. Datos Principales</h3>
+                            </div>
+                            <div class="card-body">
+
                                 <div class="row mb-3">
                                     <div class="col-md-12">
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-12">
-                                                <label>Dimensiones de las columnas</label>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">c₁</span>
-                                                    <input type="number" name="c1" class="form-control text-center" id="c1" placeholder="0.6" step="any" value="0.6" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-md-12">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">c'₁</span>
-                                                    <input type="number" name="c_1" class="form-control text-center" id="c_1" value="0.8" min="0" step="any" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-12">
-                                                <label>Luz libre entre columnas:</label>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">lₙ</span>
-                                                    <input type="number" name="ln" class="form-control text-center" id="ln" step="any" value="5" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="row mb-3 text-center">
                                             <div class="col-12">
                                                 <label>Cargas-En los momentos gravitacionales horario positivo</label>
@@ -595,76 +611,7 @@ include_once "assets/views/nav.php";
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row mb-3 text-center">
-                                                <div class="col-12">
-                                                    <label>---</label>
-                                                </div>
-                                                <div class="col-md-12 mb-3">
-                                                    <div class="input-group">
-                                                        <span class="input-group-text col-3">b</span>
-                                                        <input type="number" name="bc" class="form-control text-center" id="bc" step="any" value="40" min="0" required>
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">cm</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 mb-3">
-                                                    <div class="input-group">
-                                                        <span class="input-group-text col-3">h</span>
-                                                        <input type="number" name="h" class="form-control text-center" id="h" step="any" value="120" min="0" required>
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">cm</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 mb-3">
-                                                    <div class="input-group">
-                                                        <span class="input-group-text col-3">f'<sub>c</sub></span>
-                                                        <input type="number" name="fdc" class="form-control text-center" id="fdc" step="any" value="280" min="0" required>
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text"> kgf/cm<sup>2</sup></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 mb-3">
-                                                    <div class="input-group">
-                                                        <span class="input-group-text col-3">ϕ<sub>f</sub></span>
-                                                        <input type="number" name="of" class="form-control text-center" id="of" step="any" value="0.9" min="0" required>
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-md-12 mb-3">
-                                                    <div class="input-group">
-                                                        <span class="input-group-text col-3">f<sub>y</sub></span>
-                                                        <input type="number" name="fy" class="form-control text-center" id="fy" step="any" value="4200" min="0" required>
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text"> kgf/cm<sup>2</sup></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-12 mb-3">
-                                                    <div class="input-group">
-                                                        <span class="input-group-text col-3">Mu</span>
-                                                        <input type="number" name="Mu" class="form-control text-center" id="Mu" step="any" value="150" min="0" required>
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">tonnef⋅m</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 mb-3">
-                                                    <div class="input-group">
-                                                        <span class="input-group-text col-3">Av</span>
-                                                        <input type="number" name="Av" class="form-control text-center" id="Av" step="any" value="5.1" min="0" required>
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">cm <sup>2</sup></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
 
                                         </div>
 
@@ -680,47 +627,46 @@ include_once "assets/views/nav.php";
 
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="card-footer">
-                            <!-- <div class="group-form">
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <!-- <div class="group-form">
                                 <button class="btn btn-primary" type="submit">DISEÑAR</button>
                             </div> -->
-                        </div>
-                    </div>
-
                 </div>
-                <div class="card col-9 card-info" style="height: 900px; overflow-y: auto;">
-                    <div class="card-header">
-                        <h3>Diseño</h3>
-                    </div>
-                    <div class="card">
-                        <div class="d-flex justify-content-center">
-                            <canvas id="myCanvas" width="1000" height="300" style="border: none;"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="card-header ">
-                        <h3>Resultados</h3>
-                    </div>
-                    <div class="card-body col-12">
-                        <div class="container">
-                            <div class="table-responsive" id="ObtenerResultados">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
             </div>
-            <br>
-    </section>
-    <!-- Main content -->
+
+        </div>
+        <div class="card col-9 card-info" style="height: 900px; overflow-y: auto;">
+            <div class="card-header">
+                <h3>Diseño</h3>
+            </div>
+            <div class="card">
+                <div class="d-flex justify-content-center">
+                    <canvas id="myCanvas" width="1000" height="300" style="border: none;"></canvas>
+                </div>
+            </div>
+
+            <div class="card-header ">
+                <h3>Resultados</h3>
+            </div>
+            <div class="card-body col-12">
+                <div class="container">
+                    <div class="table-responsive" id="ObtenerResultados">
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
 
-    <script src="js/zapata.js"></script>
-    <script type="text/javascript" src="grafica.js"></script>
+</div>
+<br>
+</section>
+<!-- Main content -->
+
+
+<script src="js/zapataConectada.js"></script>
 </div>
 <?php
 include_once "assets/views/footer.php";
