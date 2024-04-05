@@ -50,6 +50,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $facmc2 = $_POST["fact_ampli_cm_c2"];
     $facvc2 = $_POST["fact_ampli_cv_c2"];
 
+    //Envolvente de Momento Flector en la viga de cimentación
+
+    $bc = $_POST["bc"];
+    $h = $_POST["h"];
+    $fdc = $_POST["fdc"];
+    $of = $_POST["of"];
+    $fy = $_POST["fy"];
+    $Mu = $_POST["Mu"];
+    $Av = $_POST["Av"];
+
     //CALCULOS
 
     //Luz entre ejes de columnas
@@ -273,6 +283,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Presiones en la zapata 2
     $O42PAmax = round(($C4PAR2 * 1.05) / ($b2 * $L2) + 6 * ($facmc2 * $MDy2 + $facvc2 * $MLy2 + $MSY2) / (pow($b2, 2) * $L2), 3);
     $O42PAmin = round(($C4PAR2 * 1.05) / ($b2 * $L2) - 6 * ($facmc2 * $MDy2 + $facvc2 * $MLy2 + $MSY2) / (pow($b2, 2) * $L2), 3);
+
+
+    //Envolvente de Momento Flector en la viga de cimentación
+    $d = $h - 11;
+    $p1 = (0.85 * $fdc * $bc * $d) / ($fy);
+    $p2 = ((2 * $Mu * 100000) / ($of * 0.85 * $fdc * $bc * $d * $d));
+    $raziq = sqrt(1 - $p2);
+    $Avsint = round(($p1 * (1 - $raziq)), 3);
+    $N = $Avsint / $Av;
 }
 ?>
 <!DOCTYPE html>
@@ -1130,7 +1149,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </tr>
 
                 </tbody>
+                <thead style="font-size: 13px; background-color: #4e5c77; color: white;">
+                    <tr>
+                        <th colspan="2">5. </th>
+                        <th scope="col">FORMULAS</th>
+                        <th scope="col">RESULTADOS</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 11px;">
 
+                    <tr>
+                        <td></td>
+                        <td>A'<sub>sint</sub></td>
+                        <td> ((0.85 * f'<sub>c</sub> * b * d) / f<sub>y</sub>) * (1 - (√(1-(2*Mu)/(ϕ<sub>f</sub> * 0.85 * f'<sub>c</sub> * b *d<sup>2</sup> )))) </td>
+                        <td><?php echo $Avsint ?> cm<sup>2</sup></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>N</td>
+                        <td>A'<sub>sint</sub> / A<sub>v</sub></td>
+                        <td><?php echo $N  ?> </td>
+                    </tr>
+
+                </tbody>
             </table>
             <br><br>
 
