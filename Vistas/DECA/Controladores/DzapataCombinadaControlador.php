@@ -3,128 +3,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Datos de Zapata combinada
     //Distancia entre ejes de columnas
-    $dec = $_POST["dec"];
+    $des = $_POST["des"];
+    $qa = $_POST["qa"];
+    $p_servicio = $_POST["p_servicio"];
 
-    //Distancia entre el limite de propiedad y el eje de la columna exterior
-    $dist_limitP = $_POST["dist_limitP"];
+    //Dimensiones de la columna 1
+    $t1_col1 = $_POST["t1_col1"];
+    $t2_col1 = $_POST["t2_col1"];
 
-    //Profundidad de cimentación:
-    $df = $_POST["df"];
+    //Dimensiones de la columna 2
+    $t1_col2 = $_POST["t1_col2"];
+    $t2_col2 = $_POST["t2_col2"];
 
-    //Dimensiones de la columna exterior
-    $c1 = $_POST["c1"];
-    $c2 = $_POST["c2"];
-
-    //Dimensiones de la columna interior
-    $cd1_i = $_POST["cd1_i"];
-    $cd2_i = $_POST["cd2_i"];
-
-    //Cargas en la columna exterior
-    $pd1_e = $_POST["pd1_e"];
-    $pl1_e = $_POST["pl1_e"];
-
-    //Cargas en la columna interior
-    $pd2_i = $_POST["pd2_i"];
-    $pl2_i = $_POST["pl2_i"];
-
-    //espesor del piso
-    $e_piso = $_POST["e_piso"];
-    //Sobrecarga
-    $sc = $_POST["sc"];
-
-    //Propiedades de los materiales 
-    $fdc = $_POST["fdc"];
+    //
     $fy = $_POST["fy"];
-    $cpn = $_POST["cpn"];
-    $yc = $_POST["yc"];
-
-    //suelo 
-    $q_adm = $_POST["q_adm"];
-    $ys = $_POST["ys"];
-
-    //Peralte mínimo para Longitud de desarrollo a compresión dentro la zapata
-    $dbz = $_POST["dbz"];
-    $r = $_POST["r"];
-    $db = $_POST["db"];
-    $fc_yr = $_POST["fc_yr"];
-
-    //Peralte adoptado
+    $fc = $_POST["fc"];
+    $df = $_POST["df"];
+    $sc = $_POST["sc"];
+    $ym = $_POST["ym"];
+    $hc = $_POST["hc"];
+    $ot = $_POST["ot"];
     $hz = $_POST["hz"];
-
-    //Predimensionamiento
-    $Bd = $_POST["Bd"];
-    $delta = $_POST["delta"];
-    $L = $_POST["L"];
-    $B = $_POST["B"];
-
-    //Presión ultima de diseño
-    $hz_aprox = $_POST["hz_aprox"];
-
-    //Verificación por cortante en 2 direcciones
-    $dv = $_POST["dv"];
-
-    //Resistencia al punzonamiento (Columna Exterior)
-    $cm_of = $_POST["cm_of"];
-    $as_e = $_POST["as_e"];
-    $as_i = $_POST["as_i"];
-
-    //Resistencia a cortante considerando el acero mínimo
-    $pw = $_POST["pw"];
-    $B_ram = $_POST["B_ram"];
-
-    //Diseño por flexión - Acero longitudinal positivo (superior):
-    $of_frf = $_POST["of_frf"];
-    $dbz_sup = $_POST["dbz_sup"];
-    $Nv1 = $_POST["Nv1"];
-    $ec = $_POST["ec"];
-    $es = $_POST["es"];
-
-    //Acero Transversal (inferior)
-    $ddbz = $_POST["ddbz"];
-    $Nv1_inf = $_POST["Nv1_inf"];
-    $Nv1_ext = $_POST["Nv1_ext"];
-    //Desarrollo del refuerzo longitudinal
-
-    //Desarrollo de la varilla superior sin gancho
-    $yt_sup_sg = $_POST["yt_sup_sg"];
-    $ye_sup_sg = $_POST["ye_sup_sg"];
-    $yg_sup_sg = $_POST["yg_sup_sg"];
-
-    //Desarrollo de la varilla superior con gancho
-    $ye_sup_cg = $_POST["ye_sup_cg"];
-    $yr_sup_cg = $_POST["yr_sup_cg"];
-    $yo_sup_cg = $_POST["yo_sup_cg"];
-
-    //Desarrollo de la varilla inferior sin gancho
-    $yt_inf = $_POST["yt_inf"];
-    $ye_inf = $_POST["ye_inf"];
-    $yg_inf = $_POST["yg_inf"];
-    $yr_inf = $_POST["yr_inf"];
-    $ye_inf = $_POST["ye_inf"];
-    $ys_inf = $_POST["ys_inf"];
-    $Ktr_inf = $_POST["Ktr_inf"];
-
-    //Desarrollo del acero transversal
-    $yt_at = $_POST["yt_at"];
-    $ye_at = $_POST["ye_at"];
-    $yg_at = $_POST["yg_at"];
-
-    //Transferencia de la carga axial de columna a zapata
-    $lvd = $_POST["lvd"];
-    $o_apls = $_POST["o_apls"];
-
-    //CALCULOS
-    $PDL1_E = $pd1_e + $pl1_e;
-    $PDL2_E = $pd1_i + $pl1_i;
-
-   
+    $m1 = $_POST["m1"];
+    $m2 = $_POST["m2"];
+    $r = $_POST["r"];
+    $rec = $_POST["rec"];
+    $Le = $_POST["Le"];
 
 
+    //Calculos
 
-
-
-
-    
+    $Az = $qa * $p_servicio;
+    $B =  $t2_col1 + $m1 + $fc;
+    $L = 0.5 * $t1_col1 + $Le + 0.5 * $t1_col2 + $m2;
 }
 ?>
 <!DOCTYPE html>
@@ -149,372 +60,134 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </thead>
                 <tbody style=" font-size: 11px;">
                     <tr>
-                        <td>Distancia entre ejes de columnas</td>
-                        <td>δ</td>
-                        <td><?php echo $dec ?> m</td>
+                        <td>Descripción</td>
+                        <td>Des</td>
+                        <td><?php echo $des ?></td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>Distancia entre el limite de propiedad y
-                            el eje de la columna exterior</td>
-                        <td>Δ</td>
-                        <td><?php echo $dist_limitP ?> m</td>
+                        <td></td>
+                        <td>qa</td>
+                        <td><?php echo $qa ?> Ton/m<sup>2</sup></td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>Profundidad de cimentación</td>
-                        <td>D<sub>f</sub></td>
-                        <td><?php echo $df ?> m</td>
+                        <td>Presión de Servicio</td>
+                        <td>P servicio</td>
+                        <td><?php echo $p_servicio ?> Ton</td>
+                        <td></td>
+                    </tr>
+                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                        <td colspan="4">Columna 1</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>t1</td>
+                        <td><?php echo $t1_col1 ?> m</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>t2</td>
+                        <td><?php echo $t2_col1 ?> m</td>
                         <td></td>
                     </tr>
 
                     <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Dimensiones de la columna exterior</td>
+                        <td colspan="4">Columna 2</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>>c<sub>1</sub> </td>
-                        <td><?php echo $c1  ?> cm</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>c<sub>2</sub></td>
-                        <td><?php echo $c2  ?> cm</td>
-                        <td></td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Dimensiones de la columna interior</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>>c'<sub>1</sub> </td>
-                        <td><?php echo $cd1_i  ?> cm</td>
+                        <td>t1</td>
+                        <td><?php echo $t1_col2 ?> m</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>c'<sub>2</sub></td>
-                        <td><?php echo $cd2_i  ?> cm</td>
-                        <td></td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Cargas en la columna exterior</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>P<sub>D1</sub></td>
-                        <td><?php echo $pd1_e  ?> tonnef</td>
+                        <td>t2</td>
+                        <td><?php echo $t2_col2 ?> m</td>
                         <td></td>
                     </tr>
                     <tr>
+                        <td>Fluencia del acero</td>
+                        <td>fy</td>
+                        <td><?php echo $fy  ?> Kgf/cm<sup>2</sup></td>
                         <td></td>
-                        <td>P<sub>L1</sub></td>
-                        <td><?php echo $pl1_e  ?> tonnef</td>
-                        <td></td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Cargas en la columna interior</td>
                     </tr>
                     <tr>
+                        <td>Resistencia a compresión del concreto</td>
+                        <td>fc</td>
+                        <td><?php echo $fc  ?> Kgf/cm<sup>2</sup></td>
                         <td></td>
-                        <td>P<sub>D2</sub></td>
-                        <td><?php echo $pd2_i  ?> tonnef</td>
+                    </tr>
+                    <tr>
+                        <td>Profundidad de desplante</td>
+                        <td>Df</td>
+                        <td><?php echo $df  ?> m</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>P<sub>L2</sub></td>
-                        <td><?php echo $pl2_i  ?> tonnef</td>
+                        <td>S/C</td>
+                        <td><?php echo $sc ?> Kg/m<sup>2</sup></td>
                         <td></td>
                     </tr>
 
                     <tr>
-                        <td>Espesor del piso de concreto</td>
-                        <td>e<sub>piso</sub></td>
-                        <td><?php echo $e_piso  ?> m</td>
+                        <td></td>
+                        <td>ym</td>
+                        <td><?php echo $ym  ?> Kg/m<sup>3</sup></td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>Sobrecarga</td>
-                        <td>sc</td>
-                        <td><?php echo $sc  ?> tonnef/m<sup>2</sup></td>
                         <td></td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Propiedades de los materiales</td>
-                    </tr>
-                    <tr>
-                        <td>Resistencia del concreto</td>
-                        <td>f'<sub>c</sub></td>
-                        <td><?php echo $fdc  ?> kgf/m<sup>2</sup></td>
+                        <td>hc</td>
+                        <td><?php echo $hc  ?> m</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>Resistencia a fluencia del
-                            acero</td>
-                        <td>f<sub>y</sub></td>
-                        <td><?php echo $fy  ?> kgf/m<sup>2</sup></td>
+                        <td></td>
+                        <td>σt</td>
+                        <td><?php echo $ot  ?> Kg/m<sup>2</sup></td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>Concreto de Peso normal</td>
-                        <td>λ</td>
                         <td></td>
-                        <td><?php echo $cpn  ?> kgf/m<sup>2</sup></td>
-                    </tr>
-                    <tr>
-                        <td>Densidad del concreto</td>
-                        <td>γ<sub>c</sub></td>
-                        <td><?php echo $yc  ?> tonnef/m<sup>3</sup></td>
-                        <td></td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Suelo</td>
-                    </tr>
-                    <tr>
-                        <td>Capacidad admisible del
-                            suelo</td>
-                        <td>q<sub>adm</sub></td>
-                        <td><?php echo $q_adm  ?> kgf/cm<sup>2</sup></td>
+                        <td>hz</td>
+                        <td><?php echo $hz  ?> m</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>Densidad de suelo</td>
-                        <td>γ<sub>s</sub></td>
-                        <td><?php echo $ys  ?> tonnef/m<sup>3</sup></td>
+                        <td></td>
+                        <td>m1</td>
+                        <td><?php echo $m1  ?> m</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>Diámetro de la barra de la zapata</td>
-                        <td>d<sub>bz</sub></td>
-                        <td><?php echo $dbz  ?> in</td>
+                        <td></td>
+                        <td>m2</td>
+                        <td><?php echo $m2  ?> m</td>
                         <td></td>
                     </tr>
+
                     <tr>
-                        <td>Recubrimiento</td>
+                        <td></td>
                         <td>r</td>
                         <td><?php echo $r  ?> cm</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>Diámetro de la barra de la columna</td>
-                        <td>d<sub>b</sub></td>
-                        <td><?php echo $db  ?> in</td>
                         <td></td>
-                    </tr>
-                    <tr>
-                        <td>Factor de confinamiento</td>
-                        <td>ψ<sub>r</sub></td>
-                        <td><?php echo $fc_yr  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Predimensionamiento</td>
-                    </tr>
-                    <tr>
-                        <td>Ancho propuesto</td>
-                        <td>B'</td>
-                        <td><?php echo $Bd  ?> cm</td>
+                        <td>rec</td>
+                        <td><?php echo $rec  ?> cm</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>δ</td>
-                        <td><?php echo $delta  ?>m</td>
+                        <td>Le</td>
+                        <td><?php echo $Le  ?> m</td>
                         <td></td>
                     </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Longitudes finales adoptadas</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>L</td>
-                        <td><?php echo $L  ?> m</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>B</td>
-                        <td><?php echo $B  ?> cm</td>
-                        <td></td>
-                    </tr>
-
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Presión ultima de diseño</td>
-                    </tr>
-                    <tr>
-                        <td>Peralte aproximado</td>
-                        <td>h<sub>z</sub></td>
-                        <td><?php echo $hz_aprox  ?> m</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Verificación por cortante en 2 direcciones</td>
-                        <td>d<sub>v</sub></td>
-                        <td><?php echo $dv  ?> m</td>
-                        <td></td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Resistencia al punzonamiento (Columna Exterior)</td>
-                    </tr>
-                    <tr>
-                        <td>Coeficiente de minoración</td>
-                        <td>Φ<sub>c</sub></td>
-                        <td><?php echo $as_e  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Resistencia al punzonamiento (Columna interior)</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>α<sub>s</sub></td>
-                        <td><?php echo $as_i  ?> </td>
-                        <td></td>
-                    </tr>
-
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Resistencia a cortante considerando el acero mínimo</td>
-                    </tr>
-                    <tr>
-                        <td>Cuantía colocada en tracción</td>
-                        <td>ρ<sub>w</sub></td>
-                        <td><?php echo $pw  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>B</td>
-                        <td><?php echo $B_ram  ?> in</td>
-                        <td></td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Resistencia a cortante considerando el acero mínimo</td>
-                    </tr>
-                    <tr>
-                        <td>Factor de Reducción por flexión</td>
-                        <td>Φ<sub>f</sub></td>
-                        <td><?php echo $of_frf  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Diámetro de la barra</td>
-                        <td>d<sub>bz</sub></td>
-                        <td><?php echo $dbz_sup  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Numero de barras adoptado</td>
-                        <td>N<sub>v1</sub></td>
-                        <td><?php echo $Nv1  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Deformación máxima útil del
-                            concreto no confinado</td>
-                        <td>ε<sub>c</sub></td>
-                        <td><?php echo $ec  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Modulo de elasticidad del
-                            acero</td>
-                        <td>E<sub>s</sub></td>
-                        <td><?php echo $es  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Resistencia a cortante considerando el acero mínimo</td>
-                    </tr>
-                    <tr>
-                        <td>Diámetro de la barra</td>
-                        <td>d'<sub>bz</sub></td>
-                        <td><?php echo $ddbz  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Numero de barras adoptado columna interior</td>
-                        <td>N<sub>v1</sub></td>
-                        <td><?php echo $Nv1_inf  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Numero de barras adoptado columna exterior</td>
-                        <td>N<sub>v1</sub></td>
-                        <td><?php echo $Nv1_ext  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Desarrollo de la varilla superior sin gancho</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>ψ<sub>t</sub></td>
-                        <td><?php echo $yt_sup_sg  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>ψ<sub>e</sub></td>
-                        <td><?php echo $ye_sup_sg  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>ψ<sub>g</sub></td>
-                        <td><?php echo $ye_sup_sg  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Desarrollo de la varilla superior con gancho</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>ψ<sub>e</sub></td>
-                        <td><?php echo $ye_sup_cg  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>ψ<sub>r</sub></td>
-                        <td><?php echo $yr_sup_cg  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>ψ<sub>o</sub></td>
-                        <td><?php echo $yo_sup_cg  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Desarrollo de la varilla superior con gancho</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>ψ<sub>e</sub></td>
-                        <td><?php echo $ye_sup_sg  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>ψ<sub>e</sub></td>
-                        <td><?php echo $ye_sup_sg  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>ψ<sub>e</sub></td>
-                        <td><?php echo $ye_sup_sg  ?> </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>ψ<sub>e</sub></td>
-                        <td><?php echo $ye_sup_sg  ?> </td>
-                        <td></td>
-                    </tr>
-
 
 
                 </tbody>
@@ -522,7 +195,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <thead style="font-size: 13px; background-color: #4e5c77; color: white;">
                     <tr>
-                        <th colspan="2">2. ANALISIS Y DISEÑO DE UNA ZAPATA CONECTADA SEGUN ACI 318-19</th>
+                        <th colspan="2">2. PREDIMENSIONAMIENTO DE ZAPATAS</th>
                         <th scope="col">FORMULAS</th>
                         <th scope="col">RESULTADOS</th>
                     </tr>
@@ -530,22 +203,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <tbody style="font-size: 11px;">
 
                     <tr>
-                        <td>Luz entre ejes de columnas</td>
-                        <td>δ</td>
-                        <td> l<sub>n</sub> + 0.5 * (c<sub>1</sub> + c'<sub>1</sub>)</td>
-                        <td><?php echo $lec  ?> m</td>
-                    </tr>
-                    <tr>
-                        <td>Excentricidad de la columna esquinera</td>
-                        <td>Δ</td>
-                        <td>0.5 * c<sub>1</sub></td>
-                        <td><?php echo $ece ?> m</td>
+                        <td>Area de la Zapata</td>
+                        <td></td>
+                        <td>qa * p servicio</td>
+                        <td><?php echo $Az  ?> m<sup>2</sup></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>P<sub>DL1</sub></td>
-                        <td>P<sub>D1</sub> + P<sub>L1</sub></td>
-                        <td> <?php echo $PDL1 ?> tonnef</td>
+                        <td>B</td>
+                        <td>t2 + m1 + fc</td>
+                        <td><?php echo $B ?> m</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>L</td>
+                        <td>0.5 * t1(col1) + Le + 0.5 * t1(col2) + m2</td>
+                        <td> <?php echo $L ?> m</td>
                     </tr>
                     <tr>
                         <td></td>

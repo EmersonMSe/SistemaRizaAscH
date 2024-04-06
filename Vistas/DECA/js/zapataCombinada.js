@@ -4,7 +4,7 @@ $(document).ready(function () {
     var formData = $(this).serialize();
     $.ajax({
       type: "POST",
-      url: "Controladores/zapataCombinadaControlador.php",
+      url: "Controladores/DzapataCombinadaControlador.php",
       data: formData,
       success: function (response) {
         $("#ObtenerResultados").html(response);
