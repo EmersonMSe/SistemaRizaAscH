@@ -10,6 +10,10 @@ include_once "assets/views/nav.php";
     canvas {
         border: 1px solid black;
     }
+
+    .tamaño-tabla {
+        height: 80px;
+    }
 </style>
 
 <div class="content-wrapper">
@@ -38,12 +42,13 @@ include_once "assets/views/nav.php";
                 <div class="col-3">
                     <div class="card-dark" style="height: 900px; overflow-y: auto;">
                         <div class="card-header">
-                            <h3 class="card-title">1. Datos Principales</h3>
+                            <h3 class="card-title">Datos Generales</h3>
                         </div>
                         <div class="card-body">
                             <form id="DataZapataCombinada">
                                 <div class="row mb-3">
                                     <div class="col-md-12">
+                                        <h2 class="text-center"><strong>Datos Generales</strong></h2>
                                         <div class="row mb-3 text-center">
                                             <div class="col-12">
                                                 <label>Descripción</label>
@@ -54,7 +59,7 @@ include_once "assets/views/nav.php";
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <!-- 
                                         <div class="row ">
                                             <div class="col-12 text-center">
                                                 <label>Tipos de Zapata</label>
@@ -67,7 +72,7 @@ include_once "assets/views/nav.php";
 
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                         <div class="row mb-3 text-center">
                                             <div class="col-12">
@@ -90,7 +95,6 @@ include_once "assets/views/nav.php";
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="input-group">
-                                                    <span class="input-group-text col-3"></span>
                                                     <input type="number" name="p_servicio" class="form-control text-center" id="p_servicio" step="any" placeholder="1" value="1" min="0" required>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">Ton/m<sup>2</sup></span>
@@ -98,12 +102,12 @@ include_once "assets/views/nav.php";
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <h2 class="text-center"><strong>Predimencionamiento</strong></h2>
                                         <div class="row mb-3 text-center">
                                             <div class="col-12">
                                                 <label>columna 1</label>
                                             </div>
-                                            <div class="col-md-12 mb-3">
+                                            <div class="col-md-6 mb-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text col-3">t1</span>
                                                     <input type="number" name="t1_col1" class="form-control text-center" id="t1_col1" step="any" placeholder="0.5" value="0.5" min="0" required>
@@ -112,7 +116,7 @@ include_once "assets/views/nav.php";
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12 mb-3">
+                                            <div class="col-md-6 mb-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text col-3">t2</span>
                                                     <input type="number" name="t2_col1" class="form-control text-center" id="t2_col1" step="any" placeholder="0.5" value="0.5" min="0" required>
@@ -127,7 +131,7 @@ include_once "assets/views/nav.php";
                                             <div class="col-12">
                                                 <label>columna 2</label>
                                             </div>
-                                            <div class="col-md-12 mb-3">
+                                            <div class="col-md-6 mb-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text col-3">t1</span>
                                                     <input type="number" name="t1_col2" class="form-control text-center" id="t1_col2" step="any" placeholder="0.5" value="0.5" min="0" required>
@@ -136,7 +140,7 @@ include_once "assets/views/nav.php";
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12 mb-3">
+                                            <div class="col-md-6 mb-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text col-3">t2</span>
                                                     <input type="number" name="t2_col2" class="form-control text-center" id="t2_col2" step="any" placeholder="0.5" value="0.5" min="0" required>
@@ -308,6 +312,18 @@ include_once "assets/views/nav.php";
                                                 </div>
                                             </div>
                                         </div>
+                                        <input name="dataCargaX" type="hidden" id="dataCargaX" value="">
+                                        <input name="dataCargaY" type="hidden" id="dataCargaY" value="">
+                                        <h2 class="text-center"><strong>Combinacion de cargas</strong></h2>
+                                        <h2 class="text-center"><strong>En el sentido X-X</strong></h2>
+                                        <div class="row mb-3 text-center">
+                                            <div id="CargaConServ" class="tamaño-tabla"></div>
+                                        </div>
+
+                                        <h2 class="text-center"><strong>En el sentido Y-Y</strong></h2>
+                                        <div class="row mb-3 text-center">
+                                            <div id="CargaConServy" class="tamaño-tabla"></div>
+                                        </div>
 
                                         <div class="row">
                                             <div class="col-12">
@@ -335,7 +351,7 @@ include_once "assets/views/nav.php";
                     </div>
                     <div class="card">
                         <div class="d-flex justify-content-center">
-                            <canvas id="myCanvas" width="1000" height="300" style="border: none;"></canvas>
+                            <canvas id="myCanvas" width="1000" height="400" style="border: none;"></canvas>
                         </div>
                     </div> -->
 
@@ -348,7 +364,6 @@ include_once "assets/views/nav.php";
                             </div>
                         </div>
                     </div>
-
                 </div>
 
 
@@ -357,10 +372,207 @@ include_once "assets/views/nav.php";
     </section>
     <!-- Main content -->
 
-
+    <!-- 
     <script src="js/zapataCombinada.js"></script>
-    <script type="text/javascript" src="grafica.js"></script>
+    <script type="text/javascript" src="grafica.js"></script> -->
+    <script>
+        $(document).ready(function() {
+            var data = [
+                ['P1', 14.80, 5.61, 1.15, 0.59, 3.1, 5.28],
+                ['P2', 21.32, 3.09, 3.96, 0.81, 0.86, 0.05],
+            ];
+
+            var container = document.getElementById('CargaConServ');
+            var hot = new Handsontable(container, {
+                data: data,
+                rowHeaders: false,
+                colHeaders: true,
+                contextMenu: true,
+                colWidths: 100,
+                nestedHeaders: [
+                    ['Nudos', {
+                        label: 'Cargas muertas "D"',
+                        colspan: 2
+                    }, {
+                        label: 'Cargas Vivas "L"',
+                        colspan: 2
+                    }, {
+                        label: 'Cargas por Sismo "Ex" ',
+                        colspan: 2
+                    }],
+                    [' ', 'Pz (Ton)', 'Mx (Ton-m)', 'Pz (Ton)', 'Mx (Ton-m)', 'Pz (Ton)', 'Mx (Ton-m)']
+                ],
+                collapsibleColumns: [{
+                    row: -1,
+                    col: 1,
+                    collapsible: false
+                }, ],
+                licenseKey: 'non-commercial-and-evaluation'
+            });
+            var datay = [
+                ['P1', 14.80, 12.45, 1.15, 4.86, 9.97, 37.31],
+                ['P2', 21.32, 0.74, 3.96, 0.14, 0.28, 0.11],
+            ];
+
+            var containery = document.getElementById('CargaConServy');
+            var hoty = new Handsontable(containery, {
+                data: datay,
+                rowHeaders: false,
+                colHeaders: true,
+                contextMenu: true,
+                colWidths: 100,
+                nestedHeaders: [
+                    ['Nudos', {
+                        label: 'Cargas muertas "D"',
+                        colspan: 2
+                    }, {
+                        label: 'Cargas Vivas "L"',
+                        colspan: 2
+                    }, {
+                        label: 'Cargas por Sismo "Ex" ',
+                        colspan: 2
+                    }],
+                    [' ', 'Pz (Ton)', 'Mx (Ton-m)', 'Pz (Ton)', 'Mx (Ton-m)', 'Pz (Ton)', 'Mx (Ton-m)']
+                ],
+                collapsibleColumns: [{
+                    row: -1,
+                    col: 1,
+                    collapsible: false
+                }, ],
+                licenseKey: 'non-commercial-and-evaluation'
+            });
+
+            // Captura el formulario
+            const form = document.getElementById('DataZapataCombinada');
+            const dataCargaX = document.querySelector('#dataCargaX');
+            const dataCargaY = document.querySelector('#dataCargaY');
+
+            // Agrega un manejador de eventos para el envío del formulario
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                // Obtén los datos de Handsontable y conviértelos a JSON
+                const tableDataX = hot.getData();
+                const jsonDataX = JSON.stringify(tableDataX);
+
+                dataCargaX.value = jsonDataX;
+
+                const tableDataY = hoty.getData();
+                const jsonDataY = JSON.stringify(tableDataY);
+
+                dataCargaY.value = jsonDataY;
+                const formData = new FormData(form);
+
+                // Envía los datos mediante una solicitud POST AJAX
+                fetch('Controladores/DzapataCombinadaControlador.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        const resultadosContainer = document.getElementById('ObtenerResultados');
+                        resultadosContainer.innerHTML = data;
+                    })
+                    .catch(error => {
+                        console.error('Error al enviar la solicitud Ajax', error);
+                    });
+            });
+        });
+    </script>
 </div>
 <?php
 include_once "assets/views/footer.php";
 ?>
+<script>
+    var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext('2d');
+
+    // Definir los puntos de la zapata izquierda
+    var puntos_zapata_izquierda = [{
+            x: -2.25,
+            y: 1.00
+        },
+        {
+            x: -2.25,
+            y: 1.80
+        },
+        {
+            x: -2.75,
+            y: 1.80
+        },
+        {
+            x: -2.75,
+            y: 0.00
+        },
+        {
+            x: 3.75,
+            y: 0.00
+        },
+        {
+            x: 3.75,
+            y: 1.00
+        },
+        {
+            x: 2.75,
+            y: 1.00
+        },
+        {
+            x: 2.75,
+            y: 1.80
+        },
+        {
+            x: 2.25,
+            y: 1.80
+        },
+        {
+            x: 2.25,
+            y: 1.00
+        },
+        {
+            x: -2.25,
+            y: 1.00
+        }
+    ];
+
+    // Escalar y trasladar los puntos para ajustar al canvas
+    function escalarYTrasladar(puntos) {
+        return puntos.map(function(punto) {
+            return {
+                x: (punto.x + 3.75) * 50, // Escalar y trasladar el eje x
+                y: (punto.y + 2) * 50 // Escalar y trasladar el eje y
+            };
+        });
+    }
+
+    // Función para graficar los puntos en el canvas
+    function graficarPuntos(ctx, puntos, color) {
+        ctx.strokeStyle = color;
+        ctx.beginPath();
+        puntos.forEach(function(punto) {
+            ctx.lineTo(punto.x, punto.y);
+        });
+        ctx.closePath();
+        ctx.stroke();
+    }
+
+    // Función para dibujar el eje en el canvas
+    function dibujarEje(ctx) {
+        ctx.strokeStyle = 'black';
+        ctx.beginPath();
+        ctx.moveTo(0, canvas.height / 2);
+        ctx.lineTo(canvas.width, canvas.height / 2);
+        ctx.moveTo(canvas.width / 2, 0);
+        ctx.lineTo(canvas.width / 2, canvas.height);
+        ctx.stroke();
+    }
+
+    // Limpiar el canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Escalar y trasladar los puntos de la zapata izquierda
+    var puntos_zapata_izquierda_escalados = escalarYTrasladar(puntos_zapata_izquierda);
+
+    // Graficar los puntos y el eje en el canvas
+    dibujarEje(ctx);
+    graficarPuntos(ctx, puntos_zapata_izquierda_escalados, 'blue');
+</script>

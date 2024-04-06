@@ -1,11 +1,14 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+
+
     // Datos de Zapata combinada
     //Distancia entre ejes de columnas
     $des = $_POST["des"];
     $qa = $_POST["qa"];
     $p_servicio = $_POST["p_servicio"];
+
 
     //Dimensiones de la columna 1
     $t1_col1 = $_POST["t1_col1"];
@@ -31,11 +34,131 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Le = $_POST["Le"];
 
 
+    //Cargas x
+    $dataCargaX = $_POST["dataCargaX"];
+
+    // Decodificar los datos JSON en un array de PHP
+    $datax = json_decode($dataCargaX, true);
+
+    //Datos de la columna 1
+    $Col1_cm_pzX = $datax[0][1];
+    $Col1_cm_mxX = $datax[0][2];
+    $Col1_cv_pzX = $datax[0][3];
+    $Col1_cv_mxX = $datax[0][4];
+    $Col1_cs_pzX = $datax[0][5];
+    $Col1_cs_mxX = $datax[0][6];
+
+    //Datos de la columna 2
+    $Col2_cm_pzX = $datax[1][1];
+    $Col2_cm_mxX = $datax[1][2];
+    $Col2_cv_pzX = $datax[1][3];
+    $Col2_cv_mxX = $datax[1][4];
+    $Col2_cs_pzX = $datax[1][5];
+    $Col2_cs_mxX = $datax[1][6];
+
+
+    //Cargas Y
+    $dataCargaY = $_POST["dataCargaY"];
+
+    // Decodificar los datos JSON en un array de PHP
+    $datay = json_decode($dataCargaY, true);
+
+    //Datos de la columna 1
+    $Col1_cm_pzY = $datay[0][1];
+    $Col1_cm_myY = $datay[0][2];
+    $Col1_cv_pzY = $datay[0][3];
+    $Col1_cv_myY = $datay[0][4];
+    $Col1_cs_pzY = $datay[0][5];
+    $Col1_cs_myY = $datay[0][6];
+
+    //Datos de la columna 2
+    $Col2_cm_pzY = $datay[1][1];
+    $Col2_cm_myY = $datay[1][2];
+    $Col2_cv_pzY = $datay[1][3];
+    $Col2_cv_myY = $datay[1][4];
+    $Col2_cs_pzY = $datay[1][5];
+    $Col2_cs_myY = $datay[1][6];
+
+
+    // print_r($datax);
+    // print_r("----");
+    // print_r($datay);
     //Calculos
 
     $Az = $qa * $p_servicio;
     $B =  $t2_col1 + $m1 + $fc;
     $L = 0.5 * $t1_col1 + $Le + 0.5 * $t1_col2 + $m2;
+
+    //PRECIONES
+    //Cargas en condiciones de servicio
+
+    //Cargas muertas
+    $CM_P =  $Col1_cm_pzX + $Col2_cm_pzX;
+    $CM_Mx =  $Col1_cm_mxX + $Col2_cm_mxX;
+    $CM_My =  $Col1_cm_myY + $Col2_cm_myY;
+
+    //Cargas vivas
+    $CV_P =  $Col1_cv_pzX + $Col2_cv_pzX;
+    $CV_Mx =  $Col1_cv_mxX + $Col2_cv_mxX;
+    $CV_My =  $Col1_cv_myY + $Col2_cv_myY;
+
+    //Cargas sismo x
+    $CSx_P =  $Col1_cs_pzX + $Col2_cs_pzX;
+    $CSx_Mx =  $Col1_cs_mxX + $Col2_cs_mxX;
+    $CSx_My =  0;
+
+    //Cargas sismo y
+    $CSy_P =  $Col1_cs_pzY + $Col2_cs_pzY;
+    $CSy_Mx =  0;
+    $CSy_My =  $Col1_cs_myY + $Col2_cs_myY;
+
+    //Combinaciones de cargas de servicio
+
+    //CM+CV
+    $CM_CV_P = $CM_P + $CV_P;
+    $CM_CV_MX = $CM_Mx + $CV_Mx;
+    $CM_CV_MY = $CM_My + $CV_My;
+
+    //CM+CV+0.8Sx
+    $CM_CV_8SX_sum = $CM_P + $CV_P + 0.8* $CSx_P;
+    $CM_CV_8SX_sum = $CM_P + $CV_P + 0.8 * $CSx_Mx;
+    $CM_CV_8SX_sum = $CM_P + $CV_P + 0.8 * $CSx_My;
+
+    //CM+CV-0.8Sx
+    $CM_CV_8SX_rest = $CM_P + $CV_P - 0.8 * $CSx_P;
+    $CM_CV_8SX_rest = $CM_P + $CV_P - 0.8 * $CSx_Mx;
+    $CM_CV_8SX_rest = $CM_P + $CV_P - 0.8 * $CSx_My;
+
+    //CM+CV+0.8Sy
+    $CM_CV_8SY_sum = $CM_P + $CV_P + 0.8 * $CSy_P;
+    $CM_CV_8SY_sum = $CM_P + $CV_P + 0.8 * $CSy_Mx;
+    $CM_CV_8SY_sum = $CM_P + $CV_P + 0.8 * $CSy_My;
+
+    //CM+CV-0.8Sy
+    $CM_CV_8SY_rest = $CM_P + $CV_P - 0.8 * $CSy_P;
+    $CM_CV_8SY_rest = $CM_P + $CV_P - 0.8 * $CSy_Mx;
+    $CM_CV_8SY_rest = $CM_P + $CV_P - 0.8 * $CSy_My;
+
+    //COMBINACIONES DE CARGA ÚLTIMAS
+
+    //1.4CM+1.7CV
+    $CCU1_P= 1.4 * $CM_P + 1.7 * $CV_P;
+    $CCC1_MX = 1.4 * $CM_Mx + 1.7 * $CV_Mx;
+    $CCC1_MY = 1.4 * $CM_My + 1.7 * $CV_My;
+
+    //1.25(CM+CV)+Sx
+    $CCC2_P = 1.25 * ($CM_P + $CV_P) +$CSx_P;
+    $CCC2_MX = 1.25 * ($CM_P + $CV_P) + $CSx_P;
+    $CCC2_MY = 1.25 * ($CM_P + $CV_P) + $CSx_P;
+
+    //1.25(CM+CV)-Sx
+    $CCC2_P = 1.25 * ($CM_P + $CV_P) + $CSx_P;
+    $CCC2_MX = 1.25 * ($CM_P + $CV_P) + $CSx_P;
+    $CCC2_MY = 1.25 * ($CM_P + $CV_P) + $CSx_P;
+
+
+
+    
 }
 ?>
 <!DOCTYPE html>
