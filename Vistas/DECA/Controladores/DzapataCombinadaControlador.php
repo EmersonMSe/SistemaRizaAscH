@@ -146,15 +146,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $CCC1_MX = 1.4 * $CM_Mx + 1.7 * $CV_Mx;
     $CCC1_MY = 1.4 * $CM_My + 1.7 * $CV_My;
 
-    //1.25(CM+CV)+Sx
+    //1.25(CM+CV) + Sx
     $CCC2_P = 1.25 * ($CM_P + $CV_P) +$CSx_P;
-    $CCC2_MX = 1.25 * ($CM_P + $CV_P) + $CSx_P;
-    $CCC2_MY = 1.25 * ($CM_P + $CV_P) + $CSx_P;
+    $CCC2_MX = 1.25 * ($CM_Mx  + $CV_Mx) + $CSx_Mx;
+    $CCC2_MY = 1.25 * ($CM_My + $CV_My) + $CSx_My;
 
     //1.25(CM+CV)-Sx
-    $CCC2_P = 1.25 * ($CM_P + $CV_P) + $CSx_P;
-    $CCC2_MX = 1.25 * ($CM_P + $CV_P) + $CSx_P;
-    $CCC2_MY = 1.25 * ($CM_P + $CV_P) + $CSx_P;
+    $CCC3_P = 1.25 * ($CM_P + $CV_P) - $CSx_P;
+    $CCC3_MX = 1.25 * ($CM_Mx  + $CV_Mx) - $CSx_Mx;
+    $CCC3_MY = 1.25 * ($CM_My + $CV_My) - $CSx_My;
+
+    //1.25(CM+CV) + Sy
+    $CCC4_P = 1.25 * ($CM_P + $CV_P) + $CSy_P;
+    $CCC4_MX = 1.25 * ($CM_Mx  + $CV_Mx) + $CSy_Mx;
+    $CCC4_MY = 1.25 * ($CM_My + $CV_My) + $CSy_My;
+
+    //1.25(CM+CV) - Sy
+    $CCC5_P = 1.25 * ($CM_P + $CV_P) - $CSy_P;
+    $CCC5_MX = 1.25 * ($CM_Mx  + $CV_Mx) - $CSy_Mx;
+    $CCC5_MY = 1.25 * ($CM_My + $CV_My) - $CSy_My;
+
+    //0.9CM + Sx
+    $CCC6_P = 0.9 * $CM_P + $CSx_P;
+    $CCC6_MX = 1.25 * $CM_Mx +  $CSx_Mx ;
+    $CCC6_MY = 1.25 * $CM_My + $CSx_My;
+
+    //0.9CM - Sx
+    $CCC7_P = 0.9 * $CM_P - $CSx_P;
+    $CCC7_MX = 1.25 * $CM_Mx -  $CSx_Mx;
+    $CCC7_MY = 1.25 * $CM_My - $CSx_My;
+
+    //0.9CM + Sy
+    $CCC8_P = 0.9 * $CM_P + $CSy_P;
+    $CCC8_MX = 1.25 * $CM_Mx +  $CSy_Mx;
+    $CCC8_MY = 1.25 * $CM_My + $CSy_My;
+
+    //0.9CM - Sy
+    $CCC9_P = 0.9 * $CM_P - $CSy_P;
+    $CCC9_MX = 1.25 * $CM_Mx -  $CSy_Mx;
+    $CCC9_MY = 1.25 * $CM_My - $CSy_My;
+
+
+
+
+
 
 
 
