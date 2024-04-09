@@ -4,7 +4,7 @@ $(document).ready(function () {
     var formData = $(this).serialize();
     $.ajax({
       type: "POST",
-      url: "Controladores/DzapataControlador.php",
+      url: "Controladores/DzapataConectadaControlador.php",
       data: formData,
       success: function (response) {
         $("#ObtenerResultados").html(response);
@@ -47,6 +47,7 @@ $(document).ready(function () {
       var anchoZap2 = parseFloat(document.getElementById("anchoZap2").value);
       var largoZap2 = parseFloat(document.getElementById("largoZap2").value);
       var ln = parseFloat(document.getElementById("lndiseño").value);
+      var anchoViga = parseFloat(document.getElementById("anchoViga").value);
       var selectElement = document.getElementById("tipoDiseño");
       var tipoDiseño = parseInt(selectElement.value);
 
@@ -59,6 +60,7 @@ $(document).ready(function () {
       largoZap1 = largoZap1 * 100;
       anchoZap2 = anchoZap2 * 100;
       largoZap2 = largoZap2 * 100;
+      anchoViga = anchoViga * 100;
       ln = ln * 100;
 
       //variables para las diemnsiones del diseño
@@ -254,7 +256,8 @@ $(document).ready(function () {
         anchoCol2,
         largoCol2,
         yAjustadoZC1,
-        yAjustadoZC2
+        yAjustadoZC2,
+        anchoViga
       );
     }
   }
@@ -281,7 +284,8 @@ $(document).ready(function () {
     anchoColumna2,
     altoColumna2,
     yAjustadoZC1,
-    yAjustadoZC2
+    yAjustadoZC2,
+    anchoViga
   ) {
     // Configura Paper.js
     paper.setup("myCanvas");
@@ -340,9 +344,11 @@ $(document).ready(function () {
     // linea 1
 
     xlinea_inicio_1 = espaciadoX + xcol1 + anchoColumna1;
-    ylinea_inicio_1 = espaciadoY + ycol1 + yAjustadoZC1;
+    ylinea_inicio_1 =
+      espaciadoY + ycol1 + yAjustadoZC1 + (altoColumna1 / 2 - anchoViga / 2);
     xlinea_final_1 = xcol2 + espaciadoX;
-    ylinea_final_1 = ycol2 + espaciadoY + yAjustadoZC2;
+    ylinea_final_1 =
+      ycol2 + espaciadoY + yAjustadoZC2 + (altoColumna2 / 2 - anchoViga / 2);
 
     //cuando son de diferentes tamaños se debe martener la altura del cimiento con respecto a la columna mas pequeña
     if (altoColumna2 - altoColumna1 > 0) {
@@ -359,9 +365,19 @@ $(document).ready(function () {
 
     // linea 2
     xlinea_inicio_2 = espaciadoX + xcol1 + anchoColumna1;
-    ylinea_inicio_2 = espaciadoY + ycol1 + altoColumna1 + yAjustadoZC1;
+    ylinea_inicio_2 =
+      espaciadoY +
+      ycol1 +
+      altoColumna1 +
+      yAjustadoZC1 -
+      (altoColumna1 / 2 - anchoViga / 2);
     xlinea_final_2 = xcol2 + espaciadoX;
-    ylinea_final_2 = ycol2 + espaciadoY + altoColumna2 + yAjustadoZC2;
+    ylinea_final_2 =
+      ycol2 +
+      espaciadoY +
+      altoColumna2 +
+      yAjustadoZC2 -
+      (altoColumna2 / 2 - anchoViga / 2);
     //cuando son de diferentes tamaños se debe martener la altura del cimiento con respecto a la columna mas pequeña
     if (altoColumna2 - altoColumna1 > 0) {
       ylinea_final_2 = ylinea_inicio_2;
@@ -373,6 +389,45 @@ $(document).ready(function () {
     var endPoint = new paper.Point(xlinea_final_2, ylinea_final_2);
     var line = new paper.Path.Line(startPoint, endPoint);
     line.strokeColor = "black";
+    line.strokeWidth = 2;
+
+    // texto anchoViga
+    // Crear un punto de texto en las coordenadas especificadas
+    xtextoav = espaciadoX + xcol1 + anchoColumna1 + ln / 2;
+    ytextoav = ylinea_inicio_1 + anchoViga / 2 + 12.5;
+
+    var textPoint = new paper.Point(xtextoav, ytextoav);
+    // Crear un objeto de texto en el punto especificado
+    var text = new paper.PointText(textPoint);
+
+    // Establecer el contenido del texto
+    text.content = anchoViga / 100 + " ";
+
+    // Otras propiedades del texto (opcional)
+    text.fillColor = "red";
+    text.fontSize = 25;
+    text.fontFamily = "Arial";
+    text.fontWeight = "bold";
+
+    // linea ancho Viga
+
+    xlinea_inicio_1 = espaciadoX + xcol1 + anchoColumna1 + ln / 2 - 30;
+    ylinea_inicio_1 =
+      espaciadoY + ycol1 + yAjustadoZC1 + (altoColumna1 / 2 - anchoViga / 2);
+    xlinea_final_1 = xlinea_inicio_2 + ln / 2 - 30;
+    ylinea_final_1 = ylinea_inicio_1 + anchoViga;
+
+    //cuando son de diferentes tamaños se debe martener la altura del cimiento con respecto a la columna mas pequeña
+    if (altoColumna2 - altoColumna1 > 0) {
+      ylinea_final_1 = ylinea_inicio_1;
+    } else if (altoColumna2 - altoColumna1 < 0) {
+      ylinea_inicio_1 = ylinea_final_1;
+    }
+
+    var startPoint = new paper.Point(xlinea_inicio_1, ylinea_inicio_1);
+    var endPoint = new paper.Point(xlinea_final_1, ylinea_final_1);
+    var line = new paper.Path.Line(startPoint, endPoint);
+    line.strokeColor = "red";
     line.strokeWidth = 2;
 
     // texto columna 1
@@ -421,7 +476,7 @@ $(document).ready(function () {
     var text = new paper.PointText(textPoint);
 
     // Establecer el contenido del texto
-    text.content = "." + anchoColumna1;
+    text.content = anchoColumna1 / 100;
 
     // Otras propiedades del texto (opcional)
     text.fillColor = "black"; // Color del texto
@@ -439,7 +494,7 @@ $(document).ready(function () {
     var text = new paper.PointText(textPoint);
 
     // Establecer el contenido del texto
-    text.content = "." + anchoColumna2;
+    text.content = anchoColumna2 / 100;
 
     // Otras propiedades del texto (opcional)
     text.fillColor = "black"; // Color del texto
@@ -457,7 +512,7 @@ $(document).ready(function () {
     var text = new paper.PointText(textPoint);
 
     // Establecer el contenido del texto
-    text.content = "." + altoColumna1;
+    text.content = altoColumna1 / 100;
 
     // Otras propiedades del texto (opcional)
     text.fillColor = "black"; // Color del texto
@@ -475,7 +530,7 @@ $(document).ready(function () {
     var text = new paper.PointText(textPoint);
 
     // Establecer el contenido del texto
-    text.content = "." + altoColumna2;
+    text.content = altoColumna2 / 100;
 
     // Otras propiedades del texto (opcional)
     text.fillColor = "black"; // Color del texto
@@ -492,7 +547,14 @@ $(document).ready(function () {
     nivel = 0;
     // cuando la columna 2 sea mas largo debe imcrementarse esa diferencia en la otra columna para que salga la linea recta
     if (altoColumna2 - altoColumna1 > 0) {
-      nivel = altoColumna2 / 2 - altoColumna1 / 2;
+      //condicion para cuando este en la psicion 1,4 y 7 para que la linea de la medida del ln este recta
+      if (ycol1 == 0) {
+        nivel = altoColumna2 - altoColumna1;
+      } else if (ycol1 + altoColumna1 == altoZapata1) {
+        nivel = 0;
+      } else {
+        nivel = altoColumna2 / 2 - altoColumna1 / 2;
+      }
     }
 
     ylinea_final_c1 =
@@ -501,7 +563,7 @@ $(document).ready(function () {
     var startPoint = new paper.Point(xlinea_inicio_c1, ylinea_inicio_c1);
     var endPoint = new paper.Point(xlinea_final_c1, ylinea_final_c1);
     var line = new paper.Path.Line(startPoint, endPoint);
-    line.strokeColor = "black";
+    line.strokeColor = "red";
     line.strokeWidth = 1;
 
     // linea 2 vertical
@@ -511,7 +573,14 @@ $(document).ready(function () {
     nively = 0;
     // cuando la columna 2 sea mas largo debe imcrementarse esa diferencia en la otra columna para que salga la linea recta
     if (altoColumna2 - altoColumna1 < 0) {
-      nively = altoColumna1 / 2 - altoColumna2 / 2;
+      //condicion para cuando este en la psicion 1,4 y 7 para que la linea de la medida del ln este recta
+      if (ycol1 == 0) {
+        nively = altoColumna1 - altoColumna2;
+      } else if (ycol1 + altoColumna1 == altoZapata1) {
+        nively = 0;
+      } else {
+        nively = altoColumna1 / 2 - altoColumna2 / 2;
+      }
     }
 
     ylinea_final_c2 =
@@ -520,7 +589,7 @@ $(document).ready(function () {
     var startPoint = new paper.Point(xlinea_inicio_c2, ylinea_inicio_c2);
     var endPoint = new paper.Point(xlinea_final_c2, ylinea_final_c2);
     var line = new paper.Path.Line(startPoint, endPoint);
-    line.strokeColor = "black";
+    line.strokeColor = "red";
     line.strokeWidth = 1;
 
     //ln
@@ -535,7 +604,7 @@ $(document).ready(function () {
     var startPoint = new paper.Point(xlinea_inicio_ln, ylinea_inicio_ln);
     var endPoint = new paper.Point(xlinea_final_ln, ylinea_final_ln);
     var line = new paper.Path.Line(startPoint, endPoint);
-    line.strokeColor = "black";
+    line.strokeColor = "red";
     line.strokeWidth = 2;
 
     // texto ln
@@ -551,7 +620,7 @@ $(document).ready(function () {
     text.content = ln / 100 + " ";
 
     // Otras propiedades del texto (opcional)
-    text.fillColor = "black";
+    text.fillColor = "red";
     text.fontSize = 25;
     text.fontFamily = "Arial";
     text.fontWeight = "bold";
