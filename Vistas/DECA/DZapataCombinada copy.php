@@ -6,14 +6,13 @@ include_once "assets/views/nav.php";
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js" integrity="sha512-7U4rRB8aGAHGVad3u2jiC7GA5/1YhQcQjxKeaVms/bT66i3LVBMRcBI9KwABNWnxOSwulkuSXxZLGuyfvo7V1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.15/paper-full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
     canvas {
         border: 1px solid black;
     }
 
     .tamaño-tabla {
-        height: 160px;
+        height: 80px;
     }
 </style>
 
@@ -40,7 +39,7 @@ include_once "assets/views/nav.php";
             <!-- Contenedor de las filas -->
             <div class="row">
                 <!-- Primera columna datos generales -->
-                <div class="col-4">
+                <div class="col-3">
                     <div class="card-dark" style="height: 900px; overflow-y: auto;">
                         <div class="card-header">
                             <h3 class="card-title">Datos Generales</h3>
@@ -56,7 +55,7 @@ include_once "assets/views/nav.php";
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="input-group">
-                                                    <input type="text" name="des" class="form-control text-center col-12" id="des" placeholder="Zapata A1" step="any" value="Zapata A1" min=" 0" required>
+                                                    <input type="text" name="des" class="form-control text-center col-12" id="des" placeholder="4.5" step="any" value="Zapata A1" min=" 0" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -110,7 +109,7 @@ include_once "assets/views/nav.php";
                                             <div class="col-md-12">
                                                 <div class="input-group">
                                                     <input type="number" name="fk" class="form-control text-center" id="fk" step="any" placeholder="1" value="1" min="0" required>
-
+                                                   
                                                 </div>
                                             </div>
                                         </div>
@@ -324,29 +323,17 @@ include_once "assets/views/nav.php";
                                                 </div>
                                             </div>
                                         </div>
-                                        <input name="dataCargacol1" type="hidden" id="dataCargacol1" value="">
-                                        <input name="dataCargacol2" type="hidden" id="dataCargacol2" value="">
+                                        <input name="dataCargaX" type="hidden" id="dataCargaX" value="">
+                                        <input name="dataCargaY" type="hidden" id="dataCargaY" value="">
                                         <h2 class="text-center"><strong>Combinacion de cargas</strong></h2>
-                                        <h2 class="text-center"><strong>COLUMNA 1</strong></h2>
+                                        <h2 class="text-center"><strong>En el sentido X-X</strong></h2>
                                         <div class="row mb-3 text-center">
                                             <div id="CargaConServ" class="tamaño-tabla"></div>
                                         </div>
 
-                                        <h2 class="text-center"><strong>COLUMNA 2</strong></h2>
+                                        <h2 class="text-center"><strong>En el sentido Y-Y</strong></h2>
                                         <div class="row mb-3 text-center">
-                                            <div id="CargaConServcol2" class="tamaño-tabla"></div>
-                                        </div>
-
-                                        <h2 class="text-center"><strong>Análisis por Punzonamiento</strong></h2>
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-12">
-                                                <label>Peralte Efectivo</label>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="input-group">
-                                                    <input type="text" name="d" class="form-control text-center col-12" id="d" placeholder="42.50" step="any" value="42.50" min=" 0" required>
-                                                </div>
-                                            </div>
+                                            <div id="CargaConServy" class="tamaño-tabla"></div>
                                         </div>
 
                                         <div class="row">
@@ -369,15 +356,15 @@ include_once "assets/views/nav.php";
                     </div>
 
                 </div>
-                <div class="card col-8 card-info" style="height: 900px; overflow-y: auto;">
-                    <div class="card-header">
+                <div class="card col-9 card-info" style="height: 900px; overflow-y: auto;">
+                    <!-- <div class="card-header">
                         <h3>Diseño</h3>
                     </div>
                     <div class="card">
                         <div class="d-flex justify-content-center">
-                            <canvas id="myChart" width="1000" height="400"></canvas>
+                            <canvas id="myCanvas" width="1000" height="400" style="border: none;"></canvas>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="card-header ">
                         <h3>Resultados</h3>
@@ -395,115 +382,208 @@ include_once "assets/views/nav.php";
             <br>
     </section>
     <!-- Main content -->
-    <script src="js/zapataCombinada.js"></script>
+
     <!-- 
-
+    <script src="js/zapataCombinada.js"></script>
     <script type="text/javascript" src="grafica.js"></script> -->
-
     <script>
-        // Datos de los puntos (x, y)
-        // Datos de los puntos (x, y)
-        var t1_col1 = document.getElementById('t1_col1').value;
-        var Le = document.getElementById('Le').value;
-        var m2 = document.getElementById('m2').value;
-        var t1_col2 = document.getElementById('t1_col2').value;
+        $(document).ready(function() {
+            var data = [
+                ['P1', 14.80, 5.61, 1.15, 0.59, 3.1, 5.28],
+                ['P2', 21.32, 3.09, 3.96, 0.81, 0.86, 0.05],
+            ];
 
-        // Convertir los valores a números de punto flotante (float)
-        var t1_col1_float = parseFloat(t1_col1);
-        var Le_float = parseFloat(Le);
-        var m2_float = parseFloat(m2);
-        var t1_col2_float = parseFloat(t1_col2);
-
-        // Puntos en X
-        var puntoX1 = 0; // Supongamos que calculamos este punto dinámicamente
-        var puntoX2 = 0.5 * t1_col1_float;
-        var puntoX3 = puntoX2;
-        var puntoX4 = 0.5 * t1_col1_float + Le_float;
-        var puntoX5 = puntoX4;
-        var puntoX6 = puntoX4 + m2_float + 0.5 * t1_col2_float;
-
-        // Imprimir los valores en la consola
-        console.log("Punto X1:", puntoX1);
-        console.log("Punto X2:", puntoX2);
-        console.log("Punto X3:", puntoX3);
-        console.log("Punto X4:", puntoX4);
-        console.log("Punto X5:", puntoX5);
-        console.log("Punto X6:", puntoX6);
-
-        //puntos en Y
-
-
-        var puntoY1 = 0; // Supongamos que calculamos este punto dinámicamente
-        var puntoY2 = 0.5 * t1_col1_float;
-        var puntoY3 = puntoX2;
-        var puntoY4 = 0.5 * t1_col1_float + Le_float;
-        var puntoY5 = puntoX4;
-        var puntoY6 = 0;
-
-
-
-        var data = {
-            labels: ['0.00', '0.25', '0.25', '5.25', '5.25', '6.50'],
-            datasets: [{
-                label: 'Puntos',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)', // Color del fondo de la línea
-                borderColor: 'rgba(255, 99, 132, 1)', // Color del borde de la línea
-                data: [{
-                        x: 0.00,
-                        y: 0.00
-                    },
-                    {
-                        x: 0.25,
-                        y: 26.27
-                    },
-                    {
-                        x: 0.25,
-                        y: -156.58
-                    },
-                    {
-                        x: 5.25,
-                        y: 222.58
-                    },
-                    {
-                        x: 5.25,
-                        y: -131.34
-                    },
-                    {
-                        x: 6.50,
-                        y: 0.00
-                    }
+            var container = document.getElementById('CargaConServ');
+            var hot = new Handsontable(container, {
+                data: data,
+                rowHeaders: false,
+                colHeaders: true,
+                contextMenu: true,
+                colWidths: 100,
+                nestedHeaders: [
+                    ['Nudos', {
+                        label: 'Cargas muertas "D"',
+                        colspan: 2
+                    }, {
+                        label: 'Cargas Vivas "L"',
+                        colspan: 2
+                    }, {
+                        label: 'Cargas por Sismo "Ex" ',
+                        colspan: 2
+                    }],
+                    [' ', 'Pz (Ton)', 'Mx (Ton-m)', 'Pz (Ton)', 'Mx (Ton-m)', 'Pz (Ton)', 'Mx (Ton-m)']
                 ],
-                fill: false // Para deshabilitar el relleno debajo de la línea
-            }]
-        };
+                collapsibleColumns: [{
+                    row: -1,
+                    col: 1,
+                    collapsible: false
+                }, ],
+                licenseKey: 'non-commercial-and-evaluation'
+            });
+            var datay = [
+                ['P1', 14.80, 12.45, 1.15, 4.86, 9.97, 37.31],
+                ['P2', 21.32, 0.74, 3.96, 0.14, 0.28, 0.11],
+            ];
 
-        // Opciones del gráfico
-        var options = {
-            scales: {
-                x: {
-                    type: 'linear',
-                    position: 'bottom',
-                    min: -1, // Mínimo valor en el eje X
-                    max: 7 // Máximo valor en el eje X
-                },
-                y: {
-                    type: 'linear', // Tipo de escala lineal para permitir valores negativos
-                    position: 'left',
-                    min: -200, // Mínimo valor en el eje Y
-                    max: 250 // Máximo valor en el eje Y
-                }
-            }
-        };
+            var containery = document.getElementById('CargaConServy');
+            var hoty = new Handsontable(containery, {
+                data: datay,
+                rowHeaders: false,
+                colHeaders: true,
+                contextMenu: true,
+                colWidths: 100,
+                nestedHeaders: [
+                    ['Nudos', {
+                        label: 'Cargas muertas "D"',
+                        colspan: 2
+                    }, {
+                        label: 'Cargas Vivas "L"',
+                        colspan: 2
+                    }, {
+                        label: 'Cargas por Sismo "Ex" ',
+                        colspan: 2
+                    }],
+                    [' ', 'Pz (Ton)', 'Mx (Ton-m)', 'Pz (Ton)', 'Mx (Ton-m)', 'Pz (Ton)', 'Mx (Ton-m)']
+                ],
+                collapsibleColumns: [{
+                    row: -1,
+                    col: 1,
+                    collapsible: false
+                }, ],
+                licenseKey: 'non-commercial-and-evaluation'
+            });
 
-        // Crear el gráfico de líneas
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var lineChart = new Chart(ctx, {
-            type: 'line',
-            data: data,
-            options: options
+            // Captura el formulario
+            const form = document.getElementById('DataZapataCombinada');
+            const dataCargaX = document.querySelector('#dataCargaX');
+            const dataCargaY = document.querySelector('#dataCargaY');
+
+            // Agrega un manejador de eventos para el envío del formulario
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                // Obtén los datos de Handsontable y conviértelos a JSON
+                const tableDataX = hot.getData();
+                const jsonDataX = JSON.stringify(tableDataX);
+
+                dataCargaX.value = jsonDataX;
+
+                const tableDataY = hoty.getData();
+                const jsonDataY = JSON.stringify(tableDataY);
+
+                dataCargaY.value = jsonDataY;
+                const formData = new FormData(form);
+
+                // Envía los datos mediante una solicitud POST AJAX
+                fetch('Controladores/DzapataCombinadaControlador.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        const resultadosContainer = document.getElementById('ObtenerResultados');
+                        resultadosContainer.innerHTML = data;
+                    })
+                    .catch(error => {
+                        console.error('Error al enviar la solicitud Ajax', error);
+                    });
+            });
         });
     </script>
 </div>
 <?php
 include_once "assets/views/footer.php";
 ?>
+<script>
+    var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext('2d');
+
+    // Definir los puntos de la zapata izquierda
+    var puntos_zapata_izquierda = [{
+            x: -2.25,
+            y: 1.00
+        },
+        {
+            x: -2.25,
+            y: 1.80
+        },
+        {
+            x: -2.75,
+            y: 1.80
+        },
+        {
+            x: -2.75,
+            y: 0.00
+        },
+        {
+            x: 3.75,
+            y: 0.00
+        },
+        {
+            x: 3.75,
+            y: 1.00
+        },
+        {
+            x: 2.75,
+            y: 1.00
+        },
+        {
+            x: 2.75,
+            y: 1.80
+        },
+        {
+            x: 2.25,
+            y: 1.80
+        },
+        {
+            x: 2.25,
+            y: 1.00
+        },
+        {
+            x: -2.25,
+            y: 1.00
+        }
+    ];
+
+    // Escalar y trasladar los puntos para ajustar al canvas
+    function escalarYTrasladar(puntos) {
+        return puntos.map(function(punto) {
+            return {
+                x: (punto.x + 3.75) * 50, // Escalar y trasladar el eje x
+                y: (punto.y + 2) * 50 // Escalar y trasladar el eje y
+            };
+        });
+    }
+
+    // Función para graficar los puntos en el canvas
+    function graficarPuntos(ctx, puntos, color) {
+        ctx.strokeStyle = color;
+        ctx.beginPath();
+        puntos.forEach(function(punto) {
+            ctx.lineTo(punto.x, punto.y);
+        });
+        ctx.closePath();
+        ctx.stroke();
+    }
+
+    // Función para dibujar el eje en el canvas
+    function dibujarEje(ctx) {
+        ctx.strokeStyle = 'black';
+        ctx.beginPath();
+        ctx.moveTo(0, canvas.height / 2);
+        ctx.lineTo(canvas.width, canvas.height / 2);
+        ctx.moveTo(canvas.width / 2, 0);
+        ctx.lineTo(canvas.width / 2, canvas.height);
+        ctx.stroke();
+    }
+
+    // Limpiar el canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Escalar y trasladar los puntos de la zapata izquierda
+    var puntos_zapata_izquierda_escalados = escalarYTrasladar(puntos_zapata_izquierda);
+
+    // Graficar los puntos y el eje en el canvas
+    dibujarEje(ctx);
+    graficarPuntos(ctx, puntos_zapata_izquierda_escalados, 'blue');
+</script>
