@@ -81,7 +81,7 @@ include_once "assets/views/nav.php";
                                             <div class="col-md-12">
                                                 <div class="input-group">
                                                     <span class="input-group-text col-3">qa</span>
-                                                    <input type="number" name="qa" class="form-control text-center" id="qa" step="any" placeholder="1" value="1" min="0" required>
+                                                    <input type="number" name="qa" class="form-control text-center" id="qa" step="any" placeholder="3" value="3" min="0" required>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">Ton/m<sup>2</sup></span>
                                                     </div>
@@ -95,10 +95,21 @@ include_once "assets/views/nav.php";
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="input-group">
-                                                    <input type="number" name="p_servicio" class="form-control text-center" id="p_servicio" step="any" placeholder="1" value="1" min="0" required>
+                                                    <input type="number" name="p_servicio" class="form-control text-center" id="p_servicio" step="any" placeholder="8" value="8" min="0" required>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">Ton/m<sup>2</sup></span>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 text-center">
+                                            <div class="col-12">
+                                                <label>Factor K</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <input type="number" name="fk" class="form-control text-center" id="fk" step="any" placeholder="1" value="1" min="0" required>
+                                                   
                                                 </div>
                                             </div>
                                         </div>
