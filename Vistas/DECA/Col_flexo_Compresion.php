@@ -858,6 +858,10 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                 myChart.data.datasets[1].data = dataneg;
                 myChart.data.datasets[2].data = datanegEX;
                 myChart.data.datasets[3].data = datafiEX;
+                console.log(datafi)
+                console.log(dataneg)
+                console.log(datanegEX)
+                console.log(datafiEX)
                 myChart.update();
             }
 
@@ -899,6 +903,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                         fill: false,
                         borderColor: 'red',
                         backgroundColor: 'red',
+                        type: 'line', // Tipo de gráfico para conectar los puntos con líneas
                     },
                     {
                         label: 'Diseño',
@@ -906,6 +911,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                         fill: false,
                         borderColor: 'blue',
                         backgroundColor: 'blue',
+                        type: 'line', // Tipo de gráfico para conectar los puntos con líneas
                     },
                     {
                         label: 'Nominal',
@@ -913,6 +919,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                         fill: false,
                         borderColor: 'green',
                         backgroundColor: 'green',
+                        type: 'line', // Tipo de gráfico para conectar los puntos con líneas
                     },
                     {
                         label: 'Nominal',
@@ -920,6 +927,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                         fill: false,
                         borderColor: 'yellow',
                         backgroundColor: 'yellow',
+                        type: 'line', // Tipo de gráfico para conectar los puntos con líneas
                     }
                 ]
             };
@@ -1103,28 +1111,32 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
             function updateChartData() {
                 var datanegy = dataFromHandsontableys.map(function(row) {
                     return {
-                        x: row[1],
+                        /* x: row[1], */
+                        x: row[2],
                         y: row[0],
                         z: row[2]
                     };
                 });
                 var datafiy = dataFromHandsontableys.map(function(row) {
                     return {
-                        x: row[4],
+                        /* x: row[4], */
+                        x: row[5],
                         y: row[3],
                         z: row[5]
                     };
                 });
                 var datanegEy = dataExcluidoy.map(function(row) {
                     return {
-                        x: row[1],
+                        /* x: row[1], */
+                        x: row[2],
                         y: row[0],
                         z: row[2]
                     };
                 });
                 var datafiEy = dataExcluidoy.map(function(row) {
                     return {
-                        x: row[4],
+                        /* x: row[4], */
+                        x: row[5],
                         y: row[3],
                         z: row[5]
                     };
@@ -1140,31 +1152,35 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
 
             var datanegy = dataFromHandsontableys.map(function(row) {
                 return {
-                    x: row[1],
+                    /* x: row[1], */
+                    x: row[2],
                     y: row[0],
-                    z: row[2]
+                    //z: row[2]
                 };
             });
             var datafiy = dataFromHandsontableys.map(function(row) {
                 return {
-                    x: row[4],
+                    /* x: row[4], */
+                    x: row[5],
                     y: row[3],
-                    z: row[5]
+                    //z: row[5]
                 };
             });
             var datanegEy = dataExcluidoy.map(function(row) {
                 return {
-                    x: row[1],
+                    /* x: row[1], */
+                    x: row[2],
                     y: row[0],
-                    z: row[2]
+                    //z: row[2]
                 };
             });
 
             var datafiEy = dataExcluidoy.map(function(row) {
                 return {
-                    x: row[4],
+                    /* x: row[4], */
+                    x: row[5],
                     y: row[3],
-                    z: row[5]
+                    //z: row[5]
                 };
             });
 
@@ -1175,6 +1191,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                         fill: false,
                         borderColor: 'red',
                         backgroundColor: 'red',
+                        type: 'line', // Tipo de gráfico para conectar los puntos con líneas
                     },
                     {
                         label: 'Diseño',
@@ -1182,6 +1199,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                         fill: false,
                         borderColor: 'blue',
                         backgroundColor: 'blue',
+                        type: 'line', // Tipo de gráfico para conectar los puntos con líneas
                     },
                     {
                         label: 'Nominal',
@@ -1189,6 +1207,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                         fill: false,
                         borderColor: 'green',
                         backgroundColor: 'green',
+                        type: 'line', // Tipo de gráfico para conectar los puntos con líneas
                     },
                     {
                         label: 'Nominal',
@@ -1196,6 +1215,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                         fill: false,
                         borderColor: 'yellow',
                         backgroundColor: 'yellow',
+                        type: 'line', // Tipo de gráfico para conectar los puntos con líneas
                     }
                 ]
             };
