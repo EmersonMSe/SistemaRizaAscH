@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('muVal').innerHTML = `${mu.toFixed(2)} kg-cm`;
     // corte val
     var phivc = 0;
-    var reqData = document.getElementById("reqData");
+    var reqData = document.getElementById('reqData');
     reqData.style.display = 'block';
 
     /* var resultado = inputValue * 2; */
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <tbody style=" font-size: 11px;">
     <tr>
     <th scope="row">
-      
+    Peralte efectivo
     </th>
     <th scope="row">
       d
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
       </tr>
       <tr>
         <td scope="row">
-          Cuantía
+          Cuantía mínima
         </td>
         <td scope="row">
         ρMin
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </td>
       </tr>
       <tr>
-        <td>Áreas</td>
+        <td>Área de acero mínimo</td>
         <td>​</td>
         <td>ρMin * b * d​</td>
         <td>${Asmin.toFixed(2)} cm²​</td>
@@ -148,13 +148,13 @@ document.addEventListener('DOMContentLoaded', function () {
         </td>
       </tr>      
       <tr>
-        <td> </td>
+        <td>Bloque comprimido</td>
         <td>a</td>
         <td>d - (d² - (2 * mu) / (0.85 * 0.9 * fc * b))^0.5</td>
         <td>${a.toFixed(2)} cm</td>
       </tr>
       <tr>
-        <td></td>
+        <td>Área de acero calculado</td>
         <td>As</td>
         <td>mu / (0.9 * fy * (d - a / 2))</td>
         <td>${As.toFixed(2)} cm²</td>
@@ -165,13 +165,13 @@ document.addEventListener('DOMContentLoaded', function () {
         </td>
       </tr>
       <tr>
-        <td> </td>
+        <td>¿Usar acero mínimo?</td>
         <td>Asmin</td>
         <td>(condicional)</td>
         <td>${As > Asmin ? 'OK' : 'NO'}</td>
       </tr>
       <tr>
-        <td> </td>
+        <td>Área de acero máximo</td>
         <td>As</td>
         <td>max(Asmin, As)</td>
         <td>${asFinal.toFixed(2)} cm²/m</td>
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </td>
       </tr>
       <tr>
-        <td></td>
+        <td>Área de acero total a usar</td>
         <td>As</td>
         <td>áreaAcero * cantidad barras</td>
         <td id="asC">${asSelect} cm²</td>
@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </tr>        
         <tr>
           <th scope="row">
-            
+            Peralte efectivo
           </th>
           <th scope="row">
             d
@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function () {
           </th>
         </tr>  
         <tr>
-          <td></td>
+          <td>Fuerza cortante última</td>
           <td>Vu</td>
           <td>Ingrese valor</td>
           <td>
@@ -304,13 +304,13 @@ document.addEventListener('DOMContentLoaded', function () {
           </td>
         </tr>        
         <tr>
-          <td></td>
+          <td>Resistencia del concreto a corte</td>
           <td>Vc</td>
           <td>(0.53 * d * b * (f'c)^0.5) / 1000</td>
           <td>${vc.toFixed(2)} tn</td>
         </tr>
         <tr>
-          <td></td>
+          <td>Resistencia nominal del concreto a corte</td>
           <td>ΦVc</td>
           <td>0.85 * vc</td>
           <td>${phivc.toFixed(2)} tn</td>
@@ -350,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function () {
           </td>
         </tr>
         <tr>
-          <td></td>
+          <td>Espesor</td>
           <td>e</td>
           <td>Seleccione</td>
           <td>
@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', function () {
           </td>          
         </tr>        
         <tr>
-          <td></td>
+          <td>Área del acero mínimo</td>
           <td>As</td>
           <td>0.0018 * e * 100</td>
           <td id="asT">${as2.toFixed(2)} cm²</td>
@@ -391,16 +391,47 @@ document.addEventListener('DOMContentLoaded', function () {
     const toggleFormButton = document.getElementById('toggleFormButton');
     const formContainer = document.getElementById('formContainer');
     const formColumn = document.getElementById('formColumn');
+    const resultadosContainer = document.getElementById('resultadosContainer');
     const toggleIcon = toggleFormButton.querySelector('i');
+
+    // Función para cambiar las clases de Bootstrap y el ícono del botón
+    function toggleClasses() {
+      formColumn.classList.toggle('col-md-3');
+      formColumn.classList.toggle('col-md-1');
+      resultadosContainer.classList.toggle('col-md-9');
+      resultadosContainer.classList.toggle('col-md-10');
+      toggleIcon.classList.toggle('fa-chevron-left');
+      toggleIcon.classList.toggle('fa-chevron-right');
+    }
+
+    // Función para ocultar el formulario antes de imprimir
+    function hideFormBeforePrint() {
+      formContainer.style.display = 'none';
+      toggleIcon.classList.add('d-none');
+      if (formColumn.classList.contains('col-md-3')) {
+        toggleClasses();
+      }
+    }
+
+    // Función para restaurar la visibilidad del formulario después de imprimir
+    function showFormAfterPrint() {
+      // Esperar un breve período antes de restaurar las clases
+      setTimeout(function () {
+        formContainer.style.display = 'block';
+        toggleIcon.classList.remove('d-none');
+        toggleClasses();
+      }, 100); // Ajusta este valor según sea necesario
+    }
 
     toggleFormButton.addEventListener('click', function () {
       formContainer.style.display =
         formContainer.style.display === 'none' ? 'block' : 'none';
-      formColumn.classList.toggle('col-md-3');
-      formColumn.classList.toggle('col-md-1');
-      toggleIcon.classList.toggle('fa-chevron-left');
-      toggleIcon.classList.toggle('fa-chevron-right');
+      toggleClasses();
     });
+
+    // Agregar eventos para detectar cuando se imprime la página
+    window.addEventListener('beforeprint', hideFormBeforePrint);
+    window.addEventListener('afterprint', showFormAfterPrint);
   }
   ocultarForm();
 
@@ -439,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function () {
       asSelect = value * selectValue;
       var asC = document.getElementById('asC');
       asC.innerHTML = `${asSelect} cm²`;
-      
+
       resDA = Math.round((asSelect * b) / asFinal);
       var sepA = document.getElementById('sepA');
       sepA.innerHTML = `@ ${resDA}`;
@@ -461,7 +492,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       var asC = document.getElementById('asT');
       asC.innerHTML = `${as2.toFixed(2)} cm²`;
-      
+
       var areaA2Text = document.getElementById('areaA2Text');
       areaA2Text.innerHTML = `${value} cm²`;
 
@@ -479,7 +510,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var as2 = 0.0018 * value * 100;
 
       var asC = document.getElementById('asT');
-      asC.innerHTML = `${as2.toFixed(2)} cm²` ;
+      asC.innerHTML = `${as2.toFixed(2)} cm²`;
 
       var select = document.getElementById('areaAcero2');
       // select value
