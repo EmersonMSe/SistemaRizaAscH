@@ -1,5 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $pisos = $_POST["piso"];
     $fc = $_POST["fc"];
     $fy = $_POST["fy"];
     $H = $_POST["altura"];
@@ -58,18 +59,64 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
 </head>
 
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, sans-serif;
+            /* font-size: 0.3cm */
+        }
+
+        table {
+            font-family: 'Helvetica Neue', Helvetica, sans-serif;
+        }
+
+        table.table {
+            margin-bottom: 0;
+            /* Eliminar el espacio inferior de la tabla */
+        }
+
+        .tab_encabezados {
+            font-family: 'Helvetica Neue', Helvetica, sans-serif;
+            font-size: 16pt;
+            font-weight: 700;
+        }
+
+        .sub_encabezados {
+            background-color: #4f5d78;
+            color: #fff;
+            font-family: 'Helvetica Neue', Helvetica, sans-serif;
+            font-size: 11pt;
+            font-weight: bold;
+        }
+
+        .sub_sub_encabezados {
+            background-color: #a6b7c7;
+            color: #fff;
+            font-family: 'Helvetica Neue', Helvetica, sans-serif;
+            font-size: 11pt;
+            font-weight: bold;
+        }
+
+        .datos_relleno {
+            font-family: 'Helvetica Neue', Helvetica, sans-serif;
+            font-size: 11pt;
+        }
+    </style>
+
 <body>
-    <h3><u><strong>1.0 Condición de Esbeltez:</strong></u></h3>
+    <h1 class="tab_encabezados text-2xl font-bold decoration-indigo-500">
+        1.- Condicion de Esbeltez
+    </h1>
+    <!-- <h3><u><strong>1.0 Condición de Esbeltez:</strong></u></h3> -->
     <!-- Condicion Esbeltez -->
     <div class="table-responsive">
-        <table class="table table-bordered table-hover ">
+        <table class="table table-bordered table-hover" id="tablaBody">
             <thead class="bg-info">
-                <tr>
+                <tr class="sub_encabezados">
                     <th scope="col" style="vertical-align: middle;" class="text-center" rowspan="3">
                         Piso</th>
                     <th scope="col" style="vertical-align: middle;" class="text-center" rowspan="3">
@@ -79,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <th scope="col" style="vertical-align: middle;" class="text-center" colspan="7">
                         Direcciones Y-Y</th>
                 </tr>
-                <tr>
+                <tr class="sub_encabezados">
                     <th scope="col" rowspan="2" style="vertical-align: middle;" class="text-center">Pu (Ton)</th>
                     <th scope="col" rowspan="2" style="vertical-align: middle;" class="text-center">Vux (Ton)</th>
                     <th scope="col" rowspan="2" style="vertical-align: middle;" class="text-center">vuy (Ton)</th>
@@ -91,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <th scope="col" colspan="2" style="vertical-align: middle;" class="text-center">Mux (Ton.m)</th>
                     <th scope="col" colspan="2" style="vertical-align: middle;" class="text-center">Muy (Ton.m)</th>
                 </tr>
-                <tr>
+                <tr class="sub_encabezados">
                     <th scope="col" class="text-center">Top</th>
                     <th scope="col" class="text-center">Bottom</th>
                     <th scope="col" class="text-center">Top</th>
@@ -102,919 +149,530 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <th scope="col" class="text-center">Bottom</th>
                 </tr>
             </thead>
-            <tbody id="tablaBody">
-                <tr>
-                    <th rowspan="5" style="vertical-align: middle;" scope="row">Piso 1</th>
-                    <th>1.40CM+1.70CV</th>
-                    <?php
-                    $datos = 1;
-                    $Ps = array();
-                    $vuxs = array();
-                    $vys = array();
-                    $topmxs = array();
-                    $buttonmxs = array();
-                    $topmys = array();
-                    $buttonmys = array();
-                    //cuadrante en X-x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $P = round((1.4 * $p[$i] + 1.7 * $p[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $Ps[] = $P;
+            <tbody>
+                <?php
+                    //////////////////////////////////////////////////////////
+                    //                                                      //
+                    //                  CUADRANTE en X-X                    //
+                    //                                                      //
+                    //////////////////////////////////////////////////////////
+                    // Procesar los datos de $p
+                    $datos_por_piso_p = array_chunk($p, 4);
+                    $pisos_json_p = array();
+                    for ($piso_num = 0; $piso_num < $pisos; $piso_num++) {
+                        $datos_piso_actual = array(
+                            "Piso" => $piso_num + 1,
+                            "Datos" => $datos_por_piso_p[$piso_num]
+                        );
+                        $pisos_json_p[] = $datos_piso_actual;
                     }
-                    if (isset($Ps)) {
-                        foreach ($Ps as $P) {
-                            echo "<td>$P</td>";
-                        }
-                    }
+                    $pisos_datos_p = json_encode($pisos_json_p);
+                    $pisos_datos_array_p = json_decode($pisos_datos_p, true);
 
-                    //segundo cuadrante vux
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vux = round((1.4 * $vx[$i] + 1.7 * $vx[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $vuxs[] = $vux;
+                    // Procesar los datos de $vx
+                    $datos_por_piso_vx = array_chunk($vx, 4);
+                    $pisos_json_vx = array();
+                    for ($piso_num = 0; $piso_num < $pisos; $piso_num++) {
+                        $datos_piso_actual = array(
+                            "Piso" => $piso_num + 1,
+                            "Datos" => $datos_por_piso_vx[$piso_num]
+                        );
+                        $pisos_json_vx[] = $datos_piso_actual;
                     }
-                    if (isset($vuxs)) {
-                        foreach ($vuxs as $vux) {
-                            echo "<td>$vux</td>";
-                        }
-                    }
+                    $pisos_datos_vx = json_encode($pisos_json_vx);
+                    $pisos_datos_array_vx = json_decode($pisos_datos_vx, true);
 
-                    //tercer cuadrante vy
-                    for ($i = 0; $i < $datos; $i++) {
-                        $v1y = round((1.4 * $vy[$i] + 1.7 * $vy[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $v1ys[] = $v1y;
+                    // Procesar los datos de $vuy
+                    $datos_por_piso_vy = array_chunk($vy, 4);
+                    $pisos_json_vy = array();
+                    for ($piso_num = 0; $piso_num < $pisos; $piso_num++) {
+                        $datos_piso_actual = array(
+                            "Piso" => $piso_num + 1,
+                            "Datos" => $datos_por_piso_vy[$piso_num]
+                        );
+                        $pisos_json_vy[] = $datos_piso_actual;
                     }
-                    if (isset($v1ys)) {
-                        foreach ($v1ys as $v1y) {
-                            echo "<td>$v1y</td>";
-                        }
-                    }
+                    $pisos_datos_vy = json_encode($pisos_json_vy);
+                    $pisos_datos_array_vy = json_decode($pisos_datos_vy, true);
 
-                    //cuarto cuadrante top x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmx1 = round((1.4 * $topmx[$i] + 1.7 * $topmx[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $topmx1s[] = $topmx1;
+                    // Procesar los datos de $topmx
+                    $datos_por_piso_topmx = array_chunk($topmx, 4);
+                    $pisos_json_topmx = array();
+                    for ($piso_num = 0; $piso_num < $pisos; $piso_num++) {
+                        $datos_piso_actual = array(
+                            "Piso" => $piso_num + 1,
+                            "Datos" => $datos_por_piso_topmx[$piso_num]
+                        );
+                        $pisos_json_topmx[] = $datos_piso_actual;
                     }
-                    if (isset($topmx1s)) {
-                        foreach ($topmx1s as $topmx1) {
-                            echo "<td>$topmx1</td>";
-                        }
-                    }
-                    //cuarto cuadrante Button x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmx1 = round((1.4 * $buttonmx[$i] + 1.7 * $buttonmx[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmx1s[] = $buttonmx1;
-                    }
-                    if (isset($buttonmx1s)) {
-                        foreach ($buttonmx1s as $buttonmx1) {
-                            echo "<td>$buttonmx1</td>";
-                        }
-                    }
+                    $pisos_datos_topmx = json_encode($pisos_json_topmx);
+                    $pisos_datos_array_topmx = json_decode($pisos_datos_topmx, true);
 
-                    //quinto cuadrante top y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmy1 = round((1.4 * $topmy[$i] + 1.7 * $topmy[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $topmy1s[] = $topmy1;
+                    // Procesar los datos de $buttonmx
+                    $datos_por_piso_buttonmx = array_chunk($buttonmx, 4);
+                    $pisos_json_buttonmx = array();
+                    for ($piso_num = 0; $piso_num < $pisos; $piso_num++) {
+                        $datos_piso_actual = array(
+                            "Piso" => $piso_num + 1,
+                            "Datos" => $datos_por_piso_buttonmx[$piso_num]
+                        );
+                        $pisos_json_buttonmx[] = $datos_piso_actual;
                     }
-                    if (isset($topmy1s)) {
-                        foreach ($topmy1s as $topmy1) {
-                            echo "<td>$topmy1</td>";
-                        }
-                    }
-                    //sexto cuadrante Button y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmy1 = round((1.4 * $buttonmy[$i] + 1.7 * $buttonmy[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmy1s[] = $buttonmy1;
-                    }
-                    if (isset($buttonmy1s)) {
-                        foreach ($buttonmy1s as $buttonmy1) {
-                            echo "<td>$buttonmy1</td>";
-                        }
-                    }
+                    $pisos_datos_buttonmx = json_encode($pisos_json_buttonmx);
+                    $pisos_datos_array_buttonmx = json_decode($pisos_datos_buttonmx, true);
 
-                    //CUADRANTE en Y-Y
+                    // Procesar los datos de $topmy
+                    $datos_por_piso_topmy = array_chunk($topmy, 4);
+                    $pisos_json_topmy = array();
+                    for ($piso_num = 0; $piso_num < $pisos; $piso_num++) {
+                        $datos_piso_actual = array(
+                            "Piso" => $piso_num + 1,
+                            "Datos" => $datos_por_piso_topmy[$piso_num]
+                        );
+                        $pisos_json_topmy[] = $datos_piso_actual;
+                    }
+                    $pisos_datos_topmy = json_encode($pisos_json_topmy);
+                    $pisos_datos_array_topmy = json_decode($pisos_datos_topmy, true);
+
+                    // Procesar los datos de $buttonmy
+                    $datos_por_piso_buttonmy = array_chunk($buttonmy, 4);
+                    $pisos_json_buttonmy = array();
+                    for ($piso_num = 0; $piso_num < $pisos; $piso_num++) {
+                        $datos_piso_actual = array(
+                            "Piso" => $piso_num + 1,
+                            "Datos" => $datos_por_piso_buttonmy[$piso_num]
+                        );
+                        $pisos_json_buttonmy[] = $datos_piso_actual;
+                    }
+                    $pisos_datos_buttonmy = json_encode($pisos_json_buttonmy);
+                    $pisos_datos_array_buttonmy = json_decode($pisos_datos_buttonmy, true);
+                    //////////////////////////////////////////////////////////
+                    //                                                      //
+                    //                  CUADRANTE en Y-Y                    //
+                    //                                                      //
+                    //////////////////////////////////////////////////////////
+                    $max_values = array();
+                    $P_values = [];
+                    $Pc_values = [];
+                    $Pcn_values = [];
+                    $Pms_values = [];
+                    $Pmns_values = [];
+
+                    $topmx1_values=[];
+                    $topmxcs_values=[];
+                    $topmxcns_values=[];
+                    $topmxms_values=[];
+                    $topmxmns_values=[];
                     
-                    for ($i = 0; $i < $datos; $i++) {
-                        $Py = round((1.4 * $p[$i] + 1.7 * $p[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $Pys[] = $Py;
-                    }
-                    if (isset($Pys)) {
-                        foreach ($Pys as $Py) {
-                            echo "<td>$Py</td>";
-                        }
-                    }
+                    $buttonmx1_values=[];
+                    $buttonmxcs_values=[];
+                    $buttonmxcns_values=[] ;
+                    $buttonmxms_values=[];
+                    $buttonmxmns_values=[];
 
-                    //segundo cuadrante vux
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vux1 = round((1.4 * $vx[$i] + 1.7 * $vx[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $vux1s[] = $vux1;
-                    }
-                    if (isset($vux1s)) {
-                        foreach ($vux1s as $vux1) {
-                            echo "<td>$vux1</td>";
-                        }
-                    }
-                    //tercer cuadrante vy
-                    $vyYs = array();
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vyY = round((1.4 * $vy[$i] + 1.7 * $vy[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $vyYs[] = $vyY;
-                    }
-                    if (isset($vyYs)) {
-                        foreach ($vyYs as $vyY) {
-                            echo "<td>$vyY</td>";
-                        }
-                    }
+                    $max_valuesyy = array();
 
-                    //cuarto cuadrante top x
-                    $vyYs = array();
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmx2 = round((1.4 * $topmx[$i] + 1.7 * $topmx[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $topmx2s[] = $topmx2;
-                    }
-                    if (isset($topmx2s)) {
-                        foreach ($topmx2s as $topmx2) {
-                            echo "<td>$topmx2</td>";
-                        }
-                    }
+                    $max_pisovux_values=[];
+                    $max_pisoVy_values=[];
 
+                    $Py_values=[];
+                    $Pcsy_values=[];
+                    $Pcnsy_values=[];
+                    $Pmsy_values=[];
+                    $Pmnsy_values=[];
 
-                    //cuarto cuadrante Button x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmyx2 = round((1.4 * $buttonmx[$i] + 1.7 * $buttonmx[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmyx2s[] = $buttonmyx2;
-                    }
-                    if (isset($buttonmyx2s)) {
-                        foreach ($buttonmyx2s as $buttonmyx2) {
-                            echo "<td>$buttonmyx2</td>";
-                        }
-                    }
+                    $topmyy2_values=[];
+                    $topmyycss_values=[];
+                    $topmyycns_values=[];
+                    $topmsmyy_values=[];
+                    $topmsmnyy_values=[];
 
-                    //quinto cuadrante top y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmyy2 = round((1.4 * $topmy[$i] + 1.7 * $topmy[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $topmyy2s[] = $topmyy2;
-                    }
-                    if (isset($topmyy2s)) {
-                        foreach ($topmyy2s as $topmyy2) {
-                            echo "<td>$topmyy2</td>";
-                        }
-                    }
-                    //sexto cuadrante Button y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmyy = round((1.4 * $buttonmy[$i] + 1.7 * $buttonmy[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmyys[] = $buttonmyy;
-                    }
-                    if (isset($buttonmyys)) {
-                        foreach ($buttonmyys as $buttonmyy) {
-                            echo "<td>$buttonmyy</td>";
-                        }
-                    }
-                    ?>
-                </tr>
-                <tr>
-                    <th>1.25(CM+CV)+CS</th>
-                    <?php
-                    $datos = 1;
-                    $Ps = array();
-                    $vuxs = array();
-                    $vys = array();
-                    $topmxs = array();
-                    $buttonmxs = array();
-                    $topmys = array();
-                    $buttonmys = array();
-                    //cuadrante en X-x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $Pc = round((1.25 * ($p[$i] + $p[$i + 1]) + $p[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $Pcs[] = $Pc;
-                    }
-                    if (isset($Pcs)) {
-                        foreach ($Pcs as $Pc) {
-                            echo "<td>$Pc</td>";
-                        }
-                    }
-
-                    //segundo cuadrante vux
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vucx = round((1.25 * ($vx[$i] + $vx[$i + 1]) + $vx[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $vucxs[] = $vucx;
-                    }
-                    if (isset($vucxs)) {
-                        foreach ($vucxs as $vucx) {
-                            echo "<td>$vucx</td>";
-                        }
-                    }
-
-                    //tercer cuadrante vy
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vcsy = round((1.25 * ($vy[$i] + $vy[$i + 1]) + $vy[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $vcsys[] = $vcsy;
-                    }
-                    if (isset($vcsys)) {
-                        foreach ($vcsys as $vcsy) {
-                            echo "<td>$vcsy</td>";
-                        }
-                    }
-
-                    //cuarto cuadrante top x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmxcs = round((1.25 * ($topmx[$i] + $topmx[$i + 1]) + $topmx[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $topmxcss[] = $topmxcs;
-                    }
-                    if (isset($topmxcss)) {
-                        foreach ($topmxcss as $topmxcs) {
-                            echo "<td>$topmxcs</td>";
-                        }
-                    }
-                    //cuarto cuadrante Button x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmxcs = round((1.25 * ($buttonmx[$i] + $buttonmx[$i + 1]) + $buttonmx[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmxcss[] = $buttonmxcs;
-                    }
-                    if (isset($buttonmxcss)) {
-                        foreach ($buttonmxcss as $buttonmxcs) {
-                            echo "<td>$buttonmxcs</td>";
-                        }
-                    }
-
-                    //quinto cuadrante top y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmycs = round((1.25 * ($topmy[$i] + $topmy[$i + 1]) + $topmy[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $topmycss[] = $topmycs;
-                    }
-                    if (isset($topmycss)) {
-                        foreach ($topmycss as $topmycs) {
-                            echo "<td>$topmycs</td>";
-                        }
-                    }
-                    //sexto cuadrante Button y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmycs = round((1.25 * ($buttonmy[$i] + $buttonmy[$i + 1]) + $buttonmy[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmycss[] = $buttonmycs;
-                    }
-                    if (isset($buttonmycss)) {
-                        foreach ($buttonmycss as $buttonmycs) {
-                            echo "<td>$buttonmycs</td>";
-                        }
-                    }
-
-                    //CUADRANTE en Y-Y
                     
-                    for ($i = 0; $i < $datos; $i++) {
-                        $Pcsy = round((1.25 * ($p[$i] + $p[$i + 1]) + $p[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $Pcsys[] = $Pcsy;
-                    }
-                    if (isset($Pcsys)) {
-                        foreach ($Pcsys as $Pcsy) {
-                            echo "<td>$Pcsy</td>";
-                        }
-                    }
+                    $buttonmyy_values=[];
+                    $buttonmyycs_values=[];
+                    $buttonmyycns_values=[];
+                    $buttonmsmyy_values=[];
+                    $buttonmsmnyy_values=[];
 
-                    //segundo cuadrante vux
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vucsy = round((1.25 * ($vx[$i] + $vx[$i + 1]) + $vx[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $vucsys[] = $vucsy;
-                    }
-                    if (isset($vucsys)) {
-                        foreach ($vucsys as $vucsy) {
-                            echo "<td>$vucsy</td>";
-                        }
-                    }
-                    //tercer cuadrante vy
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vycs = round((1.25 * ($vy[$i] + $vy[$i + 1]) + $vy[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $vycss[] = $vycs;
-                    }
-                    if (isset($vycss)) {
-                        foreach ($vycss as $vycs) {
-                            echo "<td>$vycs</td>";
-                        }
-                    }
+                    for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                        // Si es el inicio de un nuevo piso, generamos la fila del piso con rowspan=5
+                        echo "<tr>";
+                        echo "<th rowspan='5' style='vertical-align: middle;' scope='row'>Piso " . ($piso_num + 1) . "</th>";
+                        //////////////////////////////////////////////////////////
+                        //                                                      //
+                        //                  CUADRANTE en X-X                    //
+                        //                                                      //
+                        //////////////////////////////////////////////////////////
+                        // Obtener los datos del piso actual P
+                        $datos_piso_p = $pisos_datos_array_p[$piso_num]['Datos'];
+                        $P = round((1.4 * $datos_piso_p[0] + 1.7 * $datos_piso_p[1]), 2, PHP_ROUND_HALF_UP);
+                        $Pc = round((1.25 * ($datos_piso_p[0] + $datos_piso_p[1]) + $datos_piso_p[2]), 2, PHP_ROUND_HALF_UP);
+                        $Pcn = round((1.25 * ($datos_piso_p[0] + $datos_piso_p[1]) - $datos_piso_p[2]), 2, PHP_ROUND_HALF_UP);
+                        $Pms = round((0.9 * $datos_piso_p[0] + $datos_piso_p[2]), 2, PHP_ROUND_HALF_UP);
+                        $Pmns = round((0.9 * $datos_piso_p[0] - $datos_piso_p[2]), 2, PHP_ROUND_HALF_UP);
 
-                    //cuarto cuadrante top x
-                    $vyYs = array();
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmxycs = round((1.25 * ($topmx[$i] + $topmx[$i + 1]) + $topmx[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $topmxycss[] = $topmxycs;
-                    }
-                    if (isset($topmxycss)) {
-                        foreach ($topmxycss as $topmxycs) {
-                            echo "<td>$topmxycs</td>";
-                        }
-                    }
+                        $max_piso = max($P, $Pc, $Pcn, $Pms, $Pmns);
+                        // Guardar el valor máximo en un array
+                        $max_values[] = $max_piso;
+                        $P_values[] = $P;
+                        $Pc_values[] = $Pc;
+                        $Pcn_values[] = $Pcn;
+                        $Pms_values[] = $Pms;
+                        $Pmns_values[] = $Pmns;
 
+                        // Obtener los datos del piso actual VX
+                        $datos_piso_vx = $pisos_datos_array_vx[$piso_num]['Datos'];
+                        $vux = round((1.4 * $datos_piso_vx[0] + 1.7 * $datos_piso_vx[1]), 2, PHP_ROUND_HALF_UP);
+                        $vucx = round((1.25 * ($datos_piso_vx[0] + $datos_piso_vx[1]) + $datos_piso_vx[2]), 2, PHP_ROUND_HALF_UP);
+                        $vucnx = round((1.25 * ($datos_piso_vx[0] + $datos_piso_vx[1]) - $datos_piso_vx[2]), 2, PHP_ROUND_HALF_UP);
+                        $vums = round((0.9 * $datos_piso_vx[0] + $datos_piso_vx[2]), 2, PHP_ROUND_HALF_UP);
+                        $vumns = round((0.9 * $datos_piso_vx[0] - $datos_piso_vx[2]), 2, PHP_ROUND_HALF_UP);
 
-                    //cuarto cuadrante Button x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmyxcs = round((1.25 * ($buttonmx[$i] + $buttonmx[$i + 1]) + $buttonmx[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmyxcss[] = $buttonmyxcs;
-                    }
-                    if (isset($buttonmyxcss)) {
-                        foreach ($buttonmyxcss as $buttonmyxcs) {
-                            echo "<td>$buttonmyxcs</td>";
-                        }
-                    }
+                        $max_pisovux = max($vux, $vucx, $vucnx, $vums, $vumns);
+                        // Guardar el valor máximo en un array
+                        $max_pisovux_values[] = $max_pisovux;
 
-                    //quinto cuadrante top y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmyycs = round((1.25 * ($topmy[$i] + $topmy[$i + 1]) + $topmy[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $topmyycss[] = $topmyycs;
-                    }
-                    if (isset($topmyycss)) {
-                        foreach ($topmyycss as $topmyycs) {
-                            echo "<td>$topmyycs</td>";
-                        }
-                    }
-                    //sexto cuadrante Button y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmyycs = round((1.25 * ($buttonmy[$i] + $buttonmy[$i + 1]) + $buttonmy[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmyycss[] = $buttonmyycs;
-                    }
-                    if (isset($buttonmyycss)) {
-                        foreach ($buttonmyycss as $buttonmyycs) {
-                            echo "<td>$buttonmyycs</td>";
-                        }
-                    }
+                        // Obtener los datos del piso actual Vy
+                        $datos_piso_vy = $pisos_datos_array_vy[$piso_num]['Datos'];
+                        $v1y = round((1.4 * $datos_piso_vy[0] + 1.7 * $datos_piso_vy[1]), 2, PHP_ROUND_HALF_UP);
+                        $vcsy = round((1.25 * ($datos_piso_vy[0] + $datos_piso_vy[1]) + $datos_piso_vy[2]), 2, PHP_ROUND_HALF_UP);
+                        $vcnsy = round((1.25 * ($datos_piso_vy[0] + $datos_piso_vy[1]) - $datos_piso_vy[2]), 2, PHP_ROUND_HALF_UP);
+                        $vyms = round((0.9 * $datos_piso_vy[0] + $datos_piso_vy[2]), 2, PHP_ROUND_HALF_UP);
+                        $vymns = round((0.9 * $datos_piso_vy[0] - $datos_piso_vy[2]), 2, PHP_ROUND_HALF_UP);
 
-                    ?>
-                </tr>
-                <tr>
-                    <th>1.25(CM+CV)-CS</th>
-                    <?php
-                    $datos = 1;
-                    $Ps = array();
-                    $vuxs = array();
-                    $vys = array();
-                    $topmxs = array();
-                    $buttonmxs = array();
-                    $topmys = array();
-                    $buttonmys = array();
-                    //cuadrante en X-x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $Pcn = round((1.25 * ($p[$i] + $p[$i + 1]) - $p[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $Pcns[] = $Pcn;
-                    }
-                    if (isset($Pcns)) {
-                        foreach ($Pcns as $Pcn) {
-                            echo "<td>$Pcn</td>";
-                        }
-                    }
+                        // Obtener los datos del piso actual topmx
+                        $datos_piso_topmx = $pisos_datos_array_topmx[$piso_num]['Datos'];
+                        $topmx1 = round((1.4 * $datos_piso_topmx[0] + 1.7 * $datos_piso_topmx[1]), 2, PHP_ROUND_HALF_UP);
+                        $topmxcs = round((1.25 * ($datos_piso_topmx[0] + $datos_piso_topmx[1]) + $datos_piso_topmx[2]), 2, PHP_ROUND_HALF_UP);
+                        $topmxcns = round((1.25 * ($datos_piso_topmx[0] + $datos_piso_topmx[1]) - $datos_piso_topmx[2]), 2, PHP_ROUND_HALF_UP);
+                        $topmxms = round((0.9 * $datos_piso_topmx[0] + $datos_piso_topmx[2]), 2, PHP_ROUND_HALF_UP);
+                        $topmxmns = round((0.9 * $datos_piso_topmx[0] - $datos_piso_topmx[2]), 2, PHP_ROUND_HALF_UP);
 
-                    //segundo cuadrante vux
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vucnx = round((1.25 * ($vx[$i] + $vx[$i + 1]) - $vx[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $vucnxs[] = $vucnx;
-                    }
-                    if (isset($vucnxs)) {
-                        foreach ($vucnxs as $vucnx) {
-                            echo "<td>$vucnx</td>";
-                        }
-                    }
+                        $topmx1_values[] = $topmx1;
+                        $topmxcs_values[] = $topmxcs;
+                        $topmxcns_values[] = $topmxcns;
+                        $topmxms_values[] = $topmxms;
+                        $topmxmns_values[] = $topmxmns;
 
-                    //tercer cuadrante vy
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vcnsy = round((1.25 * ($vy[$i] + $vy[$i + 1]) - $vy[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $vcnsys[] = $vcnsy;
-                    }
-                    if (isset($vcnsys)) {
-                        foreach ($vcnsys as $vcnsy) {
-                            echo "<td>$vcnsy</td>";
-                        }
-                    }
+                        // Obtener los datos del piso actual buttonmx1
+                        $datos_piso_buttonmx = $pisos_datos_array_buttonmx[$piso_num]['Datos'];
+                        $buttonmx1 = round((1.4 * $datos_piso_buttonmx[0] + 1.7 * $datos_piso_buttonmx[1]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmxcs = round((1.25 * ($datos_piso_buttonmx[0] + $datos_piso_buttonmx[1]) + $datos_piso_buttonmx[2]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmxcns = round((1.25 * ($datos_piso_buttonmx[0] + $datos_piso_buttonmx[1]) - $datos_piso_buttonmx[2]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmxms = round((0.9 * $datos_piso_buttonmx[0] + $datos_piso_buttonmx[2]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmxmns = round((0.9 * $datos_piso_buttonmx[0] - $datos_piso_buttonmx[2]), 2, PHP_ROUND_HALF_UP);
 
-                    //cuarto cuadrante top x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmxcns = round((1.25 * ($topmx[$i] + $topmx[$i + 1]) - $topmx[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $topmxcnss[] = $topmxcns;
-                    }
-                    if (isset($topmxcnss)) {
-                        foreach ($topmxcnss as $topmxcns) {
-                            echo "<td>$topmxcns</td>";
-                        }
-                    }
-                    //cuarto cuadrante Button x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmxcns = round((1.25 * ($buttonmx[$i] + $buttonmx[$i + 1]) - $buttonmx[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmxcnss[] = $buttonmxcns;
-                    }
-                    if (isset($buttonmxcnss)) {
-                        foreach ($buttonmxcnss as $buttonmxcns) {
-                            echo "<td>$buttonmxcns</td>";
-                        }
-                    }
+                        $buttonmx1_values[] = $buttonmx1;
+                        $buttonmxcs_values[] = $buttonmxcs;
+                        $buttonmxcns_values[] = $buttonmxcns;
+                        $buttonmxms_values[] = $buttonmxms;
+                        $buttonmxmns_values[] = $buttonmxmns;
 
-                    //quinto cuadrante top y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmycns = round((1.25 * ($topmy[$i] + $topmy[$i + 1]) - $topmy[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $topmycnss[] = $topmycns;
-                    }
-                    if (isset($topmycnss)) {
-                        foreach ($topmycnss as $topmycns) {
-                            echo "<td>$topmycns</td>";
-                        }
-                    }
-                    //sexto cuadrante Button y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmycns = round((1.25 * ($buttonmy[$i] + $buttonmy[$i + 1]) + $buttonmy[$i + 1]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmycnss[] = $buttonmycns;
-                    }
-                    if (isset($buttonmycss)) {
-                        foreach ($buttonmycss as $buttonmycs) {
-                            echo "<td>$buttonmycs</td>";
-                        }
-                    }
+                        // Obtener los datos del piso actual  topmy
+                        $datos_piso_topmy = $pisos_datos_array_topmy[$piso_num]['Datos'];
+                        $topmy1 = round((1.4 * $datos_piso_topmy[0] + 1.7 * $datos_piso_topmy[1]), 2, PHP_ROUND_HALF_UP);
+                        $topmycs = round((1.25 * ($datos_piso_topmy[0] + $datos_piso_topmy[1]) + $datos_piso_topmy[2]), 2, PHP_ROUND_HALF_UP);
+                        $topmycns = round((1.25 * ($datos_piso_topmy[0] + $datos_piso_topmy[1]) - $datos_piso_topmy[2]), 2, PHP_ROUND_HALF_UP);
+                        $topmyms = round((0.9 * $datos_piso_topmy[0] + $datos_piso_topmy[2]), 2, PHP_ROUND_HALF_UP);
+                        $topmymns = round((0.9 * $datos_piso_topmy[0] - $datos_piso_topmy[2]), 2, PHP_ROUND_HALF_UP);
 
-                    //CUADRANTE en Y-Y
-                    
-                    for ($i = 0; $i < $datos; $i++) {
-                        $Pcnsy = round((1.25 * ($p[$i] + $p[$i + 1]) - $p[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $Pcnsys[] = $Pcnsy;
-                    }
-                    if (isset($Pcnsys)) {
-                        foreach ($Pcnsys as $Pcnsy) {
-                            echo "<td>$Pcnsy</td>";
-                        }
-                    }
+                        // Obtener los datos del piso actual  buttonmy
+                        $datos_piso_buttonmy = $pisos_datos_array_buttonmy[$piso_num]['Datos'];
+                        $buttonmy1 = round((1.4 * $datos_piso_buttonmy[0] + 1.7 * $datos_piso_buttonmy[1]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmycs = round((1.25 * ($datos_piso_buttonmy[0] + $datos_piso_buttonmy[1]) + $datos_piso_buttonmy[2]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmycns = round((1.25 * ($datos_piso_buttonmy[0] + $datos_piso_buttonmy[1]) - $datos_piso_buttonmy[2]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmyms = round((0.9 * $datos_piso_buttonmy[0] + $datos_piso_buttonmy[2]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmymns = round((0.9 * $datos_piso_buttonmy[0] - $datos_piso_buttonmy[2]), 2, PHP_ROUND_HALF_UP);
 
-                    //segundo cuadrante vux
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vucnsy = round((1.25 * ($vx[$i] + $vx[$i + 1]) - $vx[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $vucnsys[] = $vucnsy;
-                    }
-                    if (isset($vucnsys)) {
-                        foreach ($vucnsys as $vucnsy) {
-                            echo "<td>$vucnsy</td>";
-                        }
-                    }
-                    //tercer cuadrante vy
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vycns = round((1.25 * ($vy[$i] + $vy[$i + 1]) - $vy[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $vycnss[] = $vycns;
-                    }
-                    if (isset($vycnss)) {
-                        foreach ($vycnss as $vycns) {
-                            echo "<td>$vycns</td>";
-                        }
-                    }
+                        //////////////////////////////////////////////////////////
+                        //                                                      //
+                        //                  CUADRANTE en Y-Y                    //
+                        //                                                      //
+                        //////////////////////////////////////////////////////////
 
-                    //cuarto cuadrante top x
-                    $vyYs = array();
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmxycns = round((1.25 * ($topmx[$i] + $topmx[$i + 1]) - $topmx[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $topmxycnss[] = $topmxycns;
-                    }
-                    if (isset($topmxycnss)) {
-                        foreach ($topmxycnss as $topmxycns) {
-                            echo "<td>$topmxycns</td>";
-                        }
-                    }
+                        // Obtener los datos del piso actual  py
+                        $datos_piso_p = $pisos_datos_array_p[$piso_num]['Datos'];
+                        $Py = round((1.4 * $datos_piso_p[0] + 1.7 * $datos_piso_p[1]), 2, PHP_ROUND_HALF_UP);
+                        $Pcsy = round((1.25 * ($datos_piso_p[0] + $datos_piso_p[1]) + $datos_piso_p[3]), 2, PHP_ROUND_HALF_UP);
+                        $Pcnsy = round((1.25 * ($datos_piso_p[0] + $datos_piso_p[1]) - $datos_piso_p[3]), 2, PHP_ROUND_HALF_UP);
+                        $Pmsy = round((0.9 * $datos_piso_p[0] + $datos_piso_p[3]), 2, PHP_ROUND_HALF_UP);
+                        $Pmnsy = round((0.9 * $datos_piso_p[0] - $datos_piso_p[3]), 2, PHP_ROUND_HALF_UP);
+
+                        $max_pisoyy = max($Py, $Pcsy, $Pcnsy, $Pmsy, $Pmnsy);
+                        // Guardar el valor máximo en un array
+                        $max_valuesyy[] = $max_pisoyy;
+
+                        $Py_values[] = $Py;
+                        $Pcsy_values[] = $Pcsy;
+                        $Pcnsy_values[] = $Pcnsy;
+                        $Pmsy_values[] = $Pmsy;
+                        $Pmnsy_values[] = $Pmnsy;
+
+                        // Obtener los datos del piso actual VX
+                        $datos_piso_vx = $pisos_datos_array_vx[$piso_num]['Datos'];
+                        $vux1 = round((1.4 * $datos_piso_vx[0] + 1.7 * $datos_piso_vx[1]), 2, PHP_ROUND_HALF_UP);
+                        $vucsy = round((1.25 * ($datos_piso_vx[0] + $datos_piso_vx[1]) + $datos_piso_vx[3]), 2, PHP_ROUND_HALF_UP);
+                        $vucnsy = round((1.25 * ($datos_piso_vx[0] + $datos_piso_vx[1]) - $datos_piso_vx[3]), 2, PHP_ROUND_HALF_UP);
+                        $vuxms = round((0.9 * $datos_piso_vx[0] + $datos_piso_vx[3]), 2, PHP_ROUND_HALF_UP);
+                        $vuxmns = round((0.9 * $datos_piso_vx[0] - $datos_piso_vx[3]), 2, PHP_ROUND_HALF_UP);
 
 
-                    //cuarto cuadrante Button x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmyxcns = round((1.25 * ($buttonmx[$i] + $buttonmx[$i + 1]) - $buttonmx[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmyxcnss[] = $buttonmyxcns;
-                    }
-                    if (isset($buttonmyxcnss)) {
-                        foreach ($buttonmyxcnss as $buttonmyxcns) {
-                            echo "<td>$buttonmyxcns</td>";
-                        }
-                    }
+                        // Obtener los datos del piso actual Vy
+                        $datos_piso_vy = $pisos_datos_array_vy[$piso_num]['Datos'];
+                        $vyY = round((1.4 * $datos_piso_vy[0] + 1.7 * $datos_piso_vy[1]), 2, PHP_ROUND_HALF_UP);
+                        $vycs = round((1.25 * ($datos_piso_vy[0] + $datos_piso_vy[1]) + $datos_piso_vy[3]), 2, PHP_ROUND_HALF_UP);
+                        $vycns = round((1.25 * ($datos_piso_vy[0] + $datos_piso_vy[1]) - $datos_piso_vy[3]), 2, PHP_ROUND_HALF_UP);
+                        $vmsy = round((0.9 * $datos_piso_vy[0] + $datos_piso_vy[3]), 2, PHP_ROUND_HALF_UP);
+                        $vmnsy = round((0.9 * $datos_piso_vy[0] - $datos_piso_vy[3]), 2, PHP_ROUND_HALF_UP);
 
-                    //quinto cuadrante top y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmyycns = round((1.25 * ($topmy[$i] + $topmy[$i + 1]) - $topmy[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $topmyycnss[] = $topmyycns;
-                    }
-                    if (isset($topmyycnss)) {
-                        foreach ($topmyycnss as $topmyycns) {
-                            echo "<td>$topmyycns</td>";
-                        }
-                    }
-                    //sexto cuadrante Button y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmyycns = round((1.25 * ($buttonmy[$i] + $buttonmy[$i + 1]) - $buttonmy[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmyycnss[] = $buttonmyycns;
-                    }
-                    if (isset($buttonmyycnss)) {
-                        foreach ($buttonmyycnss as $buttonmyycns) {
-                            echo "<td>$buttonmyycns</td>";
-                        }
-                    }
-
-                    ?>
-                </tr>
-                <tr>
-                    <th>0.90CM+CS</th>
-                    <?php
-                    $datos = 1;
-                    $Ps = array();
-                    $vuxs = array();
-                    $vys = array();
-                    $topmxs = array();
-                    $buttonmxs = array();
-                    $topmys = array();
-                    $buttonmys = array();
-                    //cuadrante en X-x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $Pms = round((0.9 * $p[$i] + $p[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $Pmss[] = $Pms;
-                    }
-                    if (isset($Pmss)) {
-                        foreach ($Pmss as $Pms) {
-                            echo "<td>$Pms</td>";
-                        }
-                    }
-
-                    //segundo cuadrante vux
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vums = round((0.90 * $vx[$i] + $vx[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $vumss[] = $vums;
-                    }
-                    if (isset($vumss)) {
-                        foreach ($vumss as $vums) {
-                            echo "<td>$vums</td>";
-                        }
-                    }
-
-                    //tercer cuadrante vy
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vyms = round((0.9 * $vy[$i] + $vy[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $vymss[] = $vyms;
-                    }
-                    if (isset($vymss)) {
-                        foreach ($vymss as $vyms) {
-                            echo "<td>$vyms</td>";
-                        }
-                    }
-
-                    //cuarto cuadrante top x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmxms = round((0.9 * $topmx[$i] + $topmx[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $topmxmss[] = $topmxms;
-                    }
-                    if (isset($topmxmss)) {
-                        foreach ($topmxmss as $topmxms) {
-                            echo "<td>$topmxms</td>";
-                        }
-                    }
-                    //cuarto cuadrante Button x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmxms = round((0.9 * $buttonmx[$i] + $buttonmx[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmxmss[] = $buttonmxms;
-                    }
-                    if (isset($buttonmxmss)) {
-                        foreach ($buttonmxmss as $buttonmxms) {
-                            echo "<td>$buttonmxms</td>";
-                        }
-                    }
-
-                    //quinto cuadrante top y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmyms = round((0.9 * $topmy[$i] + $topmy[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $topmymss[] = $topmyms;
-                    }
-                    if (isset($topmymss)) {
-                        foreach ($topmymss as $topmyms) {
-                            echo "<td>$topmyms</td>";
-                        }
-                    }
-                    //sexto cuadrante Button y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmyms = round((0.9 * $buttonmy[$i] + $buttonmy[$i + 2]), 4, PHP_ROUND_HALF_UP);
-                        $buttonmymss[] = $buttonmyms;
-                    }
-                    if (isset($buttonmymss)) {
-                        foreach ($buttonmymss as $buttonmyms) {
-                            echo "<td>$buttonmyms</td>";
-                        }
-                    }
-
-                    //CUADRANTE en Y-Y
-                    
-                    for ($i = 0; $i < $datos; $i++) {
-                        $Pmsy = round((0.9 * $p[$i] + $p[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $Pmsys[] = $Pmsy;
-                    }
-                    if (isset($Pmsys)) {
-                        foreach ($Pmsys as $Pmsy) {
-                            echo "<td>$Pmsy</td>";
-                        }
-                    }
-
-                    //segundo cuadrante vux
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vuxms = round((0.9 * $vx[$i] + $vx[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $vuxmss[] = $vuxms;
-                    }
-                    if (isset($vuxmss)) {
-                        foreach ($vuxmss as $vuxms) {
-                            echo "<td>$vuxms</td>";
-                        }
-                    }
-                    //tercer cuadrante vy
-                    $vyYs = array();
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vmsy = round((0.9 * $vy[$i] + $vy[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $vmsys[] = $vmsy;
-                    }
-                    if (isset($vmsys)) {
-                        foreach ($vmsys as $vmsy) {
-                            echo "<td>$vmsy</td>";
-                        }
-                    }
-
-                    //cuarto cuadrante top x
-                    $vyYs = array();
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmsmx = round((0.9 * $topmx[$i] + $topmx[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $topmsmxs[] = $topmsmx;
-                    }
-                    if (isset($topmsmxs)) {
-                        foreach ($topmsmxs as $topmsmx) {
-                            echo "<td>$topmsmx</td>";
-                        }
-                    }
+                        $max_pisoVy = max($vyY, $vycs, $vycns, $vmsy, $vmnsy);
+                        // Guardar el valor máximo en un array
+                        $max_pisoVy_values[] = $max_pisoVy;
 
 
-                    //cuarto cuadrante Button x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmsmy = round((0.9 * $buttonmx[$i] + $buttonmx[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmsmys[] = $buttonmsmy;
-                    }
-                    if (isset($buttonmsmys)) {
-                        foreach ($buttonmsmys as $buttonmsmy) {
-                            echo "<td>$buttonmsmy</td>";
-                        }
-                    }
+                        // Obtener los datos del piso actual topmx
+                        $datos_piso_topmx = $pisos_datos_array_topmx[$piso_num]['Datos'];
+                        $topmx2 = round((1.4 * $datos_piso_topmx[0] + 1.7 * $datos_piso_topmx[1]), 2, PHP_ROUND_HALF_UP);
+                        $topmxycs = round((1.25 * ($datos_piso_topmx[0] + $datos_piso_topmx[1]) + $datos_piso_topmx[3]), 2, PHP_ROUND_HALF_UP);
+                        $topmxycns = round((1.25 * ($datos_piso_topmx[0] + $datos_piso_topmx[1]) - $datos_piso_topmx[3]), 2, PHP_ROUND_HALF_UP);
+                        $topmsmx = round((0.9 * $datos_piso_topmx[0] + $datos_piso_topmx[3]), 2, PHP_ROUND_HALF_UP);
+                        $topmsmnx = round((0.9 * $datos_piso_topmx[0] - $datos_piso_topmx[3]), 2, PHP_ROUND_HALF_UP);
 
-                    //quinto cuadrante top y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmsmyy = round((0.9 * $topmy[$i] + $topmy[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $topmsmyys[] = $topmsmyy;
-                    }
-                    if (isset($topmsmyys)) {
-                        foreach ($topmsmyys as $topmsmyy) {
-                            echo "<td>$topmsmyy</td>";
-                        }
-                    }
-                    //sexto cuadrante Button y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmsmyy = round((0.9 * $buttonmy[$i] + $buttonmy[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmsmyys[] = $buttonmsmyy;
-                    }
-                    if (isset($buttonmsmyys)) {
-                        foreach ($buttonmsmyys as $buttonmsmyy) {
-                            echo "<td>$buttonmsmyy</td>";
-                        }
-                    }
-                    ?>
-                </tr>
-                <tr>
-                    <th>0.90CM-CS</th>
-                    <?php
-                    $datos = 1;
-                    $Ps = array();
-                    $vuxs = array();
-                    $vys = array();
-                    $topmxs = array();
-                    $buttonmxs = array();
-                    $topmys = array();
-                    $buttonmys = array();
-                    //cuadrante en X-x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $Pmns = round((0.9 * $p[$i] - $p[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $Pmnss[] = $Pmns;
-                    }
-                    if (isset($Pmnss)) {
-                        foreach ($Pmnss as $Pmns) {
-                            echo "<td>$Pmns</td>";
-                        }
-                    }
+                        // Obtener los datos del piso actual buttonmx1
+                        $datos_piso_buttonmx = $pisos_datos_array_buttonmx[$piso_num]['Datos'];
+                        $buttonmyx2 = round((1.4 * $datos_piso_buttonmx[0] + 1.7 * $datos_piso_buttonmx[1]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmyxcs = round((1.25 * ($datos_piso_buttonmx[0] + $datos_piso_buttonmx[1]) + $datos_piso_buttonmx[3]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmyxcns = round((1.25 * ($datos_piso_buttonmx[0] + $datos_piso_buttonmx[1]) - $datos_piso_buttonmx[3]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmsmy = round((0.9 * $datos_piso_buttonmx[0] + $datos_piso_buttonmx[3]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmsmny = round((0.9 * $datos_piso_buttonmx[0] - $datos_piso_buttonmx[3]), 2, PHP_ROUND_HALF_UP);
 
-                    //segundo cuadrante vux
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vumns = round((0.90 * $vx[$i] - $vx[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $vumnss[] = $vumns;
-                    }
-                    if (isset($vumnss)) {
-                        foreach ($vumnss as $vumns) {
-                            echo "<td>$vumns</td>";
-                        }
-                    }
+                        // Obtener los datos del piso actual  topmy
+                        $datos_piso_topmy = $pisos_datos_array_topmy[$piso_num]['Datos'];
+                        $topmyy2 = round((1.4 * $datos_piso_topmy[0] + 1.7 * $datos_piso_topmy[1]), 2, PHP_ROUND_HALF_UP);
+                        $topmyycss = round((1.25 * ($datos_piso_topmy[0] + $datos_piso_topmy[1]) + $datos_piso_topmy[3]), 2, PHP_ROUND_HALF_UP);
+                        $topmyycns = round((1.25 * ($datos_piso_topmy[0] + $datos_piso_topmy[1]) - $datos_piso_topmy[3]), 2, PHP_ROUND_HALF_UP);
+                        $topmsmyy = round((0.9 * $datos_piso_topmy[0] + $datos_piso_topmy[3]), 2, PHP_ROUND_HALF_UP);
+                        $topmsmnyy = round((0.9 * $datos_piso_topmy[0] - $datos_piso_topmy[3]), 2, PHP_ROUND_HALF_UP);
 
-                    //tercer cuadrante vy
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vymns = round((0.9 * $vy[$i] - $vy[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $vymnss[] = $vymns;
-                    }
-                    if (isset($vymnss)) {
-                        foreach ($vymnss as $vymns) {
-                            echo "<td>$vymns</td>";
-                        }
-                    }
+                        $topmyy2_values[] = $topmyy2;
+                        $topmyycss_values[] = $topmyycss;
+                        $topmyycns_values[] = $topmyycns;
+                        $topmsmyy_values[] = $topmsmyy;
+                        $topmsmnyy_values[] = $topmsmnyy;
 
-                    //cuarto cuadrante top x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmxmns = round((0.9 * $topmx[$i] - $topmx[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $topmxmnss[] = $topmxmns;
-                    }
-                    if (isset($topmxmnss)) {
-                        foreach ($topmxmnss as $topmxmns) {
-                            echo "<td>$topmxmns</td>";
-                        }
-                    }
-                    //cuarto cuadrante Button x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmxmns = round((0.9 * $buttonmx[$i] - $buttonmx[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmxmnss[] = $buttonmxmns;
-                    }
-                    if (isset($buttonmxmnss)) {
-                        foreach ($buttonmxmnss as $buttonmxmns) {
-                            echo "<td>$buttonmxmns</td>";
-                        }
-                    }
+                        // Obtener los datos del piso actual  buttonmy
+                        $datos_piso_buttonmy = $pisos_datos_array_buttonmy[$piso_num]['Datos'];
+                        $buttonmyy = round((1.4 * $datos_piso_buttonmy[0] + 1.7 * $datos_piso_buttonmy[1]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmyycs = round((1.25 * ($datos_piso_buttonmy[0] + $datos_piso_buttonmy[1]) + $datos_piso_buttonmy[3]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmyycns = round((1.25 * ($datos_piso_buttonmy[0] + $datos_piso_buttonmy[1]) - $datos_piso_buttonmy[3]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmsmyy = round((0.9 * $datos_piso_buttonmy[0] + $datos_piso_buttonmy[3]), 2, PHP_ROUND_HALF_UP);
+                        $buttonmsmnyy = round((0.9 * $datos_piso_buttonmy[0] - $datos_piso_buttonmy[3]), 2, PHP_ROUND_HALF_UP);
+                        
+                        $buttonmyy_values[] = $buttonmyy;
+                        $buttonmyycs_values[] = $buttonmyycs;
+                        $buttonmyycns_values[] = $buttonmyycns;
+                        $buttonmsmyy_values[] = $buttonmsmyy;
+                        $buttonmsmnyy_values[] = $buttonmsmnyy;
+                        // Mostrar los resultados para este piso
+                        echo "<td style='vertical-align: middle;'>1.40CM+1.70CV</td>";
+                        echo "<td>$P</td>";
+                        echo "<td>$vux</td>";
+                        echo "<td>$v1y</td>";
+                        echo "<td>$topmx1</td>";
+                        echo "<td>$buttonmx1</td>";
+                        echo "<td>$topmy1</td>";
+                        echo "<td>$buttonmy1</td>";
+                        echo "<td>$Py</td>";
+                        echo "<td>$vux1</td>";
+                        echo "<td>$vyY</td>";
+                        echo "<td>$topmx2</td>";
+                        echo "<td>$buttonmyx2</td>";
+                        echo "<td>$topmyy2</td>";
+                        echo "<td>$buttonmyy</td>";
+                        // Cerramos la fila del piso
+                        echo "</tr>";
 
-                    //quinto cuadrante top y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmymns = round((0.9 * $topmy[$i] - $topmy[$i + 2]), 2, PHP_ROUND_HALF_UP);
-                        $topmymnss[] = $topmymns;
-                    }
-                    if (isset($topmymnss)) {
-                        foreach ($topmymnss as $topmymns) {
-                            echo "<td>$topmymns</td>";
+                        // Generamos las 4 subfilas restantes para este piso
+                        for ($subfila = 2; $subfila <= 5; $subfila++) {
+                            echo "<tr>";
+                            switch ($subfila) {
+                                case 2:
+                                    echo "<td style='vertical-align: middle;'>1.25(CM+CV)+CS</td>";
+                                    echo "<td>$Pc</td>";
+                                    echo "<td>$vucx</td>";
+                                    echo "<td>$vcsy</td>";
+                                    echo "<td>$topmxcs</td>";
+                                    echo "<td>$buttonmxcs</td>";
+                                    echo "<td>$topmycs</td>";
+                                    echo "<td>$buttonmycs</td>";
+                                    //cuadrante yy
+                                    echo "<td>$Pcsy</td>";
+                                    echo "<td>$vucsy</td>";
+                                    echo "<td>$vycs</td>";
+                                    echo "<td>$topmxycs</td>";
+                                    echo "<td>$buttonmyxcs</td>";
+                                    echo "<td>$topmyycss</td>";
+                                    echo "<td>$buttonmyycs</td>";
+                                    break;
+                                case 3:
+                                    echo "<td style='vertical-align: middle;'>1.25(CM+CV)-CS</td>";
+                                    echo "<td>$Pcn</td>";
+                                    echo "<td>$vucnx</td>";
+                                    echo "<td>$vcnsy</td>";
+                                    echo "<td>$topmxcns</td>";
+                                    echo "<td>$buttonmxcns</td>";
+                                    echo "<td>$topmycns</td>";
+                                    echo "<td>$buttonmycns</td>";
+                                    //cuadrante yy
+                                    echo "<td>$Pcnsy</td>";
+                                    echo "<td>$vucnsy</td>";
+                                    echo "<td>$vycns</td>";
+                                    echo "<td>$topmxycns</td>";
+                                    echo "<td>$buttonmyxcns</td>";
+                                    echo "<td>$topmyycns</td>";
+                                    echo "<td>$buttonmyycns</td>";
+                                    break;
+                                case 4:
+                                    echo "<td style='vertical-align: middle;'>0.90CM+CS</td>";
+                                    echo "<td>$Pms</td>";
+                                    echo "<td>$vums</td>";
+                                    echo "<td>$vyms</td>";
+                                    echo "<td>$topmxms</td>";
+                                    echo "<td>$buttonmxms</td>";
+                                    echo "<td>$topmyms</td>";
+                                    echo "<td>$buttonmyms</td>";
+                                    //cuadrante yy
+                                    echo "<td>$Pmsy</td>";
+                                    echo "<td>$vuxms</td>";
+                                    echo "<td>$vmsy</td>";
+                                    echo "<td>$topmsmx</td>";
+                                    echo "<td>$buttonmsmy</td>";
+                                    echo "<td>$topmsmyy</td>";
+                                    echo "<td>$buttonmsmyy</td>";
+                                    break;
+                                case 5:
+                                    echo "<td style='vertical-align: middle;'>0.90CM-CS</td>";
+                                    echo "<td>$Pmns</td>";
+                                    echo "<td>$vumns</td>";
+                                    echo "<td>$vymns</td>";
+                                    echo "<td>$topmxmns</td>";
+                                    echo "<td>$buttonmxmns</td>";
+                                    echo "<td>$topmymns</td>";
+                                    echo "<td>$buttonmymns</td>";
+                                    //cuadrante yy
+                                    echo "<td>$Pmnsy</td>";
+                                    echo "<td>$vuxmns</td>";
+                                    echo "<td>$vmnsy</td>";
+                                    echo "<td>$topmsmnx</td>";
+                                    echo "<td>$buttonmsmny</td>";
+                                    echo "<td>$topmsmnyy</td>";
+                                    echo "<td>$buttonmsmnyy</td>";
+                                    break;
+                            }
+                            // Aquí puedes agregar más columnas según sea necesario para cada subdivisión
+                            echo "</tr>";
                         }
                     }
-                    //sexto cuadrante Button y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmymns = round((0.9 * $buttonmy[$i] - $buttonmy[$i + 2]), 4, PHP_ROUND_HALF_UP);
-                        $buttonmymnss[] = $buttonmymns;
-                    }
-                    if (isset($buttonmymnss)) {
-                        foreach ($buttonmymnss as $buttonmymns) {
-                            echo "<td>$buttonmymns</td>";
-                        }
-                    }
-
-                    //CUADRANTE en Y-Y
-                    
-                    for ($i = 0; $i < $datos; $i++) {
-                        $Pmnsy = round((0.9 * $p[$i] - $p[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $Pmnsys[] = $Pmnsy;
-                    }
-                    if (isset($Pmnsys)) {
-                        foreach ($Pmnsys as $Pmnsy) {
-                            echo "<td>$Pmnsy</td>";
-                        }
-                    }
-
-                    //segundo cuadrante vux
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vuxmns = round((0.9 * $vx[$i] - $vx[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $vuxmnss[] = $vuxmns;
-                    }
-                    if (isset($vuxmnss)) {
-                        foreach ($vuxmnss as $vuxmns) {
-                            echo "<td>$vuxmns</td>";
-                        }
-                    }
-                    //tercer cuadrante vy
-                    $vyYs = array();
-                    for ($i = 0; $i < $datos; $i++) {
-                        $vmnsy = round((0.9 * $vy[$i] - $vy[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $vmnsys[] = $vmnsy;
-                    }
-                    if (isset($vmnsys)) {
-                        foreach ($vmnsys as $vmnsy) {
-                            echo "<td>$vmnsy</td>";
-                        }
-                    }
-
-                    //cuarto cuadrante top x
-                    $vyYs = array();
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmsmnx = round((0.9 * $topmx[$i] - $topmx[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $topmsmnxs[] = $topmsmnx;
-                    }
-                    if (isset($topmsmnxs)) {
-                        foreach ($topmsmnxs as $topmsmnx) {
-                            echo "<td>$topmsmnx</td>";
-                        }
-                    }
-
-
-                    //cuarto cuadrante Button x
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmsmny = round((0.9 * $buttonmx[$i] - $buttonmx[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmsmnys[] = $buttonmsmny;
-                    }
-                    if (isset($buttonmsmnys)) {
-                        foreach ($buttonmsmnys as $buttonmsmny) {
-                            echo "<td>$buttonmsmny</td>";
-                        }
-                    }
-
-                    //quinto cuadrante top y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $topmsmnyy = round((0.9 * $topmy[$i] - $topmy[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $topmsmnyys[] = $topmsmnyy;
-                    }
-                    if (isset($topmsmnyys)) {
-                        foreach ($topmsmnyys as $topmsmnyy) {
-                            echo "<td>$topmsmnyy</td>";
-                        }
-                    }
-                    //sexto cuadrante Button y
-                    for ($i = 0; $i < $datos; $i++) {
-                        $buttonmsmnyy = round((0.9 * $buttonmy[$i] - $buttonmy[$i + 3]), 2, PHP_ROUND_HALF_UP);
-                        $buttonmsmnyys[] = $buttonmsmnyy;
-                    }
-                    if (isset($buttonmsmnyys)) {
-                        foreach ($buttonmsmnyys as $buttonmsmnyy) {
-                            echo "<td>$buttonmsmnyy</td>";
-                        }
-                    }
-                    ?>
-                </tr>
+                ?>
             </tbody>
         </table>
     </div>
-
+    <br>
+    <br>
     <div class="row">
         <div class="col-md-6">
             <div class="card card-danger">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover ">
-                        <thead class="bg-info">
+                        <thead>
                             <tr>
-                                <th scope="col" style="vertical-align: middle;" class="text-center">
+                                <th scope="col" style="vertical-align: middle;" class="text-center sub_encabezados">
                                     Piso</th>
-                                <th scope="col" colspan="3" style="vertical-align: middle;" class="text-center">
+                                <th scope="col" colspan="3" style="vertical-align: middle;" class="text-center sub_encabezados">
                                     DIRECCION X-X</th>
                             </tr>
                         </thead>
-                        <tbody id="tablaBody" class="text-center">
-                            <tr>
-                                <th rowspan="3" style="vertical-align: middle;" scope="row">Piso 01</th>
-                                <?php
-                                $datos = 1;
-                                for ($i = 0; $i < $datos; $i++) {
-                                    $PuMax = max($P, $Pc, $Pcn, $Pms, $Pmns);
-                                    $PuMaxs[] = $PuMax;
+                        <tbody>
+                            <?php
+                                $valorpm = []; // Array para almacenar los valores de $max_values
+                                $mulMax_values = [];
+                                $mu2Max_values = [];
+                                foreach ($max_values as $max_piso) {
+                                    $valorpm[] = $max_piso;
                                 }
-                                if (isset($PuMaxs)) {
-                                    foreach ($PuMaxs as $PuMax) {
-                                        echo "<td class='text-center'>$PuMax</td>";
-                                    }
-                                } ?>
-                                <td>Ton</td>
-                            </tr>
-                            <tr>
-                                <?php
-                                $datos = 1;
-                                for ($i = 0; $i < $datos; $i++) {
+
+                                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                                    // Si es el inicio de un nuevo piso, generamos la fila del piso con rowspan=5
+                                    echo "<tr>";
+                                    echo "<th rowspan='5' style='vertical-align: middle;' scope='row'>Piso " . ($piso_num + 1) . "</th>";
+                                    echo "<td style='vertical-align: middle;'>Pu máx</td>";
+                                    
+                                    $valor_piso_actual = isset($valorpm[$piso_num]) ? $valorpm[$piso_num] : ''; // Obtener el valor o cadena vacía si no está definido          
+                                     
+                                    $P_value = isset($P_values[$piso_num]) ? $P_values[$piso_num] : '';
+                                    $Pc_value = isset($Pc_values[$piso_num]) ? $Pc_values[$piso_num] : '';
+                                    $Pcn_value = isset($Pcn_values[$piso_num]) ? $Pcn_values[$piso_num] : '';
+                                    $Pms_value = isset($Pms_values[$piso_num]) ? $Pms_values[$piso_num] : '';
+                                    $Pmns_value = isset($Pmns_values[$piso_num]) ? $Pmns_values[$piso_num] : '';
+
+                                    $topmx1_value = isset($topmx1_values[$piso_num]) ? $topmx1_values[$piso_num] : '';
+                                    $topmxcs_value = isset($topmxcs_values[$piso_num]) ? $topmxcs_values[$piso_num] : '';
+                                    $topmxcns_value = isset($topmxcns_values[$piso_num]) ? $topmxcns_values[$piso_num] : '';
+                                    $topmxms_value = isset($topmxms_values[$piso_num]) ? $topmxms_values[$piso_num] : '';
+                                    $topmxmns_value = isset($topmxmns_values[$piso_num]) ? $topmxmns_values[$piso_num] : '';
+                                
+                                    $buttonmx1_value = isset($buttonmx1_values[$piso_num]) ? $buttonmx1_values[$piso_num] : '';
+                                    $buttonmxcs_value = isset($buttonmxcs_values[$piso_num]) ? $buttonmxcs_values[$piso_num] : '';
+                                    $buttonmxcns_value = isset($buttonmxcns_values[$piso_num]) ? $buttonmxcns_values[$piso_num] : '';
+                                    $buttonmxms_value = isset($buttonmxms_values[$piso_num]) ? $buttonmxms_values[$piso_num] : '';
+                                    $buttonmxmns_value = isset($buttonmxmns_values[$piso_num]) ? $buttonmxmns_values[$piso_num] : '';
+                                
+                                    // Calcular $mulMax según el valor actual del piso
                                     $mulMax = 0;
-                                    if ($PuMax == $P) {
-                                        $mulMax = $buttonmx1;
-                                    } else if ($PuMax == $Pc) {
-                                        $mulMax = $buttonmx;
-                                    } elseif ($PuMax == $Pcn) {
-                                        $mulMax = $buttonmxcns;
-                                    } elseif ($PuMax == $Pms) {
-                                        $mulMax = $buttonmxmns;
+                                    if ($valor_piso_actual == $P_value) {
+                                        $mulMax = $buttonmx1_value;
+                                    } else if ($valor_piso_actual == $Pc_value) {
+                                        $mulMax = $buttonmxcs_value;
+                                    } elseif ($valor_piso_actual == $Pcn_value) {
+                                        $mulMax = $buttonmxcns_value;
+                                    } elseif ($valor_piso_actual == $Pms_value) {
+                                        $mulMax = $buttonmxms_value;
                                     }
-                                    $mulMaxs[] = $mulMax;
-                                }
-                                if (isset($mulMaxs)) {
-                                    foreach ($mulMaxs as $mulMax) {
-                                        echo "<td class='text-center'>$mulMax</td>";
-                                    }
-                                } ?>
-                                <td>Ton m</td>
-                            </tr>
-                            <tr>
-                                <?php
-                                $datos = 1;
-                                for ($i = 0; $i < $datos; $i++) {
-                                    $mu2Max = 0;
-                                    if ($PuMax == $P) {
-                                        $mu2Max = $topmx1;
-                                    } else if ($PuMax == $Pc) {
-                                        $mu2Max = $topmxcs;
-                                    } elseif ($PuMax == $Pcn) {
-                                        $mu2Max = $topmxcns;
-                                    } elseif ($PuMax == $Pms) {
-                                        $mu2Max = $topmxms;
+                                    $mulMax_values[] = $mulMax;
+                                 
+                                    if ($valor_piso_actual == $P_value) {
+                                        $mu2Max = $topmx1_value;
+                                    } else if ($valor_piso_actual == $Pc_value) {
+                                        $mu2Max = $topmxcs_value;
+                                    } elseif ($valor_piso_actual == $Pcn_value) {
+                                        $mu2Max = $topmxcns_value;
+                                    } elseif ($valor_piso_actual == $Pms_value) {
+                                        $mu2Max = $topmxms_value;
                                     } else {
-                                        $mu2Max = $topmxmns;
+                                        $mu2Max = $topmxmns_value;
                                     }
-                                    $mu2Maxs[] = $mu2Max;
+                                    $mu2Max_values[] = $mu2Max;
+                                    echo "<td>$valor_piso_actual</td>";
+                                    echo "<td>Ton</td>";
+                                    for ($subfila = 2; $subfila <= 5; $subfila++) {
+                                        echo "<tr>";
+                                        switch ($subfila) {
+                                            case 2:
+                                                echo "<td style='vertical-align: middle;'>Mu1 máx</td>";
+                                                echo "<td>$mulMax</td>";
+                                                echo "<td>Ton.m</td>";
+                                                break;
+                                            case 3:
+                                                echo "<td style='vertical-align: middle;'>Mu2 máx</td>";
+                                                echo "<td>$mu2Max</td>";
+                                                echo "<td>Ton.m</td>";
+                                                break;
+                                        }
+                                        // Aquí puedes agregar más columnas según sea necesario para cada subdivisión
+                                        echo "</tr>";
+                                    }
                                 }
-                                if (isset($mu2Maxs)) {
-                                    foreach ($mu2Maxs as $mu2Max) {
-                                        echo "<td class='text-center'>$mu2Max</td>";
-                                    }
-                                } ?>
-                                <td>Ton m</td>
-                            </tr>
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -1024,93 +682,115 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="card card-info">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover ">
-                        <thead class="bg-info">
+                        <thead class="sub_encabezados">
                             <th scope="col" style="vertical-align: middle;" class="text-center">
                                 Piso</th>
                             <th scope="col" colspan="3" style="vertical-align: middle;" class="text-center">
                                 DIRECCION Y-Y</th>
                         </thead>
-                        <tbody id="tablaBody" class="text-center">
-                            <tr>
-                                <th rowspan="3" style="vertical-align: middle;" scope="row">Piso 01</th>
-                                <?php
-                                $datos = 1;
-                                for ($i = 0; $i < $datos; $i++) {
-                                    $PuyMax = max($Py, $Pcsy, $Pcnsy, $Pmsy, $Pmnsy);
-                                    $PuyMaxs[] = $PuyMax;
+                        <tbody>
+                            <?php
+                                $valorpmyy = []; // Array para almacenar los valores de $max_values
+                                $muylMax_values = []; 
+                                $muy2Max_values = []; 
+                                foreach ($max_valuesyy as $max_pisoyy) {
+                                    $valorpmyy[] = $max_pisoyy;
                                 }
-                                if (isset($PuyMaxs)) {
-                                    foreach ($PuyMaxs as $PuyMax) {
-                                        echo "<td class='text-center'>$PuyMax</td>";
-                                    }
-                                } ?>
-                                <td>Ton</td>
-                            </tr>
-                            <tr>
-                                <?php
-                                $datos = 1;
-                                for ($i = 0; $i < $datos; $i++) {
+
+                                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                                    // Si es el inicio de un nuevo piso, generamos la fila del piso con rowspan=5
+                                    echo "<tr>";
+                                    echo "<th rowspan='5' style='vertical-align: middle;' scope='row'>Piso " . ($piso_num + 1) . "</th>";
+                                    echo "<td style='vertical-align: middle;'>Pu máx</td>";
+                                    
+                                    $valor_piso_actualyy = isset($valorpmyy[$piso_num]) ? $valorpmyy[$piso_num] : ''; // Obtener el valor o cadena vacía si no está definido          
+                                     
+                                    $Py_value = isset($Py_values[$piso_num]) ? $Py_values[$piso_num] : '';
+                                    $Pcsy_value = isset($Pcsy_values[$piso_num]) ? $Pcsy_values[$piso_num] : '';
+                                    $Pcnsy_value = isset($Pcnsy_values[$piso_num]) ? $Pcnsy_values[$piso_num] : '';
+                                    $Pmsy_value = isset($Pmsy_values[$piso_num]) ? $Pmsy_values[$piso_num] : '';
+                                    $Pmnsy_value = isset($Pmnsy_values[$piso_num]) ? $Pmnsy_values[$piso_num] : '';
+                                    
+                                    $topmyy2_value = isset($topmyy2_values[$piso_num]) ? $topmyy2_values[$piso_num] : '';
+                                    $topmyycss_value = isset($topmyycss_values[$piso_num]) ? $topmyycss_values[$piso_num] : '';
+                                    $topmyycns_value = isset($topmyycns_values[$piso_num]) ? $topmyycns_values[$piso_num] : '';
+                                    $topmsmyy_value = isset($topmsmyy_values[$piso_num]) ? $topmsmyy_values[$piso_num] : '';
+                                    $topmsmnyy_value = isset($topmsmnyy_values[$piso_num]) ? $topmsmnyy_values[$piso_num] : '';
+                                
+                                    $buttonmyy_value = isset($buttonmyy_values[$piso_num]) ? $buttonmyy_values[$piso_num] : '';
+                                    $buttonmyycs_value = isset($buttonmyycs_values[$piso_num]) ? $buttonmyycs_values[$piso_num] : '';
+                                    $buttonmyycns_value = isset($buttonmyycns_values[$piso_num]) ? $buttonmyycns_values[$piso_num] : '';
+                                    $buttonmsmyy_value = isset($buttonmsmyy_values[$piso_num]) ? $buttonmsmyy_values[$piso_num] : '';
+                                    $buttonmsmnyy_value = isset($buttonmsmnyy_values[$piso_num]) ? $buttonmsmnyy_values[$piso_num] : '';
+                                
+                                    // Calcular $mulMax según el valor actual del piso
                                     $muylMax = 0;
-                                    if ($PuyMax == $Py) {
-                                        $muylMax = $buttonmyy;
-                                    } else if ($PuyMax == $Pcsy) {
-                                        $muylMax = $buttonmyycs;
-                                    } elseif ($PuyMax == $Pcnsy) {
-                                        $muylMax = $buttonmyycns;
-                                    } elseif ($PuyMax == $Pmsy) {
-                                        $muylMax = $buttonmsmyy;
-                                    }
-                                    $muylMaxs[] = $muylMax;
-                                }
-                                if (isset($muylMaxs)) {
-                                    foreach ($muylMaxs as $muylMax) {
-                                        echo "<td class='text-center'>$muylMax</td>";
-                                    }
-                                } ?>
-                                <td>Ton m</td>
-                            </tr>
-                            <tr>
-                                <?php
-                                $datos = 1;
-                                for ($i = 0; $i < $datos; $i++) {
-                                    $muy2Max = 0;
-                                    if ($PuyMax == $Py) {
-                                        $muy2Max = $topmyy2;
-                                    } else if ($PuyMax == $Pcsy) {
-                                        $muy2Max = $topmyycs;
-                                    } elseif ($PuyMax == $Pcnsy) {
-                                        $muy2Max = $topmyycns;
-                                    } elseif ($PuyMax == $Pmsy) {
-                                        $muy2Max = $topmsmyy;
+                                    if ($valor_piso_actualyy == $Py_value) {
+                                        $muylMax = $buttonmyy_value;
+                                    } else if ($valor_piso_actualyy == $Pcsy_value) {
+                                        $muylMax = $buttonmyycs_value;
+                                    } else if ($valor_piso_actualyy == $Pcnsy_value) {
+                                        $muylMax = $buttonmyycns_value;
+                                    } else if ($valor_piso_actualyy == $Pmsy_value) {
+                                        $muylMax = $buttonmsmyy_value;
                                     } else {
-                                        $muy2Max = $topmsmnyy;
+                                        $muylMax = $buttonmsmnyy_value;
                                     }
-                                    $muy2Maxs[] = $muy2Max;
+                                    $muylMax_values[] = $muylMax;
+
+                                    $muy2Max = 0;
+                                    if ($valor_piso_actualyy == $Py_value) {
+                                        $muy2Max = $topmyy2_value;
+                                    } else if ($valor_piso_actualyy == $Pcsy_value) {
+                                        $muy2Max = $topmyycss_value;
+                                    } elseif ($valor_piso_actualyy == $Pcnsy_value) {
+                                        $muy2Max = $topmyycns_value;
+                                    } elseif ($valor_piso_actualyy == $Pmsy_value) {
+                                        $muy2Max = $topmsmyy_value;
+                                    } else {
+                                        $muy2Max = $topmsmnyy_value;
+                                    }
+                                    $muy2Max_values[] = $muy2Max;
+
+                                    echo "<td>$valor_piso_actualyy</td>";
+                                    echo "<td>Ton</td>";
+                                    for ($subfila = 2; $subfila <= 5; $subfila++) {
+                                        echo "<tr>";
+                                        switch ($subfila) {
+                                            case 2:
+                                                echo "<td style='vertical-align: middle;'>Mu1 máx</td>";
+                                                echo "<td>$muylMax</td>";
+                                                echo "<td>Ton.m</td>";
+                                                break;
+                                            case 3:
+                                                echo "<td style='vertical-align: middle;'>Mu2 máx</td>";
+                                                echo "<td>$muy2Max</td>";
+                                                echo "<td>Ton.m</td>";
+                                                break;
+                                        }
+                                        // Aquí puedes agregar más columnas según sea necesario para cada subdivisión
+                                        echo "</tr>";
+                                    }
                                 }
-                                if (isset($muy2Maxs)) {
-                                    foreach ($muy2Maxs as $muy2Max) {
-                                        echo "<td class='text-center'>$muy2Max</td>";
-                                    }
-                                } ?>
-                                <td>Ton m</td>
-                            </tr>
+                            ?>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-
-    <table class="table table-bordered table-hover ">
+    <br>
+    <br>
+    <table class="table table-bordered table-hover">
         <thead class="bg-info text-center">
-            <tr>
+            <tr class="sub_encabezados">
                 <th colspan="4" scope="col" style="vertical-align: middle;" class="text-center">Artículo 10.11.3. <br>
                     Longitud no Arriostrada de un Elemento
                     a Compresión</th>
                 <th colspan="5" scope="col" style="vertical-align: middle;" class="text-center">Cálculo de la Esbeltez
                     de la Columna</th>
             </tr>
-            <tr>
+            <tr class="sub_encabezados">
                 <th scope="col" style="vertical-align: middle;">NIVEL</th>
                 <th scope="col" style="vertical-align: middle;">DIRECCION</th>
                 <th scope="col" style="vertical-align: middle;">Q</th>
@@ -1124,15 +804,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" style="vertical-align: middle;">Verificacion del Articulo 10.11.5.</th>
             </tr>
         </thead>
-        <tbody class="text-center">
-            <tr>
-                <th rowspan="2" style="vertical-align: middle;">PISO 1</th>
-                <td>Dirección X-X</td>
-                <td>0.190</td>
-                <td>Con Desplazamiento Lateral</td>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
+        <tbody>
+            <?php
+                $klu_values = []; 
+                $kluy_values = []; 
+                $tipDes="Con Desplazamiento Lateral";
+                $longq=0.190;
+                $longqy=0.116;
+                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                    // Si es el inicio de un nuevo piso, generamos la fila del piso con rowspan=5
+                    echo "<tr>";
+                    echo "<th rowspan='5' style='vertical-align: middle;' scope='row'>Piso " . ($piso_num + 1) . "</th>";
                     $RREX = "";
                     if ($CDEZ == 1.01) {
                         $RREX = "Biarticulada";
@@ -1145,56 +827,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     } elseif ($CDEZ == 1) {
                         $RREX = "Segun Norma";
                     }
-                    $RREXs[] = $RREX;
-                }
-                if (isset($RREXs)) {
-                    foreach ($RREXs as $RREX) {
-                        echo "<td class='text-center'>$RREX</td>";
-                    }
-                }
 
-                ///Valor de K segun normativa
-                for ($i = 0; $i < $datos; $i++) {
-                    $k = $CDEZ;
-                    $ks[] = $k;
-                }
-
-                if (isset($ks)) {
-                    foreach ($ks as $k) {
-                        echo "<td class='text-center'>$k</td>";
-                    }
-                }
-                //Valor de Lu 
-                for ($i = 0; $i < $datos; $i++) {
-                    $lu = $H;
-                    $lus[] = $lu;
-                }
-
-                if (isset($lus)) {
-                    foreach ($lus as $lu) {
-                        echo "<td class='text-center'>$lu</td>";
-                    }
-                }
-                //Scando Formula de Esbeltez por Columna
-                for ($i = 0; $i < $datos; $i++) {
                     $ag = $L1 * $L2;
                     $Igx = $L1 * pow($L2, 3) / 12;
                     $Igy = $L2 * pow($L1, 3) / 12;
                     $rx = round(sqrt($Igx / $ag), 2, PHP_ROUND_HALF_UP);
                     $ry = round(sqrt($Igy / $ag), 2, PHP_ROUND_HALF_UP);
-                    $klu = round($k * ($lu * 100) / $rx, 2, PHP_ROUND_HALF_UP);
-                    $klus[] = $klu;
-                }
 
-                if (isset($klus)) {
-                    foreach ($klus as $klu) {
-                        echo "<td class='text-center'>$klu</td>";
-                    }
-                }
+                    $klu = round($CDEZ * ($H * 100) / $rx, 2, PHP_ROUND_HALF_UP);
+                    $klu_values[] = $klu;
 
-                //Sacando Condiciones
-                for ($i = 0; $i < $datos; $i++) {
-                    $verfi = "";
+                    $kluy = round($CDEZ * ($H * 100) / $ry, 2, PHP_ROUND_HALF_UP);
+                    $kluy_values[] = $kluy;
 
                     if ($klu < 100) {
                         $verfi = "Si Cumple";
@@ -1202,114 +846,435 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $verfi = "No Cumple";
                     }
 
-                    $verfis[] = $verfi;
-                }
-
-                if (isset($verfis)) {
-                    foreach ($verfis as $verfi) {
-                        echo "<td class='text-center'>$verfi</td>";
-                    }
-                }
-
-                ?>
-            </tr>
-            <tr>
-                <td>Dirección Y-Y</td>
-                <td>0.116</td>
-                <td>Con Desplazamiento Lateral</td>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
-                    $RREY = "";
-                    if ($CDEZ == 1.01) {
-                        $RREY = "Biarticulada";
-                    } else if ($CDEZ == 0.5) {
-                        $RREY = "Empotrado Impedido";
-                    } elseif ($CDEZ == 2) {
-                        $RREY = "Empotrado y Libre";
-                    } elseif ($CDEZ == 1.02) {
-                        $RREY = "Empotrado Permitido";
-                    } elseif ($CDEZ == 1) {
-                        $RREY = "Segun Norma";
-                    }
-                    $RREYs[] = $RREY;
-                }
-                if (isset($RREYs)) {
-                    foreach ($RREYs as $RREY) {
-                        echo "<td class='text-center'>$RREY</td>";
-                    }
-                }
-
-                ///Valor de K segun normativa
-                for ($i = 0; $i < $datos; $i++) {
-                    $ky = $CDEZ;
-                    $kys[] = $ky;
-                }
-
-                if (isset($kys)) {
-                    foreach ($kys as $ky) {
-                        echo "<td class='text-center'>$ky</td>";
-                    }
-                }
-                //Valor de Lu 
-                for ($i = 0; $i < $datos; $i++) {
-                    $luy = $H;
-                    $luys[] = $luy;
-                }
-
-                if (isset($luys)) {
-                    foreach ($luys as $luy) {
-                        echo "<td class='text-center'>$luy</td>";
-                    }
-                }
-                //Scando Formula de Esbeltez por Columna
-                for ($i = 0; $i < $datos; $i++) {
-                    $kluy = round($k * ($lu * 100) / $ry, 2, PHP_ROUND_HALF_UP);
-                    $kluys[] = $kluy;
-                }
-
-                if (isset($kluys)) {
-                    foreach ($kluys as $kluy) {
-                        echo "<td class='text-center'>$kluy</td>";
-                    }
-                }
-
-                //Sacando Condiciones
-                for ($i = 0; $i < $datos; $i++) {
-                    $verfiy = "";
-
                     if ($kluy < 100) {
                         $verfiy = "Si Cumple";
                     } else {
                         $verfiy = "No Cumple";
                     }
 
-                    $verfiys[] = $verfiy;
-                }
-
-                if (isset($verfiys)) {
-                    foreach ($verfiys as $verfiy) {
-                        echo "<td class='text-center'>$verfiy</td>";
+                 
+                    echo "<td style='vertical-align: middle;'>Dirección X-X</td>";
+                    echo "<td>$longq</td>";
+                    echo "<td>$tipDes</td>";
+                    echo "<td>$RREX</td>";
+                    echo "<td>$CDEZ</td>";
+                    echo "<td>$H</td>";
+                    echo "<td>$klu</td>";
+                    echo "<td>$verfi</td>";
+                    for ($subfila = 2; $subfila <= 5; $subfila++) {
+                        echo "<tr>";
+                        switch ($subfila) {
+                            case 2:
+                                echo "<td style='vertical-align: middle;'>Dirección Y-Y</td>";
+                                echo "<td>$longqy</td>";
+                                echo "<td>$tipDes</td>";
+                                echo "<td>$RREX</td>";
+                                echo "<td>$CDEZ</td>";
+                                echo "<td>$H</td>";
+                                echo "<td>$kluy</td>";
+                                echo "<td>$verfiy</td>";
+                                break;
+                        }
+                        // Aquí puedes agregar más columnas según sea necesario para cada subdivisión
+                        echo "</tr>";
                     }
                 }
-
-                ?>
-            </tr>
+            ?>
         </tbody>
     </table>
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    <hr class="bg-red">
-    <h3><u><strong>2.0 Condición Biaxial:</strong></u></h3>
-    <!-- BIaxial -->
+    <br>
+    <br>
     <table class="table table-bordered table-hover">
         <thead class="bg-info text-center">
-            <tr>
+            <tr class="sub_encabezados">
+                <th colspan="15" scope="col" style="vertical-align: middle;" class="text-center">Artículo 10.12. <br>
+                Momentos Magnificados en Estructuras sin Desplazamiento Lateral</th>
+            </tr>
+            <tr class="sub_encabezados">
+                <th scope="col" style="vertical-align: middle;">NIVEL</th>
+                <th scope="col" style="vertical-align: middle;">DIRECCION</th>
+                <th scope="col" style="vertical-align: middle;">M1 <br>(Ton.m)</th>
+                <th scope="col" style="vertical-align: middle;">M2 <br>(Ton.m)</th>
+                <th scope="col" style="vertical-align: middle;">M1/M2</th>
+                <th scope="col" style="vertical-align: middle;">Tipo de Flexión del Elemento</th>
+                <th scope="col" style="vertical-align: middle;">34-12(M1/M2)</th>
+                <th scope="col" style="vertical-align: middle;">Verificación de Esbeltez</th>
+                <th scope="col" style="vertical-align: middle;">βd</th>
+                <th scope="col" style="vertical-align: middle;">EI <br>(Ton.m²)</th>
+                <th scope="col" style="vertical-align: middle;">Pc <br>(Ton)</th>
+                <th scope="col" style="vertical-align: middle;">M2 mín <br>(Ton.m)</th>
+                <th scope="col" style="vertical-align: middle;">Cm</th>
+                <th scope="col" style="vertical-align: middle;">δns</th>
+                <th scope="col" style="vertical-align: middle;">Mc <br>(Ton.m)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                // $mulMax_values = [];
+                // $mu2Max_values = [];
+                // $muylMax_values = []; 
+                // $muy2Max_values = []; 
+                // var_dump($muylMax_values);
+                // var_dump($muy2Max_values);
+                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                    // Si es el inicio de un nuevo piso, generamos la fila del piso con rowspan=5
+                    echo "<tr>";
+                    echo "<th rowspan='5' style='vertical-align: middle;' scope='row'>Piso " . ($piso_num + 1) . "</th>";
+                    $valor_piso_actual = isset($valorpm[$piso_num]) ? $valorpm[$piso_num] : ''; // Obtener el valor o cadena vacía si no está definido          
+                    $valor_piso_actualyy = isset($valorpmyy[$piso_num]) ? $valorpmyy[$piso_num] : ''; // Obtener el valor o cadena vacía si no está definido          
+                                        
+                    // Realizar la operación similar para cada array
+                    $mulMax_value = isset($mulMax_values[$piso_num]) ? $mulMax_values[$piso_num] : '';
+                    $mu2Max_value = isset($mu2Max_values[$piso_num]) ? $mu2Max_values[$piso_num] : '';
+
+                    $muylMax_value = isset($muylMax_values[$piso_num]) ? $muylMax_values[$piso_num] : '';
+                    $muy2Max_value = isset($muy2Max_values[$piso_num]) ? $muy2Max_values[$piso_num] : '';
+
+                    $klu_value = isset($klu_values[$piso_num]) ? $klu_values[$piso_num] : '';
+                    $kluy_value = isset($kluy_values[$piso_num]) ? $kluy_values[$piso_num] : '';
+                    
+                    $max_pisovux_value = isset($max_pisovux_values[$piso_num]) ? $max_pisovux_values[$piso_num] : '';
+                    $max_pisoVy_value = isset($max_pisoVy_values[$piso_num]) ? $max_pisoVy_values[$piso_num] : '';
+
+                    $m1ton=min($mulMax_value,$mu2Max_value);
+                    $m2ton=abs(max($mulMax_value,$mu2Max_value));
+
+                    $m1tony=min($muylMax_value,$muy2Max_value);
+                    $m2tony=abs(max($muylMax_value,$muy2Max_value));
+
+                    $m1m2= round($m1ton/$m2ton,2,PHP_ROUND_HALF_DOWN);
+                    $m1m2y= round($m1tony/$m2tony,2,PHP_ROUND_HALF_DOWN);
+
+                    if ($m1m2<0) {
+                       $tipflexion="Curvatura Doble";
+                    } else {
+                        $tipflexion="Curvatura Simple";
+                    }
+
+                    if ($m1m2y<0) {
+                        $tipflexiony="Curvatura Doble";
+                    } else {
+                         $tipflexiony="Curvatura Simple";
+                    }
+
+                    if (34-12*($m1ton/$m2ton)>40) {
+                       $calmm=40;
+                    } else {
+                        $calmm=34-12*($m1ton/$m2ton);
+                    }
+                    
+                    if (34-12*($m1tony/$m2tony)>40) {
+                        $calmmy=40;
+                    } else {
+                         $calmmy=34-12*($m1tony/$m1tony);
+                    }
+
+                    if ($tipDes="Con Desplazamiento Lateral") {
+                        $veresbeltez="No Considerar Efectos de Esbeltez";
+                    } else {
+                        if ($klu_value<=$calmmy) {
+                            $veresbeltez="No Considerar Efectos de Esbeltez";
+                        } else {
+                            $veresbeltez="Considerar Efectos de Esbeltez";
+                        }
+                    }
+
+                    if ($tipDes="Con Desplazamiento Lateral") {
+                        $veresbeltezy="No Considerar Efectos de Esbeltez";
+                    } else {
+                        if ($kluy_value<=$calmmy) {
+                            $veresbeltezy="No Considerar Efectos de Esbeltez";
+                        } else {
+                            $veresbeltezy="Considerar Efectos de Esbeltez";
+                        }
+                    }
+
+                    //bd
+                    $datos_piso_p = $pisos_datos_array_p[$piso_num]['Datos'];
+                    $datos_piso_vx = $pisos_datos_array_vx[$piso_num]['Datos'];
+                    $datos_piso_vy = $pisos_datos_array_vy[$piso_num]['Datos'];
+
+                    //XX
+                    if ($tipDes=="Sin Desplazamiento Lateral") {
+                        $bd=round(max(1.4*$datos_piso_p[0]+1.7*$datos_piso_p[1],1.25*($datos_piso_p[0]+$datos_piso_p[1]))/$valor_piso_actual,2,PHP_ROUND_HALF_UP);
+                    } else {
+                        $bd=round(max(1.4*$datos_piso_vx[0]+1.7*$datos_piso_vx[1],1.25*($datos_piso_vx[0]+$datos_piso_vx[1]))/$max_pisovux_value,2,PHP_ROUND_HALF_UP);
+                    }
+
+                    //YY
+                    if ($tipDes=="Sin Desplazamiento Lateral") {
+                        $bdy=round(max(1.4*$datos_piso_p[0]+1.7*$datos_piso_p[1],1.25*($datos_piso_p[0]+$datos_piso_p[1]))/$valor_piso_actualyy,2,PHP_ROUND_HALF_UP);
+                    } else {
+                        $bdy=round(max(1.4*$datos_piso_vy[0]+1.7*$datos_piso_vy[1],1.25*($datos_piso_vy[0]+$datos_piso_vy[1]))/$max_pisoVy_value,2,PHP_ROUND_HALF_UP);
+                    }
+
+                    ///////////////-XX-EL////////////////////
+                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                        $elton="-";
+                    }else{
+                        $ec=1500*sqrt($fc);
+                        $elton=(0.4*$ec*$Igx/(1+$bd))/pow(10,7);
+                    }
+                    ///////////////-XX-pc////////////////////
+                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                        $pcton="-";
+                    }else{
+                        $pcton = (pow(pi(), 2) * $elton) / pow($CDEZ * $H, 2);
+                    }
+                    ///////////////-XX-m2min////////////////////
+                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                        $m2min="-";
+                    }else{
+                        $m2min = ($valor_piso_actual*(15+0.03*$H*1000)/1000);
+                    }
+                    ///////////////-XX-cm////////////////////
+                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                        $cm="-";
+                    }else{
+                        if (0.6+0.4*($m1ton/$m2ton)>=0.4) {
+                            $cm= 0.6+0.4*($m1ton/$m2ton);
+                        } else {
+                            $cm= 0.4;
+                        }
+                    }
+                     ///////////////-XX-ns////////////////////
+                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                        $ns=1;
+                    }else{
+                        if ($cm/(1-($valor_piso_actual/(0.75*$pcton)))>=1) {
+                            $ns = $cm/(1-($valor_piso_actual/(0.75*$pcton)));
+                        } else {
+                            $ns = 1;
+                        }
+                    }
+                    ///////////////-XX-mcTon////////////////////
+                    $mcTon=$m2ton*$ns;
+
+                    //////////////------------------------//////////////////////
+                    ///////////////-YY-EL////////////////////
+                    if ($veresbeltezy="No Considerar Efectos de Esbeltez") {
+                        $eltony="-";
+                    }else{
+                        $ec=1500*sqrt($fc);
+                        $eltony=(0.4*$ec*$Igx/($CDEZ+$bdy))/pow(10,7);
+                    }
+
+                    ///////////////-YY-pc////////////////////
+                    if ($veresbeltezy="No Considerar Efectos de Esbeltez") {
+                        $pctony="-";
+                    }else{
+                        $pcton = (pow(pi(), 2) * $elton) / pow(1 * $$H, 2);
+                    }
+
+                    ///////////////-XX-m2min////////////////////
+                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                        $m2miny="-";
+                    }else{
+                        $m2miny = ($valor_piso_actualyy*(15+0.03*$H*1000)/1000);
+                    }
+                    ///////////////-XX-cm////////////////////
+                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                        $cmy="-";
+                    }else{
+                        if (0.6+0.4*($m1tony/$m2tony)>=0.4) {
+                            $cmy= 0.6+0.4*($m1tony/$m2tony);
+                        } else {
+                            $cmy= 0.4;
+                        }
+                    }
+                     ///////////////-XX-ns////////////////////
+                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                        $nsy=1;
+                    }else{
+                        if ($cmy/(1-($valor_piso_actualyy/(0.75*$pctony)))>=1) {
+                            $nsy = $cm/(1-($valor_piso_actualyy/(0.75*$pctony)));
+                        } else {
+                            $nsy = 1;
+                        }
+                    }
+                    ///////////////-YY-mcTon////////////////////
+                    $mcTony=$m2tony*$nsy;
+
+                    echo "<td style='vertical-align: middle;'>Dirección X-X</td>";
+                    echo "<td>$m1ton</td>";
+                    echo "<td>$m2ton</td>";
+                    echo "<td>$m1m2</td>";
+                    echo "<td>$tipflexion</td>";
+                    echo "<td>$calmm</td>";
+                    echo "<td>$veresbeltez</td>";
+                    echo "<td>$bd</td>";
+                    echo "<td>$elton</td>";
+                    echo "<td>$pcton</td>";
+                    echo "<td>$m2min</td>";
+                    echo "<td>$cm</td>";   
+                    echo "<td>$ns</td>";
+                    echo "<td>$mcTon</td>";
+
+                    for ($subfila = 2; $subfila <= 5; $subfila++) {
+                        echo "<tr>";
+                        switch ($subfila) {
+                            case 2:
+                                echo "<td style='vertical-align: middle;'>Dirección Y-Y</td>";
+                                echo "<td>$m1tony</td>";
+                                echo "<td>$m2tony</td>";
+                                echo "<td>$m1m2y</td>";
+                                echo "<td>$tipflexiony</td>";
+                                echo "<td>$calmmy</td>";
+                                echo "<td>$veresbeltezy</td>";
+                                echo "<td>$bdy</td>";
+                                echo "<td>$eltony</td>";
+                                echo "<td>$pctony</td>";
+                                echo "<td>$m2miny</td>";
+                                echo "<td>$cmy</td>";  
+                                echo "<td>$nsy</td>";
+                                echo "<td>$mcTony</td>";  
+                                break;
+                        }
+                        // Aquí puedes agregar más columnas según sea necesario para cada subdivisión
+                        echo "</tr>";
+                    }
+                }
+            ?>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <table class="table table-bordered table-hover">
+        <thead class="bg-info text-center">
+            <tr class="sub_encabezados">
+                <th colspan="17" scope="col" style="vertical-align: middle;" class="text-center">Artículo 10.13. <br>
+                Momentos Magnificados en Estructuras con Desplazamiento Lateral</th>
+            </tr>
+            <tr class="sub_encabezados">
+                <th scope="col" style="vertical-align: middle;">NIVEL</th>
+                <th scope="col" style="vertical-align: middle;">DIRECCION</th>
+                <th scope="col" style="vertical-align: middle;">(𝒌𝒍_𝒖)/𝒓</th>
+                <th scope="col" style="vertical-align: middle;">Verificación de Esbeltez</th>
+                <th scope="col" style="vertical-align: middle;">δs1</th>
+                <th scope="col" style="vertical-align: middle;">ƩPu <br>(Ton)</th>
+                <th scope="col" style="vertical-align: middle;">Pc <br>(Ton)</th>
+                <th scope="col" style="vertical-align: middle;">ƩPc <br>(Ton)</th>
+                <th scope="col" style="vertical-align: middle;">δs2</th>
+                <th scope="col" style="vertical-align: middle;">δs</th>
+                <th scope="col" style="vertical-align: middle;">𝒍_𝒖/𝒓</th>
+                <th scope="col" style="vertical-align: middle;">√(𝑷_𝒖/(〖𝒇′〗_𝒄  𝑨_𝒈 ))</th>
+                <th scope="col" style="vertical-align: middle;">Verificación del <br>Artículo 10.13.5.</th>
+                <th scope="col" style="vertical-align: middle;">M1 <br>(Ton.m)</th>
+                <th scope="col" style="vertical-align: middle;">M2 <br>(Ton.m)</th>
+                <th scope="col" style="vertical-align: middle;">Cm</th>
+                <th scope="col" style="vertical-align: middle;">δns</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                    // Si es el inicio de un nuevo piso, generamos la fila del piso con rowspan=5
+                    echo "<tr>";
+                    echo "<th rowspan='5' style='vertical-align: middle;' scope='row'>Piso " . ($piso_num + 1) . "</th>";
+                    switch ($tipDes) {
+                        case 'Sin Desplazamiento Lateral':
+                            $kluart="-";
+                            break;
+                        
+                        default:
+                            $kluart=$klu_value;
+                            break;
+                    }
+                    switch ($tipDes) {
+                        case 'Sin Desplazamiento Lateral':
+                            $kluarty="-";
+                            break;
+                        
+                        default:
+                            $kluarty=$kluy_value;
+                            break;
+                    }
+                    switch ($tipDes) {
+                        case 'Sin Desplazamiento Lateral':
+                           $verez="Sin Desplazamiento Lateral";
+                            break;
+                        
+                        default:
+                            if ($kluart<=22) {
+                                $verez="No Considerar Efectos de Esbeltez";
+                            } else {
+                                $verez="Considerar Efectos de Esbeltez";
+                            }
+                            break;
+                    }
+                    switch ($tipDes) {
+                        case 'Sin Desplazamiento Lateral':
+                           $verezy="Sin Desplazamiento Lateral";
+                            break;
+                        
+                        default:
+                            if ($kluarty<=22) {
+                                $verezy="No Considerar Efectos de Esbeltez";
+                            } else {
+                                $verezy="Considerar Efectos de Esbeltez";
+                            }
+                            break;
+                    }
+                    //cuarta columna
+                    switch ($verez) {
+                        case 'No Considerar Efectos de Esbeltez':
+                           $os1="-";
+                            break;
+                        
+                        default:
+                            if (1/(1-$longq)>=1) {
+                                $os1=round(1/(1-$longq),2,PHP_ROUND_HALF_UP);
+                            } else {
+                                $os1=1;
+                            }
+                            break;
+                    }
+                    switch ($verezy) {
+                        case 'No Considerar Efectos de Esbeltez':
+                           $os1y="-";
+                            break;
+                        
+                        default:
+                            if (1/(1-$longqy)>=1) {
+                                $os1y=round(1/(1-$longqy),2,PHP_ROUND_HALF_UP);
+                            } else {
+                                $os1y=1;
+                            }
+                            break;
+                    }
+
+                    echo "<td style='vertical-align: middle;'>Dirección X-X</td>";
+                    echo "<td>$kluart</td>";
+                    echo "<td>$verez</td>";
+                    echo "<td>$os1</td>";
+                    for ($subfila = 2; $subfila <= 5; $subfila++) {
+                        echo "<tr>";
+                        switch ($subfila) {
+                            case 2:
+                                echo "<td style='vertical-align: middle;'>Dirección Y-Y</td>";
+                                echo "<td>$kluarty</td>";
+                                echo "<td>$verezy</td>";
+                                echo "<td>$os1y</td>";
+                                break;
+                            }
+                            // Aquí puedes agregar más columnas según sea necesario para cada subdivisión
+                        echo "</tr>";
+                    }
+                }
+            ?>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <h1 class="tab_encabezados text-2xl font-bold decoration-indigo-500">
+        2.- Condicion de Biaxial
+    </h1>
+    <table class="table table-bordered table-hover">
+        <thead class="bg-info text-center">
+            <tr class="sub_encabezados">
                 <th colspan="12" scope="col">Condicion Biaxial</th>
             </tr>
-            <tr>
+            <tr class="sub_encabezados">
                 <th scope="col" style="vertical-align: middle;">Nivel</th>
                 <th scope="col" style="vertical-align: middle;">ALtura Total "H" (cm)</th>
                 <th scope="col" style="vertical-align: middle;">Ast (cm<sup>2</sup>)</th>
@@ -1324,130 +1289,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" style="vertical-align: middle;">Verificación del <br> Artículo 10.3.6.3.</th>
             </tr>
         </thead>
-        <tbody class="text-center">
-            <tr>
-                <th scope="col">Piso 1</th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
-                    //Variables Estaticos
-                    $IFy = 0.70;
-                    $AlTotal = $H;
-                    $AlTotals[] = $AlTotal;
-                    //Ast(CM2)
-                    $AAceroT = $AAceroTotal;
-                    $AAceroTs[] = $AAceroT;
-                    //Ag
-                    $AgL = $L1 * $L2;
-                    $AgLs[] = $AgL;
-                    //PON
-                    $Pon = round((0.85 * $fc * ($AgL - $AAceroT) + $fy * $AAceroT) / 1000, 2, PHP_ROUND_HALF_UP);
-                    $Pons[] = $Pon;
-                    //Pon Max
-                    $PnMax = round(0.8 * $IFy * $Pon, 2, PHP_ROUND_HALF_UP);
-                    $PnMaxs[] = $PnMax;
-                    //pnx
-                    $pnx = round(0.8 * $Pon, 2, PHP_ROUND_HALF_UP);
-                    $pnxs[] = $pnx;
-                    //pny
-                    $pny = round(0.8 * $Pon, 2, PHP_ROUND_HALF_UP);
-                    $pnys[] = $pny;
-                    //0.10FyPon
-                    $PonFy = round(0.1 * $IFy * $Pon, 2, PHP_ROUND_HALF_UP);
-                    $PonFys[] = $PonFy;
-                    //pn
-                    $Pn = round(1 / ((1 / $pnx) + (1 / $pny) - (1 / $Pon)), 2, PHP_ROUND_HALF_UP);
-                    $pns[] = $Pn;
-                    //pnFy
-                    $pnFy = round($IFy * $Pn, 2, PHP_ROUND_HALF_UP);
-                    $pnFys[] = $pnFy;
-                    //VerificacionSegunArticulo
-                    $VerifiArt = "";
-                    if ($pnFy < $PnMax) {
-                        $VerifiArt = "Si Cumple";
-                    } else {
-                        $VerifiArt = "No Cumple,'<br>' Verificar";
-                    }
-                    $VerifiArts[] = $VerifiArt;
+        <tbody>
+            <?php
+              for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                // Genera una fila para cada piso
+                echo "<tr>";
+                echo "<th scope='row'>Piso " . ($piso_num + 1) . "</th>";
+                $IFy = 0.70;
+                $AgL = $L1 * $L2;
+                $Pon = round((0.85 * $fc * ($AgL - $AAceroTotal) + $fy * $AAceroTotal) / 1000, 2, PHP_ROUND_HALF_UP);
+                $PnMax = round(0.8 * $IFy * $Pon, 2, PHP_ROUND_HALF_UP);
+                $pnx = round(0.8 * $Pon, 2, PHP_ROUND_HALF_UP);
+                $pny = round(0.8 * $Pon, 2, PHP_ROUND_HALF_UP);
+                $PonFy = round(0.1 * $IFy * $Pon, 2, PHP_ROUND_HALF_UP);
+                $Pn = round(1 / ((1 / $pnx) + (1 / $pny) - (1 / $Pon)), 2, PHP_ROUND_HALF_UP);
+                $pnFy = round($IFy * $Pn, 2, PHP_ROUND_HALF_UP);
+                //VerificacionSegunArticulo
+                if ($pnFy < $PnMax) {
+                    $VerifiArt = "Si Cumple";
+                } else {
+                    $VerifiArt = "No Cumple,'<br>' Verificar";
+                }
+                echo "<td>$H</td>"; 
+                echo "<td>$AAceroTotal</td>"; 
+                echo "<td>$AgL</td>"; 
+                echo "<td>$Pon</td>"; 
+                echo "<td>$PnMax</td>"; 
+                echo "<td>$pnx</td>"; 
+                echo "<td>$pny</td>"; 
+                echo "<td>$PonFy</td>"; 
+                echo "<td>$Pn</td>"; 
+                echo "<td>$pnFy</td>"; 
+                echo "<td>$VerifiArt</td>"; 
+                // Agrega columnas adicionales aquí según sea necesario para cada piso
+                echo "</tr>";
+            }
+            
+            ?>
 
-                }
-                //Altura Total M
-                if (isset($AlTotals)) {
-                    foreach ($AlTotals as $AlTotal) {
-                        echo "<td class='text-center'>$AlTotal</td>";
-                    }
-                }
-                //Ast(CM2)
-                if (isset($AAceroTs)) {
-                    foreach ($AAceroTs as $AAceroT) {
-                        echo "<td class='text-center'>$AAceroT</td>";
-                    }
-                }
-                //Ag
-                if (isset($AgLs)) {
-                    foreach ($AgLs as $AgL) {
-                        echo "<td class='text-center'>$AgL</td>";
-                    }
-                }
-                //PON
-                if (isset($Pons)) {
-                    foreach ($Pons as $Pon) {
-                        echo "<td class='text-center'>$Pon</td>";
-                    }
-                }
-                //Pn Max fy
-                if (isset($PnMaxs)) {
-                    foreach ($PnMaxs as $PnMax) {
-                        echo "<td class='text-center'>$PnMax</td>";
-                    }
-                }
-                //pnx
-                if (isset($pnxs)) {
-                    foreach ($pnxs as $pnx) {
-                        echo "<td class='text-center'>$pnx</td>";
-                    }
-                }
-                //pny
-                if (isset($pnys)) {
-                    foreach ($pnys as $pny) {
-                        echo "<td class='text-center'>$pny</td>";
-                    }
-                }
-                //0.10FyPon
-                if (isset($PonFys)) {
-                    foreach ($PonFys as $PonFy) {
-                        echo "<td class='text-center'>$PonFy</td>";
-                    }
-                }
-                //pn
-                if (isset($pns)) {
-                    foreach ($pns as $pn) {
-                        echo "<td class='text-center'>$pn</td>";
-                    }
-                }
-                //FyPn
-                if (isset($pnFys)) {
-                    foreach ($pnFys as $pnFy) {
-                        echo "<td class='text-center'>$pnFy</td>";
-                    }
-                }
-                //Verificar Segun Articulo
-                if (isset($VerifiArts)) {
-                    foreach ($VerifiArts as $VerifiArt) {
-                        echo "<td class='text-center'>$VerifiArt</td>";
-                    }
-                }
-                ?>
-            </tr>
         </tbody>
     </table>
-  <!-- CONDICION BIAXIAL -->
-    <table class="table table-responsive table-bordered">
+    <br>
+    <br>
+    <table class="table table-bordered table-hover">
         <thead class="bg-info text-center">
-            <tr>
-                <th colspan="7" class="text-left">Columna C-01 Piso 1</th>
+            <tr class="sub_encabezados">
+                <th colspan="8" class="text-left">Columna C-01 Piso 1</th>
             </tr>
-            <tr>
+            <tr class="sub_encabezados">
+                <th scope="col" style="vertical-align: middle;">NIVEL</th>
                 <th scope="col">Combinaciones <br> de Carga</th>
                 <th scope="col">Pux (Ton)</th>
                 <th scope="col">Py (Ton)</th>
@@ -1457,558 +1347,259 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col">Verificacion del <br>Articulo 10.3.7 <br>Direccion Y-Y</th>
             </tr>
         </thead>
-        <tbody class="text.center">
-            <tr>
-                <th scope="col">1.40CM+1.70CV</th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
-                    $CFCb = "";
-                    $CFCby = "";
-                    $VerifArtCCx = "";
-                    $VerifArtCCy = "";
-                    $veriRx = "";
-                    $veriRy = "";
+        <tbody>
+            <?php
+                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                    // Si es el inicio de un nuevo piso, generamos la fila del piso con rowspan=5
+                    echo "<tr>";
+                    echo "<th rowspan='5' style='vertical-align: middle;' scope='row'>Piso " . ($piso_num + 1) . "</th>";
+                    // Obtener los datos del piso actual P
+                    $datos_piso_p = $pisos_datos_array_p[$piso_num]['Datos'];
+                    $P = round((1.4 * $datos_piso_p[0] + 1.7 * $datos_piso_p[1]), 2, PHP_ROUND_HALF_UP);
+                    $Pc = round((1.25 * ($datos_piso_p[0] + $datos_piso_p[1]) + $datos_piso_p[2]), 2, PHP_ROUND_HALF_UP);
+                    $Pcn = round((1.25 * ($datos_piso_p[0] + $datos_piso_p[1]) - $datos_piso_p[2]), 2, PHP_ROUND_HALF_UP);
+                    $Pms = round((0.9 * $datos_piso_p[0] + $datos_piso_p[2]), 2, PHP_ROUND_HALF_UP);
+                    $Pmns = round((0.9 * $datos_piso_p[0] - $datos_piso_p[2]), 2, PHP_ROUND_HALF_UP);
 
-                    if ($P >= $PonFy) {
-                        $CFCb = $P;
-                    } else {
-                        $CFCb = "-";
-                    }
-                    $CFCbs[] = $CFCb;
+                    $datos_piso_p = $pisos_datos_array_p[$piso_num]['Datos'];
+                    $Py = round((1.4 * $datos_piso_p[0] + 1.7 * $datos_piso_p[1]), 2, PHP_ROUND_HALF_UP);
+                    $Pcsy = round((1.25 * ($datos_piso_p[0] + $datos_piso_p[1]) + $datos_piso_p[3]), 2, PHP_ROUND_HALF_UP);
+                    $Pcnsy = round((1.25 * ($datos_piso_p[0] + $datos_piso_p[1]) - $datos_piso_p[3]), 2, PHP_ROUND_HALF_UP);
+                    $Pmsy = round((0.9 * $datos_piso_p[0] + $datos_piso_p[3]), 2, PHP_ROUND_HALF_UP);
+                    $Pmnsy = round((0.9 * $datos_piso_p[0] - $datos_piso_p[3]), 2, PHP_ROUND_HALF_UP);
 
-                    //Condicion para ver si es dieño por flexo-compresion o condicion biaxial
-                    if ($Py >= $PonFy) {
-                        $CFCby = $Py;
+                    if ($P=='-') {
+                        $rx="-";
                     } else {
-                        $CFCby = "-";
+                        $rx=round($P/$pnFy,2,PHP_ROUND_HALF_UP);
                     }
-                    $CFCbys[] = $CFCby;
 
-                    //Sacar rx
-                    if ($CFCb == "-") {
-                        $veriRx = "-";
+                    if ($Pc == '-') {
+                        $rPc = "-";
                     } else {
-                        $veriRx = round($CFCb / $pnFy, 2, PHP_ROUND_HALF_UP);
+                        $rPc = round($Pc / $pnFy, 2, PHP_ROUND_HALF_UP);
                     }
-                    $veriRxs[] = $veriRx;
-                    //Sacar ry
-                    if ($CFCby == "-") {
-                        $veriRy = "-";
+                    
+                    if ($Pcn == '-') {
+                        $rPcn = "-";
                     } else {
-                        $veriRy = round($CFCb / $pnFy, 2, PHP_ROUND_HALF_UP);
+                        $rPcn = round($Pcn / $pnFy, 2, PHP_ROUND_HALF_UP);
                     }
-                    $veriRys[] = $veriRy;
-                    //Condiciones
-                    //vERIFICACION EN EJE X 
-                    if ($CFCb == "-") {
-                        $VerifArtCCx = "SI CUMPLE";
+
+                    if ($Pms == '-') {
+                        $rPms = "-";
                     } else {
-                        if ($veriRx <= 1) {
-                            $VerifArtCCx = "SI CUMPLE";
+                        $rPms = round($Pms / $pnFy, 2, PHP_ROUND_HALF_UP);
+                    }
+
+                    if ($Pmns == '-') {
+                        $rPmns = "-";
+                    } else {
+                        $rPmns = round($Pmns / $pnFy, 2, PHP_ROUND_HALF_UP);
+                    }
+                    
+                    if ($Py == '-') {
+                        $ry = "-";
+                    } else {
+                        $ry = round($Py / $pnFy, 2, PHP_ROUND_HALF_UP);
+                    }
+
+                    if ($Pcsy == '-') {
+                        $rPcsy = "-";
+                    } else {
+                        $rPcsy = round($Pcsy / $pnFy, 2, PHP_ROUND_HALF_UP);
+                    }
+
+                    if ($Pcnsy == '-') {
+                        $rPcnsy = "-";
+                    } else {
+                        $rPcnsy = round($Pcnsy / $pnFy, 2, PHP_ROUND_HALF_UP);
+                    }
+
+                    if ($Pmsy == '-') {
+                        $rPmsy = "-";
+                    } else {
+                        $rPmsy = round($Pmsy / $pnFy, 2, PHP_ROUND_HALF_UP);
+                    }
+
+                    if ($Pmnsy == '-') {
+                        $rPmnsy = "-";
+                    } else {
+                        $rPmnsy = round($Pmnsy / $pnFy, 2, PHP_ROUND_HALF_UP);
+                    }
+                    //VERIFICACION XX
+                    if ($P=="-") {
+                        $verartxx="-";
+                    } else {
+                        if ($rx<=1) {
+                            $verartxx="Si Cumple";
                         } else {
-                            $VerifArtCCx = "NO CUMPLE <br> Verificar";
+                            $verartxx="No Cumple,verificar";
                         }
                     }
-                    $VerifArtCCxs[] = $VerifArtCCx;
-
-                    //Verificacion en eje y
-                    if ($CFCby == "-") {
-                        $VerifArtCCy = "SI CUMPLE";
+                    
+                    if ($Pc=="-") {
+                        $verartxxpc="-";
                     } else {
-                        if ($veriRy <= 1) {
-                            $VerifArtCCy = "SI CUMPLE";
+                        if ($rPc<=1) {
+                            $verartxxpc="Si Cumple";
                         } else {
-                            $VerifArtCCy = "NO CUMPLE <br> Verificar";
-                        }
-                    }
-                    $VerifArtCCys[] = $VerifArtCCy;
-                }
-                //Verificacion en eje X
-                if (isset($CFCbs)) {
-                    foreach ($CFCbs as $CFCb) {
-                        echo "<td class='text-center'>$CFCb</td>";
-                    }
-                }
-                //Verificacion en eje Y
-                if (isset($CFCbys)) {
-                    foreach ($CFCbys as $CFCby) {
-                        echo "<td class='text-center'>$CFCby</td>";
-                    }
-                }
-                //Verificar Rx
-                if (isset($veriRxs)) {
-                    foreach ($veriRxs as $veriRx) {
-                        echo "<td class='text-center'>$veriRx</td>";
-                    }
-                }
-                //verificar ry
-                if (isset($veriRys)) {
-                    foreach ($veriRys as $veriRy) {
-                        echo "<td class='text-center'>$veriRy</td>";
-                    }
-                }
-                //Verificacions de Cumplimiento Segun las normas
-                if (isset($VerifArtCCxs)) {
-                    foreach ($VerifArtCCxs as $VerifArtCCx) {
-                        echo "<td class='text-center'>$VerifArtCCx</td>";
-                    }
-                }
-                //Verificacion en eje Y
-                if (isset($VerifArtCCys)) {
-                    foreach ($VerifArtCCys as $VerifArtCCy) {
-                        echo "<td class='text-center'>$VerifArtCCy</td>";
-                    }
-                }
-                ?>
-            </tr>
-            <tr>
-                <th scope="col">1.25(CM+CV)+CS</th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
-                    $CFCsb = "";
-                    $CFCsby = "";
-                    $VerifArtCCsx = "";
-                    $VerifArtCCsy = "";
-                    $veriRx = "";
-                    $veriRy = "";
-
-                    if ($Pc >= $PonFy) {
-                        $CFCsb = $Pc;
-                    } else {
-                        $CFCsb = "-";
-                    }
-                    $CFCsbs[] = $CFCsb;
-
-                    //Condicion para ver si es dieño por flexo-compresion o condicion biaxial
-                    if ($Pcsy >= $PonFy) {
-                        $CFCsby = $Pcsy;
-                    } else {
-                        $CFCby = "-";
-                    }
-                    $CFCsbys[] = $CFCsby;
-
-                    //Sacar rx
-                    if ($CFCsb == "-") {
-                        $veriRsx = "-";
-                    } else {
-                        $veriRsx = round($CFCsb / $pnFy, 2, PHP_ROUND_HALF_UP);
-                    }
-                    $veriRsxs[] = $veriRsx;
-                    //Sacar ry
-                    if ($CFCsby == "-") {
-                        $veriRsy = "-";
-                    } else {
-                        $veriRsy = round($CFCsby / $pnFy, 2, PHP_ROUND_HALF_UP);
-                    }
-                    $veriRsys[] = $veriRsy;
-                    //Condiciones
-                
-                    //vERIFICACION EN EJE X 
-                    if ($CFCsb == "-") {
-                        $VerifArtCCsx = "-";
-                    } else {
-                        if ($veriRsx <= 1) {
-                            $VerifArtCCsx = "SI CUMPLE";
-                        } else {
-                            $VerifArtCCsx = "NO CUMPLE <br> Verificar";
+                            $verartxxpc="No Cumple,verificar";
                         }
                     }
 
-                    $VerifArtCCsxs[] = $VerifArtCCsx;
-
-                    //Verificacion en eje y
-                    if ($CFCsby == "-") {
-                        $VerifArtCCsy = "-";
+                    if ($Pcn=="-") {
+                        $verpcn="-";
                     } else {
-                        if ($veriRy <= 1) {
-                            $VerifArtCCsy = "SI CUMPLE";
+                        if ($rPcn<=1) {
+                            $verpcn="Si Cumple";
                         } else {
-                            $VerifArtCCsy = "NO CUMPLE <br> Verificar";
+                            $verpcn="No Cumple,verificar";
                         }
                     }
 
-                    $VerifArtCCsys[] = $VerifArtCCsy;
-                }
-                //Verificacion en eje X
-                if (isset($CFCsbs)) {
-                    foreach ($CFCsbs as $CFCsb) {
-                        echo "<td class='text-center'>$CFCsb</td>";
-                    }
-                }
-                //Verificacion en eje Y
-                if (isset($CFCsbys)) {
-                    foreach ($CFCsbys as $CFCsby) {
-                        echo "<td class='text-center'>$CFCsby</td>";
-                    }
-                }
-                //Verificar Rx
-                if (isset($veriRsxs)) {
-                    foreach ($veriRsxs as $veriRsx) {
-                        echo "<td class='text-center'>$veriRsx</td>";
-                    }
-                }
-                //verificar ry
-                if (isset($veriRsys)) {
-                    foreach ($veriRsys as $veriRsy) {
-                        echo "<td class='text-center'>$veriRsy</td>";
-                    }
-                }
-                //Verificacion en eje X
-                if (isset($VerifArtCCsxs)) {
-                    foreach ($VerifArtCCsxs as $VerifArtCCsx) {
-                        echo "<td class='text-center'>$VerifArtCCsx</td>";
-                    }
-                }
-                //Verificacion en eje Y
-                if (isset($VerifArtCCsys)) {
-                    foreach ($VerifArtCCsys as $VerifArtCCsy) {
-                        echo "<td class='text-center'>$VerifArtCCsy</td>";
-                    }
-                }
-                ?>
-            </tr>
-            <tr>
-                <th scope="col">1.25(CM+CV)-CS</th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
-                    $CFCsnb = "";
-                    $CFCsnby = "";
-                    $VerifArtCCnx = "";
-                    $VerifArtCCny = "";
-                    $verisRx = "";
-                    $verisRy = "";
-
-                    if ($Pcn >= $PonFy) {
-                        $CFCsnb = $Pcn;
+                    if ($Pms=="-") {
+                        $verpms="-";
                     } else {
-                        $CFCsnb = "-";
-                    }
-                    $CFCsnbs[] = $CFCsnb;
-
-                    //Condicion para ver si es dieño por flexo-compresion o condicion biaxial
-                    if ($Pcnsy >= $PonFy) {
-                        $CFCsnby = $Pcnsy;
-                    } else {
-                        $CFCnby = "-";
-                    }
-                    $CFCsnbys[] = $CFCsnby;
-
-                    //Sacar rx
-                    if ($CFCsnb == "-") {
-                        $verisRx = "-";
-                    } else {
-                        $verisRx = round($CFCsnb / $pnFy, 2, PHP_ROUND_HALF_UP);
-                    }
-                    $verisRxs[] = $verisRx;
-                    //Sacar ry
-                    if ($CFCsnby == "-") {
-                        $verisRy = "-";
-                    } else {
-                        $verisRy = round($CFCsnby / $pnFy, 2, PHP_ROUND_HALF_UP);
-                    }
-                    $verisRys[] = $verisRy;
-                    //Condiciones
-                
-                    //vERIFICACION EN EJE X 
-                    if ($CFCsnb == "-") {
-                        $VerifArtCCnx = "-";
-                    } else {
-                        if ($verisRx <= 1) {
-                            $VerifArtCCnx = "SI CUMPLE";
+                        if ($rPms<=1) {
+                            $verpms="Si Cumple";
                         } else {
-                            $VerifArtCCnx = "NO CUMPLE <br> Verificar";
+                            $verpms="No Cumple,verificar";
+                        }
+                    }
+                    
+                    if ($Pmns=="-") {
+                        $verpmns="-";
+                    } else {
+                        if ($rPmns<=1) {
+                            $verpmns="Si Cumple";
+                        } else {
+                            $verpmns="No Cumple,verificar";
+                        }
+                    }
+                    //VERIFICACION YY
+                    if ($Py=="-") {
+                        $verartyy="-";
+                    } else {
+                        if ($ry<=1) {
+                            $verartyy="Si Cumple";
+                        } else {
+                            $verartyy="No Cumple,verificar";
                         }
                     }
 
-                    $VerifArtCCnxs[] = $VerifArtCCnx;
-
-                    //Verificacion en eje y
-                    if ($CFCsnby == "-") {
-                        $VerifArtCCny = "-";
+                    if ($Pcsy=="-") {
+                        $verartcsy="-";
                     } else {
-                        if ($verisRy <= 1) {
-                            $VerifArtCCny = "SI CUMPLE";
+                        if ($rPcsy<=1) {
+                            $verartcsy="Si Cumple";
                         } else {
-                            $VerifArtCCny = "NO CUMPLE <br> Verificar";
+                            $verartcsy="No Cumple,verificar";
                         }
                     }
 
-                    $VerifArtCCnys[] = $VerifArtCCny;
-                }
-                //Verificacion en eje X
-                if (isset($CFCsnbs)) {
-                    foreach ($CFCsnbs as $CFCsnb) {
-                        echo "<td class='text-center'>$CFCsnb</td>";
-                    }
-                }
-                //Verificacion en eje Y
-                if (isset($CFCsnbys)) {
-                    foreach ($CFCsnbys as $CFCsnby) {
-                        echo "<td class='text-center'>$CFCsnby</td>";
-                    }
-                }
-                //Verificar Rx
-                if (isset($verisRxs)) {
-                    foreach ($verisRxs as $verisRx) {
-                        echo "<td class='text-center'>$verisRx</td>";
-                    }
-                }
-                //verificar ry
-                if (isset($verisRys)) {
-                    foreach ($verisRys as $verisRy) {
-                        echo "<td class='text-center'>$verisRy</td>";
-                    }
-                }
-                //Verificacion en eje X
-                if (isset($VerifArtCCnxs)) {
-                    foreach ($VerifArtCCnxs as $VerifArtCCnx) {
-                        echo "<td class='text-center'>$VerifArtCCnx</td>";
-                    }
-                }
-                //Verificacion en eje Y
-                if (isset($VerifArtCCnys)) {
-                    foreach ($VerifArtCCnys as $VerifArtCCny) {
-                        echo "<td class='text-center'>$VerifArtCCny</td>";
-                    }
-                }
-                ?>
-            </tr>
-            <tr>
-                <th scope="col">0.90CM+CS</th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
-                    $cccxs = "";
-                    $cccys = "";
-                    $VerifArtCCmx = "";
-                    $VerifArtCCmy = "";
-                    $vericsRx = "";
-                    $vericsRy = "";
-
-                    if ($Pms >= $PonFy) {
-                        $cccxs = $Pms;
+                    if ($Pcnsy=="-") {
+                        $verartpsy="-";
                     } else {
-                        $cccxs = "-";
-                    }
-                    $cccxss[] = $cccxs;
-
-                    //Condicion para ver si es dieño por flexo-compresion o condicion biaxial
-                    if ($Pmsy >= $PonFy) {
-                        $cccys = $Pmsy;
-                    } else {
-                        $cccys = "-";
-                    }
-                    $cccyss[] = $cccys;
-
-                    //Sacar rx
-                    if ($cccxs == "-") {
-                        $vericsRx = "-";
-                    } else {
-                        $vericsRx = round($CFcccxsCsnb / $pnFy, 2, PHP_ROUND_HALF_UP);
-                    }
-                    $vericsRxs[] = $vericsRx;
-                    //Sacar ry
-                    if ($cccys == "-") {
-                        $vericsRy = "-";
-                    } else {
-                        $vericsRy = round($cccys / $pnFy, 2, PHP_ROUND_HALF_UP);
-                    }
-                    $vericsRys[] = $vericsRy;
-                    //Condiciones
-                
-                    //vERIFICACION EN EJE X 
-                    if ($cccxs == "-") {
-                        $VerifArtCCmx = "-";
-                    } else {
-                        if ($vericsRx <= 1) {
-                            $VerifArtCCmx = "SI CUMPLE";
+                        if ($rPcnsy<=1) {
+                            $verartpsy="Si Cumple";
                         } else {
-                            $VerifArtCCmx = "NO CUMPLE <br> Verificar";
+                            $verartpsy="No Cumple,verificar";
                         }
                     }
 
-                    $VerifArtCCmxs[] = $VerifArtCCmx;
-
-                    //Verificacion en eje y
-                    if ($cccys == "-") {
-                        $VerifArtCCmy = "-";
+                    if ($Pmsy=="-") {
+                        $verartpmy="-";
                     } else {
-                        if ($vericsRy <= 1) {
-                            $VerifArtCCmy = "SI CUMPLE";
+                        if ($rPmsy<=1) {
+                            $verartpmy="Si Cumple";
                         } else {
-                            $VerifArtCCmy = "NO CUMPLE <br> Verificar";
+                            $verartpmy="No Cumple,verificar";
                         }
                     }
 
-                    $VerifArtCCmys[] = $VerifArtCCmy;
-                }
-                //Verificacion en eje X
-                if (isset($cccxss)) {
-                    foreach ($cccxss as $cccxs) {
-                        echo "<td class='text-center'>$cccxs</td>";
-                    }
-                }
-                //Verificacion en eje Y
-                if (isset($cccyss)) {
-                    foreach ($cccyss as $cccys) {
-                        echo "<td class='text-center'>$cccys</td>";
-                    }
-                }
-                //Verificar Rx
-                if (isset($vericsRxs)) {
-                    foreach ($vericsRxs as $vericsRx) {
-                        echo "<td class='text-center'>$vericsRx</td>";
-                    }
-                }
-                //verificar ry
-                if (isset($vericsRys)) {
-                    foreach ($vericsRys as $vericsRy) {
-                        echo "<td class='text-center'>$vericsRy</td>";
-                    }
-                }
-                //Verificacion en eje X
-                if (isset($VerifArtCCmxs)) {
-                    foreach ($VerifArtCCmxs as $VerifArtCCmx) {
-                        echo "<td class='text-center'>$VerifArtCCmx</td>";
-                    }
-                }
-                //Verificacion en eje Y
-                if (isset($VerifArtCCmys)) {
-                    foreach ($VerifArtCCmys as $VerifArtCCmy) {
-                        echo "<td class='text-center'>$VerifArtCCmy</td>";
-                    }
-                }
-                ?>
-            </tr>
-            <tr>
-                <th scope="col">0.90CM-CS</th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
-                    $cccx1 = "";
-                    $cccy1 = "";
-                    $VerifArtCCmx = "";
-                    $VerifArtCCmy = "";
-                    $verics1Rx = "";
-                    $verics1Ry = "";
-
-                    if ($Pmns >= $PonFy) {
-                        $cccx1 = $Pmns;
+                    if ($Pmnsy=="-") {
+                        $verpmsy="-";
                     } else {
-                        $cccx1 = "-";
-                    }
-                    $cccx1s[] = $cccx1;
-
-                    //Condicion para ver si es dieño por flexo-compresion o condicion biaxial
-                    if ($Pmnsy >= $PonFy) {
-                        $cccy1 = $Pmnsy;
-                    } else {
-                        $cccy1 = "-";
-                    }
-                    $cccy1s[] = $cccy1;
-
-                    //Sacar rx
-                    if ($cccx1 == "-") {
-                        $verics1Rx = "-";
-                    } else {
-                        $verics1Rx = round($cccx1 / $pnFy, 2, PHP_ROUND_HALF_UP);
-                    }
-                    $verics1Rxs[] = $verics1Rx;
-                    //Sacar ry
-                    if ($cccy1 == "-") {
-                        $verics1Ry = "-";
-                    } else {
-                        $verics1Ry = round($cccy1 / $pnFy, 2, PHP_ROUND_HALF_UP);
-                    }
-                    $verics1Rys[] = $verics1Ry;
-
-                    //Condiciones
-                
-                    if ($Pmns == "-") {
-                        $VerifArtCCmnx = "-";
-                    } else {
-                        if ($cccx1 <= 1) {
-                            $VerifArtCCmnx = "SI CUMPLE";
+                        if ($rPmnsy<=1) {
+                            $verpmsy="Si Cumple";
                         } else {
-                            $VerifArtCCmnx = "NO CUMPLE <br> Verificar";
+                            $verpmsy="No Cumple,verificar";
                         }
                     }
 
-                    $VerifArtCCmnxs[] = $VerifArtCCmnx;
-
-                    //Verificacion en eje y
-                    if ($Pmnsy == "-") {
-                        $VerifArtCCmny = "-";
-                    } else {
-                        if ($cccy1 <= 1) {
-                            $VerifArtCCmny = "SI CUMPLE";
-                        } else {
-                            $VerifArtCCmny = "NO CUMPLE <br> Verificar";
-                        }
+                    echo "<td style='vertical-align: middle;'>1.40CM+1.70CV</td>";
+                    echo "<td>$P</td>";
+                    echo "<td>$Py</td>";
+                    echo "<td>$rx</td>";
+                    echo "<td>$ry</td>";
+                    echo "<td>$verartxx</td>";
+                    echo "<td>$verartyy</td>";
+                    for ($subfila = 2; $subfila <= 5; $subfila++) {
+                        echo "<tr>";
+                        switch ($subfila) {
+                            case 2:
+                                echo "<td style='vertical-align: middle;'>1.25(CM+CV)+CS</td>";
+                                echo "<td>$Pc</td>";
+                                echo "<td>$Pcsy</td>";
+                                echo "<td>$rPc</td>";
+                                echo "<td>$rPcsy</td>";
+                                echo "<td>$verartxxpc</td>";
+                                echo "<td>$verartcsy</td>";
+                                
+                                break;
+                            
+                            case 3:
+                                echo "<td style='vertical-align: middle;'>1.25(CM+CV)-CS</td>";
+                                echo "<td>$Pcn</td>";
+                                echo "<td>$Pcnsy</td>";
+                                echo "<td>$rPcn</td>";
+                                echo "<td>$rPcnsy</td>";
+                                echo "<td>$verpcn</td>";
+                                echo "<td>$verartpsy</td>";
+                                break;
+                            
+                            case 4:
+                                echo "<td style='vertical-align: middle;'>0.90CM+CS</td>";
+                                echo "<td>$Pms</td>";
+                                echo "<td>$Pmsy</td>";
+                                echo "<td>$rPms</td>";
+                                echo "<td>$rPmsy</td>";
+                                echo "<td>$verpms</td>";
+                                echo "<td>$verartpmy</td>";
+                                break;
+                            
+                            case 5:
+                                echo "<td style='vertical-align: middle;'>0.90CM-CS</td>";
+                                echo "<td>$Pmns</td>";
+                                echo "<td>$Pmnsy</td>";
+                                echo "<td>$rPmns</td>";
+                                echo "<td>$rPmnsy</td>";
+                                echo "<td>$verpmns</td>";
+                                echo "<td>$verpmsy</td>";
+                                break;
+                            }
+                            // Aquí puedes agregar más columnas según sea necesario para cada subdivisión
+                        echo "</tr>";
                     }
-
-                    $VerifArtCCmnys[] = $VerifArtCCmny;
                 }
-                //Verificacion en eje X
-                if (isset($cccx1s)) {
-                    foreach ($cccx1s as $cccx1) {
-                        echo "<td class='text-center'>$cccx1</td>";
-                    }
-                }
-                //Verificacion en eje Y
-                if (isset($cccy1s)) {
-                    foreach ($cccy1s as $cccy1) {
-                        echo "<td class='text-center'>$cccy1</td>";
-                    }
-                }
-                //Verificar Rx
-                if (isset($verics1Rxs)) {
-                    foreach ($verics1Rxs as $verics1Rx) {
-                        echo "<td class='text-center'>$verics1Rx</td>";
-                    }
-                }
-                //verificar ry
-                if (isset($verics1Rys)) {
-                    foreach ($verics1Rys as $verics1Ry) {
-                        echo "<td class='text-center'>$verics1Ry</td>";
-                    }
-                }
-                //Verificacion en eje X
-                if (isset($VerifArtCCmnxs)) {
-                    foreach ($VerifArtCCmnxs as $VerifArtCCmnx) {
-                        echo "<td class='text-center'>$VerifArtCCmnx</td>";
-                    }
-                }
-                //Verificacion en eje Y
-                if (isset($VerifArtCCmnys)) {
-                    foreach ($VerifArtCCmnys as $VerifArtCCmny) {
-                        echo "<td class='text-center'>$VerifArtCCmny</td>";
-                    }
-                }
-                ?>
-            </tr>
-
+            ?>
         </tbody>
     </table>
-
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    <hr class="bg-red">
-    <h3><u><strong>3.0 Diseño por Corte:</strong></u></h3>
-    <h2 class="text-center"><strong>Analisis en Direccion "X"</strong></h2>
-
-    <!-- Columa por Corte  En eje X-->
+    <br>
+    <br>
+    <h1 class="tab_encabezados text-2xl font-bold decoration-indigo-500">
+        3.- Diseño por corte
+    </h1>
+    <h1 class="tab_encabezados text-2xl font-bold decoration-indigo-500">
+        Analisis en Direccion "X"
+    </h1>
     <table class="table table-bordered table-responsive">
         <thead class="text-center">
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" colspan="16">Diseño por CORTE</th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" rowspan="3" style="vertical-align: middle;">NIVEL</th>
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Altura Libre <br> "hn" (m)</th>
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Pu info (Ton)</th>
@@ -2025,43 +1616,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Verificacion de Utilizacion <br> de Estribos
                 </th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th colspan="2" scope="col">caso I</th>
                 <th colspan="2" scope="col">caso II</th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col">Mpri</th>
                 <th scope="col">Mprs</th>
                 <th scope="col">Mpri</th>
                 <th scope="col">Mprs</th>
             </tr>
         </thead>
-        <tbody class="text-center">
-            <tr>
-                <th>Piso 1</th>
-                <th>
-                    <?php echo "$H" ?>
-                </th>
-                <th>
-                    <?php echo "$puinf" ?>
-                </th>
-                <th>
-                    <?php echo "$pusup" ?>
-                </th>
-                <th>
-                    <?php echo "$Mninf" ?>
-                </th>
-                <th>
-                    <?php echo "$Mnsup" ?>
-                </th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
+        <tbody>
+            <?php
+                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                    // Genera una fila para cada piso
+                    echo "<tr>";
+                    echo "<th scope='row'>Piso " . ($piso_num + 1) . "</th>";
                     $dx = $L1 - 6;
                     $dy = $L2 - 6;
-                    //CASO I
-                    //Mpri Valores Unicos
-                    $Mpri = 0;
                     if ($SEstru == "Porticos") {
                         $Mpri = 125 * $Mninf;
                     } else if ($SEstru == "DualTipI") {
@@ -2071,9 +1644,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     } elseif ($SEstru == "MEstructurales") {
                         $Mpri = $Mninf;
                     }
-                    $Mpris[] = $Mpri;
 
-                    //Mpri Valores Unicos
                     $Mpr = 0;
                     if ($SEstru == "Porticos") {
                         $Mpr = 125 * $Mnsup;
@@ -2084,8 +1655,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     } elseif ($SEstru == "MEstructurales") {
                         $Mpr = $Mnsup;
                     }
-                    $Mprs[] = $Mpr;
-                    //CASO II
+
+                     //CASO II
                     //Mpri Valores Unicos
                     $MpriII = 0;
                     if ($SEstru == "Porticos") {
@@ -2097,9 +1668,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     } elseif ($SEstru == "MEstructurales") {
                         $MpriII = $Mninf;
                     }
-                    $MpriIIs[] = $MpriII;
 
-                    //Mpri Valores Unicos
+                     //Mpri Valores Unicos
                     $MprII = 0;
                     if ($SEstru == "Porticos") {
                         $MprII = 125 * $Mnsup;
@@ -2110,101 +1680,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     } elseif ($SEstru == "MEstructurales") {
                         $MprII = $Mnsup;
                     }
-                    $MprIIs[] = $MprII;
 
                     $VN = round(max(($Mpri + $Mpr) / $H, ($MpriII + $MprII) / $H), 2, PHP_ROUND_HALF_UP);
-                    $VNs[] = $VN;
-
                     $VUD = round($VN * (0.5 * $H - ($dx / 100)) / (0.5 * $H), 2, PHP_ROUND_HALF_UP);
-                    $VUDs[] = $VUD;
-                }
-                //caso I
-                if (isset($Mpris)) {
-                    foreach ($Mpris as $Mpri) {
-                        echo "<td class='text-center'>$Mpri</td>";
-                    }
-                }
-                //Mprs
-                if (isset($Mprs)) {
-                    foreach ($Mprs as $Mpr) {
-                        echo "<td class='text-center'>$Mpr</td>";
-                    }
-                }
-
-                //caso II
-                if (isset($MpriIIs)) {
-                    foreach ($MpriIIs as $MpriII) {
-                        echo "<td class='text-center'>$MpriII</td>";
-                    }
-                }
-                //Mprs caso II
-                if (isset($MprIIs)) {
-                    foreach ($MprIIs as $MprII) {
-                        echo "<td class='text-center'>$MprII</td>";
-                    }
-                }
-
-                //------------------
-                if (isset($VNs)) {
-                    foreach ($VNs as $VN) {
-                        echo "<td class='text-center'>$VN</td>";
-                    }
-                }
-                //-----
-                if (isset($VUDs)) {
-                    foreach ($VUDs as $VUD) {
-                        echo "<td class='text-center'>$VUD</td>";
-                    }
-                }
-                ?>
-                <th>
-                    <?php echo "$VudEtap" ?>
-                </th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
                     $VUMAX = max($VUD, $VudEtap);
-                    $VUMAXs[] = $VUMAX;
-
                     $VC = round(0.53 * sqrt($fc) * (1 + (MAX($puinf, $pusup) * 1000) / (140 * $L1 * $L2)) * $L2 * $dx / 1000, 2, PHP_ROUND_HALF_UP);
-                    $VCs[] = $VC;
 
-                    $VerifiUtEstribo = "";
                     if ($VUMAX > 0.70 * $VC) {
                         $VerifiUtEstribo = "Necesita Estribos";
                     } else {
                         $VerifiUtEstribo = "Refuerzo Mínimo";
                     }
-                    $VerifiUtEstribos[] = $VerifiUtEstribo;
-
+                    echo "<td>$H</td>"; 
+                    echo "<td>$puinf</td>"; 
+                    echo "<td>$pusup</td>"; 
+                    echo "<td>$Mninf</td>"; 
+                    echo "<td>$Mnsup</td>"; 
+                    echo "<td>$Mpri</td>"; 
+                    echo "<td>$Mpr</td>"; 
+                    echo "<td>$MpriII</td>"; 
+                    echo "<td>$MprII</td>"; 
+                    echo "<td>$VN</td>";
+                    echo "<td>$VUD</td>";
+                    echo "<td>$VudEtap</td>"; 
+                    echo "<td>$VUMAX</td>"; 
+                    echo "<td>$VC</td>"; 
+                    echo "<td>$VerifiUtEstribo</td>"; 
+                    // Agrega columnas adicionales aquí según sea necesario para cada piso
+                    echo "</tr>";
                 }
-                //
-                if (isset($VUMAXs)) {
-                    foreach ($VUMAXs as $VUMAX) {
-                        echo "<td class='text-center'>$VUMAX</td>";
-                    }
-                }
-                //VerifiUtEstribos
-                if (isset($VCs)) {
-                    foreach ($VCs as $VC) {
-                        echo "<td class='text-center'>$VC</td>";
-                    }
-                }
-                //Verificacion de utilizacion de estribos
-                if (isset($VerifiUtEstribos)) {
-                    foreach ($VerifiUtEstribos as $VerifiUtEstribo) {
-                        echo "<td class='text-center'>$VerifiUtEstribo</td>";
-                    }
-                }
-                ?>
-            </tr>
+                
+            ?>
         </tbody>
     </table>
-
-    <!-- S -->
+    <br>
+    <br>
     <table class="table table-bordered table-responsive">
         <thead class="text-center">
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" rowspan="3" style="vertical-align: middle;">NIVEL</th>
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Vs (Ton)</th>
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Vs Máx (Ton)</th>
@@ -2216,7 +1729,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Av (cm<Sup>2</Sup>)</th>
                 <th scope="col" rowspan="3" style="vertical-align: middle;">So (cm)</th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" style="vertical-align: middle;">Acero</th>
                 <th scope="col" style="vertical-align: middle;">D (cm)</th>
                 <th scope="col" style="vertical-align: middle;">Área (cm<Sup>2</Sup>)</th>
@@ -2225,127 +1738,237 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" style="vertical-align: middle;">Área (cm<Sup>2</Sup>)</th>
             </tr>
         </thead>
-        <tbody class="text-center">
-            <tr>
-                <th>Piso 1</th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
-                    $VsRef = 0;
+        <tbody>
+            <?php
+                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                    // Genera una fila para cada piso
+                    echo "<tr>";
+                    echo "<th scope='row'>Piso " . ($piso_num + 1) . "</th>";
                     if ($VerifiUtEstribo == "Refuerzo Mínimo") {
                         $VsRef = 0;
                     } else {
                         $VsRef = round($VUMAX / 0.70 - $VC, 2, PHP_ROUND_HALF_UP);
                     }
-                    $VsRefs[] = $VsRef;
-
                     $VsRefMax = round(2.1 * sqrt($fc) * $L2 * $dx / 1000, 2, PHP_ROUND_HALF_UP);
-                    $VsRefMaxs[] = $VsRefMax;
 
-                    $VerifArticulo = "";
                     if ($VsRef <= $VsRefMax) {
                         $VerifArticulo = "Si Cumple";
                     } else {
                         $VerifArticulo = "No Cumple, <br>Verificar";
                     }
-                    $VerifArticulos[] = $VerifArticulo;
 
-                    $AceroEstribo = "";
-                    if ($AEstribos == 0.28) {
-                        $AceroEstribo = "6mm";
-                    } else if ($AEstribos == 1.13) {
-                        $AceroEstribo = "12mm";
-                    } else if ($AEstribos == 0.50) {
-                        $AceroEstribo = "8mm";
-                    } else if ($AEstribos == 0.71) {
-                        $AceroEstribo = "ø3/8";
-                    } else if ($AEstribos == 1.27) {
-                        $AceroEstribo = "ø1/2";
-                    } else if ($AEstribos == 1.98) {
-                        $AceroEstribo = "ø5/8";
-                    } else if ($AEstribos == 2.85) {
-                        $AceroEstribo = "ø3/4";
-                    } else if ($AEstribos == 5.10) {
-                        $AceroEstribo = "ø1";
-                    } else if ($AEstribos == 7.92) {
-                        $AceroEstribo = "ø1 1/4";
-                    } else if ($AEstribos == 11.40) {
-                        $AceroEstribo = "ø1 1/2";
+                    switch ($AEstribos) {
+                        case 0.28:
+                            $AceroEstribo = "6mm";
+                            break;
+                        case 1.13:
+                            $AceroEstribo = "12mm";
+                            break;
+                        case 0.50:
+                            $AceroEstribo = "8mm";
+                            break;
+                        case 0.71:
+                            $AceroEstribo = "ø3/8";
+                            break;
+                        case 1.27:
+                            $AceroEstribo = "ø1/2";
+                            break;
+                        case 1.98:
+                            $AceroEstribo = "ø5/8";
+                            break;
+                        case 2.85:
+                            $AceroEstribo = "ø3/4";
+                            break;
+                        case 5.10:
+                            $AceroEstribo = "ø1";
+                            break;
+                        case 7.92:
+                            $AceroEstribo = "ø1 1/4";
+                            break;
+                        case 11.40:
+                            $AceroEstribo = "ø1 1/2";
+                            break;
+                        default:
+                            $AceroEstribo = "Valor no encontrado";
+                            break;
                     }
-                    $AceroEstribos[] = $AceroEstribo;
+                    switch ($AEstribos) {
+                        case 0.28:
+                            $DiaAcero = 0.6;
+                            break;
+                        case 1.13:
+                            $DiaAcero = 1.2;
+                            break;
+                        case 0.50:
+                            $DiaAcero = 0.8;
+                            break;
+                        case 0.71:
+                            $DiaAcero = 0.95;
+                            break;
+                        case 1.27:
+                            $DiaAcero = 1.27;
+                            break;
+                        case 1.98:
+                            $DiaAcero = 1.59;
+                            break;
+                        case 2.85:
+                            $DiaAcero = 1.9;
+                            break;
+                        case 5.10:
+                            $DiaAcero = 2.54;
+                            break;
+                        case 7.92:
+                            $DiaAcero = 3.175;
+                            break;
+                        case 11.40:
+                            $DiaAcero = 3.81;
+                            break;
+                        default:
+                            $DiaAcero = "Valor no encontrado";
+                            break;
+                    }
+                    switch ($AceroEstribo) {
+                        case "6mm":
+                            $areaAcer = 0.28;
+                            break;
+                        case "12mm":
+                            $areaAcer = 1.13;
+                            break;
+                        case "8mm":
+                            $areaAcer = 0.50;
+                            break;
+                        case "ø3/8":
+                            $areaAcer = 0.71;
+                            break;
+                        case "ø1/2":
+                            $areaAcer = 1.27;
+                            break;
+                        case "ø5/8":
+                            $areaAcer = 1.98;
+                            break;
+                        case "ø3/4":
+                            $areaAcer = 2.85;
+                            break;
+                        case "ø1":
+                            $areaAcer = 5.10;
+                            break;
+                        case "ø1 1/4":
+                            $areaAcer = 7.92;
+                            break;
+                        case "ø1 1/2":
+                            $areaAcer = 11.40;
+                            break;
+                        default:
+                            $areaAcer = "Valor no encontrado";
+                            break;
+                    }
+                      
+                    switch ($AaceromaxLong) {
+                        case 0.28:
+                            $aceroMxLon = "6mm";
+                            break;
+                        case 1.13:
+                            $aceroMxLon = "12mm";
+                            break;
+                        case 0.50:
+                            $aceroMxLon = "8mm";
+                            break;
+                        case 0.71:
+                            $aceroMxLon = "ø3/8";
+                            break;
+                        case 1.27:
+                            $aceroMxLon = "ø1/2";
+                            break;
+                        case 1.98:
+                            $aceroMxLon = "ø5/8";
+                            break;
+                        case 2.85:
+                            $aceroMxLon = "ø3/4";
+                            break;
+                        case 5.10:
+                            $aceroMxLon = "ø1";
+                            break;
+                        case 7.92:
+                            $aceroMxLon = "ø1 1/4";
+                            break;
+                        case 11.40:
+                            $aceroMxLon = "ø1 1/2";
+                            break;
+                        default:
+                            $aceroMxLon = "Valor no encontrado";
+                            break;
+                    }
+                    switch ($AaceromaxLong) {
+                        case 0.28:
+                            $DiaAceroMxLong = 0.6;
+                            break;
+                        case 1.13:
+                            $DiaAceroMxLong = 1.2;
+                            break;
+                        case 0.50:
+                            $DiaAceroMxLong = 0.8;
+                            break;
+                        case 0.71:
+                            $DiaAceroMxLong = 0.95;
+                            break;
+                        case 1.27:
+                            $DiaAceroMxLong = 1.27;
+                            break;
+                        case 1.98:
+                            $DiaAceroMxLong = 1.59;
+                            break;
+                        case 2.85:
+                            $DiaAceroMxLong = 1.9;
+                            break;
+                        case 5.10:
+                            $DiaAceroMxLong = 2.54;
+                            break;
+                        case 7.92:
+                            $DiaAceroMxLong = 3.175;
+                            break;
+                        case 11.40:
+                            $DiaAceroMxLong = 3.81;
+                            break;
+                        default:
+                            $DiaAceroMxLong = "Valor no encontrado";
+                            break;
+                    }
+                    switch ($aceroMxLon) {
+                        case "6mm":
+                            $areaAcerl = 0.28;
+                            break;
+                        case "12mm":
+                            $areaAcerl = 1.13;
+                            break;
+                        case "8mm":
+                            $areaAcerl = 0.50;
+                            break;
+                        case "ø3/8":
+                            $areaAcerl = 0.71;
+                            break;
+                        case "ø1/2":
+                            $areaAcerl = 1.27;
+                            break;
+                        case "ø5/8":
+                            $areaAcerl = 1.98;
+                            break;
+                        case "ø3/4":
+                            $areaAcerl = 2.85;
+                            break;
+                        case "ø1":
+                            $areaAcerl = 5.10;
+                            break;
+                        case "ø1 1/4":
+                            $areaAcerl = 7.92;
+                            break;
+                        case "ø1 1/2":
+                            $areaAcerl = 11.40;
+                            break;
+                        default:
+                            $areaAcerl = "Valor no encontrado";
+                            break;
+                    }
 
-                    $DiaAcero = 0;
-                    if ($AEstribos == 0.28) {
-                        $DiaAcero = 0.6;
-                    } else if ($AEstribos == 1.13) {
-                        $DiaAcero = 1.2;
-                    } else if ($AEstribos == 0.50) {
-                        $DiaAcero = 0.8;
-                    } else if ($AEstribos == 0.71) {
-                        $DiaAcero = 0.95;
-                    } else if ($AEstribos == 1.27) {
-                        $DiaAcero = 1.27;
-                    } else if ($AEstribos == 1.98) {
-                        $DiaAcero = 1.59;
-                    } else if ($AEstribos == 2.85) {
-                        $DiaAcero = 1.9;
-                    } else if ($AEstribos == 5.10) {
-                        $DiaAcero = 2.54;
-                    } else if ($AEstribos == 7.92) {
-                        $DiaAcero = 3.175;
-                    } else if ($AEstribos == 11.40) {
-                        $DiaAcero = 3.81;
-                    }
-                    $DiaAceros[] = $DiaAcero;
-
-                    //Aceros Maximo Longitudinal
-                    $aceroMxLon = "";
-                    if ($AaceromaxLong == 0.28) {
-                        $aceroMxLon = "6mm";
-                    } else if ($AaceromaxLong == 1.13) {
-                        $aceroMxLon = "12mm";
-                    } else if ($AaceromaxLong == 0.50) {
-                        $aceroMxLon = "8mm";
-                    } else if ($AaceromaxLong == 0.71) {
-                        $aceroMxLon = "ø3/8";
-                    } else if ($AaceromaxLong == 1.27) {
-                        $aceroMxLon = "ø1/2";
-                    } else if ($AaceromaxLong == 1.98) {
-                        $aceroMxLon = "ø5/8";
-                    } else if ($AaceromaxLong == 2.85) {
-                        $aceroMxLon = "ø3/4";
-                    } else if ($AaceromaxLong == 5.10) {
-                        $aceroMxLon = "ø1";
-                    } else if ($AaceromaxLong == 7.92) {
-                        $aceroMxLon = "ø1 1/4";
-                    } else if ($AaceromaxLong == 11.40) {
-                        $aceroMxLon = "ø1 1/2";
-                    }
-                    $aceroMxLons[] = $aceroMxLon;
-
-                    $DiaAceroMxLong = 0;
-                    if ($AaceromaxLong == 0.28) {
-                        $DiaAceroMxLong = 0.6;
-                    } else if ($AaceromaxLong == 1.13) {
-                        $DiaAceroMxLong = 1.2;
-                    } else if ($AaceromaxLong == 0.50) {
-                        $DiaAceroMxLong = 0.8;
-                    } else if ($AaceromaxLong == 0.71) {
-                        $DiaAceroMxLong = 0.95;
-                    } else if ($AaceromaxLong == 1.27) {
-                        $DiaAceroMxLong = 1.27;
-                    } else if ($AaceromaxLong == 1.98) {
-                        $DiaAceroMxLong = 1.59;
-                    } else if ($AaceromaxLong == 2.85) {
-                        $DiaAceroMxLong = 1.9;
-                    } else if ($AaceromaxLong == 5.10) {
-                        $DiaAceroMxLong = 2.54;
-                    } else if ($AaceromaxLong == 7.92) {
-                        $DiaAceroMxLong = 3.175;
-                    } else if ($AaceromaxLong == 11.40) {
-                        $DiaAceroMxLong = 3.81;
-                    }
-                    $DiaAceroMxLongs[] = $DiaAceroMxLong;
                     $ach = $dx * $dy;
                     $Ac = 30;
                     $bc = 20;
@@ -2353,91 +1976,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $Ash1 = round(0.3 * $spaciamiento * $bc * $fc / $fy * ($ag / $ach - 1), 2, PHP_ROUND_HALF_UP);
                     $Ash2 = 0.09 * $spaciamiento * $bc * $fc / $fy;
                     $nRe = round((MAX($Ash2, $Ash1) / $DiaAcero));
-                    $nRes[] = $nRe;
-
                     $AV = $nRe * $AEstribos;
-                    $AVS[] = $AV;
-
-                    $So = "";
                     if ($VerifiUtEstribo == "Refuerzo Mínimo") {
                         $So = "-";
                     } else {
                         $So = round($AV * $fy * $dx / ($VsRef * 1000), 2, PHP_ROUND_HALF_UP);
                     }
-                    $Sos[] = $So;
-
+                    echo "<td>$VsRef</td>"; 
+                    echo "<td>$VsRefMax</td>"; 
+                    echo "<td>$VerifArticulo</td>"; 
+                    echo "<td>$AceroEstribo</td>"; 
+                    echo "<td>$DiaAcero</td>";
+                    echo "<td>$areaAcer</td>";
+                    echo "<td>$aceroMxLon</td>";
+                    echo "<td>$DiaAceroMxLong</td>";
+                    echo "<td>$areaAcerl</td>";
+                    echo "<td>$nRe</td>";
+                    echo "<td>$AV</td>";
+                    echo "<td>$So</td>";
+                    // Agrega columnas adicionales aquí según sea necesario para cada piso
+                    echo "</tr>";
                 }
-                //caso I
-                if (isset($VsRefs)) {
-                    foreach ($VsRefs as $VsRef) {
-                        echo "<td class='text-center'>$VsRef</td>";
-                    }
-                }
-                //
-                if (isset($VsRefMaxs)) {
-                    foreach ($VsRefMaxs as $VsRefMax) {
-                        echo "<td class='text-center'>$VsRefMax</td>";
-                    }
-                }
-                //
-                if (isset($VerifArticulos)) {
-                    foreach ($VerifArticulos as $VerifArticulo) {
-                        echo "<td class='text-center'>$VerifArticulo</td>";
-                    }
-                }
-                if (isset($AceroEstribos)) {
-                    foreach ($AceroEstribos as $AceroEstribo) {
-                        echo "<td class='text-center'>$AceroEstribo</td>";
-                    }
-                }
-                if (isset($DiaAceros)) {
-                    foreach ($DiaAceros as $DiaAcero) {
-                        echo "<td class='text-center'>$DiaAcero</td>";
-                    }
-                }
-                echo "<td class='text-center'>$AEstribos</td>";
-                if (isset($aceroMxLons)) {
-                    foreach ($aceroMxLons as $aceroMxLon) {
-                        echo "<td class='text-center'>$aceroMxLon</td>";
-                    }
-                }
-                if (isset($DiaAceroMxLongs)) {
-                    foreach ($DiaAceroMxLongs as $DiaAceroMxLong) {
-                        echo "<td class='text-center'>$DiaAceroMxLong</td>";
-                    }
-                }
-                echo "<td class='text-center'>$AaceromaxLong</td>";
-
-                if (isset($nRes)) {
-                    foreach ($nRes as $nRe) {
-                        echo "<td class='text-center'>$nRe</td>";
-                    }
-                }
-                if (isset($AVS)) {
-                    foreach ($AVS as $AV) {
-                        echo "<td class='text-center'>$AV</td>";
-                    }
-                }
-                if (isset($Sos)) {
-                    foreach ($Sos as $So) {
-                        echo "<td class='text-center'>$So</td>";
-                    }
-                }
-                ?>
-            </tr>
+                
+            ?>
         </tbody>
     </table>
-
-    <!-- Segun Ariticulo -->
+    <br>
+    <br>
+    <!-- Falta Corregir -->
     <table class="table table-bordered table-responsive">
         <thead class="text-center">
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" rowspan="3" style="vertical-align: middle;">NIVEL</th>
                 <th scope="col" colspan="7" style="vertical-align: middle;">Artículo 21.4.5.3. y/o Artículo 21.6.4.2 / 21.6.4.4. <br>Separación de Estribos por Confinamiento</th>
                 <th scope="col" colspan="4" style="vertical-align: middle;">Artículo 7.10.5.2. <br>Espaciamiento Vertical de Estribos Máximo</th>
                 <th scope="col" colspan="4" style="vertical-align: middle;">Artículo 11.5.5.1.<br>Espaciamiento Vertical de Estribos Máximo</th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" colspan="3" style="vertical-align: middle;">Zona de Confinamiento "Lo" (cm)</th>
                 <th scope="col" colspan="3" style="vertical-align: middle;">Zona de Confinamiento "So" (cm)</th>
                 <th scope="col" rowspan="2" style="vertical-align: middle;">SI1 (cm)</th>
@@ -2451,7 +2026,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" rowspan="2" style="vertical-align: middle;">Smáx (cm)</th>
 
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" style="vertical-align: middle;">Lo1</th>
                 <th scope="col" style="vertical-align: middle;">Lo2</th>
                 <th scope="col" style="vertical-align: middle;">Lo3</th>
@@ -2461,23 +2036,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             </tr>
         </thead>
-        <tbody class="text-center">
-            <tr>
-                <th>Piso 1</th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
+        <tbody>
+            <?php
+                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                    // Genera una fila para cada piso
+                    echo "<tr>";
+                    echo "<th scope='row'>Piso " . ($piso_num + 1) . "</th>";
                     $lo3 = 50;
                     $so3 = 10;
                     $sII = 30;
                     $Smax6 = 60;
                     $lo1 = round($H * 100 / 6, 2, PHP_ROUND_HALF_UP);
-                    $lo1s[] = $lo1;
-
                     $lo2 = max($L1, $L2);
-                    $lo2s[] = $lo2;
-
-                    $ZconfinaSo = 0;
                     if ($SEstru == "Porticos") {
                         $ZconfinaSo = 6 * $AaceromaxLong;
                     } else if ($SEstru == "DualTipI") {
@@ -2487,9 +2057,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     } elseif ($SEstru == "MEstructurales") {
                         $ZconfinaSo = 8 * $AaceromaxLong;
                     }
-                    $ZconfinaSos[] = $ZconfinaSo;
 
-                    $ZconfinaSo2 = 0;
                     if ($SEstru == "Porticos") {
                         $ZconfinaSo2 = min($L1, $L2) / 3;
                     } else if ($SEstru == "DualTipI") {
@@ -2499,106 +2067,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     } elseif ($SEstru == "MEstructurales") {
                         $ZconfinaSo2 = 0.5 * min($L1, $L2);
                     }
-                    $ZconfinaSo2s[] = $ZconfinaSo2;
 
                     $Smax = 16 * $DiaAceroMxLong;
-                    $Smaxs[] = $Smax;
-
                     $Smax2 = 48 * $DiaAcero;
-                    $Smax2s[] = $Smax2;
-
                     $Smax3 = MIN($L1, $L2);
-                    $Smax3s[] = $Smax3;
-
                     $Smaxx = MIN($Smax, $Smax2, $Smax3);
-                    $Smaxxs[] = $Smaxx;
-
                     $Smax4 = $dx / 2;
-                    $Smax4s[] = $Smax4;
-
                     $Smax5 = $dy / 2;
-                    $Smax5s[] = $Smax5;
-
                     $Smax7 = min($Smax4, $Smax5, $Smax6);
-                    $Smax7s[] = $Smax7;
-
+                    echo "<td>$lo1</td>"; 
+                    echo "<td>$lo2</td>"; 
+                    echo "<td>$lo3</td>";
+                    echo "<td>$ZconfinaSo</td>"; 
+                    echo "<td>$ZconfinaSo2</td>"; 
+                    echo "<td>$so3</td>"; 
+                    echo "<td>$sII</td>"; 
+                    echo "<td>$Smax</td>"; 
+                    echo "<td>$Smax2</td>"; 
+                    echo "<td>$Smax2</td>"; 
+                    echo "<td>$Smax3</td>"; 
+                    echo "<td>$Smaxx</td>"; 
+                    echo "<td>$Smax4</td>"; 
+                    echo "<td>$Smax5</td>"; 
+                    echo "<td>$Smax7</td>"; 
+                    // Agrega columnas adicionales aquí según sea necesario para cada piso
+                    echo "</tr>";
                 }
-                //caso I
-                if (isset($lo1s)) {
-                    foreach ($lo1s as $lo1) {
-                        echo "<td class='text-center'>$lo1</td>";
-                    }
-                }
-                //
-                if (isset($lo2s)) {
-                    foreach ($lo2s as $lo2) {
-                        echo "<td class='text-center'>$lo2</td>";
-                    }
-                }
-                //
-                echo "<td class='text-center'>$lo3</td>";
-                //
-                if (isset($ZconfinaSos)) {
-                    foreach ($ZconfinaSos as $ZconfinaSo) {
-                        echo "<td class='text-center'>$ZconfinaSo</td>";
-                    }
-                }
-
-                if (isset($ZconfinaSo2s)) {
-                    foreach ($ZconfinaSo2s as $ZconfinaSo2) {
-                        echo "<td class='text-center'>$ZconfinaSo2</td>";
-                    }
-                }
-                echo "<td class='text-center'>$so3</td>";
-                echo "<td class='text-center'>$sII</td>";
-
-                if (isset($Smaxs)) {
-                    foreach ($Smaxs as $Smax) {
-                        echo "<td class='text-center'>$Smax</td>";
-                    }
-                }
-                if (isset($Smax2s)) {
-                    foreach ($Smax2s as $Smax2) {
-                        echo "<td class='text-center'>$Smax2</td>";
-                    }
-                }
-                if (isset($Smax3s)) {
-                    foreach ($Smax3s as $Smax3) {
-                        echo "<td class='text-center'>$Smax3</td>";
-                    }
-                }
-                if (isset($Smaxxs)) {
-                    foreach ($Smaxxs as $Smaxx) {
-                        echo "<td class='text-center'>$Smaxx</td>";
-                    }
-                }
-                if (isset($Smax4s)) {
-                    foreach ($Smax4s as $Smax4) {
-                        echo "<td class='text-center'>$Smax4</td>";
-                    }
-                }
-
-                if (isset($Smax5s)) {
-                    foreach ($Smax5s as $Smax5) {
-                        echo "<td class='text-center'>$Smax5</td>";
-                    }
-                }
-                echo "<td class='text-center'>$Smax6</td>";
-
-                if (isset($Smax7s)) {
-                    foreach ($Smax7s as $Smax7) {
-                        echo "<td class='text-center'>$Smax7</td>";
-                    }
-                }
-                ?>
-            </tr>
+            ?>
         </tbody>
     </table>
-
-    <!-- Verificacion de acero -->
+    <br>
+    <br>
     <table class="table table-bordered table-responsive">
         <thead class="text-center">
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" rowspan="3" style="vertical-align: middle;">NIVEL</th>
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Lo (cm)</th>
                 <th scope="col" rowspan="3" style="vertical-align: middle;">So (cm)</th>
@@ -2609,12 +2111,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Verificación de <br>Resistencia a Corte</th>
                 <th scope="col" colspan="6" style="vertical-align: middle;">Distribución Final en Dirección "x"</th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" colspan="2" style="vertical-align: middle;">Extremos</th>
                 <th scope="col" colspan="2" style="vertical-align: middle;">Zona de Confinamiento</th>
                 <th scope="col" colspan="2" style="vertical-align: middle;">Zona Central</th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" style="vertical-align: middle;">N° de Estribos</th>
                 <th scope="col" style="vertical-align: middle;">separacion (cm)</th>
                 <th scope="col" style="vertical-align: middle;">N° de Estribos</th>
@@ -2623,24 +2125,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" style="vertical-align: middle;">separacion (cm)</th>
             </tr>
         </thead>
-        <tbody class="text-center">
-            <tr>
-                <th>Piso 1</th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
-                    $lo = MAX($lo1, $lo2, $lo3);
+        <tbody>
+            <?php
+                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                    // Genera una fila para cada piso
+                    echo "<tr>";
+                    echo "<th scope='row'>Piso " . ($piso_num + 1) . "</th>";
+                    $lo = max($lo1, $lo2, $lo3);
+
                     $sO = 0;
                     if ($So == "-") {
-                        $sO = MIN($ZconfinaSo, $ZconfinaSo2, $so3, 30);
+                        $sO = min($ZconfinaSo, $ZconfinaSo2, $so3);
                     } else {
-                        $sO = MIN($So, $ZconfinaSo, $ZconfinaSo2, $so3, 30);
+                        $sO = min($ZconfinaSo, $ZconfinaSo2, $so3);
                     }
-                    $sOs[] = $sO;
 
-                    $SI = MIN($sII, $Smaxx, $Smax7);
+                    $SI = min($sII, $Smaxx, $Smax7);
+                    $base = 5;
+                    $multiplo_superior = ceil($SI / $base) * $base;
+
                     $VSton = round(($AV * $fy * $dx / $sO) / 1000, 2, PHP_ROUND_HALF_UP);
                     $FyVcVs = 0.70 * ($VC + $VSton);
+
                     $VrfResistencia = "";
                     if ($FyVcVs >= $VUMAX) {
                         $VrfResistencia = "SI CUMPLE";
@@ -2648,38 +2154,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $VrfResistencia = "NO CUMPLE, <br> Verificar";
                     }
                     $NEstribos = $lo / $sO;
+
+                    echo "<td class='text-center'>$lo</td>";
+                    echo "<td class='text-center'>$sO</td>";
+                    echo "<td class='text-center'>$multiplo_superior</td>";
+                    echo "<td class='text-center'>15</td>";
+                    echo "<td class='text-center'>$VSton</td>";
+                    echo "<td class='text-center'>$FyVcVs</td>";
+                    echo "<td class='text-center'>$VrfResistencia</td>";
+                    echo "<td class='text-center'>1</td>";
+                    echo "<td class='text-center'>5</td>";
+                    echo "<td class='text-center'>$NEstribos</td>";
+                    echo "<td class='text-center'>$sO</td>";
+                    echo "<td class='text-center'>resto</td>";
+                    echo "<td class='text-center'>$multiplo_superior</td>";
+                    // Agrega columnas adicionales aquí según sea necesario para cada piso
+                    echo "</tr>";
                 }
-                echo "<td class='text-center'>$lo</td>";
-                //caso I
-                if (isset($sOs)) {
-                    foreach ($sOs as $sO) {
-                        echo "<td class='text-center'>$sO</td>";
-                    }
-                }
-                echo "<td class='text-center'>$SI</td>";
-                echo "<td class='text-center'>15</td>";
-                echo "<td class='text-center'>$VSton</td>";
-                echo "<td class='text-center'>$FyVcVs</td>";
-                echo "<td class='text-center'>$VrfResistencia</td>";
-                echo "<td class='text-center'>1</td>";
-                echo "<td class='text-center'>5</td>";
-                echo "<td class='text-center'>$NEstribos</td>";
-                echo "<td class='text-center'>$lo</td>";
-                echo "<td class='text-center'>resto</td>";
-                echo "<td class='text-center'>15</td>";
-                ?>
-            </tr>
+            ?>
         </tbody>
     </table>
-
-    <!-- Verificacion de acero -->
+    <br>
+    <br>
     <table class="table table-bordered table-responsive">
         <thead class="text-center">
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" rowspan="2" style="vertical-align: middle;">NIVEL</th>
                 <th scope="col" colspan="9" style="vertical-align: middle;">Artículo 21.6.4.<br>Verificación del Refuerzo Transversal para Sistemas Estructurales de Pórticos y Dual Tipo II</th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" style="vertical-align: middle;">Tipo de Grapas</th>
                 <th scope="col" style="vertical-align: middle;">θ (°)</th>
                 <th scope="col" style="vertical-align: middle;">N° de Grapas</th>
@@ -2691,13 +2194,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" style="vertical-align: middle;">Verificación del <br>Artículo 21.6.4.1.b.</th>
             </tr>
         </thead>
-        <tbody class="text-center">
-            <tr>
-                <th>Piso 1</th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
-                    $AshArt = "";
+        <tbody>
+            <?php
+                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                    // Genera una fila para cada piso
+                    echo "<tr>";
+                    echo "<th scope='row'>Piso " . ($piso_num + 1) . "</th>";
+                    $tet=55;
+                    $n_grapas=1;
                     if ($SEstru == "MEstructurales") {
                         $AshArt = "-";
                     } else if ($SEstru == "DualTipI") {
@@ -2708,35 +2212,104 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $AshArt = "-";
                     }
 
-                    $AshArts[] = $AshArt;
-
-                }
-                echo "<td class='text-center'>$Tgrapas</td>";
-                echo "<td class='text-center'>55.00</td>";
-                echo "<td class='text-center'>$nRe</td>";
-                //caso I
-                if (isset($AshArts)) {
-                    foreach ($AshArts as $AshArt) {
-                        echo "<td class='text-center'>$AshArt</td>";
+                    if ($SEstru == "MEstructurales") {
+                        $ashresul = "-";
+                    } else {
+                        if ($SEstru == "Dual Tipo I") {
+                            $ashresul = "-";
+                        } else {
+                            if ($Tgrapas == "Dual Tipo I") {
+                                $ashresul = 2 * ($areaAcer + $areaAcer * cos(deg2rad($tet)));
+                            } else {
+                                $ashresul = 2 * $areaAcer + $n_grapas * $areaAcer;
+                            }
+                            
+                        }
+                        
                     }
+                    
+                    if ($SEstru == "MEstructurales") {
+                        $bc = "-";
+                    } else{
+                        if ($SEstru == "Dual Tipo I") {
+                            $bc = "-";
+                        } else {
+                            // Segunda condición
+                            $bc = $L1 - 2 * (4 + 0.5 * $DiaAcero);
+                        }
+                    }
+
+                    if ($SEstru == "MEstructurales") {
+                        $ach = "-";
+                    } else{
+                        if ($SEstru == "Dual Tipo I") {
+                            $ach = "-";
+                        } else {
+                            // Segunda condición
+                            $ach = ($L1 - 2 * (4 + 0.5 * $areaAcer)) * ($L2 - 2 * (4 + 0.5 * $areaAcer));
+                        }
+                    }
+
+                    if ($SEstru == "MEstructurales") {
+                        $ashmin1 = "-";
+                    } else{
+                        if ($SEstru == "Dual Tipo I") {
+                            $ashmin1 = "-";
+                        } else {
+                            // Segunda condición
+                            $ashmin1 = 0.3 * ($sO * $bc * $fc / $fy) * (($L1 * $L2 / $ach) - 1);
+                        }
+                    }
+
+                    if ($SEstru == "MEstructurales") {
+                        $ashmin2 = "-";
+                    } else{
+                        if ($SEstru == "Dual Tipo I") {
+                            $ashmin2 = "-";
+                        } else {
+                            // Segunda condición
+                            $ashmin2 =0.09 * ($sO * $bc * $fc / $fy);
+                        }
+                    }
+
+                    if ($SEstru == "MEstructurales") {
+                        $verarti = "-";
+                    } else{
+                        if ($SEstru == "Dual Tipo I") {
+                            $verarti = "-";
+                        } else {
+                            if ($ash >= max($ashmin1, $ashmin2)) {
+                                $verarti = "Si Cumple";
+                            } else {
+                                $verarti = "No Cumple, Verificar";
+                            }
+                        }
+                    }
+
+                    echo "<td class='text-center'>$Tgrapas</td>";
+                    echo "<td class='text-center'>$tet</td>";
+                    echo "<td class='text-center'>$n_grapas</td>";
+                    echo "<td class='text-center'>$ashresul</td>";
+                    echo "<td class='text-center'>$bc</td>"; 
+                    echo "<td class='text-center'>$ach</td>"; 
+                    echo "<td class='text-center'>$ashmin1</td>"; 
+                    echo "<td class='text-center'>$ashmin2</td>"; 
+                    echo "<td class='text-center'>$verarti</td>"; 
+                    // Agrega columnas adicionales aquí según sea necesario para cada piso
+                    echo "</tr>";
                 }
-                ?>
-            </tr>
+            ?>
         </tbody>
     </table>
-
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    <h2 class="text-center"><strong>Analisis en Direccion "Y"</strong></h2>
-     <!-- Columa por Corte  En eje Y-->
+    <h1 class="tab_encabezados text-2xl font-bold decoration-indigo-500">
+        Analisis en Direccion "Y"
+    </h1>
     <table class="table table-bordered table-responsive">
         <thead class="text-center">
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" colspan="16">Diseño por CORTE</th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" rowspan="3" style="vertical-align: middle;">NIVEL</th>
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Altura Libre <br> "hn" (m)</th>
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Pu info (Ton)</th>
@@ -2753,186 +2326,134 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Verificacion de Utilizacion <br> de Estribos
                 </th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th colspan="2" scope="col">caso I</th>
                 <th colspan="2" scope="col">caso II</th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col">Mpri</th>
                 <th scope="col">Mprs</th>
                 <th scope="col">Mpri</th>
                 <th scope="col">Mprs</th>
             </tr>
         </thead>
-        <tbody class="text-center">
-            <tr>
-                <th>Piso 1</th>
-                <th>
-                    <?php echo "$H" ?>
-                </th>
-                <th>
-                    <?php echo "$puinf" ?>
-                </th>
-                <th>
-                    <?php echo "$pusup" ?>
-                </th>
-                <th>
-                    <?php echo "$Mninf" ?>
-                </th>
-                <th>
-                    <?php echo "$Mnsup" ?>
-                </th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
-                    $dx = $L1 - 6;
-                    $dy = $L2 - 6;
-                    //CASO I
-                    //Mpri Valores Unicos
-                    $Mpriy = 0;
-                    if ($SEstru == "Porticos") {
-                        $Mpriy = 125 * $Mninf;
-                    } else if ($SEstru == "DualTipI") {
-                        $Mpriy = $Mninf;
-                    } elseif ($SEstru == "DualTipII") {
-                        $Mpriy = 125 * $Mninf;
-                    } elseif ($SEstru == "MEstructurales") {
-                        $Mpriy = $Mninf;
-                    }
-                    $Mpriys[] = $Mpriy;
+        <tbody>
+            <?php
+                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                    // Genera una fila para cada piso
+                    echo "<tr>";
+                    echo "<th scope='row'>Piso " . ($piso_num + 1) . "</th>";
 
-                    //Mpri Valores Unicos
-                    $Mpry = 0;
-                    if ($SEstru == "Porticos") {
-                        $Mpr = 125 * $Mnsup;
-                    } else if ($SEstru == "DualTipI") {
-                        $Mpry = $Mnsup;
-                    } elseif ($SEstru == "DualTipII") {
-                        $Mpry = 125 * $Mnsup;
-                    } elseif ($SEstru == "MEstructurales") {
-                        $Mpry = $Mnsup;
-                    }
-                    $Mprys[] = $Mpry;
-                    //CASO II
-                    //Mpri Valores Unicos
-                    $MpriIIy = 0;
-                    if ($SEstru == "Porticos") {
-                        $MpriIIy = 125 * $Mninf;
-                    } else if ($SEstru == "DualTipI") {
-                        $MpriIIy = $Mninf;
-                    } elseif ($SEstru == "DualTipII") {
-                        $MpriIIy = 125 * $Mninf;
-                    } elseif ($SEstru == "MEstructurales") {
-                        $MpriIIy = $Mninf;
-                    }
-                    $MpriIIys[] = $MpriIIy;
+                    switch ($SEstru) {
+                        case "Porticos":
+                            $Mpriy = 125 * $Mninf;
+                            break;
+                        case "DualTipI":
+                            $Mpriy = $Mninf;
+                            break;
+                        case "DualTipII":
+                            $Mpriy = 125 * $Mninf;
+                            break;
+                        case "MEstructurales":
+                            $Mpriy = $Mninf;
+                            break;
+                        default:
+                            // Manejar el caso por defecto si es necesario
+                            break;
+                    }   
 
-                    //Mpri Valores Unicos
-                    $MprIIy = 0;
-                    if ($SEstru == "Porticos") {
-                        $MprIIy = 125 * $Mnsup;
-                    } else if ($SEstru == "DualTipI") {
-                        $MprIIy = $Mnsup;
-                    } elseif ($SEstru == "DualTipII") {
-                        $MprIIy = 125 * $Mnsup;
-                    } elseif ($SEstru == "MEstructurales") {
-                        $MprIIy = $Mnsup;
+                    switch ($SEstru) {
+                        case "Porticos":
+                            $Mpry = 125 * $Mnsup;
+                            break;
+                        case "DualTipI":
+                            $Mpry = $Mnsup;
+                            break;
+                        case "DualTipII":
+                            $Mpry = 125 * $Mnsup;
+                            break;
+                        case "MEstructurales":
+                            $Mpry = $Mnsup;
+                            break;
+                        default:
+                            // Manejar el caso por defecto si es necesario
+                            break;
                     }
-                    $MprIIys[] = $MprIIy;
+                    
+                    switch ($SEstru) {
+                        case "Porticos":
+                            $MpriIIy = 125 * $Mninf;
+                            break;
+                        case "DualTipI":
+                            $MpriIIy = $Mninf;
+                            break;
+                        case "DualTipII":
+                            $MpriIIy = 125 * $Mninf;
+                            break;
+                        case "MEstructurales":
+                            $MpriIIy = $Mninf;
+                            break;
+                        default:
+                            // Manejar el caso por defecto si es necesario
+                            break;
+                    }
+                    
+                    switch ($SEstru) {
+                        case "Porticos":
+                            $MprIIy = 125 * $Mnsup;
+                            break;
+                        case "DualTipI":
+                            $MprIIy = $Mnsup;
+                            break;
+                        case "DualTipII":
+                            $MprIIy = 125 * $Mnsup;
+                            break;
+                        case "MEstructurales":
+                            $MprIIy = $Mnsup;
+                            break;
+                        default:
+                            // Manejar el caso por defecto si es necesario
+                            break;
+                    }
 
                     $VNy = round(max(($Mpri + $Mpr) / $H, ($MpriIIy + $MprIIy) / $H), 2, PHP_ROUND_HALF_UP);
-                    $VNys[] = $VNy;
 
                     $VUDy = round($VNy * (0.5 * $H - ($dx / 100)) / (0.5 * $H), 2, PHP_ROUND_HALF_UP);
-                    $VUDys[] = $VUDy;
-                }
-                //caso I
-                if (isset($Mpriys)) {
-                    foreach ($Mpriys as $Mpriy) {
-                        echo "<td class='text-center'>$Mpriy</td>";
-                    }
-                }
-                //Mprs
-                if (isset($Mprys)) {
-                    foreach ($Mprys as $Mpry) {
-                        echo "<td class='text-center'>$Mpry</td>";
-                    }
-                }
-
-                //caso II
-                if (isset($MpriIIys)) {
-                    foreach ($MpriIIys as $MpriIIy) {
-                        echo "<td class='text-center'>$MpriIIy</td>";
-                    }
-                }
-                //Mprs caso II
-                if (isset($MpriIIys)) {
-                    foreach ($MpriIIys as $MprIIy) {
-                        echo "<td class='text-center'>$MprIIy</td>";
-                    }
-                }
-
-                //------------------
-                if (isset($VNys)) {
-                    foreach ($VNys as $VNy) {
-                        echo "<td class='text-center'>$VNy</td>";
-                    }
-                }
-                //-----
-                if (isset($VUDys)) {
-                    foreach ($VUDys as $VUDy) {
-                        echo "<td class='text-center'>$VUDy</td>";
-                    }
-                }
-                ?>
-                <th>
-                    <?php echo "$VudEtap" ?>
-                </th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
-                    $VUMAXy = max($VUDy, $VudEtap);
-                    $VUMAXys[] = $VUMAXy;
 
                     $VCy = round(0.53 * sqrt($fc) * (1 + (MAX($puinf, $pusup) * 1000) / (140 * $L1 * $L2)) * $L2 * $dx / 1000, 2, PHP_ROUND_HALF_UP);
-                    $VCys[] = $VCy;
-
-                    $VerifiUtEstriboy = "";
+                    $VUMAXy = max($VUDy, $VudEtap);
                     if ($VUMAXy > 0.70 * $VCy) {
                         $VerifiUtEstriboy = "Necesita Estribos";
                     } else {
                         $VerifiUtEstriboy = "Refuerzo Mínimo";
                     }
-                    $VerifiUtEstriboys[] = $VerifiUtEstriboy;
 
+                    echo "<td>$H</td>";
+                    echo "<td>$puinf</td>";
+                    echo "<td>$pusup</td>";
+                    echo "<td>$Mninf</td>";
+                    echo "<td>$Mnsup</td>";
+
+                    echo "<td>$Mpriy</td>";
+                    echo "<td>$Mpry</td>";
+                    echo "<td>$MpriIIy</td>";
+                    echo "<td>$MprIIy</td>";
+                    echo "<td>$VNy</td>";
+                    echo "<td>$VUDy</td>";
+                    echo "<td>$VudEtap</td>";
+                    echo "<td>$VUMAXy</td>";
+                    echo "<td>$VCy</td>";
+                    echo "<td>$VerifiUtEstriboy</td>";
+                    echo "</tr>";
                 }
-                //
-                if (isset($VUMAXys)) {
-                    foreach ($VUMAXys as $VUMAXy) {
-                        echo "<td class='text-center'>$VUMAXy</td>";
-                    }
-                }
-                //VerifiUtEstribos
-                if (isset($VCys)) {
-                    foreach ($VCys as $VCy) {
-                        echo "<td class='text-center'>$VCy</td>";
-                    }
-                }
-                //Verificacion de utilizacion de estribos
-                if (isset($VerifiUtEstriboys)) {
-                    foreach ($VerifiUtEstriboys as $VerifiUtEstriboy) {
-                        echo "<td class='text-center'>$VerifiUtEstriboy</td>";
-                    }
-                }
-                ?>
-            </tr>
+            ?>
         </tbody>
     </table>
-
-    <!-- S -->
+    <br>
+    <br>
     <table class="table table-bordered table-responsive">
         <thead class="text-center">
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" rowspan="3" style="vertical-align: middle;">NIVEL</th>
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Vs (Ton)</th>
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Vs Máx (Ton)</th>
@@ -2944,7 +2465,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Av (cm<Sup>2</Sup>)</th>
                 <th scope="col" rowspan="3" style="vertical-align: middle;">So (cm)</th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" style="vertical-align: middle;">Acero</th>
                 <th scope="col" style="vertical-align: middle;">D (cm)</th>
                 <th scope="col" style="vertical-align: middle;">Área (cm<Sup>2</Sup>)</th>
@@ -2953,127 +2474,209 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" style="vertical-align: middle;">Área (cm<Sup>2</Sup>)</th>
             </tr>
         </thead>
-        <tbody class="text-center">
-            <tr>
-                <th>Piso 1</th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
-                    $VsRefy = 0;
+        <tbody>
+            <?php
+                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                    // Genera una fila para cada piso
+                    echo "<tr>";
+                    echo "<th scope='row'>Piso " . ($piso_num + 1) . "</th>";
                     if ($VerifiUtEstribo == "Refuerzo Mínimo") {
                         $VsRefy = 0;
                     } else {
                         $VsRefy = round($VUMAXy / 0.70 - $VCy, 2, PHP_ROUND_HALF_UP);
                     }
-                    $VsRefys[] = $VsRefy;
-
+                    
                     $VsRefMaxy = round(2.1 * sqrt($fc) * $L2 * $dx / 1000, 2, PHP_ROUND_HALF_UP);
-                    $VsRefMaxys[] = $VsRefMaxy;
 
-                    $VerifArticuloy = "";
                     if ($VsRef <= $VsRefMax) {
                         $VerifArticuloy = "Si Cumple";
                     } else {
                         $VerifArticuloy = "No Cumple, <br>Verificar";
                     }
-                    $VerifArticuloys[] = $VerifArticuloy;
 
                     $AceroEstriboy = "";
-                    if ($AEstribos == 0.28) {
-                        $AceroEstriboy = "6mm";
-                    } else if ($AEstribos == 1.13) {
-                        $AceroEstriboy = "12mm";
-                    } else if ($AEstribos == 0.50) {
-                        $AceroEstriboy = "8mm";
-                    } else if ($AEstribos == 0.71) {
-                        $AceroEstriboy = "ø3/8";
-                    } else if ($AEstribos == 1.27) {
-                        $AceroEstriboy = "ø1/2";
-                    } else if ($AEstribos == 1.98) {
-                        $AceroEstriboy = "ø5/8";
-                    } else if ($AEstribos == 2.85) {
-                        $AceroEstriboy = "ø3/4";
-                    } else if ($AEstribos == 5.10) {
-                        $AceroEstriboy = "ø1";
-                    } else if ($AEstribos == 7.92) {
-                        $AceroEstriboy = "ø1 1/4";
-                    } else if ($AEstribos == 11.40) {
-                        $AceroEstriboy = "ø1 1/2";
+                    switch ($AEstribos) {
+                        case 0.28:
+                            $AceroEstriboy = "6mm";
+                            break;
+                        case 1.13:
+                            $AceroEstriboy = "12mm";
+                            break;
+                        case 0.50:
+                            $AceroEstriboy = "8mm";
+                            break;
+                        case 0.71:
+                            $AceroEstriboy = "ø3/8";
+                            break;
+                        case 1.27:
+                            $AceroEstriboy = "ø1/2";
+                            break;
+                        case 1.98:
+                            $AceroEstriboy = "ø5/8";
+                            break;
+                        case 2.85:
+                            $AceroEstriboy = "ø3/4";
+                            break;
+                        case 5.10:
+                            $AceroEstriboy = "ø1";
+                            break;
+                        case 7.92:
+                            $AceroEstriboy = "ø1 1/4";
+                            break;
+                        case 11.40:
+                            $AceroEstriboy = "ø1 1/2";
+                            break;
+                        default:
+                            // Manejar el caso por defecto si es necesario
+                            break;
                     }
-                    $AceroEstriboys[] = $AceroEstriboy;
 
                     $DiaAceroy = 0;
-                    if ($AEstribos == 0.28) {
-                        $DiaAceroy = 0.6;
-                    } else if ($AEstribos == 1.13) {
-                        $DiaAceroy = 1.2;
-                    } else if ($AEstribos == 0.50) {
-                        $DiaAceroy = 0.8;
-                    } else if ($AEstribos == 0.71) {
-                        $DiaAceroy = 0.95;
-                    } else if ($AEstribos == 1.27) {
-                        $DiaAceroy = 1.27;
-                    } else if ($AEstribos == 1.98) {
-                        $DiaAceroy = 1.59;
-                    } else if ($AEstribos == 2.85) {
-                        $DiaAceroy = 1.9;
-                    } else if ($AEstribos == 5.10) {
-                        $DiaAceroy = 2.54;
-                    } else if ($AEstribos == 7.92) {
-                        $DiaAceroy = 3.175;
-                    } else if ($AEstribos == 11.40) {
-                        $DiaAceroy = 3.81;
+                    switch ($AEstribos) {
+                        case 0.28:
+                            $DiaAceroy = 0.6;
+                            break;
+                        case 1.13:
+                            $DiaAceroy = 1.2;
+                            break;
+                        case 0.50:
+                            $DiaAceroy = 0.8;
+                            break;
+                        case 0.71:
+                            $DiaAceroy = 0.95;
+                            break;
+                        case 1.27:
+                            $DiaAceroy = 1.27;
+                            break;
+                        case 1.98:
+                            $DiaAceroy = 1.59;
+                            break;
+                        case 2.85:
+                            $DiaAceroy = 1.9;
+                            break;
+                        case 5.10:
+                            $DiaAceroy = 2.54;
+                            break;
+                        case 7.92:
+                            $DiaAceroy = 3.175;
+                            break;
+                        case 11.40:
+                            $DiaAceroy = 3.81;
+                            break;
+                        default:
+                            // Manejar el caso por defecto si es necesario
+                            break;
                     }
-                    $DiaAceroys[] = $DiaAceroy;
 
-                    //Aceros Maximo Longitudinal
-                    $aceroMxLony = "";
-                    if ($AaceromaxLong == 0.28) {
-                        $aceroMxLony = "6mm";
-                    } else if ($AaceromaxLong == 1.13) {
-                        $aceroMxLony = "12mm";
-                    } else if ($AaceromaxLong == 0.50) {
-                        $aceroMxLony = "8mm";
-                    } else if ($AaceromaxLong == 0.71) {
-                        $aceroMxLony = "ø3/8";
-                    } else if ($AaceromaxLong == 1.27) {
-                        $aceroMxLony = "ø1/2";
-                    } else if ($AaceromaxLong == 1.98) {
-                        $aceroMxLony = "ø5/8";
-                    } else if ($AaceromaxLong == 2.85) {
-                        $aceroMxLony = "ø3/4";
-                    } else if ($AaceromaxLong == 5.10) {
-                        $aceroMxLony = "ø1";
-                    } else if ($AaceromaxLong == 7.92) {
-                        $aceroMxLony = "ø1 1/4";
-                    } else if ($AaceromaxLong == 11.40) {
-                        $aceroMxLony = "ø1 1/2";
+                    switch ($AceroEstriboy) {
+                        case "6mm":
+                            $areaAcery = 0.28;
+                            break;
+                        case "12mm":
+                            $areaAcery = 1.13;
+                            break;
+                        case "8mm":
+                            $areaAcery = 0.50;
+                            break;
+                        case "ø3/8":
+                            $areaAcery = 0.71;
+                            break;
+                        case "ø1/2":
+                            $areaAcery = 1.27;
+                            break;
+                        case "ø5/8":
+                            $areaAcery = 1.98;
+                            break;
+                        case "ø3/4":
+                            $areaAcery = 2.85;
+                            break;
+                        case "ø1":
+                            $areaAcery = 5.10;
+                            break;
+                        case "ø1 1/4":
+                            $areaAcery = 7.92;
+                            break;
+                        case "ø1 1/2":
+                            $areaAcery = 11.40;
+                            break;
+                        default:
+                            $areaAcery = "Valor no encontrado";
+                            break;
                     }
-                    $aceroMxLonys[] = $aceroMxLony;
+
+                    $aceroMxLony = "";
+                    switch ($AaceromaxLong) {
+                        case 0.28:
+                            $aceroMxLony = "6mm";
+                            break;
+                        case 1.13:
+                            $aceroMxLony = "12mm";
+                            break;
+                        case 0.50:
+                            $aceroMxLony = "8mm";
+                            break;
+                        case 0.71:
+                            $aceroMxLony = "ø3/8";
+                            break;
+                        case 1.27:
+                            $aceroMxLony = "ø1/2";
+                            break;
+                        case 1.98:
+                            $aceroMxLony = "ø5/8";
+                            break;
+                        case 2.85:
+                            $aceroMxLony = "ø3/4";
+                            break;
+                        case 5.10:
+                            $aceroMxLony = "ø1";
+                            break;
+                        case 7.92:
+                            $aceroMxLony = "ø1 1/4";
+                            break;
+                        case 11.40:
+                            $aceroMxLony = "ø1 1/2";
+                            break;
+                        default:
+                            // Manejar el caso por defecto si es necesario
+                            break;
+                    }
 
                     $DiaAceroMxLongy = 0;
-                    if ($AaceromaxLong == 0.28) {
-                        $DiaAceroMxLongy = 0.6;
-                    } else if ($AaceromaxLong == 1.13) {
-                        $DiaAceroMxLongy = 1.2;
-                    } else if ($AaceromaxLong == 0.50) {
-                        $DiaAceroMxLongy = 0.8;
-                    } else if ($AaceromaxLong == 0.71) {
-                        $DiaAceroMxLongy = 0.95;
-                    } else if ($AaceromaxLong == 1.27) {
-                        $DiaAceroMxLongy = 1.27;
-                    } else if ($AaceromaxLong == 1.98) {
-                        $DiaAceroMxLongy = 1.59;
-                    } else if ($AaceromaxLong == 2.85) {
-                        $DiaAceroMxLongy = 1.9;
-                    } else if ($AaceromaxLong == 5.10) {
-                        $DiaAceroMxLongy = 2.54;
-                    } else if ($AaceromaxLong == 7.92) {
-                        $DiaAceroMxLongy = 3.175;
-                    } else if ($AaceromaxLong == 11.40) {
-                        $DiaAceroMxLongy = 3.81;
+                    switch ($AaceromaxLong) {
+                        case 0.28:
+                            $DiaAceroMxLongy = 0.6;
+                            break;
+                        case 1.13:
+                            $DiaAceroMxLongy = 1.2;
+                            break;
+                        case 0.50:
+                            $DiaAceroMxLongy = 0.8;
+                            break;
+                        case 0.71:
+                            $DiaAceroMxLongy = 0.95;
+                            break;
+                        case 1.27:
+                            $DiaAceroMxLongy = 1.27;
+                            break;
+                        case 1.98:
+                            $DiaAceroMxLongy = 1.59;
+                            break;
+                        case 2.85:
+                            $DiaAceroMxLongy = 1.9;
+                            break;
+                        case 5.10:
+                            $DiaAceroMxLongy = 2.54;
+                            break;
+                        case 7.92:
+                            $DiaAceroMxLongy = 3.175;
+                            break;
+                        case 11.40:
+                            $DiaAceroMxLongy = 3.81;
+                            break;
+                        default:
+                            // Manejar el caso por defecto si es necesario
+                            break;
                     }
-                    $DiaAceroMxLongys[] = $DiaAceroMxLongy;
 
                     $ach = $dx * $dy;
                     $Ac = 30;
@@ -3082,91 +2685,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $Ash1y = round(0.3 * $spaciamiento * $bc * $fc / $fy * ($ag / $ach - 1), 2, PHP_ROUND_HALF_UP);
                     $Ash2y = 0.09 * $spaciamiento * $bc * $fc / $fy;
                     $nRey = round((MAX($Ash2y, $Ash1y) / $DiaAceroy));
-                    $nReys[] = $nRey;
-
                     $AVy = $nRey * $AEstribos;
-                    $AVyS[] = $AVy;
-
-                    $Soy = "";
                     if ($VerifiUtEstriboy == "Refuerzo Mínimo") {
                         $Soy = "-";
                     } else {
                         $Soy = round($AVy * $fy * $dx / ($VsRefy * 1000), 2, PHP_ROUND_HALF_UP);
                     }
-                    $Soys[] = $Soy;
-
+                    echo "<td>$VsRefy</td>";
+                    echo "<td>$VsRefMaxy</td>";
+                    echo "<td>$VerifArticuloy</td>";
+                    echo "<td>$AceroEstriboy</td>";
+                    echo "<td>$DiaAceroy</td>";
+                    echo "<td>$areaAcery</td>";//ver
+                    echo "<td>$aceroMxLony</td>";
+                    echo "<td>$DiaAceroMxLongy</td>";
+                    echo "<td>$AaceromaxLong</td>";
+                    echo "<td>$nRey</td>";
+                    echo "<td>$AVy</td>";
+                    echo "<td>$Soy</td>";
+                    echo "</tr>";
                 }
-                //caso I
-                if (isset($VsRefys)) {
-                    foreach ($VsRefys as $VsRefy) {
-                        echo "<td class='text-center'>$VsRefy</td>";
-                    }
-                }
-                //
-                if (isset($VsRefMaxys)) {
-                    foreach ($VsRefMaxys as $VsRefMaxy) {
-                        echo "<td class='text-center'>$VsRefMaxy</td>";
-                    }
-                }
-                //
-                if (isset($VerifArticuloys)) {
-                    foreach ($VerifArticuloys as $VerifArticuloy) {
-                        echo "<td class='text-center'>$VerifArticuloy</td>";
-                    }
-                }
-                if (isset($AceroEstriboys)) {
-                    foreach ($AceroEstriboys as $AceroEstriboy) {
-                        echo "<td class='text-center'>$AceroEstriboy</td>";
-                    }
-                }
-                if (isset($DiaAceroys)) {
-                    foreach ($DiaAceroys as $DiaAceroy) {
-                        echo "<td class='text-center'>$DiaAceroy</td>";
-                    }
-                }
-                echo "<td class='text-center'>$AEstribos</td>";
-                if (isset($aceroMxLonys)) {
-                    foreach ($aceroMxLonys as $aceroMxLony) {
-                        echo "<td class='text-center'>$aceroMxLony</td>";
-                    }
-                }
-                if (isset($DiaAceroMxLongys)) {
-                    foreach ($DiaAceroMxLongys as $DiaAceroMxLongy) {
-                        echo "<td class='text-center'>$DiaAceroMxLongy</td>";
-                    }
-                }
-                echo "<td class='text-center'>$AaceromaxLong</td>";
-
-                if (isset($nReys)) {
-                    foreach ($nReys as $nRey) {
-                        echo "<td class='text-center'>$nRey</td>";
-                    }
-                }
-                if (isset($AVyS)) {
-                    foreach ($AVyS as $AVy) {
-                        echo "<td class='text-center'>$AVy</td>";
-                    }
-                }
-                if (isset($Soys)) {
-                    foreach ($Soys as $Soy) {
-                        echo "<td class='text-center'>$Soy</td>";
-                    }
-                }
-                ?>
-            </tr>
+            ?>
+        </tbody>
         </tbody>
     </table>
-
-    <!-- Segun Ariticulo -->
+    <br>
+    <br>
     <table class="table table-bordered table-responsive">
         <thead class="text-center">
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" rowspan="3" style="vertical-align: middle;">NIVEL</th>
                 <th scope="col" colspan="7" style="vertical-align: middle;">Artículo 21.4.5.3. y/o Artículo 21.6.4.2 / 21.6.4.4. <br>Separación de Estribos por Confinamiento</th>
                 <th scope="col" colspan="4" style="vertical-align: middle;">Artículo 7.10.5.2. <br>Espaciamiento Vertical de Estribos Máximo</th>
                 <th scope="col" colspan="4" style="vertical-align: middle;">Artículo 11.5.5.1.<br>Espaciamiento Vertical de Estribos Máximo</th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" colspan="3" style="vertical-align: middle;">Zona de Confinamiento "Lo" (cm)</th>
                 <th scope="col" colspan="3" style="vertical-align: middle;">Zona de Confinamiento "So" (cm)</th>
                 <th scope="col" rowspan="2" style="vertical-align: middle;">SI1 (cm)</th>
@@ -3180,7 +2733,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" rowspan="2" style="vertical-align: middle;">Smáx (cm)</th>
 
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" style="vertical-align: middle;">Lo1</th>
                 <th scope="col" style="vertical-align: middle;">Lo2</th>
                 <th scope="col" style="vertical-align: middle;">Lo3</th>
@@ -3190,144 +2743,94 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             </tr>
         </thead>
-        <tbody class="text-center">
-            <tr>
-                <th>Piso 1</th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
+        <tbody>
+            <?php
+                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                    // Genera una fila para cada piso
+                    echo "<tr>";
+                    echo "<th scope='row'>Piso " . ($piso_num + 1) . "</th>";
                     $lo3 = 50;
                     $so3 = 10;
                     $sII = 30;
                     $Smax6 = 60;
                     $lo1y = round($H * 100 / 6, 2, PHP_ROUND_HALF_UP);
-                    $lo1ys[] = $lo1y;
 
                     $lo2y = max($L1, $L2);
-                    $lo2ys[] = $lo2y;
 
                     $ZconfinaSoy = 0;
-                    if ($SEstru == "Porticos") {
-                        $ZconfinaSoy = 6 * $AaceromaxLong;
-                    } else if ($SEstru == "DualTipI") {
-                        $ZconfinaSoy = 8 * $AaceromaxLong;
-                    } elseif ($SEstru == "DualTipII") {
-                        $ZconfinaSoy = 6 * $AaceromaxLong;
-                    } elseif ($SEstru == "MEstructurales") {
-                        $ZconfinaSoy = 8 * $AaceromaxLong;
+                    switch ($SEstru) {
+                        case "Porticos":
+                            $ZconfinaSoy = 6 * $AaceromaxLong;
+                            break;
+                        case "DualTipI":
+                            $ZconfinaSoy = 8 * $AaceromaxLong;
+                            break;
+                        case "DualTipII":
+                            $ZconfinaSoy = 6 * $AaceromaxLong;
+                            break;
+                        case "MEstructurales":
+                            $ZconfinaSoy = 8 * $AaceromaxLong;
+                            break;
+                        default:
+                            // Manejar el caso por defecto si es necesario
+                            break;
                     }
-                    $ZconfinaSoys[] = $ZconfinaSoy;
 
                     $ZconfinaSo2y = 0;
-                    if ($SEstru == "Porticos") {
-                        $ZconfinaSo2y = min($L1, $L2) / 3;
-                    } else if ($SEstru == "DualTipI") {
-                        $ZconfinaSo2y = 0.5 * min($L1, $L2);
-                    } elseif ($SEstru == "DualTipII") {
-                        $ZconfinaSo2y = min($L1, $L2) / 3;
-                    } elseif ($SEstru == "MEstructurales") {
-                        $ZconfinaSo2y = 0.5 * min($L1, $L2);
+                    switch ($SEstru) {
+                        case "Porticos":
+                            $ZconfinaSo2y = min($L1, $L2) / 3;
+                            break;
+                        case "DualTipI":
+                            $ZconfinaSo2y = 0.5 * min($L1, $L2);
+                            break;
+                        case "DualTipII":
+                            $ZconfinaSo2y = min($L1, $L2) / 3;
+                            break;
+                        case "MEstructurales":
+                            $ZconfinaSo2y = 0.5 * min($L1, $L2);
+                            break;
+                        default:
+                            // Manejar el caso por defecto si es necesario
+                            break;
                     }
-                    $ZconfinaSo2ys[] = $ZconfinaSo2y;
+
 
                     $Smaxy = 16 * $DiaAceroMxLongy;
-                    $Smaxys[] = $Smaxy;
-
                     $Smax2y = 48 * $DiaAceroy;
-                    $Smax2ys[] = $Smax2y;
-
                     $Smax3y = MIN($L1, $L2);
-                    $Smax3ys[] = $Smax3y;
-
                     $Smaxxy = MIN($Smaxy, $Smax2y, $Smax3y);
-                    $Smaxxys[] = $Smaxxy;
-
                     $Smax4y = $dx / 2;
-                    $Smax4ys[] = $Smax4y;
-
                     $Smax5y = $dy / 2;
-                    $Smax5ys[] = $Smax5y;
-
                     $Smax7y = min($Smax4y, $Smax5y, $Smax6);
-                    $Smax7ys[] = $Smax7y;
 
+                    echo "<td>$lo1y</td>";
+                    echo "<td>$lo2y</td>";
+                    echo "<td>$lo3</td>";
+                    echo "<td>$ZconfinaSoy</td>";
+                    echo "<td>$ZconfinaSo2y</td>";
+                    echo "<td>$so3</td>";
+                    echo "<td>$sII</td>";
+                    echo "<td>$Smaxy</td>";
+                    echo "<td>$Smax2y</td>";
+                    echo "<td>$Smax3y</td>";
+                    echo "<td>$Smaxxy</td>";
+                    echo "<td>$Smax4y</td>";
+                    echo "<td>$Smax5y</td>";
+                    echo "<td>$Smax6</td>";
+                    echo "<td>$Smax7y</td>";
+                 
+                 
+                    echo "</tr>";
                 }
-                //caso I
-                if (isset($lo1ys)) {
-                    foreach ($lo1ys as $lo1y) {
-                        echo "<td class='text-center'>$lo1y</td>";
-                    }
-                }
-                //
-                if (isset($lo2ys)) {
-                    foreach ($lo2ys as $lo2y) {
-                        echo "<td class='text-center'>$lo2y</td>";
-                    }
-                }
-                //
-                echo "<td class='text-center'>$lo3</td>";
-                //
-                if (isset($ZconfinaSoys)) {
-                    foreach ($ZconfinaSoys as $ZconfinaSoy) {
-                        echo "<td class='text-center'>$ZconfinaSoy</td>";
-                    }
-                }
-
-                if (isset($ZconfinaSo2ys)) {
-                    foreach ($ZconfinaSo2ys as $ZconfinaSo2y) {
-                        echo "<td class='text-center'>$ZconfinaSo2y</td>";
-                    }
-                }
-                echo "<td class='text-center'>$so3</td>";
-                echo "<td class='text-center'>$sII</td>";
-
-                if (isset($Smaxys)) {
-                    foreach ($Smaxys as $Smaxy) {
-                        echo "<td class='text-center'>$Smaxy</td>";
-                    }
-                }
-                if (isset($Smax2ys)) {
-                    foreach ($Smax2ys as $Smax2y) {
-                        echo "<td class='text-center'>$Smax2y</td>";
-                    }
-                }
-                if (isset($Smax3ys)) {
-                    foreach ($Smax3ys as $Smax3y) {
-                        echo "<td class='text-center'>$Smax3y</td>";
-                    }
-                }
-                if (isset($Smaxxys)) {
-                    foreach ($Smaxxys as $Smaxxy) {
-                        echo "<td class='text-center'>$Smaxxy</td>";
-                    }
-                }
-                if (isset($Smax4ys)) {
-                    foreach ($Smax4ys as $Smax4y) {
-                        echo "<td class='text-center'>$Smax4y</td>";
-                    }
-                }
-
-                if (isset($Smax5ys)) {
-                    foreach ($Smax5ys as $Smax5y) {
-                        echo "<td class='text-center'>$Smax5y</td>";
-                    }
-                }
-                echo "<td class='text-center'>$Smax6</td>";
-
-                if (isset($Smax7ys)) {
-                    foreach ($Smax7ys as $Smax7y) {
-                        echo "<td class='text-center'>$Smax7y</td>";
-                    }
-                }
-                ?>
-            </tr>
+            ?>
         </tbody>
     </table>
-
-    <!-- Verificacion de acero -->
+    <br>
+    <br>
     <table class="table table-bordered table-responsive">
         <thead class="text-center">
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" rowspan="3" style="vertical-align: middle;">NIVEL</th>
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Lo (cm)</th>
                 <th scope="col" rowspan="3" style="vertical-align: middle;">So (cm)</th>
@@ -3338,12 +2841,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" rowspan="3" style="vertical-align: middle;">Verificación de <br>Resistencia a Corte</th>
                 <th scope="col" colspan="6" style="vertical-align: middle;">Distribución Final en Dirección "x"</th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" colspan="2" style="vertical-align: middle;">Extremos</th>
                 <th scope="col" colspan="2" style="vertical-align: middle;">Zona de Confinamiento</th>
                 <th scope="col" colspan="2" style="vertical-align: middle;">Zona Central</th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" style="vertical-align: middle;">N° de Estribos</th>
                 <th scope="col" style="vertical-align: middle;">separacion (cm)</th>
                 <th scope="col" style="vertical-align: middle;">N° de Estribos</th>
@@ -3352,63 +2855,65 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" style="vertical-align: middle;">separacion (cm)</th>
             </tr>
         </thead>
-        <tbody class="text-center">
-            <tr>
-                <th>Piso 1</th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
+        <tbody>
+            <?php
+                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                    // Genera una fila para cada piso
+                    echo "<tr>";
                     $loy = MAX($lo1y, $lo2y, $lo3);
+
                     $sOy = 0;
                     if ($sOy == "-") {
-                        $sOy = MIN($ZconfinaSoy, $ZconfinaSo2y, $so3, 30);
+                        $resultadoOy = min(min($ZconfinaSoy, $ZconfinaSo2y, $so3), 30);
                     } else {
-                        $sOy = MIN($Soy, $ZconfinaSoy, $ZconfinaSo2y, $so3, 30);
+                        $resultadoOy =min(min($ZconfinaSoy, $ZconfinaSo2y, $so3), 30);
                     }
-                    $sOys[] = $sOy;
+                    $sOy = floor($resultadoOy / 5) * 5;
 
-                    $SIy = MIN($sII, $Smaxxy, $Smax7y);
+                    $SIy =  ceil(min($sII, $Smaxxy, $Smax7y) / 5) * 5;
+
                     $VStony = round(($AVy * $fy * $dx / $sOy) / 1000, 2, PHP_ROUND_HALF_UP);
+
                     $FyVcVsy = 0.70 * ($VCy + $VStony);
+
                     $VrfResistenciay = "";
+                    
                     if ($FyVcVsy >= $VUMAXy) {
                         $VrfResistenciay = "SI CUMPLE";
                     } else {
                         $VrfResistenciay = "NO CUMPLE, <br> Verificar";
                     }
                     $NEstribosy = $loy / $sOy;
+
+                    echo "<th scope='row'>Piso " . ($piso_num + 1) . "</th>";
+
+                    echo "<td class='text-center'>$loy</td>";
+                    echo "<td class='text-center'>$sOy</td>";
+                    echo "<td class='text-center'>$SIy</td>";
+                    echo "<td class='text-center'>15</td>";
+                    echo "<td class='text-center'>$VStony</td>";
+                    echo "<td class='text-center'>$FyVcVsy</td>";
+                    echo "<td class='text-center'>$VrfResistenciay</td>";
+                    echo "<td class='text-center'>1</td>";
+                    echo "<td class='text-center'>5</td>";
+                    echo "<td class='text-center'>$NEstribosy</td>";
+                    echo "<td class='text-center'>$sOy</td>";
+                    echo "<td class='text-center'>resto</td>";
+                    echo "<td class='text-center'>$SIy</td>";
+                    echo "</tr>";
                 }
-                echo "<td class='text-center'>$loy</td>";
-                //caso I
-                if (isset($sOys)) {
-                    foreach ($sOys as $sOy) {
-                        echo "<td class='text-center'>$sOy</td>";
-                    }
-                }
-                echo "<td class='text-center'>$SIy</td>";
-                echo "<td class='text-center'>15</td>";
-                echo "<td class='text-center'>$VStony</td>";
-                echo "<td class='text-center'>$FyVcVsy</td>";
-                echo "<td class='text-center'>$VrfResistenciay</td>";
-                echo "<td class='text-center'>1</td>";
-                echo "<td class='text-center'>5</td>";
-                echo "<td class='text-center'>$NEstribosy</td>";
-                echo "<td class='text-center'>$loy</td>";
-                echo "<td class='text-center'>resto</td>";
-                echo "<td class='text-center'>15</td>";
-                ?>
-            </tr>
+            ?>
         </tbody>
     </table>
-
-    <!-- Verificacion de acero -->
+    <br>
+    <br>
     <table class="table table-bordered table-responsive">
         <thead class="text-center">
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" rowspan="2" style="vertical-align: middle;">NIVEL</th>
                 <th scope="col" colspan="9" style="vertical-align: middle;">Artículo 21.6.4.<br>Verificación del Refuerzo Transversal para Sistemas Estructurales de Pórticos y Dual Tipo II</th>
             </tr>
-            <tr class="text-center bg-info">
+            <tr class="sub_encabezados">
                 <th scope="col" style="vertical-align: middle;">Tipo de Grapas</th>
                 <th scope="col" style="vertical-align: middle;">θ (°)</th>
                 <th scope="col" style="vertical-align: middle;">N° de Grapas</th>
@@ -3420,13 +2925,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <th scope="col" style="vertical-align: middle;">Verificación del <br>Artículo 21.6.4.1.b.</th>
             </tr>
         </thead>
-        <tbody class="text-center">
-            <tr>
-                <th>Piso 1</th>
-                <?php
-                $datos = 1;
-                for ($i = 0; $i < $datos; $i++) {
-                    $AshArt = "";
+        <tbody>
+            <?php
+                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                    // Genera una fila para cada piso
+                    echo "<tr>";
+                    echo "<th scope='row'>Piso " . ($piso_num + 1) . "</th>";
+                    $tet=55;
+                    $n_grapas=1;
                     if ($SEstru == "MEstructurales") {
                         $AshArt = "-";
                     } else if ($SEstru == "DualTipI") {
@@ -3437,33 +2943,152 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $AshArt = "-";
                     }
 
-                    $AshArts[] = $AshArt;
-
-                }
-                echo "<td class='text-center'>$Tgrapas</td>";
-                echo "<td class='text-center'>55.00</td>";
-                echo "<td class='text-center'>$nRe</td>";
-                //caso I
-                if (isset($AshArts)) {
-                    foreach ($AshArts as $AshArt) {
-                        echo "<td class='text-center'>$AshArt</td>";
+                    if ($SEstru == "MEstructurales") {
+                        $ashresul = "-";
+                    } else {
+                        if ($SEstru == "Dual Tipo I") {
+                            $ashresul = "-";
+                        } else {
+                            if ($Tgrapas == "Dual Tipo I") {
+                                $ashresul = 2 * ($areaAcer + $areaAcer * cos(deg2rad($tet)));
+                            } else {
+                                $ashresul = 2 * $areaAcer + $n_grapas * $areaAcer;
+                            }
+                            
+                        }
+                        
                     }
+                    
+                    if ($SEstru == "MEstructurales") {
+                        $bc = "-";
+                    } else{
+                        if ($SEstru == "Dual Tipo I") {
+                            $bc = "-";
+                        } else {
+                            // Segunda condición
+                            $bc = $L1 - 2 * (4 + 0.5 * $DiaAcero);
+                        }
+                    }
+
+                    if ($SEstru == "MEstructurales") {
+                        $ach = "-";
+                    } else{
+                        if ($SEstru == "Dual Tipo I") {
+                            $ach = "-";
+                        } else {
+                            // Segunda condición
+                            $ach = ($L1 - 2 * (4 + 0.5 * $areaAcer)) * ($L2 - 2 * (4 + 0.5 * $areaAcer));
+                        }
+                    }
+
+                    if ($SEstru == "MEstructurales") {
+                        $ashmin1 = "-";
+                    } else{
+                        if ($SEstru == "Dual Tipo I") {
+                            $ashmin1 = "-";
+                        } else {
+                            // Segunda condición
+                            $ashmin1 = 0.3 * ($sO * $bc * $fc / $fy) * (($L1 * $L2 / $ach) - 1);
+                        }
+                    }
+
+                    if ($SEstru == "MEstructurales") {
+                        $ashmin2 = "-";
+                    } else{
+                        if ($SEstru == "Dual Tipo I") {
+                            $ashmin2 = "-";
+                        } else {
+                            // Segunda condición
+                            $ashmin2 =0.09 * ($sO * $bc * $fc / $fy);
+                        }
+                    }
+
+                    if ($SEstru == "MEstructurales") {
+                        $verarti = "-";
+                    } else{
+                        if ($SEstru == "Dual Tipo I") {
+                            $verarti = "-";
+                        } else {
+                            if ($ash >= max($ashmin1, $ashmin2)) {
+                                $verarti = "Si Cumple";
+                            } else {
+                                $verarti = "No Cumple, Verificar";
+                            }
+                        }
+                    }
+
+                    echo "<td class='text-center'>$Tgrapas</td>";
+                    echo "<td class='text-center'>$tet</td>";
+                    echo "<td class='text-center'>$n_grapas</td>";
+                    echo "<td class='text-center'>$ashresul</td>";
+                    echo "<td class='text-center'>$bc</td>"; 
+                    echo "<td class='text-center'>$ach</td>"; 
+                    echo "<td class='text-center'>$ashmin1</td>"; 
+                    echo "<td class='text-center'>$ashmin2</td>"; 
+                    echo "<td class='text-center'>$verarti</td>"; 
+                    // Agrega columnas adicionales aquí según sea necesario para cada piso
+                    echo "</tr>";
                 }
-                ?>
-            </tr>
+            ?>
         </tbody>
     </table>
+    <br>
+    <br>
+    <h1 class="tab_encabezados text-2xl font-bold decoration-indigo-500">
+       Armado Final
+    </h1>
+    <table class="table table-bordered table-responsive">
+        <thead class="text-center">
+            <tr class="sub_encabezados">
+                <th scope="col" rowspan="3" style="vertical-align: middle;">NIVEL</th>
+                <th scope="col" colspan="6" style="vertical-align: middle;">Artículo 21.6.4.<br>Verificación del Refuerzo Transversal para Sistemas Estructurales de Pórticos y Dual Tipo II</th>
+                <th scope="col" rowspan="3" style="vertical-align: middle;">Esquema de Armado Final</th>
+            </tr>
+            <tr class="sub_encabezados">
+                <th scope="col" colspan="2" style="vertical-align: middle;">Extremos</th>
+                <th scope="col" colspan="2" style="vertical-align: middle;">Zona de Confinamiento</th>
+                <th scope="col" colspan="2" style="vertical-align: middle;">Zona Central</th>
+            </tr>
+            <tr class="sub_encabezados">
+                <th scope="col" style="vertical-align: middle;">N° de Estribos</th>
+                <th scope="col" style="vertical-align: middle;">Separacion (cm)</th>
+                <th scope="col" style="vertical-align: middle;">N° de Estribos</th>
+                <th scope="col" style="vertical-align: middle;">Separacion (cm)</th>
+                <th scope="col" style="vertical-align: middle;">N° de Estribos</th>
+                <th scope="col" style="vertical-align: middle;">Separacion (cm)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                for ($piso_num = 0; $piso_num < count($pisos_datos_array_p); $piso_num++) {
+                    // Genera una fila para cada piso
+                    echo "<tr>";
+                    echo "<th scope='row'>Piso " . ($piso_num + 1) . "</th>";
+                    $NEstrFinalEX=1;
+                    $spaciaFinalEX=5;
 
+                    $NEstrFinalConf=max($NEstribos,$NEstribosy);
+                    $spaciaFinalConf=min($sO,$sOy);
+                    
+                    $NEstrFinalCen="Resto";
+                    $spaciaFinalCent=min($multiplo_superior,$SIy);
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+                    $EsqArFinal="ø3/8'' 1@5 + 7@10 + Resto@20 a c/e";
+
+                    echo "<td class='text-center'>$NEstrFinalEX</td>";
+                    echo "<td class='text-center'>$spaciaFinalEX</td>";
+                    echo "<td class='text-center'>$NEstrFinalConf</td>";
+                    echo "<td class='text-center'>$spaciaFinalConf</td>";
+                    echo "<td class='text-center'>$NEstrFinalCen</td>";
+                    echo "<td class='text-center'>$spaciaFinalCent</td>";
+                    echo "<td class='text-center'>$EsqArFinal</td>";
+
+                    // Agrega columnas adicionales aquí según sea necesario para cada piso
+                    echo "</tr>";
+                }
+            ?>
+        </tbody>
+    </table>
 </body>
 
 </html>
