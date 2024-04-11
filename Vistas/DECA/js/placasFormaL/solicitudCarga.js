@@ -262,8 +262,8 @@ export function solicitudCargaT2(contenedor, filas) {
       }
     },
     afterPaste: function (data, coords) {
-      console.log(data); /* array de filas */
-      console.log(coords); /* array con coordenadas de inicio y fin (col-row)*/
+      //console.log(data); /* array de filas */
+      //console.log(coords); /* array con coordenadas de inicio y fin (col-row)*/
       data.forEach(function (rowData, i) {
         /* console.log(rowData);
         console.log(coords); */
@@ -273,10 +273,10 @@ export function solicitudCargaT2(contenedor, filas) {
         var endCol = coords[0].endCol;
         let k = 0;
         for (let j = startCol; j <= endCol; j++) {
-          console.log('Fila:', startRow + i);
-          console.log('Columna:', j);
-          console.log('Dato:', rowData[k]);
-          console.log('indice' + k);
+          //console.log('Fila:', startRow + i);
+          //console.log('Columna:', j);
+          //console.log('Dato:', rowData[k]);
+          //console.log('indice' + k);
           hot.setDataAtCell(startRow + i, j, rowData[k]);
           k++;
         }
@@ -295,7 +295,7 @@ export function solicitudCargaT2(contenedor, filas) {
     // extractedValues will contain the values from index 9 to index 14 of the original array
 
     // Aquí puedes realizar alguna acción con los datos, como enviarlos al servidor o guardarlos en el almacenamiento local
-    console.log('Datos de la tabla 2:', solicitudCargaDT2);
+    //console.log('Datos de la tabla 2:', solicitudCargaDT2);
     var contenedor3 = document.getElementById('solicitudCargaT3');
 
     solicitudCargaT3(contenedor3, solicitudCargaDT2, solicitudCargaDT2.length);

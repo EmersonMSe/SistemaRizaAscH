@@ -20,6 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $VudEtap = $_POST["VudEtaps"];
     $dataFromHandsontable = json_decode($_POST["dataFromHandsontable"], true);
     $dataFromHandsontables = array();
+    $dataFromHandsontableLAX = json_decode($_POST["dataFromHandsontableLAX"], true);
+    $dataFromHandsontablesLAX = array();
+    $dataFromHandsontableLAY = json_decode($_POST["dataFromHandsontableLAY"], true);
+    $dataFromHandsontablesLAY = array();
+    print_r($dataFromHandsontableLAX);
+    print_r($dataFromHandsontableLAY);
     $p = array();
     $vx = array();
     $vy = array();

@@ -154,6 +154,45 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                                             </div>
                                             <br>
                                             <br>
+                                            <!-- Longitud Arriostrada -->
+                                            <div class="card-body sm:rounded-lg">
+                                                <div class="card-header  h-30 bg-gradient-to-r from-cyan-500 to-blue-500 sm:rounded-lg">
+                                                    <h1 class="text-center text-2xl font-bold decoration-indigo-500">
+                                                        Longitud Arriostrada (Análisis en Dirección X-X)
+                                                        <button id="btnLongArriosX" type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded">
+                                                            Ver
+                                                        </button>
+                                                    </h1>
+                                                </div>
+                                                <div class="card-body" id="contentLongArriosX">
+                                                    <section class="content">
+                                                        <div class="container-fluid">
+                                                            <div class="row justify-content-center align-items-center">
+                                                                <div id="longitudArriostradaX"></div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                            <div class="card-body sm:rounded-lg">
+                                                <div class="card-header  h-30 bg-gradient-to-r from-cyan-500 to-blue-500 sm:rounded-lg">
+                                                    <h1 class="text-center text-2xl font-bold decoration-indigo-500">
+                                                        Longitud Arriostrada (Análisis en Dirección Y-Y)
+                                                        <button id="btnLongArriosY" type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded">
+                                                            Ver
+                                                        </button>
+                                                    </h1>
+                                                </div>
+                                                <div class="card-body" id="contentLongArriosY">
+                                                    <section class="content">
+                                                        <div class="container-fluid">
+                                                            <div class="row justify-content-center align-items-center">
+                                                                <div id="longitudArriostradaY"></div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
                                             <!-- condicion ezbeltes -->
                                             <div class="card-body sm:rounded-lg">
                                                 <div class="card-header  h-30 bg-gradient-to-r from-cyan-500 to-blue-500 sm:rounded-lg">
@@ -260,6 +299,22 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                                                 </div>
                                             </div>
                                             <script>
+                                                document.getElementById('btnLongArriosX').addEventListener('click', function() {
+                                                    var contentCE = document.getElementById('contentLongArriosX');
+                                                    if (contentCE.style.display === "none") {
+                                                        contentCE.style.display = "block";
+                                                    } else {
+                                                        contentCE.style.display = "none";
+                                                    }
+                                                });
+                                                document.getElementById('btnLongArriosY').addEventListener('click', function() {
+                                                    var contentCE = document.getElementById('contentLongArriosY');
+                                                    if (contentCE.style.display === "none") {
+                                                        contentCE.style.display = "block";
+                                                    } else {
+                                                        contentCE.style.display = "none";
+                                                    }
+                                                });
                                                 document.getElementById('btncez').addEventListener('click', function() {
                                                     var contentCE = document.getElementById('contentCE');
                                                     if (contentCE.style.display === "none") {
@@ -516,6 +571,8 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                                             </div>
                                         </div>
                                         <input type="hidden" name="dataFromHandsontable" id="dataFromHandsontable" value="">
+                                        <input type="hidden" name="dataFromHandsontableLAX" id="dataFromHandsontableLAX" value="">
+                                        <input type="hidden" name="dataFromHandsontableLAY" id="dataFromHandsontableLAY" value="">
                                         <button class="btn btn-primary" type="submit">DISEÑAR</button>
                                     </form>
                                 </div>
@@ -599,6 +656,132 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
 
     <script>
         $(document).ready(function() {
+            /* ----Longitud Arriostrada------ */
+            /* ----Dirección X X------ */
+            var dataLAX = [
+                ['', '', '', '', '', '', '', '', ''],
+            ];
+
+            var containerLAX = document.getElementById('longitudArriostradaX');
+            var hotLAX = new Handsontable(containerLAX, {
+                data: dataLAX,
+                rowHeaders: false,
+                colHeaders: true,
+                contextMenu: true,
+                colWidths: 100,
+                nestedHeaders: [
+                    ['Nivel', {
+                        label: 'Altura Total "H" (m)',
+                        colspan: 1,
+                    }, {
+                        label: 'Cargas Amplificadas "Pu" (Ton)',
+                        colspan: 1
+                    }, {
+                        label: 'ƩPu (Ton)',
+                        colspan: 1
+                    }, {
+                        label: 'Norma E.030 Artículo 31',
+                        colspan: 2,
+                        align: 'center'
+                    }, {
+                        label: 'Vux (Ton)',
+                        colspan: 1
+                    }, {
+                        label: 'Índice de Estabilidad "Q"',
+                        colspan: 1
+                    }, {
+                        label: 'Artículo 10.11.3. Verificación del Arriostramiento',
+                        colspan: 1
+                    }, {
+                        label: 'Artículo 10.11.3. Tipo de Estructura',
+                        colspan: 1
+                    }],
+                    ['', '', '', '', {
+                        label: 'Δabsoluto (m)',
+                        colspan: 1,
+                        align: 'center'
+                    }, {
+                        label: 'relativo(m)',
+                        colspan: 1,
+                        align: 'center'
+                    }, '', '', '']
+                ],
+                collapsibleColumns: [{
+                        row: -2,
+                        col: 1,
+                        collapsible: false
+                    },
+                    {
+                        row: -1,
+                        col: 1,
+                        collapsible: false
+                    },
+                ],
+                licenseKey: 'non-commercial-and-evaluation'
+            });
+            /* ----Dirección Y Y------ */
+            var dataLAY = [
+                ['', '', '', '', '', '', '', '', ''],
+            ];
+
+            var containerLAY = document.getElementById('longitudArriostradaY');
+            var hotLAY = new Handsontable(containerLAY, {
+                data: dataLAY,
+                rowHeaders: true,
+                colHeaders: true,
+                contextMenu: true,
+                colWidths: 100,
+                nestedHeaders: [
+                    ['Nivel', {
+                        label: 'Altura Total "H" (m)',
+                        colspan: 1,
+                    }, {
+                        label: 'Cargas Amplificadas "Pu" (Ton)',
+                        colspan: 1
+                    }, {
+                        label: 'ƩPu (Ton)',
+                        colspan: 1
+                    }, {
+                        label: 'Norma E.030 Artículo 31',
+                        colspan: 2,
+                        align: 'center'
+                    }, {
+                        label: 'Vux (Ton)',
+                        colspan: 1
+                    }, {
+                        label: 'Índice de Estabilidad "Q"',
+                        colspan: 1
+                    }, {
+                        label: 'Artículo 10.11.3. Verificación del Arriostramiento',
+                        colspan: 1
+                    }, {
+                        label: 'Artículo 10.11.3. Tipo de Estructura',
+                        colspan: 1
+                    }],
+                    ['', '', '', '', {
+                        label: 'Δabsoluto (m)',
+                        colspan: 1,
+                        align: 'center'
+                    }, {
+                        label: 'relativo(m)',
+                        colspan: 1,
+                        align: 'center'
+                    }, '', '', '']
+                ],
+                collapsibleColumns: [{
+                        row: -2,
+                        col: 1,
+                        collapsible: false
+                    },
+                    {
+                        row: -1,
+                        col: 1,
+                        collapsible: false
+                    },
+                ],
+                licenseKey: 'non-commercial-and-evaluation'
+            });
+            /* ---------------------------------------- */
             var data = [
                 ['CL-01', 'CM', 0, 0, 0, 0, 0, 0, 0],
                 ['', 'CV', 0, 0, 0, 0, 0, 0, 0],
@@ -643,12 +826,40 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                         collapsible: false
                     },
                 ],
+                afterChange: function(changes, source) {
+                    if (source == 'edit') {
+                        var hot = this;
+                        changes.forEach(function(change) {
+                            var row = change[0]
+                            var col = change[1]
+                            var newValue = change[3]
+                            if(col === 2){
+                               hot.setDataAtCell(row, 6, hot.getDataAtCell(row, ))
+                            }
+                        })
+                    }
+                },
+                afterPaste: function(data, coords) {
+                    data.forEach(function(rowData, i) {
+                        var startRow = coords[0].startRow;
+                        /* var endRow = coords[0].endRow; */
+                        var startCol = coords[0].startCol;
+                        var endCol = coords[0].endCol;
+                        let k = 0;
+                        for (let j = startCol; j <= endCol; j++) {
+                            hot.setDataAtCell(startRow + i, j, rowData[k]);
+                            k++;
+                        }
+                    });
+                },
                 licenseKey: 'non-commercial-and-evaluation'
             });
 
             // Captura el formulario
             const form = document.getElementById('ColumnaF');
             const dataFromHandsontable = document.querySelector('#dataFromHandsontable');
+            const dataFromHandsontableLAY = document.querySelector('#dataFromHandsontableLAY');
+            const dataFromHandsontableLAX = document.querySelector('#dataFromHandsontableLAX');
 
             // Agrega un manejador de eventos para el envío del formulario
             form.addEventListener('submit', function(event) {
@@ -656,9 +867,15 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
 
                 // Obtén los datos de Handsontable y conviértelos a JSON
                 const tableData = hot.getData();
+                const tableData2 = hotLAX.getData();
+                const tableData3 = hotLAY.getData();
                 const jsonData = JSON.stringify(tableData);
+                const jsonData2 = JSON.stringify(tableData2);
+                const jsonData3 = JSON.stringify(tableData3);
 
                 dataFromHandsontable.value = jsonData;
+                dataFromHandsontableLAX.value = jsonData2;
+                dataFromHandsontableLAY.value = jsonData3;
                 const formData = new FormData(form);
 
                 // Envía los datos mediante una solicitud POST AJAX

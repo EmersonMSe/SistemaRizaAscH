@@ -218,11 +218,11 @@ export function flexDesignT1X(contenedor, initialData, formData) {
       }
     }
     if (allCellsFilled) {
-      console.log('Datos de la tabla T1X:', tableData);
+      console.log('Datos de la tabla T1X:', dataTable1x);
       var flexDesingT2X = document.getElementById('flexDesingT2X');
-      flexDesignT2X(flexDesingT2X, tableData);
+      flexDesignT2X(flexDesingT2X, dataTable1x);
       var flexDesingT3X = document.getElementById('flexDesingT3X');
-      flexDesignT3X(flexDesingT3X, tableData, formData);
+      flexDesignT3X(flexDesingT3X, dataTable1x, formData);
     } else {
       alert('Hay celdas vacías');
     }

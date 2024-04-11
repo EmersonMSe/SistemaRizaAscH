@@ -312,10 +312,10 @@ if (1 == 1 || 1 == 1) {
                                                                     <div id="cutDesingT4Y" class="table-container"></div>
                                                                 </div> -->
                                                             </div>
-                                                            <div class="row d-flex" id="diagramsContainer">
-                                                            </div>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="row d-flex" id="diagramsContainer">
                                                 </div>
                                             </div>
                                         </div>

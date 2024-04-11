@@ -671,6 +671,339 @@ function diT3Y(contenedor, formData) {
   });
 }
 
+// Datos y gráficas
 export function diagramI(solicitacionesVarios) {
-  
+  var cont = 0;
+  var dataSize = solicitacionesVarios.length;
+  for (let i = 1; i <= dataSize / 17; i = i + 2) {
+    cont++;
+    var dataT1SC = solicitacionesVarios.slice(0, 17);
+    var dataT2SC = solicitacionesVarios.slice(17, 34);
+    solicitacionesVarios = solicitacionesVarios.slice(34);
+
+    // Crear un nuevo elemento div
+    var PairContainer = document.createElement('div');
+    var rowContainer1 = document.createElement('div');
+    var rowContainer2 = document.createElement('div');
+
+    var tableContainer1SC = document.createElement('div');
+    var tableContainer1DI = document.createElement('div');
+    var buttonD1 = document.createElement('button');
+    var tableContainer2SC = document.createElement('div');
+    var tableContainer2DI = document.createElement('div');
+    var buttonD2 = document.createElement('button');
+    tableContainer1SC.id = `hotTableContainerISC${cont}`;
+    tableContainer2SC.id = `hotTableContainerDSC${cont}`;
+    tableContainer1DI.id = `hotTableContainerIDI${cont}`;
+    buttonD1.id = `buttonIDI${cont}`;
+    tableContainer2DI.id = `hotTableContainerDDI${cont}`;
+    buttonD2.id = `buttonDDI${cont}`;
+
+    // Agregar clases, estilos o cualquier otro atributo necesario al nuevo div
+    PairContainer.classList.add('d-flex', 'flex-column');
+    rowContainer1.classList.add('row', 'd-flex');
+    rowContainer2.classList.add('row', 'd-flex');
+
+    PairContainer.id = `diagramsContainer${cont}`;
+
+    // Obtener el contenedor donde se agregarán los nuevos divs
+    var contenedor = document.getElementById('diagramsContainer');
+
+    // Agregar el nuevo div al contenedor
+    contenedor.appendChild(PairContainer);
+    PairContainer.appendChild(rowContainer1);
+    PairContainer.appendChild(rowContainer2);
+    rowContainer1.appendChild(tableContainer1SC);
+    rowContainer2.appendChild(tableContainer1DI);
+    rowContainer2.appendChild(buttonD1);
+    rowContainer1.appendChild(tableContainer2SC);
+    rowContainer2.appendChild(tableContainer2DI);
+    rowContainer2.appendChild(buttonD2);
+
+    soliciTabla(tableContainer1SC, dataT1SC);
+    soliciTabla(tableContainer2SC, dataT2SC);
+    diagramaHot(
+      tableContainer1DI,
+      buttonD1,
+      PairContainer,
+      dataT1SC,
+      dataT2SC,
+      cont,
+      'Izq'
+    );
+    diagramaHot(
+      tableContainer2DI,
+      buttonD2,
+      PairContainer,
+      dataT1SC,
+      dataT2SC,
+      cont,
+      'Der'
+    );
+  }
+}
+
+function soliciTabla(contenedor, solicitaciones) {
+  var rowToUse = [
+    'Combinación 01',
+    'Combinación 02 Max',
+    'Combinación 02 Min',
+    'Combinación 03 Max',
+    'Combinación 03 Min',
+    'Combinación 04 Max',
+    'Combinación 04 Min',
+    'Combinación 05 Max',
+    'Combinación 05 Min',
+    'Combinación 06 Max',
+    'Combinación 06 Min',
+    'Combinación 07 Max',
+    'Combinación 07 Min',
+    'Combinación 08 Max',
+    'Combinación 08 Min',
+    'Combinación 09 Max',
+    'Combinación 09 Min',
+  ];
+  var dataModified = solicitaciones.map((row, i) => {
+    return [rowToUse[i], ...row];
+  });
+
+  var hot = Handsontable(contenedor, {
+    data: dataModified,
+    rowHeaders: true,
+    colWidths: 100,
+    colHeaders: [
+      'Combinaciones de Carga',
+      'Pu (Ton)',
+      'Mux (Ton.m)',
+      'Muy (Ton.m)',
+    ],
+    columns: [
+      { type: 'text', readOnly: true }, // 'Nivel',
+      { type: 'numeric', readOnly: true },
+      { type: 'numeric', readOnly: true },
+      { type: 'numeric', readOnly: true },
+    ],
+    licenseKey: 'non-commercial-and-evaluation',
+  });
+}
+
+function diagramaHot(
+  contenedor,
+  button,
+  PairContainer,
+  dataT1SC,
+  dataT2SC,
+  cont,
+  pos
+) {
+  var dataDI = [
+    [1, 0, 0, 0, 0, 0, 0],
+    [2, 0, 0, 0, 0, 0, 0],
+    [3, 0, 0, 0, 0, 0, 0],
+    [4, 0, 0, 0, 0, 0, 0],
+    [5, 0, 0, 0, 0, 0, 0],
+    [6, 0, 0, 0, 0, 0, 0],
+    [7, 0, 0, 0, 0, 0, 0],
+    [8, 0, 0, 0, 0, 0, 0],
+    [9, 0, 0, 0, 0, 0, 0],
+    [10, 0, 0, 0, 0, 0, 0],
+    [11, 0, 0, 0, 0, 0, 0],
+  ];
+  var hot = Handsontable(contenedor, {
+    data: dataDI,
+    rowHeaders: true,
+    colWidths: 100,
+    colHeaders: [
+      'Puntos',
+      'P (Ton)',
+      'M2 (Ton.m)',
+      'M3 (Ton.m)',
+      'P (Ton)',
+      'M2 (Ton.m)',
+      'M3 (Ton.m)',
+    ],
+    columns: [
+      { type: 'numeric', readOnly: true },
+      { type: 'numeric' },
+      { type: 'numeric' },
+      { type: 'numeric' },
+      { type: 'numeric' },
+      { type: 'numeric' },
+      { type: 'numeric' },
+    ],
+    afterPaste: function (data, coords) {
+      data.forEach(function (rowData, i) {
+        var startRow = coords[0].startRow;
+        var startCol = coords[0].startCol;
+        var endCol = coords[0].endCol;
+        let k = 0;
+        for (let j = startCol; j <= endCol; j++) {
+          hot.setDataAtCell(startRow + i, j, rowData[k]);
+          k++;
+        }
+      });
+    },
+    licenseKey: 'non-commercial-and-evaluation',
+  });
+
+  button.addEventListener('click', CheckData);
+
+  function CheckData() {
+    var allCellsFilled = true;
+    var tableData = hot.getData();
+    for (var i = 0; i < tableData.length; i++) {
+      for (var j = 0; j < tableData[i].length; j++) {
+        if (tableData[i][j] === null || tableData[i][j] === '') {
+          allCellsFilled = false;
+          break;
+        }
+      }
+      if (!allCellsFilled) {
+        break;
+      }
+    }
+    if (allCellsFilled) {
+      console.log('Datos de la tabla graph1 HOT:', tableData);
+      diagramStart(PairContainer, dataT1SC, dataT2SC, tableData, cont, pos);
+    } else {
+      alert('Hay celdas vacías');
+    }
+  }
+}
+
+function diagramStart(container, dataIz, dataDer, tableData, cont, pos) {
+  var rowContainer3 = document.createElement('div');
+  rowContainer3.classList.add('row', 'd-flex');
+  var data1 = [];
+  var data2 = [];
+  console.log(pos);
+  if (pos == 'Izq') {
+    data1 = dataIz.map((row) => {
+      return [row[0], row[1]];
+    });
+
+    data2 = dataDer.map((row) => {
+      return [row[0], row[1]];
+    });
+  } else {
+    data1 = dataIz.map((row) => {
+      return [row[0], row[2]];
+    });
+    data2 = dataDer.map((row) => {
+      return [row[0], row[2]];
+    });
+  }
+
+  var leftLine = tableData.map((row) => {
+    return [row[4], row[6]];
+  });
+  var rightLine = tableData.map((row) => {
+    return [row[1], row[3]];
+  });
+
+  var canva1 = document.createElement('canvas');
+
+  canva1.id = `graph${pos}${cont}`;
+
+  canva1.width = 400;
+  canva1.height = 200;
+  rowContainer3.appendChild(canva1);
+  container.appendChild(rowContainer3);
+
+  createGraph(canva1, data1, data2, leftLine, rightLine);
+}
+
+function createGraph(canva, data1, data2, data3, data4) {
+  console.log(data1, data2, data3, data4);
+  // Definir los datos de data1 y data2
+  data1 = data1.map(function (row) {
+    return { x: row[1], y: row[0] };
+  });
+
+  var data2 = data2.map(function (row) {
+    return { x: row[1], y: row[0] };
+  });
+
+  var data3 = data3.map(function (row) {
+    return { x: row[1], y: row[0] };
+  });
+
+  var data4 = data4.map(function (row) {
+    return { x: row[1], y: row[0] };
+  });
+
+  // Configurar los datos para el gráfico
+  var config = {
+    type: 'scatter',
+    data: {
+      datasets: [
+        {
+          label: 'Data Izquierda',
+          data: data1,
+          borderColor: 'blue', // Color del borde para los puntos de data1
+          backgroundColor: 'blue', // Color de fondo para los puntos de data1
+          borderWidth: 1, // Ancho del borde
+        },
+        {
+          label: 'Data Derecha',
+          data: data2,
+          borderColor: 'green', // Color del borde para los puntos de data2
+          backgroundColor: 'green', // Color de fondo para los puntos de data2
+          borderWidth: 1, // Ancho del borde
+        },
+        {
+          //label: 'Data Derecha',
+          data: data3,
+          borderColor: 'red', // Color del borde para los puntos de data2
+          backgroundColor: 'red', // Color de fondo para los puntos de data2
+          borderWidth: 0, // Establece el ancho del borde en 0 para que no se muestren puntos
+          fill: false, // No rellenar el área debajo de la línea
+          type: 'line', // Tipo de gráfico para conectar los puntos con líneas
+        },
+        {
+          //label: 'Data Derecha',
+          data: data4,
+          borderColor: 'red', // Color del borde para los puntos de data2
+          backgroundColor: 'red', // Color de fondo para los puntos de data2
+          borderWidth: 0, // Establece el ancho del borde en 0 para que no se muestren puntos
+          fill: false, // No rellenar el área debajo de la línea
+          type: 'line', // Tipo de gráfico para conectar los puntos con líneas
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Gráfico de Dispersión',
+        },
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          min: -6000,
+          max: 6000,
+          position: 'bottom',
+          title: {
+            display: true,
+            text: 'Eje X',
+          },
+        },
+        y: {
+          type: 'linear',
+          min: -1500,
+          max: 3500,
+          position: 'left',
+          title: {
+            display: true,
+            text: 'Eje Y',
+          },
+        },
+      },
+    },
+  };
+
+  // Crear el gráfico utilizando Chart.js
+  var myChart = new Chart(canva, config);
 }

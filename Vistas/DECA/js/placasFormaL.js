@@ -372,6 +372,7 @@ document.addEventListener('DOMContentLoaded', function () {
                       <option value="2">Compresión</option>
                       <option value="3">Deslizamiento</option>
                       <option value="4">Carga Puntual</option>
+                      <option value="0">Integración</option>
                   </select>
               </div>
               <div id="generalSelectText">Ø ${generalSelect}</div>
@@ -550,6 +551,50 @@ document.addEventListener('DOMContentLoaded', function () {
       ['Piso 4', 1265.11, 98.09, 695.02, 27.05, 41.4],
       ['Piso 4', 1160.05, 89.92, 548.43, 27.74, 41.88],
     ];
+    var filtroTS2 = solicitudCargaDT2.map((subarray) => {
+      return [
+        subarray[0], // posición 0
+        subarray[2], // posición 2
+        subarray[5], // posición 5
+      ];
+    });
+
+    var sendInsteadFiltroTS2 = [
+      [1573.00, 15.26, 2.981],
+      [1246.4, 608.848, 23.586],
+      [1408.222, -583.572, -18.691],
+      [1208.982, 1682.383, 9.426],
+      [1445.64, -1657.107, -4.531],
+      [1246.4, 608.848, 23.586],
+      [1408.222, -583.572, -18.691],
+      [1208.982, 1682.383, 9.426],
+      [1445.64, -1657.107, -4.531],
+      [615.518, 601.995, 22.181],
+      [777.34, -590.425, -20.096],
+      [578.1, 1675.53, 8.021],
+      [814.758, -1663.96, -5.936],
+      [615.518, 601.995, 22.181],
+      [777.34, -590.425, -20.096],
+      [578.1, 1675.53, 8.021],
+      [814.758, -1663.96, -5.936],
+      [1471.699, -12.551, 8.622],
+      [1162.94, 417.648, 34.194],
+      [1320.915, -438.453, -20.047],
+      [1126.251, 1201.523, 16.046],
+      [1357.604, -1222.328, -1.899],
+      [1162.94, 417.648, 34.194],
+      [1320.915, -438.453, -20.047],
+      [1126.251, 1201.523, 16.046],
+      [1357.604, -1222.328, -1.899],
+      [572.978, 423.262, 30.114],
+      [730.953, -432.839, -24.126],
+      [536.289, 1207.137, 11.967],
+      [767.642, -1216.715, -5.979],
+      [572.978, 423.262, 30.114],
+      [730.953, -432.839, -24.126],
+      [536.289, 1207.137, 11.967],
+      [767.642, -1216.715, -5.979],
+    ];
 
     if (formDataObject.generalSelect == 0.9) {
       var contenedorX = document.getElementById('flexDesingT1X');
@@ -577,7 +622,7 @@ document.addEventListener('DOMContentLoaded', function () {
       //------Envío de datos (contenedor, solicitaciones de carga, a Diagrama de interacción)--------------
       var contenedorX = document.getElementById('diT1X');
       var contenedorY = document.getElementById('diT1Y');
-      diT1X(
+/*       diT1X(
         contenedorX,
         sendInsteadDT3,
         tableData1,
@@ -592,8 +637,8 @@ document.addEventListener('DOMContentLoaded', function () {
         dataTable2y,
         tableData3Y,
         formDataObject
-      );
-      diagramI(solicitudCargaDT2);
+      ); */
+      diagramI(sendInsteadFiltroTS2);
       // diT1Y(contenedorY, sendInsteadDT3, formDataObject);
       //------Envío de datos (contenedor, solicitaciones de carga, a Diagrama de interacción)--------------
     } else if (formDataObject.generalSelect == 1) {
