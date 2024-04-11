@@ -1,10 +1,12 @@
 $(document).ready(function () {
-
   //Grafica de predimencionamiento
 
   //  dibujarZapataIzquierda();
 
-  // Tabla de entrada de datos 
+  // Llama a la función para generar el gráfico
+  generarGraficoLinealCurvo();
+
+  // Tabla de entrada de datos
   var datacol1 = [
     ["CM", 93.633, 0.07, 0.52],
     ["CV", 30.45, 0.02, 0.24],
@@ -191,25 +193,6 @@ function obtenerPuntosCorte(fila_columna1,fila_columna2) {
   var puntoX5 = puntoX4;
   var puntoX6 = puntoX4 + m2_float + 0.5 * t1_col2_float;
 
-  // Imprimir los valores en la consola
-  console.log("Punto X1:", puntoX1);
-  console.log("Punto X2:", puntoX2);
-  console.log("Punto X3:", puntoX3);
-  console.log("Punto X4:", puntoX4);
-  console.log("Punto X5:", puntoX5);
-  console.log("Punto X6:", puntoX6);
-
-  //puntos en Y
-  // // Obtener la fila seleccionada por su ID
-  // var filaSeleccionada = document.getElementById(fila_columna1);
-
-  // // Acceder a las celdas dentro de la tabla anidada
-  // var celdasTabla = filaSeleccionada.querySelectorAll(
-  //   "#" + fila_columna1 + " table tr td"
-  // );
-  // var P_COL1 = celdasTabla[0].textContent.trim();
-  // var MX_COL1 = celdasTabla[1].textContent.trim();
-  // var MY_COL1 = celdasTabla[2].textContent.trim();
   var filaSeleccionada = document.getElementById(fila_columna1);
 
   // Acceder a las celdas dentro de la fila seleccionada
@@ -220,18 +203,10 @@ function obtenerPuntosCorte(fila_columna1,fila_columna2) {
   var MX_COL1 = celdasTabla[1].textContent.trim(); // Valor de la segunda celda
   var MY_COL1 = celdasTabla[2].textContent.trim(); // Valor de la tercera celda
 
-  // Ahora puedes utilizar estos valores como necesites
-  console.log("Valor de P_COL1:", P_COL1);
-  console.log("Valor de MX_COL1:", MX_COL1);
-  console.log("Valor de MY_COL1:", MY_COL1);
-
   P_COL1 = parseFloat(P_COL1);
   MX_COL1 = parseFloat(MX_COL1);
   MY_COL1 = parseFloat(MY_COL1);
 
-  console.log("Dato 4:", P_COL1);
-  console.log("Dato 5:", MX_COL1);
-  console.log("Dato 6:", MY_COL1);
 
   // Obtener la fila seleccionada por su ID
   var filaSeleccionada2 = document.getElementById(fila_columna2);
@@ -247,9 +222,6 @@ function obtenerPuntosCorte(fila_columna1,fila_columna2) {
   P_COL2 = parseFloat(P_COL2);
   MX_COL2 = parseFloat(MX_COL2);
   MY_COL2 = parseFloat(MY_COL2);
-  console.log("Dato 4:", P_COL2);
-  console.log("Dato 5:", MX_COL2);
-  console.log("Dato 6:", MY_COL2);
   // Obtener el elemento por su ID
   var B = document.getElementById("valor_b").innerHTML;
   var L = document.getElementById("valor_L").innerHTML;
@@ -261,29 +233,15 @@ function obtenerPuntosCorte(fila_columna1,fila_columna2) {
 
   B11 = 0.5 * L - 0.5 * t1_col1_float;
   G11 = 0.5 * L - (m2_float + 0.5 * t1_col2_float);
-  console.log("B11:", B11);
-  console.log("G:", G11);
   MY = -1 * MY_COL1 - MY_COL2 - P_COL1 * B11 + P_COL2 * G11;
-  console.log("P:", P);
-  console.log("MX:", MX);
-  console.log("MY:", MY);
 
   // Utilizar el valor obtenido
-  console.log("Valor de B:", B);
-  console.log("Valor de L:", L);
   CY = L / 2;
   LX = (B * L * L * L) / 12;
   COL1_O = P / (B * L) + (MY * CY) / LX;
   COL2_O = P / (B * L) - (MY * CY) / LX;
   O = Math.max(COL1_O, COL2_O);
   OF = O * B;
-  // Imprimir los valores en la consola
-  console.log("CY:", CY);
-  console.log("LX:", LX);
-  console.log("O_COL1:", COL1_O);
-  console.log("O_COL2:", COL2_O);
-  console.log("O:", O);
-  console.log("OF:", OF);
 
   var puntoY1 = 0;
   var puntoY2 = parseFloat((0.5 * t1_col1_float * OF).toFixed(2));
@@ -293,14 +251,6 @@ function obtenerPuntosCorte(fila_columna1,fila_columna2) {
   );
   var puntoY4 = parseFloat((puntoY5 + P_COL2).toFixed(2));
   var puntoY6 = 0;
-
-  // Imprimir los valores en la consola
-  console.log("Punto Y1:", puntoY1);
-  console.log("Punto Y2:", puntoY2);
-  console.log("Punto Y3:", puntoY3);
-  console.log("Punto Y4:", puntoY4);
-  console.log("Punto Y5:", puntoY5);
-  console.log("Punto Y6:", puntoY6);
 
   var data = {
     labels: [puntoX1, puntoX2, puntoX3, puntoX4, puntoX5, puntoX6],
@@ -351,3 +301,71 @@ function obtenerPuntosCorte(fila_columna1,fila_columna2) {
     options: options,
   });
 }
+
+function generarGraficoLinealCurvo() {
+var t1_col1F = document.getElementById("t1_col1").value;
+  //Puntos
+  PX1=0;
+  PX4= 0.5 * t1_col1F;
+  PX2 = 0.25 * (PX4 - PX1) + PX1;
+  PX3 = 0.25 * (PX4 - PX1) + PX2;
+  PX5 = 0.5 * t1_col1F;
+
+  VC_B32 = 0.5 * t1_col1F;
+  VC_D52= VC_D32
+  PX6 = 0.25 * (PX4 - PX1) + PX2;
+
+  // Datos de los puntos
+  var data = [
+    { x: 0, y: 0.0 },
+    { x: 0.0625, y: -0.205 },
+    { x: 0.125, y: -0.821 },
+    { x: 0.25, y: -3.284 },
+    { x: 0.25, y: -4.42 },
+    { x: 2.314837182, y: 166.0788492 },
+    { x: 5.25, y: -131.1183166 },
+    { x: 5.25, y: -131.3403166 },
+    { x: 5.5625, y: -98.50523743 },
+    { x: 5.875, y: -65.67015828 },
+    { x: 6.5, y: 0 },
+  ];
+
+  // Filtrar los puntos para eliminar los duplicados de x
+  var uniqueData = data.filter(
+    (point, index, self) => index === self.findIndex((p) => p.x === point.x)
+  );
+
+  // Obtén el contexto del lienzo
+  var ctx = document.getElementById("VC_flexion").getContext("2d");
+
+  // Crea el gráfico de línea
+  var curvedLineChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: uniqueData.map((point) => point.x), // Usar x como etiquetas
+      datasets: [
+        {
+          label: "Curved Line Chart",
+          data: uniqueData,
+          tension: 0.4, // Controla la suavidad de la curva
+          fill: false, // No rellenar el área bajo la línea
+          borderColor: "rgba(75, 192, 192, 1)", // Color de la línea
+          borderWidth: 2, // Ancho de la línea
+        },
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          type: "linear",
+          position: "bottom",
+        },
+        y: {
+          type: "linear",
+          position: "left",
+        },
+      },
+    },
+  });
+}
+

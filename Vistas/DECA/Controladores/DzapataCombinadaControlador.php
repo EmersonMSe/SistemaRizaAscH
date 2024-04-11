@@ -108,15 +108,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $VarillaX_Col2 = $_POST['VarillaX_Col2'];
 
     //verificacion por corte y punzonamiento
+    //
+    $ovcp = $_POST["ovcp"];
     //col1
     $r_vc_col1 = $_POST["r_vc_col1"];
-    $VarillaCol1 = $_POST["VarillaCol1"];
-    $d_col1 = $_POST["dvc_col1"];
+    $VarillaVC_Col1 = $_POST["VarillaVC_Col1"];
+    $dvc_col1 = $_POST["dvc_col1"];
+    $fa_Col1 = $_POST["fa_Col1"];
+
 
     //col 2
     $r_vc_col2 = $_POST["r_vc_col2"];
-    $VarillaCol2 = $_POST["VarillaCol2"];
-    $d_col2 = $_POST["dvc_col2"];
+    $VarillaVC_Col2 = $_POST["VarillaVC_Col2"];
+    $dvc_col2 = $_POST["dvc_col2"];
+    $fa_Col2 = $_POST["fa_Col2"];
 
     // Calculos
 
@@ -1115,14 +1120,108 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //CORTE Y PUNZONAMIENTO
     //COL 1
-    $Areaz_col1 = $L * $B ;
-    $PerimetroP_col1 = $L * $B;
-    $AreaP_col1 = $L * $B;
-    $AreaP_col1 = $L * $B;
+    //area zapata
+    $Areaz_col1 = $L * $B * 10000;
 
+    //Perimetro por punzonamiento
+    $PerimetroP_col1 = ($t2_col1 * 100 + $dvc_col1) + 2 * ($t1_col1 * 100 + 0.5 * $dvc_col1);
 
+    //Area por punzonamiento
+    $AreaP_col1 = $PerimetroP_col1 * $dvc_col1;
 
+    //Cortante Critico Por Punzonamiento
+    
+    $CortanteCP_col1 = 40405.26;
 
+    //Factor de DIm de la columna
+    $Maxt1_t2_col1 = max($t1_col1, $t2_col1);
+    $Mint1_t2_col1 = min($t1_col1, $t2_col1);
+    $FactorDim_col1 = $Maxt1_t2_col1 / $Mint1_t2_col1;
+
+    // Tipo de Columna y Factor α
+    $fa_Col1 = $fa_Col1;
+    $Raiz =
+        sqrt($fc);
+    //caso1
+    $Vc = round(0.53 * $ovcp * (1 + (2 / $FactorDim_col1)) * $Raiz * $PerimetroP_col1 * $dvc_col1, 2);
+
+    //resultado
+    if ($Vc > $CortanteCP_col1) {
+        $ResultadoCol1VC = "Cumple";
+    } else {
+        $ResultadoCol1VC = "No Cumple";
+    }
+
+    //caso2
+    $Vc1 = round(1.06 * $ovcp * sqrt($fc) * $PerimetroP_col1 * $dvc_col1, 2);
+
+    //resultado
+    if ($Vc1 > $CortanteCP_col1) {
+        $ResultadoCol1VC1 = "Cumple";
+    } else {
+        $ResultadoCol1VC1 = "No Cumple";
+    }
+
+    //caso3
+    $Vc2 = round(0.27 * $ovcp * (2 + (($fa_Col1 * $dvc_col1) / $PerimetroP_col1)) * $Raiz * $PerimetroP_col1 * $dvc_col1, 2);
+
+    //resultado
+    if ($Vc2 > $CortanteCP_col1) {
+        $ResultadoCol1VC2 = "Cumple";
+    } else {
+        $ResultadoCol1VC2 = "No Cumple";
+    }
+
+    //COL 2
+    //area zapata
+    $Areaz_col2 = $L * $B * 10000;
+
+    //Perimetro por punzonamiento
+    $PerimetroP_col2 = 2 * ($t1_col2 * 100 + $dvc_col2) + 2 * ($t2_col2 * 100 + $dvc_col2);
+
+    //Area por punzonamiento
+    $AreaP_col2 = $PerimetroP_col2 * $dvc_col1;
+
+    //Cortante Critico Por Punzonamiento
+    $CortanteCP_col2 = 40405.26;
+
+    //Factor de DIm de la columna
+    $Maxt1_t2_col2 = max($t1_col2, $t2_col2);
+    $Mint1_t2_col2 = min($t1_col2, $t2_col2);
+    $FactorDim_col2 = $Maxt1_t2_col2 / $Mint1_t2_col2;
+
+    // Tipo de Columna y Factor α
+    $fa_Col2 = $fa_Col2;
+    $Raiz = sqrt($fc);
+    //caso1
+    $Vc_c2 = round(0.53 * $ovcp * (1 + (2 / $FactorDim_col1)) * $Raiz * $PerimetroP_col1 * $dvc_col1, 2);
+
+    //resultado
+    if ($Vc_c2 > $CortanteCP_col2) {
+        $ResultadoCol2VC = "Cumple";
+    } else {
+        $ResultadoCol2VC = "No Cumple";
+    }
+
+    //caso2
+    $Vc1_c2 = round(1.06 * $ovcp * sqrt($fc) * $PerimetroP_col1 * $dvc_col1, 2);
+
+    //resultado
+    if ($Vc1_c2 > $CortanteCP_col2) {
+        $ResultadoCol2VC1 = "Cumple";
+    } else {
+        $ResultadoCol2VC1 = "No Cumple";
+    }
+
+    //caso3
+    $Vc2_c2 = round(0.27 * $ovcp * (2 + (($fa_Col2 * $dvc_col2) / $PerimetroP_col2)) * $Raiz * $PerimetroP_col1 * $dvc_col1, 2);
+
+    //resultado
+    if ($Vc2_c2 > $CortanteCP_col2) {
+        $ResultadoCol2VC2 = "Cumple";
+    } else {
+        $ResultadoCol2VC2 = "No Cumple";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -3465,7 +3564,366 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </tr>
             </thead>
             <tbody style="font-size: 11px;">
-            
+                <!-- <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">4.1 Dirección X-X</td>
+                </tr> -->
+                <tr>
+                    <td style="vertical-align: middle;">Descripción</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    Columna 1
+                                </td>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    Columna 2
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;">Area de la Zapata</td>
+                    <td>Az</td>
+                    <td>LxB</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    <?php echo $Areaz_col1; ?> cm
+                                </td>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    <?php echo $Areaz_col2; ?> cm
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;">Perimetro Por Punzonamiento</td>
+                    <td>𝑏𝑜</td>
+                    <td>2∙(𝑡1+0.5𝑑)+2∙(𝑡2+𝑑)</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    <?php echo $PerimetroP_col1; ?> cm
+                                </td>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    <?php echo $PerimetroP_col2 ?> cm
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;">Area Por Punzonamiento</td>
+                    <td>𝐴𝑝𝑢𝑛</td>
+                    <td>𝑏𝑜(𝑑)
+                    </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    <?php echo $AreaP_col1; ?> cm
+                                </td>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    <?php echo $AreaP_col2; ?> cm
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;">Cortante Critico Por Punzonamiento</td>
+                    <td>V𝑢</td>
+                    <td>𝑃𝑢1−𝑊𝑢(𝑡2+𝑑)(𝑡1+0.5𝑑)
+                    </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    <?php echo $CortanteCP_col1; ?> cm
+                                </td>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    <?php echo $CortanteCP_col2; ?> cm
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;">Factor de Dim de la Columna</td>
+                    <td>𝛽𝑐=</td>
+                    <td>𝑡1/𝑡2
+                    </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    <?php echo $FactorDim_col1; ?>
+                                </td>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    <?php echo $FactorDim_col2; ?>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;">Tipo de Columna y Factor α</td>
+                    <td>α </td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    <?php echo $fa_Col1; ?> cm
+                                </td>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    <?php echo $fa_Col2; ?> cm
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;"></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    Columna 1
+                                </td>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    Columna 2
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;"></td>
+                    <td>∅𝑉𝑐</td>
+                    <td>0,53∙∅∙(1+2/𝛽𝑐)∙√(𝑓^′ 𝑐)∙𝑏_𝑜∙𝑑
+                    </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Vu (Kgf)
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                < </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Ø.Vc (Kgf)
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Resultado
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $CortanteCP_col1; ?>
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $Vc; ?>
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $ResultadoCol1VC; ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Vu (Kgf)
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                < </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Ø.Vc (Kgf)
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Resultado
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $CortanteCP_col2; ?>
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $Vc_c2; ?>
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $ResultadoCol2VC; ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;"></td>
+                    <td>∅𝑉𝑐</td>
+                    <td>1.06∙∅∙√(𝑓^′ 𝑐)∙𝑏_𝑜∙𝑑</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Vu (Kgf)
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                < </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Ø.Vc (Kgf)
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Resultado
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $CortanteCP_col1; ?>
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $Vc1; ?>
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $ResultadoCol2VC1; ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Vu (Kgf)
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                < </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Ø.Vc (Kgf)
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Resultado
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $CortanteCP_col2; ?>
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $Vc1_c2; ?>
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $ResultadoCol2VC1; ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;"></td>
+                    <td>∅𝑉𝑐</td>
+                    <td>0,27∙∅∙(2+(𝛼.𝑑)/𝛽𝑜)∙√(𝑓^′ 𝑐) 〖∙𝑏〗_𝑜∙𝑑
+                    </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td>
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Vu (Kgf)
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                < </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Ø.Vc (Kgf)
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Resultado
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $CortanteCP_col1; ?>
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $Vc2; ?>
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $ResultadoCol1VC2; ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Vu (Kgf)
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                < </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Ø.Vc (Kgf)
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                Resultado
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $CortanteCP_col2; ?>
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $Vc2_c2; ?>
+                                            </td>
+                                            <td style="border: none; width: 25%; text-align: center;">
+                                                <?php echo $ResultadoCol2VC2; ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                </tr>
+
+
             </tbody>
         </table>
         <br><br>
