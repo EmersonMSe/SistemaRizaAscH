@@ -9,11 +9,50 @@ include_once "assets/views/nav.php";
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
     canvas {
-        border: 1px solid black;
+        border: none;
     }
 
     .tamaño-tabla {
         height: 160px;
+    }
+
+    /* Estilos generales del select */
+    select.form-select {
+        display: block;
+        width: 100%;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    /* Estilo cuando el select está en foco */
+    select.form-select:focus {
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 .25rem rgba(0, 123, 255, .25);
+    }
+
+    /* Estilo cuando el select está desactivado */
+    select.form-select:disabled {
+        background-color: #e9ecef;
+    }
+
+    /* Estilo para la flecha del select */
+    select.form-select::-ms-expand {
+        border: 0;
+        background-color: transparent;
+    }
+
+    /* Estilo para el borde y el fondo del dropdown */
+    select.form-select:-moz-focusring {
+        color: transparent;
+        text-shadow: 0 0 0 #212529;
     }
 </style>
 
@@ -51,12 +90,20 @@ include_once "assets/views/nav.php";
                                     <div class="col-md-12">
                                         <h2 class="text-center"><strong>Datos Generales</strong></h2>
                                         <div class="row mb-3 text-center">
-                                            <div class="col-12">
+                                            <div class="col-9">
                                                 <label>Descripción</label>
                                             </div>
-                                            <div class="col-md-12">
+                                            <div class="col-3">
+                                                <label>Factor K</label>
+                                            </div>
+                                            <div class="col-md-9">
                                                 <div class="input-group">
                                                     <input type="text" name="des" class="form-control text-center col-12" id="des" placeholder="Zapata A1" step="any" value="Zapata A1" min=" 0" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    <input type="number" name="fk" class="form-control text-center" id="fk" step="any" placeholder="1" value="1" min="0" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -76,10 +123,13 @@ include_once "assets/views/nav.php";
                                         </div> -->
 
                                         <div class="row mb-3 text-center">
-                                            <div class="col-12">
+                                            <div class="col-6">
                                                 <label></label>
                                             </div>
-                                            <div class="col-md-12">
+                                            <div class="col-6">
+                                                <label>Presión de Servicio</label>
+                                            </div>
+                                            <div class="col-md-6">
                                                 <div class="input-group">
                                                     <span class="input-group-text col-3">qa</span>
                                                     <input type="number" name="qa" class="form-control text-center" id="qa" step="any" placeholder="3" value="3" min="0" required>
@@ -88,13 +138,8 @@ include_once "assets/views/nav.php";
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-12">
-                                                <label>Presión de Servicio</label>
-                                            </div>
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="input-group">
                                                     <input type="number" name="p_servicio" class="form-control text-center" id="p_servicio" step="any" placeholder="8" value="8" min="0" required>
                                                     <div class="input-group-append">
@@ -103,21 +148,14 @@ include_once "assets/views/nav.php";
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-12">
-                                                <label>Factor K</label>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="input-group">
-                                                    <input type="number" name="fk" class="form-control text-center" id="fk" step="any" placeholder="1" value="1" min="0" required>
 
-                                                </div>
-                                            </div>
-                                        </div>
                                         <h2 class="text-center"><strong>Predimencionamiento</strong></h2>
                                         <div class="row mb-3 text-center">
-                                            <div class="col-12">
+                                            <div class="col-6">
                                                 <label>columna 1</label>
+                                            </div>
+                                            <div class="col-6">
+                                                <label>columna 2</label>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <div class="input-group">
@@ -130,23 +168,21 @@ include_once "assets/views/nav.php";
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <div class="input-group">
-                                                    <span class="input-group-text col-3">t2</span>
-                                                    <input type="number" name="t2_col1" class="form-control text-center" id="t2_col1" step="any" placeholder="0.5" value="0.5" min="0" required>
+                                                    <span class="input-group-text col-3">t1</span>
+                                                    <input type="number" name="t1_col2" class="form-control text-center" id="t1_col2" step="any" placeholder="0.5" value="0.5" min="0" required>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">m</span>
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
 
                                         <div class="row mb-3 text-center">
-                                            <div class="col-12">
-                                                <label>columna 2</label>
-                                            </div>
                                             <div class="col-md-6 mb-3">
                                                 <div class="input-group">
-                                                    <span class="input-group-text col-3">t1</span>
-                                                    <input type="number" name="t1_col2" class="form-control text-center" id="t1_col2" step="any" placeholder="0.5" value="0.5" min="0" required>
+                                                    <span class="input-group-text col-3">t2</span>
+                                                    <input type="number" name="t2_col1" class="form-control text-center" id="t2_col1" step="any" placeholder="0.5" value="0.5" min="0" required>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">m</span>
                                                     </div>
@@ -163,155 +199,172 @@ include_once "assets/views/nav.php";
                                             </div>
                                         </div>
                                         <div class="row mb-3 text-center">
-                                            <div class="col-12">
-                                                <label>Fluencia del acero</label>
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">fy</span>
-                                                    <input type="number" name="fy" class="form-control text-center" id="fy" step="any" placeholder="4200" value="4200" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text"> Kgf/cm<sup>2</sup></span>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">m1</span>
+                                                        <input type="number" name="m1" class="form-control text-center" id="m1" step="any" placeholder="1" value="1" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">m</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-12">
-                                                <label>Resistencia a compresión del concreto</label>
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">fc</span>
-                                                    <input type="number" name="fc" class="form-control text-center" id="fc" step="any" placeholder="210" value="210" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">kgf/cm<sup>2</sup></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-12">
-                                                <label>Profundidad de desplante</label>
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">Df</span>
-                                                    <input type="number" name="df" class="form-control text-center" id="df" step="any" placeholder="1.5" value="1.5" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">S/C</span>
-                                                    <input type="number" name="sc" class="form-control text-center" id="sc" step="any" placeholder="500" value="500" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">Kg/m<sup>2</sup></span>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">m2</span>
+                                                        <input type="number" name="m2" class="form-control text-center" id="m2" step="any" placeholder="1" value="1" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">m</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row mb-3 text-center">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">ym</span>
-                                                    <input type="number" name="ym" class="form-control text-center" id="ym" step="any" placeholder="2000" value="2000" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">Kg/m<sup>3</sup></span>
+                                            <div class="col-md-6 ">
+                                                <div class="col-12">
+                                                    <label>Fluencia del acero</label>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">fy</span>
+                                                        <input type="number" name="fy" class="form-control text-center" id="fy" step="any" placeholder="4200" value="4200" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"> Kgf/cm<sup>2</sup></span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-6 ">
+                                                <div class="col-12">
+                                                    <label>Resistencia a compresión del concreto</label>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">fc</span>
+                                                        <input type="number" name="fc" class="form-control text-center" id="fc" step="any" placeholder="210" value="210" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">kgf/cm<sup>2</sup></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 text-center">
+                                            <div class="col-md-6 mb-3">
+                                                <div class="col-12">
+                                                    <label>Profundidad de desplante</label>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">Df</span>
+                                                        <input type="number" name="df" class="form-control text-center" id="df" step="any" placeholder="1.5" value="1.5" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">m</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="col-12">
+                                                    <label></label>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">S/C</span>
+                                                        <input type="number" name="sc" class="form-control text-center" id="sc" step="any" placeholder="500" value="500" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">Kg/m<sup>2</sup></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="row mb-3 text-center">
+                                            <div class="col-md-6 mb-3">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">ym</span>
+                                                        <input type="number" name="ym" class="form-control text-center" id="ym" step="any" placeholder="2000" value="2000" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">Kg/m<sup>3</sup></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">hc</span>
+                                                        <input type="number" name="hc" class="form-control text-center" id="hc" step="any" placeholder="0.2" value="0.2" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">m</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
 
                                         <div class="row mb-3 text-center">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">hc</span>
-                                                    <input type="number" name="hc" class="form-control text-center" id="hc" step="any" placeholder="0.2" value="0.2" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">σt</span>
+                                                        <input type="number" name="ot" class="form-control text-center" id="ot" step="any" placeholder="3" value="3" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">Kg/m<sup>2</sup></span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">hz</span>
+                                                        <input type="number" name="hz" class="form-control text-center" id="hz" step="any" placeholder="1" value="1" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">m</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
+
 
                                         <div class="row mb-3 text-center">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">σt</span>
-                                                    <input type="number" name="ot" class="form-control text-center" id="ot" step="any" placeholder="3" value="3" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">Kg/m<sup>2</sup></span>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">r</span>
+                                                        <input type="number" name="r" class="form-control text-center" id="r" step="any" placeholder="1" value="1" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">cm</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">hz</span>
-                                                    <input type="number" name="hz" class="form-control text-center" id="hz" step="any" placeholder="1" value="1" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text col-3">rec</span>
+                                                        <input type="number" name="rec" class="form-control text-center" id="rec" step="any" placeholder="7.5" value="7.5" min="0" required>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">cm</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
 
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">m1</span>
-                                                    <input type="number" name="m1" class="form-control text-center" id="m1" step="any" placeholder="1" value="1" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">m2</span>
-                                                    <input type="number" name="m2" class="form-control text-center" id="m2" step="any" placeholder="1" value="1" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">m</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">r</span>
-                                                    <input type="number" name="r" class="form-control text-center" id="r" step="any" placeholder="1" value="1" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">cm</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3 text-center">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-text col-3">rec</span>
-                                                    <input type="number" name="rec" class="form-control text-center" id="rec" step="any" placeholder="7.5" value="7.5" min="0" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">cm</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                         <div class="row mb-3 text-center">
                                             <div class="col-md-12 mb-3">
@@ -337,17 +390,74 @@ include_once "assets/views/nav.php";
                                             <div id="CargaConServcol2" class="tamaño-tabla"></div>
                                         </div>
 
-                                        <h2 class="text-center"><strong>Análisis por Punzonamiento</strong></h2>
+                                        <h2 class="text-center"><strong>Diseño de verificación por cortante</strong></h2>
                                         <div class="row mb-3 text-center">
-                                            <div class="col-12">
-                                                <label>Peralte Efectivo</label>
+                                            <div class="col-6">
+                                                <label>Columna 1</label>
                                             </div>
-                                            <div class="col-md-12">
+                                            <div class="col-6">
+                                                <label>Columna 2</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select id="selectColumna1" class="form-select">
+                                                    <option value="fila1_col1">1.4CM+1.7CV</option>
+                                                    <option value="fila2_col1">1.25(CM+CV)+Sx</option>
+                                                    <option value="fila3_col1">1.25(CM+CV)-Sx</option>
+                                                    <option value="fila4_col1">1.25(CM+CV)+Sy</option>
+                                                    <option value="fila5_col1">1.25(CM+CV)-Sy</option>
+                                                    <option value="fila6_col1">0.9CM+Sx</option>
+                                                    <option value="fila7_col1">0.9CM-Sx</option>
+                                                    <option value="fila8_col1">0.9CM+Sy</option>
+                                                    <option value="fila9_col1">0.9CM-Sx</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select class="form-select" id="selectColumna2">
+                                                    <option value="fila1_col2">1.4CM+1.7CV</option>
+                                                    <option value="fila2_col2">1.25(CM+CV)+Sx</option>
+                                                    <option value="fila3_col2">1.25(CM+CV)-Sx</option>
+                                                    <option value="fila4_col2">1.25(CM+CV)+Sy</option>
+                                                    <option value="fila5_col2">1.25(CM+CV)-Sy</option>
+                                                    <option value="fila6_col2">0.9CM+Sx</option>
+                                                    <option value="fila7_col2">0.9CM-Sx</option>
+                                                    <option value="fila8_col2">0.9CM+Sy</option>
+                                                    <option value="fila9_col2">0.9CM-Sx</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+
+                                        <h2 class="text-center"><strong>Diseño por Flexión de Zapatas</strong></h2>
+                                        <div class="row mb-3 text-center">
+                                            <div class="col-md-6">
+                                                <div class="col-12">
+                                                    <label>Columna 1</label>
+                                                </div>
                                                 <div class="input-group">
-                                                    <input type="text" name="d" class="form-control text-center col-12" id="d" placeholder="42.50" step="any" value="42.50" min=" 0" required>
+                                                    <span class="input-group-text col-3">lv</span>
+                                                    <input type="text" name="lv_col1" class="form-control text-center col-12" id="lv_col1" placeholder="0.75" step="any" value="0.75" min=" 0" required>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">cm</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="col-12">
+                                                    <label>Columna 2</label>
+                                                </div>
+                                                <div class="input-group">
+                                                    <span class="input-group-text col-3">lv</span>
+                                                    <input type="text" name="lv_col2" class="form-control text-center col-12" id="lv_col2" placeholder="0.75" step="any" value="0.75" min=" 0" required>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">cm</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
+
+
 
                                         <div class="row">
                                             <div class="col-12">
@@ -373,20 +483,30 @@ include_once "assets/views/nav.php";
                     <div class="card-header">
                         <h3>Diseño</h3>
                     </div>
+                    <!-- <h2>Predimencionamiento</h2>
+                    <div class="card">
+                        <div class="d-flex justify-content-center">
+                            <canvas id="predimencionamiento" width="1000" height="400"></canvas>
+                        </div>
+                    </div> -->
+                    <h2>Verificación por cortante</h2>
                     <div class="card">
                         <div class="d-flex justify-content-center">
                             <canvas id="myChart" width="1000" height="400"></canvas>
                         </div>
                     </div>
-
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="card col-12 card-info" >
                     <div class="card-header ">
                         <h3>Resultados</h3>
                     </div>
                     <div class="card-body col-12">
-                        <div class="container">
                             <div class="table-responsive" id="ObtenerResultados">
                             </div>
-                        </div>
                     </div>
                 </div>
 
@@ -439,69 +559,6 @@ include_once "assets/views/nav.php";
         var puntoY4 = 0.5 * t1_col1_float + Le_float;
         var puntoY5 = puntoX4;
         var puntoY6 = 0;
-
-
-
-        var data = {
-            labels: ['0.00', '0.25', '0.25', '5.25', '5.25', '6.50'],
-            datasets: [{
-                label: 'Puntos',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)', // Color del fondo de la línea
-                borderColor: 'rgba(255, 99, 132, 1)', // Color del borde de la línea
-                data: [{
-                        x: 0.00,
-                        y: 0.00
-                    },
-                    {
-                        x: 0.25,
-                        y: 26.27
-                    },
-                    {
-                        x: 0.25,
-                        y: -156.58
-                    },
-                    {
-                        x: 5.25,
-                        y: 222.58
-                    },
-                    {
-                        x: 5.25,
-                        y: -131.34
-                    },
-                    {
-                        x: 6.50,
-                        y: 0.00
-                    }
-                ],
-                fill: false // Para deshabilitar el relleno debajo de la línea
-            }]
-        };
-
-        // Opciones del gráfico
-        var options = {
-            scales: {
-                x: {
-                    type: 'linear',
-                    position: 'bottom',
-                    min: -1, // Mínimo valor en el eje X
-                    max: 7 // Máximo valor en el eje X
-                },
-                y: {
-                    type: 'linear', // Tipo de escala lineal para permitir valores negativos
-                    position: 'left',
-                    min: -200, // Mínimo valor en el eje Y
-                    max: 250 // Máximo valor en el eje Y
-                }
-            }
-        };
-
-        // Crear el gráfico de líneas
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var lineChart = new Chart(ctx, {
-            type: 'line',
-            data: data,
-            options: options
-        });
     </script>
 </div>
 <?php

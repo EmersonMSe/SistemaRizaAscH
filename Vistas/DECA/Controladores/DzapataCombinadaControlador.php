@@ -912,7 +912,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $VE_TEXT_F10_2 = "No Cumple";
     }
-
 }
 ?>
 <!DOCTYPE html>
@@ -925,2098 +924,2426 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <div class="container">
-        <div class="table-responsive">
-            <table class="table">
-                <thead style="font-size: 13px;background-color: #4e5c77; color:white">
-                    <tr>
-                        <th colspan="2">1. REQUISITO DE DISEÑO</th>
-                        <th scope="col">DATOS</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody style=" font-size: 11px;">
-                    <tr>
-                        <td>Descripción</td>
-                        <td>Des</td>
-                        <td><?php echo $des ?></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>qa</td>
-                        <td><?php echo $qa ?> Ton/m<sup>2</sup></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Presión de Servicio</td>
-                        <td>P servicio</td>
-                        <td><?php echo $p_servicio ?> Ton</td>
-                        <td></td>
-                    </tr>
 
-                    <tr>
-                        <td>Fluencia del acero</td>
-                        <td>fy</td>
-                        <td><?php echo $fy  ?> Kgf/cm<sup>2</sup></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Resistencia a compresión del concreto</td>
-                        <td>fc</td>
-                        <td><?php echo $fc  ?> Kgf/cm<sup>2</sup></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Profundidad de desplante</td>
-                        <td>Df</td>
-                        <td><?php echo $df  ?> m</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>S/C</td>
-                        <td><?php echo $sc ?> Kg/m<sup>2</sup></td>
-                        <td></td>
-                    </tr>
+    <div class="table-responsive">
+        <table class="table">
+            <thead style="font-size: 13px;background-color: #4e5c77; color:white">
+                <tr>
+                    <th colspan="2">1. REQUISITO DE DISEÑO</th>
+                    <th scope="col">DATOS</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody style=" font-size: 11px;">
+                <tr>
+                    <td>Descripción</td>
+                    <td>Des</td>
+                    <td><?php echo $des ?></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>qa</td>
+                    <td><?php echo $qa ?> Ton/m<sup>2</sup></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Presión de Servicio</td>
+                    <td>P servicio</td>
+                    <td><?php echo $p_servicio ?> Ton</td>
+                    <td></td>
+                </tr>
 
-                    <tr>
-                        <td></td>
-                        <td>ym</td>
-                        <td><?php echo $ym  ?> Kg/m<sup>3</sup></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>hc</td>
-                        <td><?php echo $hc  ?> m</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>σt</td>
-                        <td><?php echo $ot  ?> Kg/m<sup>2</sup></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>hz</td>
-                        <td><?php echo $hz  ?> m</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>m1</td>
-                        <td><?php echo $m1  ?> m</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>m2</td>
-                        <td><?php echo $m2  ?> m</td>
-                        <td></td>
-                    </tr>
+                <tr>
+                    <td>Fluencia del acero</td>
+                    <td>fy</td>
+                    <td><?php echo $fy  ?> Kgf/cm<sup>2</sup></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Resistencia a compresión del concreto</td>
+                    <td>fc</td>
+                    <td><?php echo $fc  ?> Kgf/cm<sup>2</sup></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Profundidad de desplante</td>
+                    <td>Df</td>
+                    <td><?php echo $df  ?> m</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>S/C</td>
+                    <td><?php echo $sc ?> Kg/m<sup>2</sup></td>
+                    <td></td>
+                </tr>
 
-                    <tr>
-                        <td></td>
-                        <td>r</td>
-                        <td><?php echo $r  ?> cm</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>rec</td>
-                        <td><?php echo $rec  ?> cm</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Le</td>
-                        <td><?php echo $Le  ?> m</td>
-                        <td></td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Medidas de la columna 1</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>t1</td>
-                        <td><?php echo $t1_col1 ?> m</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>t2</td>
-                        <td><?php echo $t2_col1 ?> m</td>
-                        <td></td>
-                    </tr>
+                <tr>
+                    <td></td>
+                    <td>ym</td>
+                    <td><?php echo $ym  ?> Kg/m<sup>3</sup></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hc</td>
+                    <td><?php echo $hc  ?> m</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>σt</td>
+                    <td><?php echo $ot  ?> Kg/m<sup>2</sup></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hz</td>
+                    <td><?php echo $hz  ?> m</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>m1</td>
+                    <td><?php echo $m1  ?> m</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>m2</td>
+                    <td><?php echo $m2  ?> m</td>
+                    <td></td>
+                </tr>
 
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">Medidas de la columna 2</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>t1</td>
-                        <td><?php echo $t1_col2 ?> m</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>t2</td>
-                        <td><?php echo $t2_col2 ?> m</td>
-                        <td></td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">COMBINCACIÓN DE CARGAS EN LA COLUMNA 1</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;">P</td>
-                                    <td style="border: none; width: 35%;">Mx</td>
-                                    <td style="border: none; width: 35%;">My</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Carga Muerta</td>
-                        <td>CM</td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CM_P; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_Mx; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_My; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Carga Viva</td>
-                        <td>CV</td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CV_P; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CV_Mx; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CV_My; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Carga Sismo Ex</td>
-                        <td>CSx</td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CSx_P; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CSx_Mx; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CSx_My; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Carga Sismo Ey</td>
-                        <td>CSy</td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CSy_P; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CSy_Mx; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CSy_My; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+                <tr>
+                    <td></td>
+                    <td>r</td>
+                    <td><?php echo $r  ?> cm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>rec</td>
+                    <td><?php echo $rec  ?> cm</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Le</td>
+                    <td><?php echo $Le  ?> m</td>
+                    <td></td>
+                </tr>
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">Medidas de la columna 1</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>t1</td>
+                    <td><?php echo $t1_col1 ?> m</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>t2</td>
+                    <td><?php echo $t2_col1 ?> m</td>
+                    <td></td>
+                </tr>
 
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">COMBINCACIÓN DE CARGAS EN LA COLUMNA 2</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;">P</td>
-                                    <td style="border: none; width: 35%;">Mx</td>
-                                    <td style="border: none; width: 35%;">My</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Carga Muerta</td>
-                        <td>CM</td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CM_P2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_Mx2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_My2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Carga Viva</td>
-                        <td>CV</td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CV_P2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CV_Mx2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CV_My2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Carga Sismo Ex</td>
-                        <td>CSx</td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CSx_P2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CSx_Mx2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CSx_My2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Carga Sismo Ey</td>
-                        <td>CSy</td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CSy_P2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CSy_Mx2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CSy_My2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">Medidas de la columna 2</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>t1</td>
+                    <td><?php echo $t1_col2 ?> m</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>t2</td>
+                    <td><?php echo $t2_col2 ?> m</td>
+                    <td></td>
+                </tr>
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">COMBINCACIÓN DE CARGAS EN LA COLUMNA 1</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;">P(tonf) </td>
+                                <td style="border: none; width: 35%;">Mx (tonf-m)</td>
+                                <td style="border: none; width: 35%;">My (tonf-m)</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Carga Muerta</td>
+                    <td>CM</td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CM_P; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CM_Mx; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CM_My; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Carga Viva</td>
+                    <td>CV</td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CV_P; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CV_Mx; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CV_My; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Carga Sismo Ex</td>
+                    <td>CSx</td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CSx_P; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CSx_Mx; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CSx_My; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Carga Sismo Ey</td>
+                    <td>CSy</td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CSy_P; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CSy_Mx; ?></td>
+                                <td style="border: none; width: 35%;"><?php echo $CSy_My; ?></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
 
-                </tbody>
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">COMBINCACIÓN DE CARGAS EN LA COLUMNA 2</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;">P(tonf) </td>
+                                <td style="border: none; width: 35%;">Mx (tonf-m)</td>
+                                <td style="border: none; width: 35%;">My (tonf-m)</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Carga Muerta</td>
+                    <td>CM</td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CM_P2; ?></td>
+                                <td style="border: none; width: 35%;"><?php echo $CM_Mx2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CM_My2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Carga Viva</td>
+                    <td>CV</td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CV_P2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CV_Mx2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CV_My2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Carga Sismo Ex</td>
+                    <td>CSx</td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CSx_P2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CSx_Mx2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CSx_My2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Carga Sismo Ey</td>
+                    <td>CSy</td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CSy_P2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CSy_Mx2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CSy_My2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+            </tbody>
 
 
+            <thead style="font-size: 13px; background-color: #4e5c77; color: white;">
+                <tr>
+                    <th colspan="2">2. PREDIMENSIONAMIENTO DE ZAPATAS</th>
+                    <th scope="col">FORMULAS</th>
+                    <th scope="col">RESULTADOS</th>
+                </tr>
+            </thead>
+            <tbody style="font-size: 11px;">
+
+                <tr>
+                    <td>Area de la Zapata</td>
+                    <td></td>
+                    <td>p servicio / (qa * fk)</td>
+                    <td><?php echo $Az  ?> m<sup>2</sup></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>B</td>
+                    <td>t2 + m1 + t2</td>
+                    <td id="valor_b"><?php echo $B ?> m</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>L</td>
+                    <td>0.5 * t1(col1) + Le + 0.5 * t1(col2) + m2</td>
+                    <td id="valor_L"><?php echo $L ?> m</td>
+                </tr>
+            </tbody>
+            <thead style="font-size: 13px; background-color: #4e5c77; color: white;">
+                <tr>
+                    <th colspan="2">3. COMBINACIÓN DE CARGAS EN LA COLUMNA 1</th>
+                    <th scope="col">FORMULAS</th>
+                    <th scope="col">RESULTADOS</th>
+                </tr>
+            </thead>
+            <tbody style="font-size: 11px;">
+
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">3.1 COMBINACIONES DE CARGAS DE SERVICIO</td>
+                </tr>
+                <tr>
+                    <td>Descripción</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    Columna 1
+                                </td>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    Columna 2
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Combinaciones de cargas de servicio</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 30%;">P (tonf)</td>
+                                            <td style="border: none; width: 35%;">Mx (tonf-m)</td>
+                                            <td style="border: none; width: 35%;">My (tonf-m)</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 30%;">P (tonf)</td>
+                                            <td style="border: none; width: 35%;">Mx (tonf-m)</td>
+                                            <td style="border: none; width: 35%;">My (tonf-m)</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="vertical-align: middle;">CM + CV</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 30%;"><?php echo $CM_CV_P; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_MX; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_MY; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 30%;"><?php echo $CM_CV_P2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_MX2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_MY2; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="vertical-align: middle;">CM + CV + 0.8 Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 30%;"><?php echo $CM_CV_8SX_sumP; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_sumMX; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_sumMY; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 30%;"><?php echo $CM_CV_8SX_sumP2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_sumMX2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_sumMY2; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="vertical-align: middle;">CM + CV - 0.8 Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 30%;"><?php echo $CM_CV_8SX_restP; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_restMX; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_restMY; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 30%;"><?php echo $CM_CV_8SX_restP2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_restMX2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_restMY2; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="vertical-align: middle;">CM + CV + 0.8 Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 30%;"><?php echo $CM_CV_8SY_sumP; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_sumMX; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_sumMY; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 30%;"><?php echo $CM_CV_8SY_sumP2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_sumMX2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_sumMY2; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="vertical-align: middle;">CM + CV - 0.8 Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 30%;"><?php echo $CM_CV_8SY_restP; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_restMX; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_restMY; ?></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 30%;"><?php echo $CM_CV_8SY_restP2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_restMX2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_restMY2; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">3.2 COMBINACIONES DE CARGA ÚLTIMAS</td>
+                </tr>
+                <tr>
+                    <td>Descripción</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    Columna 1
+                                </td>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    Columna 2
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Combinaciones de cargas de servicio</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 30%;">P (tonf)</td>
+                                            <td style="border: none; width: 35%;">Mx (tonf-m)</td>
+                                            <td style="border: none; width: 35%;">My (tonf-m)</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr>
+                                            <td style="border: none; width: 30%;">P (tonf)</td>
+                                            <td style="border: none; width: 35%;">Mx (tonf-m)</td>
+                                            <td style="border: none; width: 35%;">My (tonf-m)</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="vertical-align: middle;">1.4*CM + 1.7*CV</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila1_col1">
+                                            <td style="border: none; width: 30%;" id="cel1"><?php echo $CCU1_P; ?> </td>
+                                            <td style="border: none; width: 35%;" id="cel2"><?php echo $CCC1_MX; ?> </td>
+                                            <td style="border: none; width: 35%;" id="cel3"><?php echo $CCC1_MY; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila1_col2">
+                                            <td style="border: none; width: 30%;"><?php echo $CCU1_P2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC1_MX2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC1_MY2; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="vertical-align: middle;">1.25(CM+CV) + Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila2_col1">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC2_P; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC2_MX; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC2_MY; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila2_col2">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC2_P2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC2_MX2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC2_MY2; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="vertical-align: middle;">1.25(CM+CV) - Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila3_col1">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC3_P; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC3_MX; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC3_MY; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila3_col2">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC3_P2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC3_MX2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC3_MY2; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="vertical-align: middle;">1.25(CM+CV) + Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila4_col1">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC4_P; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC4_MX; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC4_MY; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila4_col2">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC4_P2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC4_MX2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC4_MY2; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="vertical-align: middle;">1.25(CM+CV) - Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila5_col1">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC5_P; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC5_MX; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC5_MY; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila5_col2">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC5_P2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC5_MX2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC5_MY2; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="vertical-align: middle;">0.9CM + Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila6_col1">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC6_P; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC6_MX; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC6_MY; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila6_col2">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC6_P2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC6_MX2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC6_MY2; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="vertical-align: middle;">0.9CM - Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila7_col1">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC7_P; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC7_MX; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC7_MY; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila7_col2">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC7_P2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC7_MX2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC7_MY2; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="vertical-align: middle;">0.9CM + Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila8_col1">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC8_P; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC8_MX; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC8_MY; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila2_col2">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC8_P2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC8_MX2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC8_MY2; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="vertical-align: middle;">0.9CM - Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila9_col1">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC9_P; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC9_MX; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC9_MY; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila9_col2">
+                                            <td style="border: none; width: 30%;"><?php echo $CCC9_P2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC9_MX2; ?> </td>
+                                            <td style="border: none; width: 35%;"><?php echo $CCC9_MY2; ?> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">3.3 PRESIONES EN EL SUELO EN CONDICIONES DE SERVICIO</td>
+                </tr>
+                <tr>
+                    <td>Descripción</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    Columna 1
+                                </td>
+                                <td style="border: none; width: 50%; text-align: center;">
+                                    Columna 2
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila9_col1">
+                                            <td style="border: none; width: 16.5%;">σ<sub>p</sub> (tonf/m<sup>2</sup> ) </td>
+                                            <td style="border: none; width: 16.5%;">σ<sub>Mx </sub>(tonf/m<sup>2</sup> )</td>
+                                            <td style="border: none; width: 16.5%;">σ<sub>My</sub>(tonf/m<sup>2</sup> )</td>
+                                            <td style="border: none; width: 16.5%;">σ<sub>tot</sub>(tonf/m<sup>2</sup> )</td>
+                                            <td style="border: none; width: 16.5%;">σ<sub>s</sub>(tonf/m<sup>2</sup> )</td>
+                                            <td style="border: none; width: 17.5%;">Condición</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: none; width: 50%;">
+                                    <table style="border: none; font-size: 11px; width: 100%;">
+                                        <tr id="fila9_col2">
+                                            <td style="border: none; width: 16.5%;">σ<sub>p</sub> (tonf/m<sup>2</sup> ) </td>
+                                            <td style="border: none; width: 16.5%;">σ<sub>Mx </sub>(tonf/m<sup>2</sup> )</td>
+                                            <td style="border: none; width: 16.5%;">σ<sub>My</sub>(tonf/m<sup>2</sup> )</td>
+                                            <td style="border: none; width: 16.5%;">σ<sub>tot</sub>(tonf/m<sup>2</sup> )</td>
+                                            <td style="border: none; width: 16.5%;">σ<sub>s</sub>(tonf/m<sup>2</sup> )</td>
+                                            <td style="border: none; width: 17.5%;">Condición</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS1_OP; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS1_OMX; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS1_OMY; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV+0.8Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS2_OP; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS2_OMX; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS2_OMY; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV - 0.8Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS3_OP; ?></td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS3_OMX; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS3_OMY; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV + 0.8Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS4_OP; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS4_OMX; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS4_OMY; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV - 0.8Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS5_OP; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS5_OMX; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS5_OMY; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Combinaciones de cargas de servicio</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;">σ<sub>tot</sub>(tonf/m<sup>2</sup> )</td>
+                                <td style="border: none; width: 35%;">σ<sub>s</sub>(tonf/m<sup>2</sup> )</td>
+                                <td style="border: none; width: 35%;">Condición</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS1_OTOT; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS1_OS; ?></td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS1_COND; ?></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV+0.8Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS2_OTOT; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS2_OS; ?></td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS2_COND; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV - 0.8Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS3_OTOT; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS3_OS; ?></td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS3_COND; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV + 0.8Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS4_OTOT; ?></td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS4_OS; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS4_COND; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV - 0.8Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS5_OTOT; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS5_OS; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS5_COND; ?></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">3.4 PRESIONES ÚLTIMOS DE DISEÑO</td>
+                </tr>
+                <tr>
+                    <td>Combinaciones de cargas de servicio</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;">σ<sub>p</sub> (tonf/m<sup>2</sup> )</td>
+                                <td style="border: none; width: 25%;">σ<sub>Mx</sub> (tonf/m<sup>2</sup> )</td>
+                                <td style="border: none; width: 25%;">σ<sub>My</sub> (tonf/m<sup>2</sup> )</td>
+                                <td style="border: none; width: 25%;">σ<sub>tot </sub> (tonf/m<sup>2</sup> )</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>1.4CM + 1.7CV</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD1_OP; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD1_OMX; ?> </sub></td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD1_OMY; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD1_OTOT; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>1.25(CM+CV) + Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OP; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OMX; ?> </sub></td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OMY; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OTOT; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>1.25(CM+CV) + Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OP; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OMX; ?> </sub></td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OMY; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OTOT; ?></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>1.25(CM + CV) - Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD3_OP; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD3_OMX; ?> </sub></td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD3_OMY; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD3_OTOT; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>1.25(CM+CV) + Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD4_OP; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD4_OMX; ?></sub></td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD4_OMY; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD4_OTOT; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>1.25(CM+CV) - Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD5_OP; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD5_OMX; ?> </sub></td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD5_OMY; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD5_OTOT; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>0.9CM + Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD6_OP; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD6_OMX; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD6_OMY; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD6_OTOT; ?></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>0.9CM - Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD7_OP; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD7_OMX; ?> </sub></td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD7_OMY; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD7_OTOT; ?></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>0.9CM + Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD8_OP; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD8_OMX; ?> </sub></td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD8_OMY; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD8_OTOT; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>0.9CM - Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD9_OP; ?></td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD9_OMX; ?> </sub></td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD9_OMY; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD9_OTOT; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>σ<sub>ult</sub></td>
+                    <td></td>
+                    <td><?php echo $OT_ULT; ?> tonf/m<sup>2</sup> </td>
+                </tr>
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">3.5 CALCULO DE LAS FUERZAS ULTIMAS EN LA BASE DE LA ZAPATA</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Qu(1.4D+1.7)</td>
+                    <td><?php echo $CFUBZ1; ?> ton-m</td>
+                </tr>
+                <tr>
+                    <td>Descripción</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">MAX</td>
+                                <td style="border: none; width: 50%;">MIN</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Qu(1.25*(D+L)+EQX)</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;"><?php echo $CFUBZ2_MAX; ?> ton-m</td>
+                                <td style="border: none; width: 50%;"><?php echo $CFUBZ2_MIN; ?> ton-m</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Qu(1.25*(D+L)+EQY)</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;"><?php echo $CFUBZ3_MAX; ?> ton-m</td>
+                                <td style="border: none; width: 50%;"><?php echo $CFUBZ3_MIN; ?> ton-m</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">3.6 VERIFICACIÓN DE EXCENTRICIDADES</td>
+                </tr>
+
+                <tr>
+                    <td>Descripción</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">Fuerza axial</td>
+                                <td style="border: none; width: 50%;">Momento en X</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_FA1; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_FA2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_MX1; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_MX2; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_FA3; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_FA4; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_MX3; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_MX4; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV+0.8Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_FA1; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_FA2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_MX1; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_MX2; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_FA3; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_FA4; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_MX3; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_MX4; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV-0.8Sx </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_FA1; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_FA2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_MX1; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_MX2; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_FA3; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_FA4; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_MX3; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_MX4; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV+0.8Sy </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_FA1; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_FA2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_MX1; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_MX2; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_FA3; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_FA4; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_MX3; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_MX4; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV-0.8Sy </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_FA1; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_FA2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_MX1; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_MX2; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_FA3; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_FA4; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_MX3; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_MX4; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Descripción</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 40%;">Momento en Y</td>
+                                <td style="border: none; width: 40%;">Resultante</td>
+                                <td style="border: none; width: 20%;"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_MY1; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_MY2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_R1; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_R2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F1; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_MY3; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_MY4; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_R3; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_R4; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV+0.8Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_MY1; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_MY2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_R1; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_R2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F3; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_MY3; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_MY4; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_R3; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_R4; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F4; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV-0.8Sx </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_MY1; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_MY2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_R1; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_R2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F5; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_MY3; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_MY4; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_R3; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_R4; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F6; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV+0.8Sy </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_MY1; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_MY2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_R1; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_R2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F7; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_MY3; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_MY4; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_R3; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_R4; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F8; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV-0.8Sy </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_MY1; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_MY2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_R1; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_R2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F9; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_MY3; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_MY4; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_R3; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_R4; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F10; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
                 <thead style="font-size: 13px; background-color: #4e5c77; color: white;">
                     <tr>
-                        <th colspan="2">2. PREDIMENSIONAMIENTO DE ZAPATAS</th>
+                        <th colspan="2">4. COMBINACIÓN DE CARGAS EN LA COLUMNA 2</th>
                         <th scope="col">FORMULAS</th>
                         <th scope="col">RESULTADOS</th>
                     </tr>
                 </thead>
-                <tbody style="font-size: 11px;">
+            <tbody style="font-size: 11px;">
 
-                    <tr>
-                        <td>Area de la Zapata</td>
-                        <td></td>
-                        <td>p servicio / (qa * fk)</td>
-                        <td><?php echo $Az  ?> m<sup>2</sup></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>B</td>
-                        <td>t2 + m1 + t2</td>
-                        <td><?php echo $B ?> m</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>L</td>
-                        <td>0.5 * t1(col1) + Le + 0.5 * t1(col2) + m2</td>
-                        <td> <?php echo $L ?> m</td>
-                    </tr>
-                </tbody>
-                <thead style="font-size: 13px; background-color: #4e5c77; color: white;">
-                    <tr>
-                        <th colspan="2">3. COMBINACIÓN DE CARGAS EN LA COLUMNA 1</th>
-                        <th scope="col">FORMULAS</th>
-                        <th scope="col">RESULTADOS</th>
-                    </tr>
-                </thead>
-                <tbody style="font-size: 11px;">
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">4.1 COMBINACIONES DE CARGAS DE SERVICIO</td>
+                </tr>
+                <tr>
+                    <td>Combinaciones de cargas de servicio</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;">P (tonf)</td>
+                                <td style="border: none; width: 35%;">Mx (tonf-m)</td>
+                                <td style="border: none; width: 35%;">My (tonf-m)</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CM_CV_P2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CM_CV_MX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CM_CV_MY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV + 0.8 Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CM_CV_8SX_sumP2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_sumMX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_sumMY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV - 0.8 Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CM_CV_8SX_restP2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_restMX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_restMY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV + 0.8 Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CM_CV_8SY_sumP2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_sumMX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_sumMY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV - 0.8 Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CM_CV_8SY_restP2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_restMX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_restMY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">4.2 COMBINACIONES DE CARGA ÚLTIMAS</td>
+                </tr>
+                <tr>
+                    <td>Combinaciones de cargas de últimas</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;">P (tonf)</td>
+                                <td style="border: none; width: 35%;">Mx (tonf-m)</td>
+                                <td style="border: none; width: 35%;">My (tonf-m)</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="fila1_col2">
+                    <td></td>
+                    <td></td>
+                    <td>1.4*CM + 1.7*CV</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CCU1_P2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC1_MX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC1_MY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="fila2_col2">
+                    <td></td>
+                    <td></td>
+                    <td>1.25(CM+CV) + Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CCC2_P2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC2_MX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC2_MY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="fila3_col2">
+                    <td></td>
+                    <td></td>
+                    <td>1.25(CM+CV)-Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CCC3_P2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC3_MX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC3_MY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="fila4_col2">
+                    <td></td>
+                    <td></td>
+                    <td>1.25(CM+CV) + Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CCC4_P2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC4_MX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC4_MY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="fila5_col2">
+                    <td></td>
+                    <td></td>
+                    <td>1.25(CM+CV) - Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CCC5_P2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC5_MX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC5_MY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="fila6_col2">
+                    <td></td>
+                    <td></td>
+                    <td>0.9CM + Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CCC6_P2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC6_MX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC6_MY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="fila7_col2">
+                    <td></td>
+                    <td></td>
+                    <td>0.9CM - Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CCC7_P2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC7_MX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC7_MY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="fila8_col2">
+                    <td></td>
+                    <td></td>
+                    <td>0.9CM + Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CCC8_P2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC8_MX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC8_MY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="fila9_col2">
+                    <td></td>
+                    <td></td>
+                    <td>0.9CM - Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $CCC9_P2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC9_MX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $CCC9_MY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">4.3 PRESIONES EN EL SUELO EN CONDICIONES DE SERVICIO</td>
+                </tr>
+                <tr>
+                    <td>Combinaciones de cargas de servicio</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;">σ<sub>p</sub> (tonf/m<sup>2</sup> )</td>
+                                <td style="border: none; width: 25%;">σ<sub>Mx</sub> (tonf/m<sup>2</sup> )</td>
+                                <td style="border: none; width: 25%;">σ<sub>My</sub> (tonf/m<sup>2</sup> )</td>
+                                <td style="border: none; width: 25%;">σ<sub>tot </sub> (tonf/m<sup>2</sup> )</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS1_OP2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS1_OMX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS1_OMY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV+0.8Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS2_OP2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS2_OMX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS2_OMY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV - 0.8Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS3_OP2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS3_OMX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS3_OMY2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV + 0.8Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS4_OP2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS4_OMX2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS4_OMY2; ?> tonf/m<sup>2</sup></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV - 0.8Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS5_OP2; ?> tonf/m<sup>2</sup> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS5_OMX2; ?> tonf/m<sup>2</sup></td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS5_OMY2; ?> tonf/m<sup>2</sup></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Combinaciones de cargas de servicio</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;">σ<sub>tot</sub>(tonf/m<sup>2</sup> )</td>
+                                <td style="border: none; width: 35%;">σ<sub>s</sub>(tonf/m<sup>2</sup> )</td>
+                                <td style="border: none; width: 35%;">Condición</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS1_OTOT2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS1_OS2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS1_COND2; ?></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV+0.8Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS2_OTOT2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS2_OS2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS2_COND2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV - 0.8Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS3_OTOT2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS3_OS2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS3_COND2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV + 0.8Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS4_OTOT2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS4_OS2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS4_COND2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM + CV - 0.8Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 30%;"><?php echo $PSCS5_OTOT2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS5_OS2; ?> </td>
+                                <td style="border: none; width: 35%;"><?php echo $PSCS5_COND2; ?></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">4.4 PRESIONES ÚLTIMOS DE DISEÑO</td>
+                </tr>
+                <tr>
+                    <td>Combinaciones de cargas de servicio</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;">σ<sub>p</sub> (tonf/m<sup>2</sup> )</td>
+                                <td style="border: none; width: 25%;">σ<sub>Mx</sub> (tonf/m<sup>2</sup> )</td>
+                                <td style="border: none; width: 25%;">σ<sub>My</sub> (tonf/m<sup>2</sup> )</td>
+                                <td style="border: none; width: 25%;">σ<sub>tot </sub> (tonf/m<sup>2</sup> )</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>1.4CM + 1.7CV</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD1_OP2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD1_OMX2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD1_OMY2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD1_OTOT2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>1.25(CM+CV) + Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OP2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OMX2; ?> </sub></td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OMY2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OTOT2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>1.25(CM+CV) + Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OP2; ?></td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OMX2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OMY2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD2_OTOT2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>1.25(CM + CV) - Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD3_OP2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD3_OMX2; ?> </sub></td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD3_OMY2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD3_OTOT2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>1.25(CM+CV) + Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD4_OP2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD4_OMX2; ?> </sub></td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD4_OMY2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD4_OTOT2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>1.25(CM+CV) - Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD5_OP2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD5_OMX2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD5_OMY2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD5_OTOT2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>0.9CM + Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD6_OP2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD6_OMX2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD6_OMY2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD6_OTOT2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>0.9CM - Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD7_OP2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD7_OMX2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD7_OMY2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD7_OTOT2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>0.9CM + Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD8_OP2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD8_OMX2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD8_OMY2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD8_OTOT2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>0.9CM - Sy</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $PUD9_OP2; ?>
+                                </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD9_OMX2; ?>
+                                </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD9_OMY2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $PUD9_OTOT2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>σ<sub>ult</sub></td>
+                    <td></td>
+                    <td><?php echo $OT_ULT2; ?> tonf/m<sup>2</sup> </td>
+                </tr>
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">4.5 CALCULO DE LAS FUERZAS ULTIMAS EN LA BASE DE LA ZAPATA</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Qu(1.4D+1.7)</td>
+                    <td><?php echo $CFUBZ1_2; ?> ton-m</td>
+                </tr>
+                <tr>
+                    <td>Descripción</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">MAX</td>
+                                <td style="border: none; width: 50%;">MIN</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Qu(1.25*(D+L)+EQX)</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;"><?php echo $CFUBZ2_MAX_2; ?> ton-m</td>
+                                <td style="border: none; width: 50%;"><?php echo $CFUBZ2_MIN_2; ?> ton-m</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Qu(1.25*(D+L)+EQY)</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;"><?php echo $CFUBZ3_MAX_2; ?> ton-m</td>
+                                <td style="border: none; width: 50%;"><?php echo $CFUBZ3_MIN_2; ?> ton-m</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">4.6 VERIFICACIÓN DE EXCENTRICIDADES</td>
+                </tr>
 
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">3.1 COMBINACIONES DE CARGAS DE SERVICIO</td>
-                    </tr>
-                    <tr>
-                        <td>Combinaciones de cargas de servicio</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;">P</td>
-                                    <td style="border: none; width: 35%;">Mx</td>
-                                    <td style="border: none; width: 35%;">My</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CM_CV_P; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_MX; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_MY; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV + 0.8 Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CM_CV_8SX_sumP; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_sumMX; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_sumMY; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV - 0.8 Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CM_CV_8SX_restP; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_restMX; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_restMY; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV + 0.8 Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CM_CV_8SY_sumP; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_sumMX; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_sumMY; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV - 0.8 Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CM_CV_8SY_restP; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_restMX; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_restMY; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">3.2 COMBINACIONES DE CARGA ÚLTIMAS</td>
-                    </tr>
-                    <tr>
-                        <td>Combinaciones de cargas de últimas</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;">P</td>
-                                    <td style="border: none; width: 35%;">Mx</td>
-                                    <td style="border: none; width: 35%;">My</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.4*CM + 1.7*CV</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCU1_P; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC1_MX; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC1_MY; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV) + Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC2_P; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC2_MX; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC2_MY; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV)-Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC3_P; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC3_MX; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC3_MY; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV) + Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC4_P; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC4_MX; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC4_MY; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV) - Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC5_P; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC5_MX; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC5_MY; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM + Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC6_P; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC6_MX; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC6_MY; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM - Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC7_P; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC7_MX; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC7_MY; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM + Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC8_P; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC8_MX; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC8_MY; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM - Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC9_P; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC9_MX; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC9_MY; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">3.3 PRESIONES EN EL SUELO EN CONDICIONES DE SERVICIO</td>
-                    </tr>
-                    <tr>
-                        <td>Combinaciones de cargas de servicio</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;">σ<sub>p</sub> </td>
-                                    <td style="border: none; width: 35%;">σ<sub>Mx</sub></td>
-                                    <td style="border: none; width: 35%;">σ<sub>My</sub></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS1_OP; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS1_OMX; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS1_OMY; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV+0.8Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS2_OP; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS2_OMX; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS2_OMY; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV - 0.8Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS3_OP; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS3_OMX; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS3_OMY; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV + 0.8Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS4_OP; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS4_OMX; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS4_OMY; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV - 0.8Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS5_OP; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS5_OMX; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS5_OMY; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Combinaciones de cargas de servicio</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;">σ<sub>tot</sub> </td>
-                                    <td style="border: none; width: 35%;">σ<sub>s</sub></td>
-                                    <td style="border: none; width: 35%;">Condición</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS1_OTOT; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS1_OS; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS1_COND; ?></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV+0.8Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS2_OTOT; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS2_OS; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS2_COND; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV - 0.8Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS3_OTOT; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS3_OS; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS3_COND; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV + 0.8Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS4_OTOT; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS4_OS; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS4_COND; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV - 0.8Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS5_OTOT; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS5_OS; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS5_COND; ?></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">3.4 PRESIONES ÚLTIMOS DE DISEÑO</td>
-                    </tr>
-                    <tr>
-                        <td>Combinaciones de cargas de servicio</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;">σ<sub>p</sub> </td>
-                                    <td style="border: none; width: 25%;">σ<sub>Mx</sub></td>
-                                    <td style="border: none; width: 25%;">σ<sub>My</td>
-                                    <td style="border: none; width: 25%;">σ<sub>tot</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.4CM + 1.7CV</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD1_OP; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD1_OMX; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD1_OMY; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD1_OTOT; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV) + Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OP; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OMX; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OMY; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OTOT; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV) + Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OP; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OMX; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OMY; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OTOT; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM + CV) - Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD3_OP; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD3_OMX; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD3_OMY; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD3_OTOT; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV) + Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD4_OP; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD4_OMX; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD4_OMY; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD4_OTOT; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV) - Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD5_OP; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD5_OMX; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD5_OMY; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD5_OTOT; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM + Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD6_OP; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD6_OMX; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD6_OMY; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD6_OTOT; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM - Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD7_OP; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD7_OMX; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD7_OMY; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD7_OTOT; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM + Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD8_OP; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD8_OMX; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD8_OMY; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD8_OTOT; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM - Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD9_OP; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD9_OMX; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD9_OMY; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD9_OTOT; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>σ<sub>ult</sub></td>
-                        <td></td>
-                        <td><?php echo $OT_ULT; ?> tonf/m<sup>2</sup> </td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">3.5 CALCULO DE LAS FUERZAS ULTIMAS EN LA BASE DE LA ZAPATA</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Qu(1.4D+1.7)</td>
-                        <td><?php echo $CFUBZ1; ?> ton-m</td>
-                    </tr>
-                    <tr>
-                        <td>Descripción</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 50%;">MAX</td>
-                                    <td style="border: none; width: 50%;">MIN</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Qu(1.25*(D+L)+EQX)</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 50%;"><?php echo $CFUBZ2_MAX; ?> ton-m</td>
-                                    <td style="border: none; width: 50%;"><?php echo $CFUBZ2_MIN; ?> ton-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Qu(1.25*(D+L)+EQY)</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 50%;"><?php echo $CFUBZ3_MAX; ?> ton-m</td>
-                                    <td style="border: none; width: 50%;"><?php echo $CFUBZ3_MIN; ?> ton-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">3.6 VERIFICACIÓN DE EXCENTRICIDADES</td>
-                    </tr>
+                <tr>
+                    <td>Descripción</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">Fuerza axial</td>
+                                <td style="border: none; width: 50%;">Momento en X</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_FA1_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_FA2_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_MX1_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_MX2_2; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_FA3_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_FA4_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_MX3_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE1_MX4_2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV+0.8Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_FA1_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_FA2_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_MX1_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_MX2_2; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_FA3_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_FA4_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_MX3_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE2_MX4_2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td>Descripción</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 50%;">Fuerza axial</td>
-                                    <td style="border: none; width: 50%;">Momento en X</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_FA1; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_FA2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_MX1; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_MX2; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_FA3; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_FA4; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_MX3; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_MX4; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV+0.8Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_FA1; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_FA2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_MX1; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_MX2; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_FA3; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_FA4; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_MX3; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_MX4; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV-0.8Sx </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_FA1_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_FA2_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_MX1_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_MX2_2; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_FA3_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_FA4_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_MX3_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE3_MX4_2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV+0.8Sy </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_FA1_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_FA2_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_MX1_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_MX2_2; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_FA3_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_FA4_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_MX3_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE4_MX4_2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV-0.8Sy </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_FA1_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_FA2_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_MX1_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_MX2_2; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_FA3_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_FA4_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_MX3_2; ?> </td>
+                                <td style="border: none; width: 25%;"><?php echo $VE5_MX4_2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV-0.8Sx </td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_FA1; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_FA2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_MX1; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_MX2; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_FA3; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_FA4; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_MX3; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_MX4; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV+0.8Sy </td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_FA1; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_FA2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_MX1; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_MX2; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_FA3; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_FA4; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_MX3; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_MX4; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV-0.8Sy </td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_FA1; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_FA2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_MX1; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_MX2; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_FA3; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_FA4; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_MX3; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_MX4; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>Descripción</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 40%;">Momento en Y</td>
+                                <td style="border: none; width: 40%;">Resultante</td>
+                                <td style="border: none; width: 20%;"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_MY1_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_MY2_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_R1_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_R2_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F1_2; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_MY3_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_MY4_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_R3_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE1_R4_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F2_2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV+0.8Sx</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_MY1_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_MY2_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_R1_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_R2_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F3_2; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_MY3_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_MY4_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_R3_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE2_R4_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F4_2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td>Descripción</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 40%;">Momento en Y</td>
-                                    <td style="border: none; width: 40%;">Resultante</td>
-                                    <td style="border: none; width: 20%;"></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_MY1; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_MY2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_R1; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_R2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F1; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_MY3; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_MY4; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_R3; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_R4; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F2; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV+0.8Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_MY1; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_MY2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_R1; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_R2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F3; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_MY3; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_MY4; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_R3; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_R4; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F4; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV-0.8Sx </td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_MY1; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_MY2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_R1; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_R2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F5; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_MY3; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_MY4; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_R3; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_R4; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F6; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV+0.8Sy </td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_MY1; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_MY2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_R1; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_R2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F7; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_MY3; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_MY4; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_R3; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_R4; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F8; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV-0.8Sy </td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_MY1; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_MY2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_R1; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_R2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F9; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_MY3; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_MY4; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_R3; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_R4; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F10; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <thead style="font-size: 13px; background-color: #4e5c77; color: white;">
-                        <tr>
-                            <th colspan="2">4. COMBINACIÓN DE CARGAS EN LA COLUMNA 2</th>
-                            <th scope="col">FORMULAS</th>
-                            <th scope="col">RESULTADOS</th>
-                        </tr>
-                    </thead>
-                <tbody style="font-size: 11px;">
-
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">4.1 COMBINACIONES DE CARGAS DE SERVICIO</td>
-                    </tr>
-                    <tr>
-                        <td>Combinaciones de cargas de servicio</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;">P</td>
-                                    <td style="border: none; width: 35%;">Mx</td>
-                                    <td style="border: none; width: 35%;">My</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CM_CV_P2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_MX2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_MY2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV + 0.8 Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CM_CV_8SX_sumP2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_sumMX2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_sumMY2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV - 0.8 Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CM_CV_8SX_restP2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_restMX2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SX_restMY2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV + 0.8 Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CM_CV_8SY_sumP2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_sumMX2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_sumMY2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV - 0.8 Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CM_CV_8SY_restP2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_restMX2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CM_CV_8SY_restMY2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">4.2 COMBINACIONES DE CARGA ÚLTIMAS</td>
-                    </tr>
-                    <tr>
-                        <td>Combinaciones de cargas de últimas</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;">P</td>
-                                    <td style="border: none; width: 35%;">Mx</td>
-                                    <td style="border: none; width: 35%;">My</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.4*CM + 1.7*CV</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCU1_P2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC1_MX2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC1_MY2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV) + Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC2_P2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC2_MX2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC2_MY2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV)-Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC3_P2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC3_MX2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC3_MY2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV) + Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC4_P2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC4_MX2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC4_MY2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV) - Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC5_P2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC5_MX2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC5_MY2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM + Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC6_P2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC6_MX2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC6_MY2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM - Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC7_P2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC7_MX2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC7_MY2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM + Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC8_P2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC8_MX2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC8_MY2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM - Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $CCC9_P2; ?> tonf</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC9_MX2; ?> tonf-m</td>
-                                    <td style="border: none; width: 35%;"><?php echo $CCC9_MY2; ?> tonf-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">4.3 PRESIONES EN EL SUELO EN CONDICIONES DE SERVICIO</td>
-                    </tr>
-                    <tr>
-                        <td>Combinaciones de cargas de servicio</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;">σ<sub>p</sub> </td>
-                                    <td style="border: none; width: 35%;">σ<sub>Mx</sub></td>
-                                    <td style="border: none; width: 35%;">σ<sub>My</sub></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS1_OP2; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS1_OMX2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS1_OMY2; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV+0.8Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS2_OP2; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS2_OMX2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS2_OMY2; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV - 0.8Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS3_OP2; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS3_OMX2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS3_OMY2; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV + 0.8Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS4_OP2; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS4_OMX2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS4_OMY2; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV - 0.8Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS5_OP2; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS5_OMX2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS5_OMY2; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Combinaciones de cargas de servicio</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;">σ<sub>tot</sub> </td>
-                                    <td style="border: none; width: 35%;">σ<sub>s</sub></td>
-                                    <td style="border: none; width: 35%;">Condición</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS1_OTOT2; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS1_OS2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS1_COND2; ?></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV+0.8Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS2_OTOT2; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS2_OS2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS2_COND2; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV - 0.8Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS3_OTOT2; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS3_OS2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS3_COND2; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV + 0.8Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS4_OTOT2; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS4_OS2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS4_COND2; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM + CV - 0.8Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 30%;"><?php echo $PSCS5_OTOT2; ?> tonf/m<sup>2</sup> </td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS5_OS2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 35%;"><?php echo $PSCS5_COND2; ?></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">4.4 PRESIONES ÚLTIMOS DE DISEÑO</td>
-                    </tr>
-                    <tr>
-                        <td>Combinaciones de cargas de servicio</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;">σ<sub>p</sub> </td>
-                                    <td style="border: none; width: 25%;">σ<sub>Mx</sub></td>
-                                    <td style="border: none; width: 25%;">σ<sub>My</td>
-                                    <td style="border: none; width: 25%;">σ<sub>tot</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.4CM + 1.7CV</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD1_OP2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD1_OMX2; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD1_OMY2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD1_OTOT2; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV) + Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OP2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OMX2; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OMY2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OTOT2; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV) + Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OP2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OMX2; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OMY2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD2_OTOT2; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM + CV) - Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD3_OP2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD3_OMX2; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD3_OMY2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD3_OTOT2; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV) + Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD4_OP2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD4_OMX2; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD4_OMY2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD4_OTOT2; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>1.25(CM+CV) - Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD5_OP2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD5_OMX2; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD5_OMY2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD5_OTOT2; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM + Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD6_OP2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD6_OMX2; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD6_OMY2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD6_OTOT2; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM - Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD7_OP2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD7_OMX2; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD7_OMY2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD7_OTOT2; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM + Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD8_OP2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD8_OMX2; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD8_OMY2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD8_OTOT2; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>0.9CM - Sy</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD9_OP2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD9_OMX2; ?> tonf/m<sup>2</sup></sub></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD9_OMY2; ?> tonf/m<sup>2</sup></td>
-                                    <td style="border: none; width: 25%;"><?php echo $PUD9_OTOT2; ?> tonf/m<sup>2</sup></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>σ<sub>ult</sub></td>
-                        <td></td>
-                        <td><?php echo $OT_ULT2; ?> tonf/m<sup>2</sup> </td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">4.5 CALCULO DE LAS FUERZAS ULTIMAS EN LA BASE DE LA ZAPATA</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Qu(1.4D+1.7)</td>
-                        <td><?php echo $CFUBZ1_2; ?> ton-m</td>
-                    </tr>
-                    <tr>
-                        <td>Descripción</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 50%;">MAX</td>
-                                    <td style="border: none; width: 50%;">MIN</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Qu(1.25*(D+L)+EQX)</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 50%;"><?php echo $CFUBZ2_MAX_2; ?> ton-m</td>
-                                    <td style="border: none; width: 50%;"><?php echo $CFUBZ2_MIN_2; ?> ton-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Qu(1.25*(D+L)+EQY)</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 50%;"><?php echo $CFUBZ3_MAX_2; ?> ton-m</td>
-                                    <td style="border: none; width: 50%;"><?php echo $CFUBZ3_MIN_2; ?> ton-m</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                        <td colspan="4">4.6 VERIFICACIÓN DE EXCENTRICIDADES</td>
-                    </tr>
-
-                    <tr>
-                        <td>Descripción</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 50%;">Fuerza axial</td>
-                                    <td style="border: none; width: 50%;">Momento en X</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_FA1_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_FA2_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_MX1_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_MX2_2; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_FA3_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_FA4_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_MX3_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE1_MX4_2; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV+0.8Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_FA1_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_FA2_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_MX1_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_MX2_2; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_FA3_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_FA4_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_MX3_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE2_MX4_2; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV-0.8Sx </td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_FA1_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_FA2_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_MX1_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_MX2_2; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_FA3_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_FA4_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_MX3_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE3_MX4_2; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV+0.8Sy </td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_FA1_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_FA2_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_MX1_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_MX2_2; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_FA3_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_FA4_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_MX3_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE4_MX4_2; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV-0.8Sy </td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_FA1_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_FA2_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_MX1_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_MX2_2; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_FA3_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_FA4_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_MX3_2; ?> </td>
-                                    <td style="border: none; width: 25%;"><?php echo $VE5_MX4_2; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Descripción</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 40%;">Momento en Y</td>
-                                    <td style="border: none; width: 40%;">Resultante</td>
-                                    <td style="border: none; width: 20%;"></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_MY1_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_MY2_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_R1_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_R2_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F1_2; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_MY3_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_MY4_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_R3_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE1_R4_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F2_2; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV+0.8Sx</td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_MY1_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_MY2_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_R1_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_R2_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F3_2; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_MY3_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_MY4_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_R3_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE2_R4_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F4_2; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV-0.8Sx </td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_MY1_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_MY2_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_R1_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_R2_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F5_2; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_MY3_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_MY4_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_R3_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE3_R4_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F6_2; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV+0.8Sy </td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_MY1_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_MY2_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_R1_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_R2_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F7_2; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_MY3_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_MY4_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_R3_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE4_R4_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F8_2; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>CM+CV-0.8Sy </td>
-                        <td>
-                            <table style="border: none; font-size: 11px; width: 100%;">
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_MY1_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_MY2_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_R1_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_R2_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F9_2; ?> </td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_MY3_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_MY4_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_R3_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE5_R4_2; ?> </td>
-                                    <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F10_2; ?> </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV-0.8Sx </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_MY1_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_MY2_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_R1_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_R2_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F5_2; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_MY3_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_MY4_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_R3_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE3_R4_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F6_2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV+0.8Sy </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_MY1_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_MY2_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_R1_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_R2_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F7_2; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_MY3_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_MY4_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_R3_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE4_R4_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F8_2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CM+CV-0.8Sy </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_MY1_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_MY2_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_R1_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_R2_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F9_2; ?> </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_MY3_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_MY4_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_R3_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE5_R4_2; ?> </td>
+                                <td style="border: none; width: 20%;"><?php echo $VE_TEXT_F10_2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
 
 
 
@@ -3025,14 +3352,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-                </tbody>
+            </tbody>
 
 
 
-            </table>
-            <br><br>
-
-        </div>
+        </table>
+        <br><br>
     </div>
 </body>
 
