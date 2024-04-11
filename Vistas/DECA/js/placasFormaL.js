@@ -1,6 +1,7 @@
 import {
   solicitudCargaT1,
   solicitudCargaDT2,
+  solicitudCargaDT3,
 } from './placasFormaL/solicitudCarga.js';
 
 import {
@@ -560,7 +561,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     var sendInsteadFiltroTS2 = [
-      [1573.00, 15.26, 2.981],
+      [1573.0, 15.26, 2.981],
       [1246.4, 608.848, 23.586],
       [1408.222, -583.572, -18.691],
       [1208.982, 1682.383, 9.426],
@@ -600,8 +601,8 @@ document.addEventListener('DOMContentLoaded', function () {
       var contenedorX = document.getElementById('flexDesingT1X');
       var contenedorY = document.getElementById('flexDesingT1Y');
       /* flexDesignT1(contenedor, solicitudCargaDT3, formDataObject); */
-      flexDesignT1X(contenedorX, sendInsteadDT3, formDataObject);
-      flexDesignT1Y(contenedorY, sendInsteadDT3, formDataObject);
+      flexDesignT1X(contenedorX, solicitudCargaDT3, formDataObject);
+      flexDesignT1Y(contenedorY, solicitudCargaDT3, formDataObject);
       /* flexDesingT1 */
       /* dibujarLine(canva); */
     } else if (formDataObject.generalSelect == 0.85) {
@@ -613,8 +614,8 @@ document.addEventListener('DOMContentLoaded', function () {
       var contenedorX = document.getElementById('cutDesingT1X');
       var contenedorY = document.getElementById('cutDesingT1Y');
       /* flexDesignT1(contenedor, solicitudCargaDT3, formDataObject); */
-      cutDesignT1X(contenedorX, sendInsteadDT3, formDataObject);
-      cutDesignT1Y(contenedorY, sendInsteadDT3, formDataObject);
+      cutDesignT1X(contenedorX, solicitudCargaDT3, formDataObject);
+      cutDesignT1Y(contenedorY, solicitudCargaDT3, formDataObject);
       /* flexDesingT1 */
       /* dibujarLine(canva); */
       //--------------Envío de datos (contenedor, solicitaciones de carga, a Diseño por Corte)---------------------
@@ -622,9 +623,9 @@ document.addEventListener('DOMContentLoaded', function () {
       //------Envío de datos (contenedor, solicitaciones de carga, a Diagrama de interacción)--------------
       var contenedorX = document.getElementById('diT1X');
       var contenedorY = document.getElementById('diT1Y');
-/*       diT1X(
+      diT1X(
         contenedorX,
-        sendInsteadDT3,
+        solicitudCargaDT3,
         tableData1,
         dataTable2x,
         tableData3,
@@ -632,13 +633,13 @@ document.addEventListener('DOMContentLoaded', function () {
       );
       diT1Y(
         contenedorY,
-        sendInsteadDT3,
+        solicitudCargaDT3,
         tableData1Y,
         dataTable2y,
         tableData3Y,
         formDataObject
-      ); */
-      diagramI(sendInsteadFiltroTS2);
+      );
+      diagramI(filtroTS2);
       // diT1Y(contenedorY, sendInsteadDT3, formDataObject);
       //------Envío de datos (contenedor, solicitaciones de carga, a Diagrama de interacción)--------------
     } else if (formDataObject.generalSelect == 1) {
@@ -652,8 +653,8 @@ document.addEventListener('DOMContentLoaded', function () {
       //------Envío de datos (contenedor, solicitaciones de carga, a Diseño de de compresión Pura)--------------
       var contenedorX = document.getElementById('dcpT1X');
       var contenedorY = document.getElementById('dcpT1Y');
-      dcpT1X(contenedorX, sendInsteadDT3, formDataObject, tableData1);
-      dcpT1Y(contenedorY, sendInsteadDT3, formDataObject, tableData1);
+      dcpT1X(contenedorX, solicitudCargaDT3, formDataObject, tableData1);
+      dcpT1Y(contenedorY, solicitudCargaDT3, formDataObject, tableData1);
       //------Envío de datos (contenedor, solicitaciones de carga, a Diseño de de compresión Pura)--------------
     } else if (formDataObject.generalSelect == 3) {
       //------Envío de datos (contenedor, solicitaciones de carga, a Diseño por Deslizamiento)--------------
@@ -661,7 +662,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var contenedorY = document.getElementById('ddT1Y');
       ddT1X(
         contenedorX,
-        sendInsteadDT3,
+        solicitudCargaDT3,
         formDataObject,
         tableData3,
         tableData3Y
