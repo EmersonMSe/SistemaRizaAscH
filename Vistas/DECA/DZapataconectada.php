@@ -107,7 +107,7 @@ include_once "assets/views/nav.php";
                                                 <div class="col-12">
                                                     <label>Dimensiones de la columna 1</label>
                                                 </div>
-                                                <div class="col-md-6 mb-3">
+                                                <div class="col-md-12 mb-3">
                                                     <div class="input-group">
                                                         <span class="input-group-text col-3">Ancho</span>
                                                         <input type="number" name="anchoCol1" class="form-control text-center" id="anchoCol1" placeholder="0.6" step="any" value="0.6" min="0" required>
@@ -116,7 +116,7 @@ include_once "assets/views/nav.php";
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 mb-3">
+                                                <div class="col-md-12 mb-3">
                                                     <div class="input-group">
                                                         <span class="input-group-text col-3">Largo</span>
                                                         <input type="number" name="largoCol1" class="form-control text-center" id="largoCol1" placeholder="0.4" step="any" value="0.4" min="0" required>
@@ -130,7 +130,7 @@ include_once "assets/views/nav.php";
                                                 <div class="col-12">
                                                     <label>Dimensiones de la columna 2</label>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="input-group">
                                                         <span class="input-group-text col-3">Ancho</span>
                                                         <input type="number" name="anchoCol2" class="form-control text-center" id="anchoCol2" placeholder="0.8" step="any" value="0.8" min="0" required>
@@ -139,7 +139,7 @@ include_once "assets/views/nav.php";
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-12  mb-3">
                                                     <div class="input-group">
                                                         <span class="input-group-text col-3">Largo</span>
                                                         <input type="number" name="largoCol2" class="form-control text-center" id="largoCol2" placeholder="0.4" step="any" value="0.4" min="0" required>
@@ -153,7 +153,7 @@ include_once "assets/views/nav.php";
                                                 <div class="col-12">
                                                     <label>Dimensiones de la Zapata 1</label>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-12  mb-3">
                                                     <div class="input-group">
                                                         <span class="input-group-text col-3">Ancho</span>
                                                         <input type="number" name="anchoZap1" class="form-control text-center" id="anchoZap1" placeholder="1.2" step="any" value="1.2" min="0" required>
@@ -162,7 +162,7 @@ include_once "assets/views/nav.php";
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-12  mb-3">
                                                     <div class="input-group">
                                                         <span class="input-group-text col-3">Largo</span>
                                                         <input type="number" name="largoZap1" class="form-control text-center" id="largoZap1" placeholder="1.5" step="any" value="1.5" min="0" required>
@@ -176,7 +176,7 @@ include_once "assets/views/nav.php";
                                                 <div class="col-12">
                                                     <label>Dimensiones de la Zapata 2</label>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-12  mb-3">
                                                     <div class="input-group">
                                                         <span class="input-group-text col-3">Ancho</span>
                                                         <input type="number" name="anchoZap2" class="form-control text-center" id="anchoZap2" placeholder="1.5" step="any" value="1.5" min="0" required>
@@ -185,7 +185,7 @@ include_once "assets/views/nav.php";
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-12  mb-3">
                                                     <div class="input-group">
                                                         <span class="input-group-text col-3">Largo</span>
                                                         <input type="number" name="largoZap2" class="form-control text-center" id="largoZap2" placeholder="1.5" step="any" value="1.5" min="0" required>
@@ -199,7 +199,7 @@ include_once "assets/views/nav.php";
                                                 <div class="col-12">
                                                     <label>Viga</label>
                                                 </div>
-                                                <div class="col-md-12">
+                                                <div class="col-md-12  mb-3">
                                                     <div class="input-group">
                                                         <span class="input-group-text col-3">Ancho</span>
                                                         <input type="number" name="anchoViga" class="form-control text-center" id="anchoViga" placeholder="0.4" step="any" value="0.3" min="0" required>
@@ -213,7 +213,7 @@ include_once "assets/views/nav.php";
                                                 <div class="col-12">
                                                     <label>Luz libre entre columnas</label>
                                                 </div>
-                                                <div class="col-md-12">
+                                                <div class="col-md-12 mb-3">
                                                     <div class="input-group">
                                                         <span class="input-group-text col-3">ln</span>
                                                         <input type="number" name="lndiseño" class="form-control text-center" id="lndiseño" placeholder="5" step="any" value="5" min="0" required>

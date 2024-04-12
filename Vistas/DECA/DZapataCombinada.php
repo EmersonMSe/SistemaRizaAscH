@@ -436,7 +436,7 @@ include_once "assets/views/nav.php";
                                                 </div>
                                                 <div class="input-group">
                                                     <span class="input-group-text col-3">lv</span>
-                                                    <input type="text" name="lv_col1" class="form-control text-center col-12" id="lv_col1" placeholder="0.75" step="any" value="0.75" min=" 0" required>
+                                                    <input type="number" name="lv_col1" class="form-control text-center col-12" id="lv_col1" placeholder="0.75" step="any" value="0.75" min=" 0" required>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">cm</span>
                                                     </div>
@@ -448,7 +448,101 @@ include_once "assets/views/nav.php";
                                                 </div>
                                                 <div class="input-group">
                                                     <span class="input-group-text col-3">lv</span>
-                                                    <input type="text" name="lv_col2" class="form-control text-center col-12" id="lv_col2" placeholder="0.75" step="any" value="0.75" min=" 0" required>
+                                                    <input type="number" name="lv_col2" class="form-control text-center col-12" id="lv_col2" placeholder="0.75" step="any" value="0.75" min=" 0" required>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">cm</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 text-center">
+                                            <div class="col-md-6">
+
+                                                <div class="input-group">
+                                                    <span class="input-group-text col-3">d</span>
+                                                    <input type="number" name="d_col1" class="form-control text-center col-12" id="d_col1" placeholder="90.6" step="any" value="89.01" min=" 0" required>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">cm</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="input-group">
+                                                    <span class="input-group-text col-3">d</span>
+                                                    <input type="number" name="d_col2" class="form-control text-center col-12" id="d_col2" placeholder="90.6" step="any" value="89.01" min=" 0" required>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">cm</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 text-center">
+                                            <div class="col-6">
+                                                <label>Ф Varilla</label>
+                                            </div>
+                                            <div class="col-6">
+                                                <label>Ф Varilla</label>
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <select name="VarillaX_Col1" class="form-control" id="VarillaCol1" required>
+                                                    <option value="0">Ø 0"</option>
+                                                    <option value="0.28">6mm</option>
+                                                    <option value="0.5">8mm</option>
+                                                    <option value="0.71" selected>Ø 3/8"</option>
+                                                    <option value="1.13">12mm</option>
+                                                    <option value="1.29">Ø 1/2"</option>
+                                                    <option value="1.99">Ø 5/8"</option>
+                                                    <option value="2.84">Ø 3/4"</option>
+                                                    <option value="5.1">Ø 1"</option>
+                                                    <option value="10.06">Ø 1 3/8"</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select name="VarillaX_Col2" class="form-control" id="VarillaCol2" required>
+                                                    </option>
+                                                    <option value="0">Ø 0"</option>
+                                                    <option value="0.28">6mm</option>
+                                                    <option value="0.5">8mm</option>
+                                                    <option value="0.71" selected>Ø 3/8"</option>
+                                                    <option value="1.13">12mm</option>
+                                                    <option value="1.29">Ø 1/2"</option>
+                                                    <option value="1.99">Ø 5/8"</option>
+                                                    <option value="2.84">Ø 3/4"</option>
+                                                    <option value="5.1">Ø 1"</option>
+                                                    <option value="10.06">Ø 1 3/8"</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row mb-3 text-center">
+                                            <div class="col-md-6">
+
+                                                <div class="input-group">
+                                                    <span class="input-group-text col-3">ρmin</span>
+                                                    <input type="number" name="pmin_col1" class="form-control text-center col-12" id="pmin_col1" placeholder="0.0018" step="any" value="0.0018" min=" 0" required>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="input-group">
+                                                    <span class="input-group-text col-3">ρmin</span>
+                                                    <input type="number" name="pmin_col2" class="form-control text-center col-12" id="pmin_col2" placeholder="0.0018" step="any" value="0.0018" min=" 0" required>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3 text-center">
+                                            <div class="col-md-6">
+
+                                                <div class="input-group">
+                                                    <span class="input-group-text col-3">φ</span>
+                                                    <input type="number" name="fi_general" class="form-control text-center col-12" id="fi_general" placeholder="0.9" step="any" value="0.9" min=" 0" required>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">cm</span>
                                                     </div>
@@ -456,8 +550,135 @@ include_once "assets/views/nav.php";
                                             </div>
                                         </div>
 
+                                        <h2 class="text-center"><strong>Verificación por Corte y Punzonamiento</strong></h2>
+                                        <div class="row mb-3 text-center">
+                                            <div class="col-md-6">
+                                                <div class="col-12">
+                                                    <label>Columna 1</label>
+                                                </div>
+                                                <div class="input-group">
+                                                    <span class="input-group-text col-3">d</span>
+                                                    <input type="number" name="dvc_col1" class="form-control text-center col-12" id="dvc_col1" placeholder="91.55" step="any" value="91.55" min=" 0" required>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">cm</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="col-12">
+                                                    <label>Columna 2</label>
+                                                </div>
+                                                <div class="input-group">
+                                                    <span class="input-group-text col-3">d</span>
+                                                    <input type="number" name="dvc_col2" class="form-control text-center col-12" id="dvc_col2" placeholder="91.55" step="any" value="91.55" min=" 0" required>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">cm</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
+                                        <div class="row mb-3 text-center">
+                                            <div class="col-md-6">
 
+                                                <div class="input-group">
+                                                    <span class="input-group-text col-3">r</span>
+                                                    <input type="number" name="r_vc_col1" class="form-control text-center col-12" id="r_vc_col1" placeholder="7.5" step="any" value="7.5" min=" 0" required>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="input-group">
+                                                    <span class="input-group-text col-3">r</span>
+                                                    <input type="number" name="r_vc_col2" class="form-control text-center col-12" id="r_vc_col2" placeholder="7.5" step="any" value="7.5" min=" 0" required>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 text-center">
+                                            <div class="col-6">
+                                                <label>Ф Varilla</label>
+                                            </div>
+                                            <div class="col-6">
+                                                <label>Ф Varilla</label>
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <select name="VarillaVC_Col1" class="form-control" id="VarillaVC_Col1" required>
+                                                    <option value="0">Ø 0"</option>
+                                                    <option value="0.28">6mm</option>
+                                                    <option value="0.5">8mm</option>
+                                                    <option value="0.71" selected>Ø 3/8"</option>
+                                                    <option value="1.13">12mm</option>
+                                                    <option value="1.29">Ø 1/2"</option>
+                                                    <option value="1.99">Ø 5/8"</option>
+                                                    <option value="2.84">Ø 3/4"</option>
+                                                    <option value="5.1">Ø 1"</option>
+                                                    <option value="10.06">Ø 1 3/8"</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select name="VarillaVC_Col2" class="form-control" id="VarillaVC_Col2" required>
+                                                    </option>
+                                                    <option value="0">Ø 0"</option>
+                                                    <option value="0.28">6mm</option>
+                                                    <option value="0.5">8mm</option>
+                                                    <option value="0.71" selected>Ø 3/8"</option>
+                                                    <option value="1.13">12mm</option>
+                                                    <option value="1.29">Ø 1/2"</option>
+                                                    <option value="1.99">Ø 5/8"</option>
+                                                    <option value="2.84">Ø 3/4"</option>
+                                                    <option value="5.1">Ø 1"</option>
+                                                    <option value="10.06">Ø 1 3/8"</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 text-center">
+                                            <div class="col-6">
+                                                <label>Tipo de Columna y Factor α</label>
+                                            </div>
+                                            <div class="col-6">
+                                                <label>Tipo de Columna y Factor α</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select name="fa_Col1" class="form-control" id="fa_Col1" required>
+                                                    <option value="40">Columnas Interiores</option>
+                                                    <option value="30" selected>Columnas de Borde</option>
+                                                    <option value="20">Columnas de Esquina</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select name="fa_Col2" class="form-control" id="fa_Col2" required>
+                                                    <option value="40">Columnas Interiores</option>
+                                                    <option value="30" selected>Columnas de Borde</option>
+                                                    <option value="20">Columnas de Esquina</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 text-center">
+                                            <div class="col-6">
+                                                <label>∅</label>
+                                            </div>
+                                            <div class="col-6">
+                                                <label></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-text col-3">∅</span>
+                                                    <input type="number" name="ovcp" class="form-control text-center col-12" id="ovcp" placeholder="0.85" step="any" value="0.85" min=" 0" required>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select name="fa_Col2" class="form-control" id="fa_Col2" required>
+                                                    <option value="40" selected>Columnas Interiores</option>
+                                                    <option value="30">Columnas de Borde</option>
+                                                    <option value="20">Columnas de Esquina</option>
+                                                </select>
+                                            </div>
+                                        </div>
 
                                         <div class="row">
                                             <div class="col-12">
@@ -490,9 +711,16 @@ include_once "assets/views/nav.php";
                         </div>
                     </div> -->
                     <h2>Verificación por cortante</h2>
+                    
                     <div class="card">
                         <div class="d-flex justify-content-center">
                             <canvas id="myChart" width="1000" height="400"></canvas>
+                        </div>
+                    </div>
+                    <h2>Verificación por flexión</h2>
+                    <div class="card">
+                        <div class="d-flex justify-content-center">
+                            <canvas id="VC_flexion" width="1000" height="400"></canvas>
                         </div>
                     </div>
                 </div>
@@ -500,13 +728,13 @@ include_once "assets/views/nav.php";
                 <br>
                 <br>
                 <br>
-                <div class="card col-12 card-info" >
+                <div class="card col-12 card-info">
                     <div class="card-header ">
                         <h3>Resultados</h3>
                     </div>
                     <div class="card-body col-12">
-                            <div class="table-responsive" id="ObtenerResultados">
-                            </div>
+                        <div class="table-responsive" id="ObtenerResultados">
+                        </div>
                     </div>
                 </div>
 
