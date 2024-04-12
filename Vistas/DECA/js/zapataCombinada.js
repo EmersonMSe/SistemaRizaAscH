@@ -4,7 +4,6 @@ $(document).ready(function () {
   //  dibujarZapataIzquierda();
 
   // Llama a la función para generar el gráfico
-  generarGraficoLinealCurvo();
 
   // Tabla de entrada de datos
   var datacol1 = [
@@ -171,7 +170,7 @@ function dibujarZapataIzquierda() {
   });
 }
 
-function obtenerPuntosCorte(fila_columna1,fila_columna2) {
+function obtenerPuntosCorte(fila_columna1, fila_columna2) {
   // Datos de los puntos (x, y)
   var t1_col1 = document.getElementById("t1_col1").value;
   var Le = document.getElementById("Le").value;
@@ -206,7 +205,6 @@ function obtenerPuntosCorte(fila_columna1,fila_columna2) {
   P_COL1 = parseFloat(P_COL1);
   MX_COL1 = parseFloat(MX_COL1);
   MY_COL1 = parseFloat(MY_COL1);
-
 
   // Obtener la fila seleccionada por su ID
   var filaSeleccionada2 = document.getElementById(fila_columna2);
@@ -300,34 +298,163 @@ function obtenerPuntosCorte(fila_columna1,fila_columna2) {
     data: data,
     options: options,
   });
+  generarGraficoLinealCurvo(puntoY4, puntoY3);
 }
 
-function generarGraficoLinealCurvo() {
-var t1_col1F = document.getElementById("t1_col1").value;
-  //Puntos
-  PX1=0;
-  PX4= 0.5 * t1_col1F;
+function generarGraficoLinealCurvo(puntoY4, puntoY3) {
+  var t1_col1F = document.getElementById("t1_col1").value;
+  var t1_col1 = document.getElementById("t1_col1").value;
+  var Le_F = document.getElementById("Le").value;
+  var m2F = document.getElementById("m2").value;
+
+  var t1_col2F = document.getElementById("t1_col2").value;
+
+  // Convertir los valores a números de punto flotante (float)
+  var t1_col1F = parseFloat(t1_col1F);
+  var Le_F = parseFloat(Le_F);
+  var m2F = parseFloat(m2F);
+  var t1_col2F = parseFloat(t1_col2F);
+  //Puntos X
+  PX1 = 0;
+  PX4 = 0.5 * t1_col1F;
   PX2 = 0.25 * (PX4 - PX1) + PX1;
   PX3 = 0.25 * (PX4 - PX1) + PX2;
   PX5 = 0.5 * t1_col1F;
 
   VC_B32 = 0.5 * t1_col1F;
-  VC_D52= VC_D32
-  PX6 = 0.25 * (PX4 - PX1) + PX2;
+  VC_D32 = Le_F;
+  VC_H47 = parseFloat(puntoY4);
+  VC_D58 = parseFloat(puntoY3);
+  VC_D52 = VC_D32 / (1 + VC_H47 / (-1 * VC_D58));
+  PX6 = parseFloat((VC_D52 + VC_B32).toFixed(4));
+  console.log("VC_D32: " + VC_D32);
+  console.log("VC_H47: " + VC_H47);
+  console.log("VC_D58: " + VC_D58);
+  console.log("VC_D52: " + VC_D52);
+  console.log("VC_B32: " + VC_B32);
+
+  PX7 = 0.5 * t1_col1F + VC_D32;
+  PX8 = 0.5 * t1_col1F + VC_D32;
+  VC_J32 = m2F + 0.5 * t1_col2F;
+  PX11 = PX7 + VC_J32;
+  PX9 = 0.25 * (PX11 - PX7) + PX7;
+  PX10 = 0.5 * (PX11 - PX7) + PX8;
+  console.log("PX1: " + PX1);
+  console.log("PX2: " + PX2);
+  console.log("PX3: " + PX3);
+  console.log("PX4: " + PX4);
+  console.log("PX5: " + PX5);
+  console.log("PX6: " + PX6);
+  console.log("PX7: " + PX7);
+  console.log("PX8: " + PX8);
+  console.log("PX9: " + PX9);
+  console.log("PX10: " + PX10);
+  console.log("PX11: " + PX11);
+
+  //
+
+  var filaSelect1 = document.getElementById("selectVFColumna1").value;
+
+console.log("Valor de filaSeleccionadaF:", filaSelect1);
+  var filaSeleccionadaF = document.getElementById(filaSelect1);
+  // Acceder a las celdas dentro de la fila seleccionada
+  var celdasTablaF = filaSeleccionadaF.querySelectorAll("td");
+
+  // Obtener los valores de cada celda
+  var P_COLF1 = celdasTablaF[0].textContent.trim(); // Valor de la primera celda
+  var MX_COLF1 = celdasTablaF[1].textContent.trim(); // Valor de la segunda celda
+  var MY_COLF1 = celdasTablaF[2].textContent.trim(); // Valor de la tercera celda
+
+  P_COLF1 = parseFloat(P_COLF1);
+  MX_COLF1 = parseFloat(MX_COLF1);
+  MY_COLF1 = parseFloat(MY_COLF1);
+
+  var filaSelect2 = document.getElementById("selectVFColumna2").value;
+
+  // Obtener la fila seleccionada por su ID
+  var filaSeleccionadaF2 = document.getElementById(filaSelect2);
+
+  // Acceder a las celdas dentro de la fila seleccionada
+  var celdasTablaF2 = filaSeleccionadaF2.querySelectorAll("td");
+
+  // Obtener los valores de cada celda
+  var P_COLF2 = celdasTablaF2[0].textContent.trim(); // Valor de la primera celda
+  var MX_COLF2 = celdasTablaF2[1].textContent.trim(); // Valor de la segunda celda
+  var MY_COLF2 = celdasTablaF2[2].textContent.trim(); // Valor de la tercera celda
+
+  P_COLF2 = parseFloat(P_COLF2);
+  MX_COLF2 = parseFloat(MX_COLF2);
+  MY_COLF2 = parseFloat(MY_COLF2);
+
+
+  // Obtener el elemento por su ID
+  var BF = document.getElementById("valor_b").innerHTML;
+  var LF = document.getElementById("valor_L").innerHTML;
+  BF = parseFloat(BF);
+  LF = parseFloat(LF);
+  //CM+CV
+  PF = P_COLF1 + P_COLF2;
+  MXF = MX_COLF1 + MX_COLF2;
+
+  B11 = 0.5 * LF - 0.5 * t1_col1F;
+  G11 = 0.5 * LF - (m2F + 0.5 * t1_col2F);
+  MYF = -1 * MY_COLF1 - MY_COLF2 - P_COLF1 * B11 + P_COLF2 * G11;
+
+  // Utilizar el valor obtenido
+  CYF = LF / 2;
+  LXF = (BF * LF * LF * LF) / 12;
+  COL1_OF = PF / (BF * LF) + (MYF * CYF) / LXF;
+  COL2_OF = PF / (BF * LF) - (MYF * CYF) / LXF;
+  OF = Math.max(COL1_OF, COL2_OF);
+  OFF = O * BF;
+
+  //PUNTOS Y
+ PY1 = parseFloat((-1 * 0.5 * OFF * PX1 * PX1).toFixed(2));
+ PY2 = parseFloat((-1 * 0.5 * OFF * PX2 * PX2).toFixed(2));
+ PY3 = parseFloat((-1 * 0.5 * OFF * PX3 * PX3).toFixed(2));
+ PY4 = parseFloat((-1 * 0.5 * OFF * PX4 * PX4).toFixed(2));
+ PY5 = parseFloat((PY4 - MY_COLF1).toFixed(2));
+ PY6 = parseFloat((-1 * (PY5 + (VC_D58 * VC_D52) / 2)).toFixed(2));
+
+ F_J32 = parseFloat((m2F + 0.5 * t1_col2F).toFixed(2));
+ PY8 = parseFloat((-1 * OFF * F_J32).toFixed(2));
+ PY7 = parseFloat((PY8 - MY_COLF2).toFixed(2));
+
+ F_AM47 = parseFloat((0).toFixed(2));
+ F_AM45 = parseFloat((0.25 * (F_AM47 - F_J32) + F_J32).toFixed(2));
+ PY9 = parseFloat((-1 * OFF * F_AM45).toFixed(2));
+ F_AM46 = parseFloat((0.25 * (F_AM47 - F_J32) + F_AM45).toFixed(2));
+ PY10 = parseFloat((-1 * OFF * F_AM46).toFixed(2));
+ PY11 = parseFloat((-1 * OFF * F_AM47).toFixed(2));
+
+
+
+console.log("PY1: " + PY1);
+console.log("PY2: " + PY2);
+console.log("PY3: " + PY3);
+console.log("PY4: " + PY4);
+console.log("PY5: " + PY5);
+console.log("PY6: " + PY6);
+console.log("PY7: " + PY7);
+console.log("PY8: " + PY8);
+console.log("PY9: " + PY9);
+console.log("PY10: " + PY10);
+console.log("PY11: " + PY11);
+
 
   // Datos de los puntos
   var data = [
-    { x: 0, y: 0.0 },
-    { x: 0.0625, y: -0.205 },
-    { x: 0.125, y: -0.821 },
-    { x: 0.25, y: -3.284 },
-    { x: 0.25, y: -4.42 },
-    { x: 2.314837182, y: 166.0788492 },
-    { x: 5.25, y: -131.1183166 },
-    { x: 5.25, y: -131.3403166 },
-    { x: 5.5625, y: -98.50523743 },
-    { x: 5.875, y: -65.67015828 },
-    { x: 6.5, y: 0 },
+    { x: PX1, y: PY1 },
+    { x: PX2, y: PY2 },
+    { x: PX3, y: PY3 },
+    { x: PX4, y: PY4 },
+    { x: PX5, y: PY5 },
+    { x: PX6, y: PY6 },
+    { x: PX7, y: PY7 },
+    { x: PX8, y: PY8 },
+    { x: PX9, y: PY9 },
+    { x: PX10, y: PY10 },
+    { x: PX11, y: PY11 },
   ];
 
   // Filtrar los puntos para eliminar los duplicados de x
@@ -368,4 +495,3 @@ var t1_col1F = document.getElementById("t1_col1").value;
     },
   });
 }
-

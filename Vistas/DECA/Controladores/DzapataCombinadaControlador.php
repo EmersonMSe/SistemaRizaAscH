@@ -1129,9 +1129,123 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Area por punzonamiento
     $AreaP_col1 = $PerimetroP_col1 * $dvc_col1;
 
+   
+
+    //OBTENER LAS PRECIONES
+
+    $selectVFColumna1 = $_POST['selectVFColumna1'];
+
+    if (
+        $selectVFColumna1 === 'fila1_col1'
+    ) {
+        $P_COL1_CP = $CCU1_P;
+        $MX_COL1_CP = $CCC1_MX;
+        $MY_COL1_CP = $CCC1_MY;
+    } elseif ($selectVFColumna1 === 'fila2_col1') {
+        $P_COL1_CP = $CCU2_P;
+        $MX_COL1_CP = $CCC2_MX;
+        $MY_COL1_CP = $CCC2_MY;
+    } elseif ($selectVFColumna1 === 'fila3_col1') {
+        $P_COL1_CP = $CCU3_P;
+        $MX_COL1_CP = $CCC3_MX;
+        $MY_COL1_CP = $CCC3_MY;
+    } elseif ($selectVFColumna1 === 'fila4_col1') {
+        $P_COL1_CP = $CCU4_P;
+        $MX_COL1_CP = $CCC4_MX;
+        $MY_COL1_CP = $CCC4_MY;
+    } elseif ($selectVFColumna1 === 'fila5_col1') {
+        $P_COL1_CP = $CCU5_P;
+        $MX_COL1_CP = $CCC5_MX;
+        $MY_COL1_CP = $CCC5_MY;
+    } elseif ($selectVFColumna1 === 'fila6_col1') {
+        $P_COL1_CP = $CCU6_P;
+        $MX_COL1_CP = $CCC6_MX;
+        $MY_COL1_CP = $CCC6_MY;
+    } elseif ($selectVFColumna1 === 'fila7_col1') {
+        $P_COL1_CP = $CCU7_P;
+        $MX_COL1_CP = $CCC7_MX;
+        $MY_COL1_CP = $CCC7_MY;
+    } elseif ($selectVFColumna1 === 'fila8_col1') {
+        $P_COL1_CP = $CCU8_P;
+        $MX_COL1_CP = $CCC8_MX;
+        $MY_COL1_CP = $CCC8_MY;
+    } elseif ($selectVFColumna1 === 'fila9_col1') {
+        $P_COL1_CP = $CCU9_P;
+        $MX_COL1_CP = $CCC9_MX;
+        $MY_COL1_CP = $CCC9_MY;
+    }
+
+
+    // Para la segunda columna
+    if (isset($_POST['selectVFColumna2'])) {
+        $selectVFColumna2 = $_POST['selectVFColumna2'];
+
+        if (
+            $selectVFColumna2 === 'fila1_col2'
+        ) {
+            $P_COL2_CP = $CCU1_P2;
+            $MX_COL2_CP = $CCC1_MX2;
+            $MY_COL2_CP = $CCC1_MY2;
+        } elseif ($selectVFColumna2 === 'fila2_col2') {
+            $P_COL2_CP = $CCU2_P2;
+            $MX_COL2_CP = $CCC2_MX2;
+            $MY_COL2_CP = $CCC2_MY2;
+        } elseif ($selectVFColumna2 === 'fila3_col2') {
+            $P_COL2_CP = $CCU3_P2;
+            $MX_COL2_CP = $CCC3_MX2;
+            $MY_COL2_CP = $CCC3_MY2;
+        } elseif ($selectVFColumna2 === 'fila4_col2') {
+            $P_COL2_CP = $CCU4_P2;
+            $MX_COL2_CP = $CCC4_MX2;
+            $MY_COL2_CP = $CCC4_MY2;
+        } elseif ($selectVFColumna2 === 'fila5_col2') {
+            $P_COL2_CP = $CCU5_P2;
+            $MX_COL2_CP = $CCC5_MX2;
+            $MY_COL2_CP = $CCC5_MY2;
+        } elseif ($selectVFColumna2 === 'fila6_col2') {
+            $P_COL2_CP = $CCU6_P2;
+            $MX_COL2_CP = $CCC6_MX2;
+            $MY_COL2_CP = $CCC6_MY2;
+        } elseif ($selectVFColumna2 === 'fila7_col2') {
+            $P_COL2_CP = $CCU7_P2;
+            $MX_COL2_CP = $CCC7_MX2;
+            $MY_COL2_CP = $CCC7_MY2;
+        } elseif ($selectVFColumna2 === 'fila8_col2') {
+            $P_COL2_CP = $CCU8_P2;
+            $MX_COL2_CP = $CCC8_MX2;
+            $MY_COL2_CP = $CCC8_MY2;
+        } elseif ($selectVFColumna2 === 'fila9_col2') {
+            $P_COL2_CP = $CCU9_P2;
+            $MX_COL2_CP = $CCC9_MX2;
+            $MY_COL2_CP = $CCC9_MY2;
+        }
+    }
+
+    $P_CP = $P_COL1_CP + $P_COL2_CP;
+    $MX_CP = $MX_COL1_CP + $MX_COL2_CP;
+
+    $B11_CP = 0.5 * $L - 0.5 * $t1_col1;
+    $G11_CP = 0.5 * $L - ($m2 + 0.5 * $t1_col2);
+    $MY_CP = -1 * $MY_COL1_CP - $MY_COL2_CP - $P_COL1_CP * $B11_CP + $P_COL2_CP * $G11_CP;
+
+    // Utilizar el valor obtenido
+    $CY_CP = $L / 2;
+    $LX_CP = ($B * $L * $L * $L) / 12;
+    $COL1_O_CP = $P_CP / ($B * $L) + ($MY_CP * $CY_CP) / $LX_CP;
+    $COL2_O_CP = $P_CP / ($B * $L) - ($MY_CP * $CY_CP) / $LX_CP;
+    $O_CP = max($COL1_O_CP, $COL2_O_CP);
+    $OF_CP = round($O_CP * $B,2);
+
     //Cortante Critico Por Punzonamiento
-    
-    $CortanteCP_col1 = 40405.26;
+    $CortanteCP_col1 = ($P_CP * 1000) - ($OF_CP * 1000) * ($t2_col1 + ($dvc_col1 / 100)) * ($t1_col1 + (0.5* $dvc_col1 / 100));
+
+
+    var_dump($selectVFColumna1);
+    var_dump($selectVFColumna2);
+    var_dump($dvc_col1);
+    var_dump($t1_col1);
+    var_dump($t2_col1);
+    // $Vu= ;
 
     //Factor de DIm de la columna
     $Maxt1_t2_col1 = max($t1_col1, $t2_col1);
@@ -1183,7 +1297,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $AreaP_col2 = $PerimetroP_col2 * $dvc_col1;
 
     //Cortante Critico Por Punzonamiento
-    $CortanteCP_col2 = 40405.26;
+    $CortanteCP_col2
+    = $MY_CP * 1000 - $OF_CP * 1000 * ($t1_col1 + $dvc_col1 / 100) * ($t2_col2 + $dvc_col1 / 100);
 
     //Factor de DIm de la columna
     $Maxt1_t2_col2 = max($t1_col2, $t2_col2);
