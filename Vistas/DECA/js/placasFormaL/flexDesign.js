@@ -447,9 +447,10 @@ export function flexDesignT2X(contenedor, initialData) {
       }
       if (!allCellsFilled) {
         break;
-      } else {
-        alert('Guardado');
       }
+    }
+    if (allCellsFilled) {
+      alert('Guardado');
     }
     /* if (allCellsFilled) {
       console.log('Datos de la tabla T1X:', tableData);
@@ -1076,9 +1077,10 @@ export function flexDesignT2Y(contenedor, initialData) {
       }
       if (!allCellsFilled) {
         break;
-      } else {
-        alert('Guardado');
       }
+    }
+    if (allCellsFilled) {
+      alert('Guardado');
     }
     /* if (allCellsFilled) {
       console.log('Datos de la tabla T1X:', tableData);

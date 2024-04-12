@@ -213,261 +213,550 @@ document.addEventListener('DOMContentLoaded', function () {
       : 0.65;
 
   var formDF = `<form id="generalForm" class="mt-2" method="post">
-      <h5 class="text-center"><strong>Propiedades Geométricas</strong><button type="button" id="toggleButton" style="border: none; background: none;"><i class="fas fa-eye"></i></button></h5>
-      <div class="contenedor mb-5" id="contenedor_dcc">
-          <div class="col-md-12 mx-auto text-center">
-              <label for="exDF">ex</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="exDF" class="form-control text-center" id="exDF" placeholder="0.30" min="0" value="0.3" step="any" required>
-                  <div class="input-group-append">
-                      <span class="input-group-text">m</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="eyDF">ey</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="eyDF" class="form-control text-center" id="eyDF" placeholder="0.30" min="0" value="0.3" step="any" required>
-                  <div class="input-group-append">
-                      <span class="input-group-text">m</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="lxDF">Lx</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="lxDF" class="form-control text-center" id="lxDF" placeholder="6" min="0" step="any" value="6" required>
-                  <div class="input-group-append">
-                      <span class="input-group-text">m</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="lyDF">Ly</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="lyDF" class="form-control text-center" id="lyDF" placeholder="6" min="0" step="any" value="6" required>
-                  <div class="input-group-append">
-                      <span class="input-group-text">m</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="dxDF">dx</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="dxDF" class="form-control text-center" id="dxDF" placeholder="4.8" min="0" step="any" value="4.8" required>
-                  <div class="input-group-append">
-                      <span class="input-group-text">m</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="dyDF">dy</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="dyDF" class="form-control text-center" id="dyDF" placeholder="4.8" min="0" step="any" value="4.8" required>
-                  <div class="input-group-append">
-                      <span class="input-group-text">m</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="zcxDF">zCx</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="zcxDF" class="form-control text-center" id="zcxDF" placeholder="1.20" min="0" step="any" value="1.2" required>
-                  <div class="input-group-append">
-                      <span class="input-group-text">m</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="zCyDF">zCy</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="zCyDF" class="form-control text-center" id="zCyDF" placeholder="1.20" min="0" step="any" value="1.2" required>
-                  <div class="input-group-append">
-                      <span class="input-group-text">m</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="ezcxDF">ezcx</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="ezcxDF" class="form-control text-center" id="ezcxDF" placeholder="0.30" min="0" step="any" value="0.3" required>
-                  <div class="input-group-append">
-                      <span class="input-group-text">m</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="ezcyDF">ezcy</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="ezcyDF" class="form-control text-center" id="ezcyDF" placeholder="0.30" min="0" step="any" value="0.3" required>
-                  <div class="input-group-append">
-                      <span class="input-group-text">m</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="lnucxDF">Lnúcleo x</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="lnucxDF" class="form-control text-center" id="lnucxDF" placeholder="3.60" min="0" step="any" value="3.6" required>
-                  <div class="input-group-append">
-                      <span class="input-group-text">m</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="lnucyDF">Lnúcleo y</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="lnucyDF" class="form-control text-center" id="lnucyDF" placeholder="3.60" min="0" step="any" value="3.6" required>
-                  <div class="input-group-append">
-                      <span class="input-group-text">m</span>
-                  </div>
-              </div>
-          <div class="col-md-12 mx-auto text-center d-none">
-              <label for="acwxDC">Acwx</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="acwxDC" class="form-control text-center" id="acwxDC" placeholder="1.44" min="0" step="any" value="1.44" required>
-                  <div class="input-group-append">
-                      <span class="input-group-text">m²</span>
-                  </div>
-              </div>
-          <div class="col-md-12 mx-auto text-center d-none">
-              <label for="acwyDC">Acwy</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="acwyDC" class="form-control text-center" id="acwyDC" placeholder="1.44" min="0" step="any" value="1.44" required>
-                  <div class="input-group-append">
-                      <span class="input-group-text">m²</span>
-                  </div>
-              </div>
-          </div>
+  <div class="col-md-12 mx-auto text-center">
+    <label for="generalSelect">Cargar hoja</label>
+    <div class="input-group mb-2">
+      <select
+        name="generalSelect"
+        id="generalSelect"
+        class="form-control text-center"
+      >
+        <option value="0.9" selected>Flexión</option>
+        <option value="0.85">Corte</option>
+        <option value="0">Interacción</option>
+        <option value="1">Agrietamiento</option>
+        <option value="2">Compresión</option>
+        <option value="3">Deslizamiento</option>
+        <option value="4">Carga Puntual</option>
+        <option value="0.75">Flexo - Comprensión Normal</option>
+        <option value="0.7">Columna con Estribos</option>
+        <option value="0.75">Columna con Espirales</option>
+      </select>
+    </div>
+    <div id="generalSelectText">Ø ${generalSelect}</div>
+  </div>
+  <h5 class="text-center">
+    <strong>Propiedades Geométricas</strong
+    ><button
+      type="button"
+      id="toggleButton"
+      style="border: none; background: none"
+    >
+      <i class="fas fa-eye"></i>
+    </button>
+  </h5>
+  <div class="contenedor mb-5" id="contenedor_dcc" style="display: none;">
+    <div class="col-md-12 mx-auto text-center">
+      <label for="exDF">ex</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="exDF"
+          class="form-control text-center"
+          id="exDF"
+          placeholder="0.30"
+          min="0"
+          value="0.3"
+          step="any"
+          required
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">m</span>
+        </div>
       </div>
-      <h5 class="text-center"><strong>Propiedades Mecánicas</strong><button type="button" id="calccargars" style="border: none; background: none;"><i class="fas fa-eye"></i></button></h5>
-      <div class="contenedor_cc" id="contenedor_cc">
-          <div class="col-md-12 mx-auto text-center">
-              <label for="fcDF">f'c</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="fcDF" class="form-control text-center" id="fcDF" placeholder="280" min="0" step="any" value="280">
-                  <div class="input-group-append">
-                      <span class="input-group-text">kg/cm²</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="fyDF">fy</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="fyDF" class="form-control text-center" id="fyDF" placeholder="4200" min="0" step="any" value="4200">
-                  <div class="input-group-append">
-                      <span class="input-group-text">kg/cm²</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="generalSelect">Diseño</label>
-              <div class="input-group mb-2">
-                  <select name="generalSelect" id="generalSelect" class="form-control text-center">
-                      <option value="0.9" selected>Flexión</option>
-                      <option value="0.75">Flexo - Comprensión Normal</option>
-                      <option value="0.7">Columna con Estribos</option>
-                      <option value="0.75">Columna con Espirales</option>
-                      <option value="0.85">Corte</option>
-                      <option value="1">Agrietamiento</option>
-                      <option value="2">Compresión</option>
-                      <option value="3">Deslizamiento</option>
-                      <option value="4">Carga Puntual</option>
-                      <option value="0">Interacción</option>
-                  </select>
-              </div>
-              <div id="generalSelectText">Ø ${generalSelect}</div>
-          </div>
-          <div class="col-md-12 mx-auto text-center d-none">
-              <div class="input-group mb-2">
-                  <input type="number" name="designDF" class="form-control text-center" id="designDF" min="0" step="any" value="0.9">
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center d-none">
-              <label for="designDC"></label>
-              <div class="input-group mb-2">
-                  <input type="number" name="designDC" class="form-control text-center" id="designDC" min="0" step="any" value="0.85">
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center d-none">
-              <div class="input-group mb-2">
-                  <input type="number" name="designDFCN" class="form-control text-center" id="designDFCN" min="0" step="any" value="0.75">
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center d-none">
-              <div class="input-group mb-2">
-                  <input type="number" name="designDCEst" class="form-control text-center" id="designDCEst" min="0" step="any" value="0.7">
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center d-none">
-              <div class="input-group mb-2">
-                  <input type="number" name="designDCEsp" class="form-control text-center" id="designDCEsp" min="0" step="any" value="0.75">
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center d-none">
-              <div class="input-group mb-2">
-                  <input type="number" name="designCP" class="form-control text-center" id="designCP" min="0" step="any" value="0.7">
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center d-none">
-              <div class="input-group mb-2">
-                  <input type="number" name="agVA" class="form-control text-center" id="agVA" min="0" step="any" value="2.4">
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center d-none">
-              <div class="input-group mb-2">
-                  <input type="number" name="lgxVA" class="form-control text-center" id="lgxVA" min="0" step="any" value="7.2">
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center d-none">
-              <div class="input-group mb-2">
-                  <input type="number" name="lgyVA" class="form-control text-center" id="lgyVA" min="0" step="any" value="7.2">
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="ecDF">Ec</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="ecDF" class="form-control text-center" id="ecDF" placeholder="${ecDF}" min="0" step="any" value="${ecDF}">
-                  <div class="input-group-append">
-                      <span class="input-group-text">kg/cm²</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="esDF">Es</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="esDF" class="form-control text-center" id="esDF" placeholder="${esDF}" min="0" step="any" value="${esDF}">
-                  <div class="input-group-append">
-                      <span class="input-group-text">kg/cm²</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="ƐcDF">Ɛc</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="ƐcDF" class="form-control text-center" id="ƐcDF" placeholder="${ƐcDF}" min="0" step="any" value="${ƐcDF}">
-                  <div class="input-group-append">
-                      <span class="input-group-text">-</span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-12 mx-auto text-center">
-              <label for="β1DF">β1</label>
-              <div class="input-group mb-2">
-                  <input type="number" name="β1DF" class="form-control text-center" id="β1DF" placeholder="${β1DF}" min="0" step="any" value="${β1DF}">
-                  <div class="input-group-append">
-                      <span class="input-group-text">-</span>
-                  </div>
-              </div>
-          </div>
-      </div>                                                
-      <!-- Button Submit para Empezar a Diseñar el DOCUMENTO -->
-      <div class="col-md-12 mx-auto text-center">
-          <div class="d-grid gap-2 col-6 mx-auto">
-              <button class="btn btn-primary btn- text-center" type="submit">DISEÑAR</button>
-          </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="eyDF">ey</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="eyDF"
+          class="form-control text-center"
+          id="eyDF"
+          placeholder="0.30"
+          min="0"
+          value="0.3"
+          step="any"
+          required
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">m</span>
+        </div>
       </div>
-      </form>`;
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="lxDF">Lx</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="lxDF"
+          class="form-control text-center"
+          id="lxDF"
+          placeholder="6"
+          min="0"
+          step="any"
+          value="6"
+          required
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">m</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="lyDF">Ly</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="lyDF"
+          class="form-control text-center"
+          id="lyDF"
+          placeholder="6"
+          min="0"
+          step="any"
+          value="6"
+          required
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">m</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="dxDF">dx</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="dxDF"
+          class="form-control text-center"
+          id="dxDF"
+          placeholder="4.8"
+          min="0"
+          step="any"
+          value="4.8"
+          required
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">m</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="dyDF">dy</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="dyDF"
+          class="form-control text-center"
+          id="dyDF"
+          placeholder="4.8"
+          min="0"
+          step="any"
+          value="4.8"
+          required
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">m</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="zcxDF">zCx</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="zcxDF"
+          class="form-control text-center"
+          id="zcxDF"
+          placeholder="1.20"
+          min="0"
+          step="any"
+          value="1.2"
+          required
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">m</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="zCyDF">zCy</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="zCyDF"
+          class="form-control text-center"
+          id="zCyDF"
+          placeholder="1.20"
+          min="0"
+          step="any"
+          value="1.2"
+          required
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">m</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="ezcxDF">ezcx</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="ezcxDF"
+          class="form-control text-center"
+          id="ezcxDF"
+          placeholder="0.30"
+          min="0"
+          step="any"
+          value="0.3"
+          required
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">m</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="ezcyDF">ezcy</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="ezcyDF"
+          class="form-control text-center"
+          id="ezcyDF"
+          placeholder="0.30"
+          min="0"
+          step="any"
+          value="0.3"
+          required
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">m</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="lnucxDF">Lnúcleo x</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="lnucxDF"
+          class="form-control text-center"
+          id="lnucxDF"
+          placeholder="3.60"
+          min="0"
+          step="any"
+          value="3.6"
+          required
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">m</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="lnucyDF">Lnúcleo y</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="lnucyDF"
+          class="form-control text-center"
+          id="lnucyDF"
+          placeholder="3.60"
+          min="0"
+          step="any"
+          value="3.6"
+          required
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">m</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center d-none">
+      <label for="acwxDC">Acwx</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="acwxDC"
+          class="form-control text-center"
+          id="acwxDC"
+          placeholder="1.44"
+          min="0"
+          step="any"
+          value="1.44"
+          required
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">m²</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center d-none">
+      <label for="acwyDC">Acwy</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="acwyDC"
+          class="form-control text-center"
+          id="acwyDC"
+          placeholder="1.44"
+          min="0"
+          step="any"
+          value="1.44"
+          required
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">m²</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h5 class="text-center">
+    <strong>Propiedades Mecánicas</strong
+    ><button
+      type="button"
+      id="calccargars"
+      style="border: none; background: none"
+    >
+      <i class="fas fa-eye"></i>
+    </button>
+  </h5>
+  <div class="contenedor_cc" id="contenedor_cc" style="display: none;">
+    <div class="col-md-12 mx-auto text-center">
+      <label for="fcDF">f'c</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="fcDF"
+          class="form-control text-center"
+          id="fcDF"
+          placeholder="280"
+          min="0"
+          step="any"
+          value="280"
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">kg/cm²</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="fyDF">fy</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="fyDF"
+          class="form-control text-center"
+          id="fyDF"
+          placeholder="4200"
+          min="0"
+          step="any"
+          value="4200"
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">kg/cm²</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 mx-auto text-center d-none">
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="designDF"
+          class="form-control text-center"
+          id="designDF"
+          min="0"
+          step="any"
+          value="0.9"
+        />
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center d-none">
+      <label for="designDC"></label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="designDC"
+          class="form-control text-center"
+          id="designDC"
+          min="0"
+          step="any"
+          value="0.85"
+        />
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center d-none">
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="designDFCN"
+          class="form-control text-center"
+          id="designDFCN"
+          min="0"
+          step="any"
+          value="0.75"
+        />
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center d-none">
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="designDCEst"
+          class="form-control text-center"
+          id="designDCEst"
+          min="0"
+          step="any"
+          value="0.7"
+        />
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center d-none">
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="designDCEsp"
+          class="form-control text-center"
+          id="designDCEsp"
+          min="0"
+          step="any"
+          value="0.75"
+        />
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center d-none">
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="designCP"
+          class="form-control text-center"
+          id="designCP"
+          min="0"
+          step="any"
+          value="0.7"
+        />
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center d-none">
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="agVA"
+          class="form-control text-center"
+          id="agVA"
+          min="0"
+          step="any"
+          value="2.4"
+        />
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center d-none">
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="lgxVA"
+          class="form-control text-center"
+          id="lgxVA"
+          min="0"
+          step="any"
+          value="7.2"
+        />
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center d-none">
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="lgyVA"
+          class="form-control text-center"
+          id="lgyVA"
+          min="0"
+          step="any"
+          value="7.2"
+        />
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="ecDF">Ec</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="ecDF"
+          class="form-control text-center"
+          id="ecDF"
+          placeholder="${ecDF}"
+          min="0"
+          step="any"
+          value="${ecDF}"
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">kg/cm²</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="esDF">Es</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="esDF"
+          class="form-control text-center"
+          id="esDF"
+          placeholder="${esDF}"
+          min="0"
+          step="any"
+          value="${esDF}"
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">kg/cm²</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="ƐcDF">Ɛc</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="ƐcDF"
+          class="form-control text-center"
+          id="ƐcDF"
+          placeholder="${ƐcDF}"
+          min="0"
+          step="any"
+          value="${ƐcDF}"
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">-</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto text-center">
+      <label for="β1DF">β1</label>
+      <div class="input-group mb-2">
+        <input
+          type="number"
+          name="β1DF"
+          class="form-control text-center"
+          id="β1DF"
+          placeholder="${β1DF}"
+          min="0"
+          step="any"
+          value="${β1DF}"
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Button Submit para Empezar a Diseñar el DOCUMENTO -->
+  <div class="d-flex justify-content-center">
+    <button class="btn btn-primary" type="submit">DISEÑAR</button>
+  </div>
+</form>`;
 
   //--------------Diseño por Flexión---------------------
 
@@ -652,6 +941,13 @@ document.addEventListener('DOMContentLoaded', function () {
       /* flexDesignT1(contenedor, solicitudCargaDT3, formDataObject); */
       flexDesignT1X(contenedorX, solicitudCargaDT3, formDataObject);
       flexDesignT1Y(contenedorY, solicitudCargaDT3, formDataObject);
+      document.getElementById('content2').classList.remove('d-none');
+      document.getElementById('content3').classList.add('d-none');
+      document.getElementById('content4').classList.add('d-none');
+      document.getElementById('content5').classList.add('d-none');
+      document.getElementById('content6').classList.add('d-none');
+      document.getElementById('content7').classList.add('d-none');
+      document.getElementById('content8').classList.add('d-none');
       /* flexDesingT1 */
       /* dibujarLine(canva); */
     } else if (formDataObject.generalSelect == 0.85) {
@@ -665,6 +961,13 @@ document.addEventListener('DOMContentLoaded', function () {
       /* flexDesignT1(contenedor, solicitudCargaDT3, formDataObject); */
       cutDesignT1X(contenedorX, solicitudCargaDT3, formDataObject);
       cutDesignT1Y(contenedorY, solicitudCargaDT3, formDataObject);
+      document.getElementById('content2').classList.add('d-none');
+      document.getElementById('content3').classList.remove('d-none');
+      document.getElementById('content4').classList.add('d-none');
+      document.getElementById('content5').classList.add('d-none');
+      document.getElementById('content6').classList.add('d-none');
+      document.getElementById('content7').classList.add('d-none');
+      document.getElementById('content8').classList.add('d-none');
       /* flexDesingT1 */
       /* dibujarLine(canva); */
       //--------------Envío de datos (contenedor, solicitaciones de carga, a Diseño por Corte)---------------------
@@ -672,6 +975,30 @@ document.addEventListener('DOMContentLoaded', function () {
       //------Envío de datos (contenedor, solicitaciones de carga, a Diagrama de interacción)--------------
       var contenedorX = document.getElementById('diT1X');
       var contenedorY = document.getElementById('diT1Y');
+      if (tableData1 == []) {
+        alert('Llene datos en la tabla 1 X-X de diseño corte');
+        return;
+      }
+      if (tableData1Y == []) {
+        alert('Llene datos en la tabla 1 Y-Y de diseño corte');
+        return;
+      }
+      if (dataTable2x == []) {
+        alert('Llene datos en la tabla 2 X-X de diseño flexión');
+        return;
+      }
+      if (dataTable2y == []) {
+        alert('Llene datos en la tabla 2 Y-Y de diseño flexión');
+        return;
+      }
+      if (tableData3 == []) {
+        alert('Llene datos en la tabla 3 X-X de diseño corte');
+        return;
+      }
+      if (tableData3Y == []) {
+        alert('Llene datos en la tabla 3 Y-Y de diseño corte');
+        return;
+      }
       diT1X(
         contenedorX,
         solicitudCargaDT3,
@@ -689,10 +1016,24 @@ document.addEventListener('DOMContentLoaded', function () {
         formDataObject
       );
       diagramI(filtroTS2);
+      document.getElementById('content2').classList.add('d-none');
+      document.getElementById('content3').classList.add('d-none');
+      document.getElementById('content4').classList.remove('d-none');
+      document.getElementById('content5').classList.add('d-none');
+      document.getElementById('content6').classList.add('d-none');
+      document.getElementById('content7').classList.add('d-none');
+      document.getElementById('content8').classList.add('d-none');
       // diT1Y(contenedorY, sendInsteadDT3, formDataObject);
       //------Envío de datos (contenedor, solicitaciones de carga, a Diagrama de interacción)--------------
     } else if (formDataObject.generalSelect == 1) {
       //------Envío de datos (contenedor, solicitaciones de carga, a Verificación por Agrietamiento)--------------
+      document.getElementById('content2').classList.add('d-none');
+      document.getElementById('content3').classList.add('d-none');
+      document.getElementById('content4').classList.add('d-none');
+      document.getElementById('content5').classList.remove('d-none');
+      document.getElementById('content6').classList.add('d-none');
+      document.getElementById('content7').classList.add('d-none');
+      document.getElementById('content8').classList.add('d-none');
       var contenedorX = document.getElementById('vaT1X');
       var contenedorY = document.getElementById('vaT1Y');
       vaT1X(contenedorX, solicitudCargaDT3, formDataObject);
@@ -700,6 +1041,13 @@ document.addEventListener('DOMContentLoaded', function () {
       //------Envío de datos (contenedor, solicitaciones de carga, a Verificación por Agrietamiento)--------------
     } else if (formDataObject.generalSelect == 2) {
       //------Envío de datos (contenedor, solicitaciones de carga, a Diseño de de compresión Pura)--------------
+      document.getElementById('content2').classList.add('d-none');
+      document.getElementById('content3').classList.add('d-none');
+      document.getElementById('content4').classList.add('d-none');
+      document.getElementById('content5').classList.add('d-none');
+      document.getElementById('content6').classList.remove('d-none');
+      document.getElementById('content7').classList.add('d-none');
+      document.getElementById('content8').classList.add('d-none');
       var contenedorX = document.getElementById('dcpT1X');
       var contenedorY = document.getElementById('dcpT1Y');
       dcpT1X(contenedorX, solicitudCargaDT3, formDataObject, tableData1);
@@ -709,6 +1057,13 @@ document.addEventListener('DOMContentLoaded', function () {
       //------Envío de datos (contenedor, solicitaciones de carga, a Diseño por Deslizamiento)--------------
       var contenedorX = document.getElementById('ddT1X');
       var contenedorY = document.getElementById('ddT1Y');
+      document.getElementById('content2').classList.add('d-none');
+      document.getElementById('content3').classList.add('d-none');
+      document.getElementById('content4').classList.add('d-none');
+      document.getElementById('content5').classList.add('d-none');
+      document.getElementById('content6').classList.add('d-none');
+      document.getElementById('content7').classList.remove('d-none');
+      document.getElementById('content8').classList.add('d-none');
       ddT1X(
         contenedorX,
         solicitudCargaDT3,
@@ -727,6 +1082,13 @@ document.addEventListener('DOMContentLoaded', function () {
     } else if (formDataObject.generalSelect == 4) {
       //------Envío de datos (contenedor, solicitaciones de carga, a Efecto Local -Carga Puntual)--------------
       var contenedor = document.getElementById('elT1');
+      document.getElementById('content2').classList.add('d-none');
+      document.getElementById('content3').classList.add('d-none');
+      document.getElementById('content4').classList.add('d-none');
+      document.getElementById('content5').classList.add('d-none');
+      document.getElementById('content6').classList.add('d-none');
+      document.getElementById('content7').classList.add('d-none');
+      document.getElementById('content8').classList.remove('d-none');
       elT1(contenedor, formDataObject, tableData1);
       //------Envío de datos (contenedor, solicitaciones de carga, a Efecto Local -Carga Puntual)--------------
     }

@@ -220,7 +220,7 @@ export function dcpT1Y(contenedor, initialData, formData, tableData1DC) {
       { type: 'numeric', readOnly: true }, // k
       { type: 'numeric', readOnly: true }, // ØPn (Ton)
       { type: 'numeric', readOnly: true }, // Pu (Ton)
-      { type: 'numeric' }, // Verificación de la Compresión Pura
+      { type: 'text' }, // Verificación de la Compresión Pura
     ],
     afterChange: function (changes, source) {
       if (source === 'edit') {

@@ -212,14 +212,14 @@ export function elT1(contenedor, formData, table1) {
   function nextTab2() {
     elT1Data = hot.getData();
     var contenedor = document.getElementById('elT2');
-    elT2(contenedor, initialData);
+    elT2(contenedor, elT1Data);
   }
 }
 
-function elT2(contenedor, initialData) {
+function elT2(contenedor, elT1Data) {
   var container = contenedor;
   var data = [];
-  for (let i = 0; i < initialData.length; i++) {
+  for (let i = 0; i < elT1Data.length; i++) {
     var aplica = 'Sí';
     var Bcol = aplica == 'Sí' ? elT1Data[i][5] + 0.1 : '-';
     var aplicaDesign =
@@ -277,11 +277,10 @@ function elT2(contenedor, initialData) {
               design = 'Diseña Sección como si Fuera una Columna';
             } else if (aplica == 'No') {
               bcol = '-';
-              design =
-                'Diseña Sección como si Fuera una Columna","No Diseñar y/o Verificar';
+              design = 'No Diseñar y/o Verificar';
             }
             hot.setDataAtCell(row, 2, bcol);
-            hot.setDataAtCell(row, 3, bcol);
+            hot.setDataAtCell(row, 3, design);
           }
         });
       }

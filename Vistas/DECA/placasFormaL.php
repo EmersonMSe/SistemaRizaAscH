@@ -44,7 +44,7 @@ if (1 == 1 || 1 == 1) {
                         <h3 class="card-title">SOLICITACIONES DE CARGA</h3>                
                             <button class="collapsible-btn ml-auto" data-target="content1">ver / ocultar</button>                     
                     </div>
-                    <div class="card-body p-3 m-0" class="collapsible-content" id="content1">
+                    <div class="card-body p-3 m-0 d-none" class="collapsible-content" id="content1">
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-column">
                                 <div id="solicitudCargaT1"></div>
@@ -88,14 +88,14 @@ if (1 == 1 || 1 == 1) {
                                 <button class="collapsible-btn ml-auto" data-target="content2">ver / ocultar</button>
                             </div>
                             <!-- Tablas interiores -->
-                            <div class="card-body p-0 m-0" class="collapsible-content" id="content2">
+                            <div class="card-body p-0 m-0 d-none" class="collapsible-content" id="content2">
                                 <!-- <div style="width: 100%; height: 500px;" class="mb-5 d-none">
                                                     <canvas id="graphDF" width="500" height="500"></canvas>
                                                 </div> -->
                                 <!-- Tabla Análisis en Dirección "x" -->
                                 <div class="card m-0">
                                     <div class="card-header d-flex justify-content-between">Análisis en dirección "X" <button class="collapsible-btn ml-auto mr-5" data-target="contentDFx">ver / ocultar</button></div>
-                                    <div class="card-body collapsible-content" id="contentDFx">
+                                    <div class="card-body collapsible-content d-none" id="contentDFx">
                                         <div class="d-flex flex-column">
                                             <div class="d-flex flex-column mb-5">
                                                 <div id="flexDesingT1X"></div>
@@ -121,7 +121,7 @@ if (1 == 1 || 1 == 1) {
                                 <!-- Tabla Análisis en Dirección "y" -->
                                 <div class="card m-0">
                                     <div class="card-header d-flex justify-content-between">Análisis en dirección "Y" <button class="collapsible-btn ml-auto mr-5" data-target="contentDFy">ver / ocultar</button></div>
-                                    <div class="card-body collapsible-content" id="contentDFy">
+                                    <div class="card-body collapsible-content d-none" id="contentDFy">
                                         <div class="d-flex flex-column">
                                             <div class="d-flex flex-column">
                                                 <div class="d-flex flex-column mb-5">
@@ -157,14 +157,14 @@ if (1 == 1 || 1 == 1) {
                                 <button class="collapsible-btn ml-auto" data-target="content3">ver / ocultar</button>
                             </div>
                             <!-- Tablas interiores -->
-                            <div class="card-body p-0 m-0" class="collapsible-content" id="content3">
+                            <div class="card-body p-0 m-0 d-none" class="collapsible-content" id="content3">
                                 <!-- <div style="width: 100%; height: 500px;" class="mb-5 d-none">
                                                     <canvas id="graphDF" width="500" height="500"></canvas>
                                                 </div> -->
                                 <!-- Tabla Análisis en Dirección "x" -->
                                 <div class="card m-0">
                                     <div class="card-header d-flex justify-content-between">Análisis en dirección "X" <button class="collapsible-btn ml-auto mr-5" data-target="contentDCx">ver / ocultar</button></div>
-                                    <div class="card-body collapsible-content" id="contentDCx">
+                                    <div class="card-body collapsible-content d-none" id="contentDCx">
                                         <div class="d-flex flex-column">
                                             <div class="d-flex flex-column mb-5">
                                                 <div id="cutDesingT1X" class="table-container"></div>
@@ -193,7 +193,7 @@ if (1 == 1 || 1 == 1) {
                                 <!-- Tabla Análisis en Dirección "y" -->
                                 <div class="card m-0">
                                     <div class="card-header d-flex justify-content-between">Análisis en dirección "Y" <button class="collapsible-btn ml-auto mr-5" data-target="contentDCy">ver / ocultar</button></div>
-                                    <div class="card-body collapsible-content" id="contentDCy">
+                                    <div class="card-body collapsible-content d-none" id="contentDCy">
                                         <div class="d-flex flex-column">
                                             <div class="d-flex flex-column mb-5">
                                                 <div id="cutDesingT1Y" class="table-container"></div>
@@ -230,14 +230,14 @@ if (1 == 1 || 1 == 1) {
                                 <button class="collapsible-btn ml-auto" data-target="content4">ver / ocultar</button>
                             </div>
                             <!-- Tablas interiores -->
-                            <div class="card-body p-0 m-0" class="collapsible-content" id="content4">
+                            <div class="card-body p-0 m-0 d-none" class="collapsible-content" id="content4">
                                 <!-- <div style="width: 100%; height: 500px;" class="mb-5 d-none">
                                                     <canvas id="graphDF" width="500" height="500"></canvas>
                                                 </div> -->
                                 <!-- Tabla Análisis en Dirección "x" -->
                                 <div class="card m-0">
                                     <div class="card-header d-flex justify-content-between">Análisis en dirección "X" <button class="collapsible-btn ml-auto mr-5" data-target="contentDIx">ver / ocultar</button></div>
-                                    <div class="card-body collapsible-content" id="contentDIx">
+                                    <div class="card-body collapsible-content d-none" id="contentDIx">
                                         <div class="d-flex flex-column">
                                             <div class="d-flex flex-column mb-5">
                                                 <div id="diT1X" class="table-container"></div>
@@ -266,7 +266,7 @@ if (1 == 1 || 1 == 1) {
                                 <!-- Tabla Análisis en Dirección "y" -->
                                 <div class="card m-0">
                                     <div class="card-header d-flex justify-content-between">Análisis en dirección "Y" <button class="collapsible-btn ml-auto mr-5" data-target="contentDIy">ver / ocultar</button></div>
-                                    <div class="card-body collapsible-content" id="contentDIy">
+                                    <div class="card-body collapsible-content d-none" id="contentDIy">
                                         <div class="d-flex flex-column">
                                             <div class="d-flex flex-column mb-5">
                                                 <div id="diT1Y" class="table-container"></div>
@@ -296,7 +296,7 @@ if (1 == 1 || 1 == 1) {
                                 <div class="card m-0">
                                     <div class="card-header d-flex justify-content-between">Diagramas de Interacción</div>
                                     <div class="card-body">
-                                        <div class="d-flex" id="diagramsContainer">
+                                        <div class="d-flex flex-column" id="diagramsContainer">
                                         </div>
                                     </div>
                                 </div>
@@ -311,7 +311,7 @@ if (1 == 1 || 1 == 1) {
                                 <button class="collapsible-btn ml-auto" data-target="content5">ver / ocultar</button>
                             </div>
                             <!-- Tablas interiores -->
-                            <div class="card-body p-0 m-0" class="collapsible-content" id="content5">
+                            <div class="card-body p-0 m-0 d-none" class="collapsible-content" id="content5">
 
                                 <!-- <div style="width: 100%; height: 500px;" class="mb-5 d-none">
                                                     <canvas id="graphDF" width="500" height="500"></canvas>
@@ -319,7 +319,7 @@ if (1 == 1 || 1 == 1) {
                                 <!-- Tabla Análisis en Dirección "x" -->
                                 <div class="card m-0">
                                     <div class="card-header d-flex justify-content-between">Análisis en dirección "X" <button class="collapsible-btn ml-auto mr-5" data-target="contentVAx">ver / ocultar</button></div>
-                                    <div class="card-body collapsible-content" id="contentVAx">
+                                    <div class="card-body collapsible-content d-none" id="contentVAx">
 
                                         <div class="d-flex flex-column">
                                             <div id="vaT1X" class="table-container"></div>
@@ -330,7 +330,7 @@ if (1 == 1 || 1 == 1) {
                                 <!-- Tabla Análisis en Dirección "y" -->
                                 <div class="card m-0">
                                     <div class="card-header d-flex justify-content-between">Análisis en dirección "Y" <button class="collapsible-btn ml-auto mr-5" data-target="contentVAy">ver / ocultar</button></div>
-                                    <div class="card-body collapsible-content" id="contentVAy">
+                                    <div class="card-body collapsible-content d-none" id="contentVAy">
                                         <div class="d-flex flex-column">
                                             <div id="vaT1Y" class="table-container"></div>
                                         </div>
@@ -347,14 +347,14 @@ if (1 == 1 || 1 == 1) {
                                 <button class="collapsible-btn ml-auto" data-target="content6">ver / ocultar</button>
                             </div>
                             <!-- Tablas interiores -->
-                            <div class="card-body p-0 m-0" class="collapsible-content" id="content6">
+                            <div class="card-body p-0 m-0 d-none" class="collapsible-content" id="content6">
                                 <!-- <div style="width: 100%; height: 500px;" class="mb-5 d-none">
                                                     <canvas id="graphDF" width="500" height="500"></canvas>
                                                 </div> -->
                                 <!-- Tabla Análisis en Dirección "x" -->
                                 <div class="card m-0">
                                     <div class="card-header d-flex justify-content-between">Análisis en dirección "X" <button class="collapsible-btn ml-auto mr-5" data-target="contentDCPx">ver / ocultar</button></div>
-                                    <div class="card-body collapsible-content" id="contentDCPx">
+                                    <div class="card-body collapsible-content d-none" id="contentDCPx">
                                         <div class="d-flex flex-column">
                                             <div id="dcpT1X" class="table-container"></div>
                                         </div>
@@ -363,7 +363,7 @@ if (1 == 1 || 1 == 1) {
                                 <!-- Tabla Análisis en Dirección "y" -->
                                 <div class="card m-0">
                                     <div class="card-header d-flex justify-content-between">Análisis en dirección "Y" <button class="collapsible-btn ml-auto mr-5" data-target="contentDCPy">ver / ocultar</button></div>
-                                    <div class="card-body collapsible-content" id="contentDCPy">
+                                    <div class="card-body collapsible-content d-none" id="contentDCPy">
                                         <div class="d-flex flex-column">
                                             <div id="dcpT1Y" class="table-container"></div>
                                         </div>
@@ -380,14 +380,14 @@ if (1 == 1 || 1 == 1) {
                                 <button class="collapsible-btn ml-auto" data-target="content7">ver / ocultar</button>
                             </div>
                             <!-- Tablas interiores -->
-                            <div class="card-body p-0 m-0" class="collapsible-content" id="content7">
+                            <div class="card-body p-0 m-0 d-none" class="collapsible-content" id="content7">
                                 <!-- <div style="width: 100%; height: 500px;" class="mb-5 d-none">
                                                     <canvas id="graphDF" width="500" height="500"></canvas>
                                                 </div> -->
                                 <!-- Tabla Análisis en Dirección "x" -->
                                 <div class="card m-0">
                                     <div class="card-header d-flex justify-content-between">Análisis en dirección "X" <button class="collapsible-btn ml-auto mr-5" data-target="contentDDx">ver / ocultar</button></div>
-                                    <div class="card-body collapsible-content" id="contentDDx">
+                                    <div class="card-body collapsible-content d-none" id="contentDDx">
                                         <div class="d-flex flex-column">
                                             <div id="ddT1X" class="table-container"></div>
                                             <div class="d-flex justify-content-start">
@@ -402,7 +402,7 @@ if (1 == 1 || 1 == 1) {
                                 <!-- Tabla Análisis en Dirección "y" -->
                                 <div class="card m-0">
                                     <div class="card-header d-flex justify-content-between">Análisis en dirección "Y" <button class="collapsible-btn ml-auto mr-5" data-target="contentDDy">ver / ocultar</button></div>
-                                    <div class="card-body collapsible-content" id="contentDDy">
+                                    <div class="card-body collapsible-content d-none" id="contentDDy">
                                         <div class="d-flex flex-column">
                                             <div id="ddT1Y" class="table-container"></div>
                                             <div class="d-flex justify-content-start">
@@ -425,13 +425,13 @@ if (1 == 1 || 1 == 1) {
                                 <button class="collapsible-btn ml-auto" data-target="content8">ver / ocultar</button>
                             </div>
                             <!-- Tablas interiores -->
-                            <div class="card-body p-0 m-0" class="collapsible-content" id="content8">
+                            <div class="card-body p-0 m-0 d-none" class="collapsible-content" id="content8">
                                 <!-- <div style="width: 100%; height: 500px;" class="mb-5 d-none">
                                                     <canvas id="graphDF" width="500" height="500"></canvas>
                                                 </div> -->
                                 <div class="card m-0">
                                     <div class="card-header d-flex justify-content-between">Efecto Local - Carga Puntual<button class="collapsible-btn ml-auto mr-5" data-target="contentEL">ver / ocultar</button></div>
-                                    <div class="card-body collapsible-content" id="contentEL">
+                                    <div class="card-body collapsible-content d-none" id="contentEL">
                                         <div class="d-flex flex-column">
                                             <div id="elT1" class="table-container"></div>
                                             <div class="d-flex justify-content-start">

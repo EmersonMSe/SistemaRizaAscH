@@ -1,7 +1,7 @@
 /* ------------------------ Análsis en X ------------------------ */
 var tableDI1X = [];
 var tableDI1Y = [];
-
+var Charts = {};
 export function diT1X(
   contenedor,
   solicitaciones,
@@ -763,18 +763,24 @@ export function diagramI(solicitacionesVarios) {
     var PairContainer = document.createElement('div');
     var rowContainer1 = document.createElement('div');
     var rowContainer2 = document.createElement('div');
+    var rowContainer3 = document.createElement('div');
 
     var tableContainer1SC = document.createElement('div');
+    var tableContainer1MDI = document.createElement('div');
     var tableContainer1DI = document.createElement('div');
+    var tableContainer1DIE = document.createElement('div');
     var buttonD1 = document.createElement('button');
     buttonD1.textContent = 'Generar gráfico Izquierdo';
-    
+
     var tableContainer2SC = document.createElement('div');
+    var tableContainer2MDI = document.createElement('div');
     var tableContainer2DI = document.createElement('div');
+    var tableContainer2DIE = document.createElement('div');
     var buttonD2 = document.createElement('button');
     buttonD2.textContent = 'Generar gráfico Derecho';
 
     tableContainer1SC.id = `hotTableContainerISC${cont}`;
+    tableContainer1SC.classList.add('mr-1');
     tableContainer2SC.id = `hotTableContainerDSC${cont}`;
     tableContainer1DI.id = `hotTableContainerIDI${cont}`;
     buttonD1.id = `buttonIDI${cont}`;
@@ -784,7 +790,10 @@ export function diagramI(solicitacionesVarios) {
     // Agregar clases, estilos o cualquier otro atributo necesario al nuevo div
     PairContainer.classList.add('d-flex', 'flex-column');
     rowContainer1.classList.add('d-flex');
-    rowContainer2.classList.add('d-flex');
+    rowContainer2.classList.add('row');
+    rowContainer3.classList.add('d-flex', 'flex-wrap');
+    tableContainer1MDI.classList = 'col-md-5';
+    tableContainer2MDI.classList = 'col-md-5';
 
     PairContainer.id = `diagramsContainer${cont}`;
 
@@ -795,32 +804,39 @@ export function diagramI(solicitacionesVarios) {
     contenedor.appendChild(PairContainer);
     PairContainer.appendChild(rowContainer1);
     PairContainer.appendChild(rowContainer2);
+    PairContainer.appendChild(rowContainer3);
     rowContainer1.appendChild(tableContainer1SC);
-    rowContainer2.appendChild(tableContainer1DI);
-    rowContainer2.appendChild(buttonD1);
+    tableContainer1MDI.appendChild(tableContainer1DI);
+    tableContainer1MDI.appendChild(tableContainer1DIE);
+    tableContainer1MDI.appendChild(buttonD1);
+    rowContainer2.appendChild(tableContainer1MDI);
     rowContainer1.appendChild(tableContainer2SC);
-    rowContainer2.appendChild(tableContainer2DI);
-    rowContainer2.appendChild(buttonD2);
+    tableContainer2MDI.appendChild(tableContainer2DI);
+    tableContainer2MDI.appendChild(tableContainer2DIE);
+    tableContainer2MDI.appendChild(buttonD2);
+    rowContainer2.appendChild(tableContainer2MDI);
 
     soliciTabla(tableContainer1SC, dataT1SC);
     soliciTabla(tableContainer2SC, dataT2SC);
     diagramaHot(
       tableContainer1DI,
       buttonD1,
-      PairContainer,
+      rowContainer3,
       dataT1SC,
       dataT2SC,
       cont,
-      'Izq'
+      'Izq',
+      tableContainer1DIE
     );
     diagramaHot(
       tableContainer2DI,
       buttonD2,
-      PairContainer,
+      rowContainer3,
       dataT1SC,
       dataT2SC,
       cont,
-      'Der'
+      'Der',
+      tableContainer2DIE
     );
   }
 }
@@ -852,7 +868,6 @@ function soliciTabla(contenedor, solicitaciones) {
   var hot = Handsontable(contenedor, {
     data: dataModified,
     colHeaders: true,
-    width: '45%',
     preventOverflow: 'horizontal',
     colWidths: 100,
     nestedHeaders: [
@@ -876,8 +891,10 @@ function diagramaHot(
   dataT1SC,
   dataT2SC,
   cont,
-  pos
+  pos,
+  contenedorEx
 ) {
+  var title = pos == 'Izq' ? 'Dirección X-X' : 'Dirección Y-Y';
   var dataDI = [
     [1, 0, 0, 0, 0, 0, 0],
     [2, 0, 0, 0, 0, 0, 0],
@@ -894,10 +911,11 @@ function diagramaHot(
   var hot = Handsontable(contenedor, {
     data: dataDI,
     colHeaders: true,
-    width: '45%',
+    width: '100%',
     preventOverflow: 'horizontal',
     colWidths: 100,
     nestedHeaders: [
+      ['Incluido ' + title],
       ['Puntos', 'P', 'M2', 'M3', 'P', 'M2', 'M3'],
       ['', '(Ton)', '(Ton.m)', '(Ton.m)', '(Ton)', '(Ton.m)', '(Ton.m)'],
     ],
@@ -925,11 +943,61 @@ function diagramaHot(
     licenseKey: 'non-commercial-and-evaluation',
   });
 
+  // Excluido table
+  var dataDIEx = [
+    [1, 0, 0, 0, 0, 0, 0],
+    [2, 0, 0, 0, 0, 0, 0],
+    [3, 0, 0, 0, 0, 0, 0],
+    [4, 0, 0, 0, 0, 0, 0],
+    [5, 0, 0, 0, 0, 0, 0],
+    [6, 0, 0, 0, 0, 0, 0],
+    [7, 0, 0, 0, 0, 0, 0],
+    [8, 0, 0, 0, 0, 0, 0],
+    [9, 0, 0, 0, 0, 0, 0],
+    [10, 0, 0, 0, 0, 0, 0],
+    [11, 0, 0, 0, 0, 0, 0],
+  ];
+  var hotEx = Handsontable(contenedorEx, {
+    data: dataDIEx,
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
+    colWidths: 100,
+    nestedHeaders: [
+      ['Excluido ' + title],
+      ['Puntos', 'P', 'M2', 'M3', 'P', 'M2', 'M3'],
+      ['', '(Ton)', '(Ton.m)', '(Ton.m)', '(Ton)', '(Ton.m)', '(Ton.m)'],
+    ],
+    columns: [
+      { type: 'numeric', readOnly: true },
+      { type: 'numeric' },
+      { type: 'numeric' },
+      { type: 'numeric' },
+      { type: 'numeric' },
+      { type: 'numeric' },
+      { type: 'numeric' },
+    ],
+    afterPaste: function (data, coords) {
+      data.forEach(function (rowData, i) {
+        var startRow = coords[0].startRow;
+        var startCol = coords[0].startCol;
+        var endCol = coords[0].endCol;
+        let k = 0;
+        for (let j = startCol; j <= endCol; j++) {
+          hotEx.setDataAtCell(startRow + i, j, rowData[k]);
+          k++;
+        }
+      });
+    },
+    licenseKey: 'non-commercial-and-evaluation',
+  });
+
   button.addEventListener('click', CheckData);
 
   function CheckData() {
     var allCellsFilled = true;
     var tableData = hot.getData();
+    var tableDataEx = hotEx.getData();
     for (var i = 0; i < tableData.length; i++) {
       for (var j = 0; j < tableData[i].length; j++) {
         if (tableData[i][j] === null || tableData[i][j] === '') {
@@ -942,20 +1010,36 @@ function diagramaHot(
       }
     }
     if (allCellsFilled) {
-      console.log('Datos de la tabla graph1 HOT:', tableData);
-      diagramStart(PairContainer, dataT1SC, dataT2SC, tableData, cont, pos);
+      console.log('Datos de la tabla graph1 HOT:', tableDataEx);
+      diagramStart(
+        PairContainer,
+        dataT1SC,
+        dataT2SC,
+        tableData,
+        cont,
+        pos,
+        tableDataEx
+      );
     } else {
       alert('Hay celdas vacías');
     }
   }
 }
 
-function diagramStart(container, dataIz, dataDer, tableData, cont, pos) {
-  var rowContainer3 = document.createElement('div');
-  rowContainer3.classList.add('row', 'd-flex');
+function diagramStart(
+  container,
+  dataIz,
+  dataDer,
+  tableData,
+  cont,
+  pos,
+  tableDataEx
+) {
+  /* var rowContainer3 = document.createElement('div'); */
+  var graphContainer = document.createElement('div');
+  /* rowContainer3.classList.add('d-flex'); */
   var data1 = [];
   var data2 = [];
-  console.log(pos);
   if (pos == 'Izq') {
     data1 = dataIz.map((row) => {
       return [row[0], row[1]];
@@ -979,21 +1063,94 @@ function diagramStart(container, dataIz, dataDer, tableData, cont, pos) {
   var rightLine = tableData.map((row) => {
     return [row[1], row[3]];
   });
+  var leftLineEx = tableDataEx.map((row) => {
+    return [row[4], row[6]];
+  });
+  var rightLineEx = tableDataEx.map((row) => {
+    return [row[1], row[3]];
+  });
 
-  var canva1 = document.createElement('canvas');
+  var canvaId = `graph${pos}${cont}`;
 
-  canva1.id = `graph${pos}${cont}`;
-
-  canva1.width = 400;
-  canva1.height = 200;
-  rowContainer3.appendChild(canva1);
-  container.appendChild(rowContainer3);
-
-  createGraph(canva1, data1, data2, leftLine, rightLine);
+  if (!document.getElementById(canvaId)) {
+    var canva1 = document.createElement('canvas');
+    canva1.id = canvaId;
+    canva1.width = 400;
+    canva1.height = 400;
+    graphContainer.appendChild(canva1);
+    container.appendChild(graphContainer);
+    /* container.appendChild(rowContainer3); */
+    createGraph(
+      canvaId,
+      canva1,
+      data1,
+      data2,
+      leftLine,
+      rightLine,
+      leftLineEx,
+      rightLineEx,
+      cont,
+      pos
+    );
+  } else {
+    updateGraph(
+      canvaId,
+      data1,
+      data2,
+      leftLine,
+      rightLine,
+      leftLineEx,
+      rightLineEx
+    );
+  }
 }
 
-function createGraph(canva, data1, data2, data3, data4) {
-  console.log(data1, data2, data3, data4);
+function updateGraph(canvaId, data1, data2, data3, data4, data5, data6) {
+  var chart = Charts[canvaId];
+  //console.log(data1, data2, data3, data4);
+  // Definir los datos de data1 y data2
+  if (!chart) {
+    return;
+  }
+  chart.data.datasets[0].data = data1.map(function (row) {
+    return { x: row[1], y: row[0] };
+  });
+
+  chart.data.datasets[1].data = data2.map(function (row) {
+    return { x: row[1], y: row[0] };
+  });
+
+  chart.data.datasets[2].data = data3.map(function (row) {
+    return { x: row[1], y: row[0] };
+  });
+
+  chart.data.datasets[3].data = data4.map(function (row) {
+    return { x: row[1], y: row[0] };
+  });
+  chart.data.datasets[4].data = data5.map(function (row) {
+    return { x: row[1], y: row[0] };
+  });
+
+  chart.data.datasets[5].data = data6.map(function (row) {
+    return { x: row[1], y: row[0] };
+  });
+
+  chart.update();
+}
+
+function createGraph(
+  canvaId,
+  canva,
+  data1,
+  data2,
+  data3,
+  data4,
+  data5,
+  data6,
+  cont,
+  pos
+) {
+  //console.log(data1, data2, data3, data4);
   // Definir los datos de data1 y data2
   data1 = data1.map(function (row) {
     return { x: row[1], y: row[0] };
@@ -1010,6 +1167,13 @@ function createGraph(canva, data1, data2, data3, data4) {
   var data4 = data4.map(function (row) {
     return { x: row[1], y: row[0] };
   });
+  var data5 = data5.map(function (row) {
+    return { x: row[1], y: row[0] };
+  });
+
+  var data6 = data6.map(function (row) {
+    return { x: row[1], y: row[0] };
+  });
 
   // Configurar los datos para el gráfico
   var config = {
@@ -1017,33 +1181,51 @@ function createGraph(canva, data1, data2, data3, data4) {
     data: {
       datasets: [
         {
-          label: 'Data Izquierda',
+          label: `SC Piso ${cont * 2 - 1} (Mux, Pu)`,
           data: data1,
           borderColor: 'blue', // Color del borde para los puntos de data1
           backgroundColor: 'blue', // Color de fondo para los puntos de data1
           borderWidth: 1, // Ancho del borde
         },
         {
-          label: 'Data Derecha',
+          label: `SC Piso ${cont * 2} (Mux, Pu)`,
           data: data2,
           borderColor: 'green', // Color del borde para los puntos de data2
           backgroundColor: 'green', // Color de fondo para los puntos de data2
           borderWidth: 1, // Ancho del borde
         },
         {
-          //label: 'Data Derecha',
+          label: 'DI Incluido X-X',
           data: data3,
-          borderColor: 'red', // Color del borde para los puntos de data2
-          backgroundColor: 'red', // Color de fondo para los puntos de data2
+          borderColor: pos == 'Izq' ? 'red' : 'blue', // Color del borde para los puntos de data2
+          backgroundColor: pos == 'Izq' ? 'red' : 'blue', // Color de fondo para los puntos de data2
           borderWidth: 0, // Establece el ancho del borde en 0 para que no se muestren puntos
           fill: false, // No rellenar el área debajo de la línea
           type: 'line', // Tipo de gráfico para conectar los puntos con líneas
         },
         {
-          //label: 'Data Derecha',
+          label: 'DI Incluido Y-Y',
           data: data4,
-          borderColor: 'red', // Color del borde para los puntos de data2
-          backgroundColor: 'red', // Color de fondo para los puntos de data2
+          borderColor: pos == 'Izq' ? 'red' : 'blue', // Color del borde para los puntos de data2
+          backgroundColor: pos == 'Izq' ? 'red' : 'blue', // Color de fondo para los puntos de data2
+          borderWidth: 0, // Establece el ancho del borde en 0 para que no se muestren puntos
+          fill: false, // No rellenar el área debajo de la línea
+          type: 'line', // Tipo de gráfico para conectar los puntos con líneas
+        },
+        {
+          label: 'DI Excluido X-X',
+          data: data5,
+          borderColor: 'green', // Color del borde para los puntos de data2
+          backgroundColor: 'green', // Color de fondo para los puntos de data2
+          borderWidth: 0, // Establece el ancho del borde en 0 para que no se muestren puntos
+          fill: false, // No rellenar el área debajo de la línea
+          type: 'line', // Tipo de gráfico para conectar los puntos con líneas
+        },
+        {
+          label: 'DI Excluido Y-Y',
+          data: data6,
+          borderColor: 'yellow', // Color del borde para los puntos de data2
+          backgroundColor: 'yellow', // Color de fondo para los puntos de data2
           borderWidth: 0, // Establece el ancho del borde en 0 para que no se muestren puntos
           fill: false, // No rellenar el área debajo de la línea
           type: 'line', // Tipo de gráfico para conectar los puntos con líneas
@@ -1055,7 +1237,7 @@ function createGraph(canva, data1, data2, data3, data4) {
       plugins: {
         title: {
           display: true,
-          text: 'Gráfico de Dispersión',
+          text: 'DIAGRAMA DE INTERACCIÓN',
         },
       },
       scales: {
@@ -1085,4 +1267,5 @@ function createGraph(canva, data1, data2, data3, data4) {
 
   // Crear el gráfico utilizando Chart.js
   var myChart = new Chart(canva, config);
+  charts['canvaId'] = myChart;
 }
