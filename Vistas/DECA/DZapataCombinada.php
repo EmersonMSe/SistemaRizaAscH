@@ -662,7 +662,7 @@ include_once "assets/views/nav.php";
                                                 <label>∅</label>
                                             </div>
                                             <div class="col-6">
-                                                <label></label>
+                                                <label>Tipo de Columna y Factor α</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="input-group">
@@ -679,7 +679,36 @@ include_once "assets/views/nav.php";
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="row mb-3 text-center">
 
+                                            <div class="col-md-6">
+                                                <select name="selectVFColumna1" id="selectVFColumna1" class="form-select">
+                                                    <option value="fila1_col1">1.4CM+1.7CV</option>
+                                                    <option value="fila2_col1">1.25(CM+CV)+Sx</option>
+                                                    <option value="fila3_col1">1.25(CM+CV)-Sx</option>
+                                                    <option value="fila4_col1">1.25(CM+CV)+Sy</option>
+                                                    <option value="fila5_col1">1.25(CM+CV)-Sy</option>
+                                                    <option value="fila6_col1">0.9CM+Sx</option>
+                                                    <option value="fila7_col1">0.9CM-Sx</option>
+                                                    <option value="fila8_col1">0.9CM+Sy</option>
+                                                    <option value="fila9_col1">0.9CM-Sx</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select class="form-select" name="selectVFColumna2" id="selectVFColumna2">
+                                                    <option value="fila1_col2">1.4CM+1.7CV</option>
+                                                    <option value="fila2_col2">1.25(CM+CV)+Sx</option>
+                                                    <option value="fila3_col2">1.25(CM+CV)-Sx</option>
+                                                    <option value="fila4_col2">1.25(CM+CV)+Sy</option>
+                                                    <option value="fila5_col2">1.25(CM+CV)-Sy</option>
+                                                    <option value="fila6_col2">0.9CM+Sx</option>
+                                                    <option value="fila7_col2">0.9CM-Sx</option>
+                                                    <option value="fila8_col2">0.9CM+Sy</option>
+                                                    <option value="fila9_col2">0.9CM-Sx</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="card-body">
@@ -711,7 +740,7 @@ include_once "assets/views/nav.php";
                         </div>
                     </div> -->
                     <h2>Verificación por cortante</h2>
-                    
+
                     <div class="card">
                         <div class="d-flex justify-content-center">
                             <canvas id="myChart" width="1000" height="400"></canvas>
