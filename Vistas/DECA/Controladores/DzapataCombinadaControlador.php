@@ -92,36 +92,123 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // print_r("----");
     // print_r($datay);
 
+    //Verificacion por cortante
+    $preciones_Columna1 = $_POST['selectColumna1'];
+    $preciones_Columna2 = $_POST['selectColumna2'];
+
+    if (
+        $preciones_Columna1 === 'fila1_col1'
+    ) {
+        $preciones_Columna1_dato = "1.4CM+1.7CV";
+    } elseif ($preciones_Columna1 === 'fila2_col1') {
+        $preciones_Columna1_dato = "1.25(CM+CV)+Sx";
+    } elseif ($preciones_Columna1 === 'fila3_col1') {
+        $preciones_Columna1_dato = "1.25(CM+CV)-Sx";
+    } elseif ($preciones_Columna1 === 'fila4_col1') {
+        $preciones_Columna1_dato = "1.25(CM+CV)+Sy";
+    } elseif ($preciones_Columna1 === 'fila5_col1') {
+        $preciones_Columna1_dato = "1.25(CM+CV)-Sy";
+    } elseif ($preciones_Columna1 === 'fila6_col1') {
+        $preciones_Columna1_dato = "0.9CM+Sx";
+    } elseif ($preciones_Columna1 === 'fila7_col1') {
+        $preciones_Columna1_dato = "0.9CM-Sx";
+    } elseif ($preciones_Columna1 === 'fila8_col1') {
+        $preciones_Columna1_dato = "0.9CM+Sy";
+    } elseif ($preciones_Columna1 === 'fila9_col1') {
+        $preciones_Columna1_dato = "0.9CM-Sy";
+    }
+
+    if (
+        $preciones_Columna2 === 'fila1_col2'
+    ) {
+        $preciones_Columna2_dato = "1.4CM+1.7CV";
+    } elseif ($preciones_Columna2 === 'fila2_col2') {
+        $preciones_Columna2_dato = "1.25(CM+CV)+Sx";
+    } elseif ($preciones_Columna2 === 'fila3_col2') {
+        $preciones_Columna2_dato = "1.25(CM+CV)-Sx";
+    } elseif ($preciones_Columna2 === 'fila4_col2') {
+        $preciones_Columna2_dato = "1.25(CM+CV)+Sy";
+    } elseif ($preciones_Columna2 === 'fila5_col2') {
+        $preciones_Columna2_dato = "1.25(CM+CV)-Sy";
+    } elseif ($preciones_Columna2 === 'fila6_col2') {
+        $preciones_Columna2_dato = "0.9CM+Sx";
+    } elseif ($preciones_Columna2 === 'fila7_col2') {
+        $preciones_Columna2_dato = "0.9CM-Sx";
+    } elseif ($preciones_Columna2 === 'fila8_col2') {
+        $preciones_Columna2_dato = "0.9CM+Sy";
+    } elseif ($preciones_Columna2 === 'fila9_col2') {
+        $preciones_Columna2_dato = "0.9CM-Sy";
+    }
 
     //Diseño por flexion
+    // Define el array asociativo de opciones
+    $opcionesvar = array(
+        '0' => 'Ø 0"',
+        '0.28' => '6mm',
+        '0.5' => '8mm',
+        '0.71' => 'Ø 3/8"',
+        '1.13' => '12mm',
+        '1.29' => 'Ø 1/2"',
+        '1.99' => 'Ø 5/8"',
+        '2.84' => 'Ø 3/4"',
+        '5.1' => 'Ø 1"',
+        '10.06' => 'Ø 1 3/8"'
+    );
+
     $fi_general = $_POST["fi_general"];
     // col1
     $d_col1 = $_POST["d_col1"];
     $lv_col1 = $_POST["lv_col1"];
     $pmin_col1 = $_POST["pmin_col1"];
     $VarillaX_Col1 = $_POST['VarillaX_Col1'];
+    // Busca el texto asociado al valor en el array
+    if (isset($opcionesvar[$VarillaX_Col1])) {
+        $Varilla1texto = $opcionesvar[$VarillaX_Col1];
+    }
 
     // col2
     $d_col2 = $_POST["d_col2"];
     $lv_col2 = $_POST["lv_col2"];
     $pmin_col2 = $_POST["pmin_col2"];
     $VarillaX_Col2 = $_POST['VarillaX_Col2'];
-
+    // Busca el texto asociado al valor en el array
+    if (isset($opcionesvar[$VarillaX_Col2])) {
+        $Varilla22texto = $opcionesvar[$VarillaX_Col2];
+    }
     //verificacion por corte y punzonamiento
+    // Define el array asociativo de opciones
+    $opciones_columnas = array(
+        '40' => 'Columnas Interiores',
+        '30' => 'Columnas de Borde',
+        '20' => 'Columnas de Esquina'
+    );
+
     //
     $ovcp = $_POST["ovcp"];
     //col1
     $r_vc_col1 = $_POST["r_vc_col1"];
     $VarillaVC_Col1 = $_POST["VarillaVC_Col1"];
+    if (isset($opcionesvar[$VarillaVC_Col1])) {
+        $VarillaVC1texto = $opcionesvar[$VarillaVC_Col1];
+    }
     $dvc_col1 = $_POST["dvc_col1"];
     $fa_Col1 = $_POST["fa_Col1"];
-
+    if (isset($opciones_columnas[$fa_Col1])) {
+        $texto_columna_fa1 = $opciones_columnas[$fa_Col1];
+    }
 
     //col 2
     $r_vc_col2 = $_POST["r_vc_col2"];
     $VarillaVC_Col2 = $_POST["VarillaVC_Col2"];
+    // Busca el texto asociado al valor en el array
+    if (isset($opcionesvar[$VarillaVC_Col2])) {
+        $VarillaVC2texto = $opcionesvar[$VarillaVC_Col2];
+    }
     $dvc_col2 = $_POST["dvc_col2"];
     $fa_Col2 = $_POST["fa_Col2"];
+    if (isset($opciones_columnas[$fa_Col2])) {
+        $texto_columna_fa2 = $opciones_columnas[$fa_Col2];
+    }
 
     // Calculos
 
@@ -1129,7 +1216,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Area por punzonamiento
     $AreaP_col1 = $PerimetroP_col1 * $dvc_col1;
 
-   
+
 
     //OBTENER LAS PRECIONES
 
@@ -1141,38 +1228,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $P_COL1_CP = $CCU1_P;
         $MX_COL1_CP = $CCC1_MX;
         $MY_COL1_CP = $CCC1_MY;
+        $texto_VFColumna1 = "1.4CM+1.7CV";
     } elseif ($selectVFColumna1 === 'fila2_col1') {
-        $P_COL1_CP = $CCU2_P;
+        $P_COL1_CP = $CCC2_P;
         $MX_COL1_CP = $CCC2_MX;
         $MY_COL1_CP = $CCC2_MY;
+        $texto_VFColumna1 = "1.25(CM+CV)+Sx";
     } elseif ($selectVFColumna1 === 'fila3_col1') {
-        $P_COL1_CP = $CCU3_P;
+        $P_COL1_CP = $CCC3_P;
         $MX_COL1_CP = $CCC3_MX;
         $MY_COL1_CP = $CCC3_MY;
+        $texto_VFColumna1 = "1.25(CM+CV)-Sx";
     } elseif ($selectVFColumna1 === 'fila4_col1') {
-        $P_COL1_CP = $CCU4_P;
+        $P_COL1_CP = $CCC4_P;
         $MX_COL1_CP = $CCC4_MX;
         $MY_COL1_CP = $CCC4_MY;
+        $texto_VFColumna1 = "1.25(CM+CV)+Sy";
     } elseif ($selectVFColumna1 === 'fila5_col1') {
-        $P_COL1_CP = $CCU5_P;
+        $P_COL1_CP = $CCC5_P;
         $MX_COL1_CP = $CCC5_MX;
         $MY_COL1_CP = $CCC5_MY;
+        $texto_VFColumna1 = "1.25(CM+CV)-Sy";
     } elseif ($selectVFColumna1 === 'fila6_col1') {
-        $P_COL1_CP = $CCU6_P;
+        $P_COL1_CP = $CCC6_P;
         $MX_COL1_CP = $CCC6_MX;
         $MY_COL1_CP = $CCC6_MY;
+        $texto_VFColumna1 = "0.9CM+Sx";
     } elseif ($selectVFColumna1 === 'fila7_col1') {
-        $P_COL1_CP = $CCU7_P;
+        $P_COL1_CP = $CCC7_P;
         $MX_COL1_CP = $CCC7_MX;
         $MY_COL1_CP = $CCC7_MY;
+        $texto_VFColumna1 = "0.9CM-Sx";
     } elseif ($selectVFColumna1 === 'fila8_col1') {
-        $P_COL1_CP = $CCU8_P;
+        $P_COL1_CP = $CCC8_P;
         $MX_COL1_CP = $CCC8_MX;
         $MY_COL1_CP = $CCC8_MY;
+        $texto_VFColumna1 = "0.9CM+Sy";
     } elseif ($selectVFColumna1 === 'fila9_col1') {
-        $P_COL1_CP = $CCU9_P;
+        $P_COL1_CP = $CCC9_P;
         $MX_COL1_CP = $CCC9_MX;
         $MY_COL1_CP = $CCC9_MY;
+        $texto_VFColumna1 = "0.9CM-Sy";
     }
 
 
@@ -1186,38 +1282,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $P_COL2_CP = $CCU1_P2;
             $MX_COL2_CP = $CCC1_MX2;
             $MY_COL2_CP = $CCC1_MY2;
+            $texto_VFColumna2 = "1.4CM+1.7CV";
         } elseif ($selectVFColumna2 === 'fila2_col2') {
-            $P_COL2_CP = $CCU2_P2;
+            $P_COL2_CP = $CCC2_P2;
             $MX_COL2_CP = $CCC2_MX2;
             $MY_COL2_CP = $CCC2_MY2;
+            $texto_VFColumna2 = "1.25(CM+CV)+Sx";
         } elseif ($selectVFColumna2 === 'fila3_col2') {
-            $P_COL2_CP = $CCU3_P2;
+            $P_COL2_CP = $CCC3_P2;
             $MX_COL2_CP = $CCC3_MX2;
             $MY_COL2_CP = $CCC3_MY2;
+            $texto_VFColumna2 = "1.25(CM+CV)-Sx";
         } elseif ($selectVFColumna2 === 'fila4_col2') {
-            $P_COL2_CP = $CCU4_P2;
+            $P_COL2_CP = $CCC4_P2;
             $MX_COL2_CP = $CCC4_MX2;
             $MY_COL2_CP = $CCC4_MY2;
+            $texto_VFColumna2 = "1.25(CM+CV)+Sy";
         } elseif ($selectVFColumna2 === 'fila5_col2') {
-            $P_COL2_CP = $CCU5_P2;
+            $P_COL2_CP = $CCC5_P2;
             $MX_COL2_CP = $CCC5_MX2;
             $MY_COL2_CP = $CCC5_MY2;
+            $texto_VFColumna2= "1.25(CM+CV)-Sy";
         } elseif ($selectVFColumna2 === 'fila6_col2') {
-            $P_COL2_CP = $CCU6_P2;
+            $P_COL2_CP = $CCC6_P2;
             $MX_COL2_CP = $CCC6_MX2;
             $MY_COL2_CP = $CCC6_MY2;
+            $texto_VFColumna2 = "0.9CM+Sx";
         } elseif ($selectVFColumna2 === 'fila7_col2') {
-            $P_COL2_CP = $CCU7_P2;
+            $P_COL2_CP = $CCC7_P2;
             $MX_COL2_CP = $CCC7_MX2;
             $MY_COL2_CP = $CCC7_MY2;
+            $texto_VFColumna2 = "0.9CM-Sx";
         } elseif ($selectVFColumna2 === 'fila8_col2') {
-            $P_COL2_CP = $CCU8_P2;
+            $P_COL2_CP = $CCC8_P2;
             $MX_COL2_CP = $CCC8_MX2;
             $MY_COL2_CP = $CCC8_MY2;
+            $texto_VFColumna2 = "0.9CM+Sy";
         } elseif ($selectVFColumna2 === 'fila9_col2') {
-            $P_COL2_CP = $CCU9_P2;
+            $P_COL2_CP = $CCC9_P2;
             $MX_COL2_CP = $CCC9_MX2;
             $MY_COL2_CP = $CCC9_MY2;
+            $texto_VFColumna2 = "0.9CM-Sy";
         }
     }
 
@@ -1234,17 +1339,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $COL1_O_CP = $P_CP / ($B * $L) + ($MY_CP * $CY_CP) / $LX_CP;
     $COL2_O_CP = $P_CP / ($B * $L) - ($MY_CP * $CY_CP) / $LX_CP;
     $O_CP = max($COL1_O_CP, $COL2_O_CP);
-    $OF_CP = round($O_CP * $B,2);
+    $OF_CP = round($O_CP * $B, 2);
+
 
     //Cortante Critico Por Punzonamiento
-    $CortanteCP_col1 = ($P_CP * 1000) - ($OF_CP * 1000) * ($t2_col1 + ($dvc_col1 / 100)) * ($t1_col1 + (0.5* $dvc_col1 / 100));
+    $CortanteCP_col1 = ($P_COL1_CP * 1000) - ($OF_CP * 1000) * ($t2_col1 + ($dvc_col1 / 100)) * ($t1_col1 + (0.5 * $dvc_col1 / 100));
+    $CortanteCP_col1 = round($CortanteCP_col1, 2);
 
-
-    var_dump($selectVFColumna1);
-    var_dump($selectVFColumna2);
-    var_dump($dvc_col1);
-    var_dump($t1_col1);
-    var_dump($t2_col1);
+    // var_dump($selectVFColumna1);
+    // var_dump($selectVFColumna2);
+    // var_dump($P_COL1_CP);
+    // var_dump($OF_CP);
+    // var_dump($dvc_col1);
+    // var_dump($t1_col1);
+    // var_dump($t2_col1);
     // $Vu= ;
 
     //Factor de DIm de la columna
@@ -1297,9 +1405,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $AreaP_col2 = $PerimetroP_col2 * $dvc_col1;
 
     //Cortante Critico Por Punzonamiento
-    $CortanteCP_col2
-    = $MY_CP * 1000 - $OF_CP * 1000 * ($t1_col1 + $dvc_col1 / 100) * ($t2_col2 + $dvc_col1 / 100);
-
+    $CortanteCP_col2 = $P_COL2_CP * 1000 - $OF_CP * 1000 * ($t1_col1 + $dvc_col1 / 100) * ($t2_col2 + $dvc_col1 / 100);
+    $CortanteCP_col2 = round($CortanteCP_col2, 2);
     //Factor de DIm de la columna
     $Maxt1_t2_col2 = max($t1_col2, $t2_col2);
     $Mint1_t2_col2 = min($t1_col2, $t2_col2);
@@ -1637,6 +1744,187 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </table>
                     </td>
                 </tr>
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">Verificación de cortante</td>
+                </tr>
+                <tr>
+                    <td>Columna 1 - Preciones</td>
+                    <td></td>
+                    <td><?php echo $preciones_Columna1_dato; ?> </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Columna 2 - Preciones</td>
+                    <td></td>
+                    <td><?php echo $preciones_Columna2_dato; ?> </td>
+                    <td></td>
+                </tr>
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">Diseño por Flexión de Zapatas</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">Columna 1</td>
+                                <td style="border: none; width: 50%;">Columna 2</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>d</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;"><?php echo $d_col1; ?> </td>
+                                <td style="border: none; width: 50%;"><?php echo $d_col2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>lv</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;"><?php echo $lv_col1; ?> </td>
+                                <td style="border: none; width: 50%;"><?php echo $lv_col2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>pmin</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;"><?php echo $pmin_col1; ?> </td>
+                                <td style="border: none; width: 50%;"><?php echo $pmin_col2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Ф Varilla </td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;"><?php echo $Varilla1texto; ?> </td>
+                                <td style="border: none; width: 50%;"><?php echo $Varilla22texto; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Preciones</td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;"><?php echo $texto_VFColumna1 ; ?> </td>
+                                <td style="border: none; width: 50%;"><?php echo $texto_VFColumna2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>φ</td>
+                    <td><?php echo $fi_general; ?> </td>
+                    <td></td>
+                </tr>
+
+                <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
+                    <td colspan="4">Verificación por Corte y Punzonamiento</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;">Columna 1</td>
+                                <td style="border: none; width: 50%;">Columna 2</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>d</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;"><?php echo $dvc_col1; ?> </td>
+                                <td style="border: none; width: 50%;"><?php echo $dvc_col2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>r</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;"><?php echo $r_vc_col1; ?> </td>
+                                <td style="border: none; width: 50%;"><?php echo $r_vc_col2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Ф Varilla</td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;"><?php echo $VarillaVC1texto; ?> </td>
+                                <td style="border: none; width: 50%;"><?php echo $VarillaVC2texto; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Tipo de Columna y Factor α</td>
+                    <td></td>
+                    <td>
+                        <table style="border: none; font-size: 11px; width: 100%;">
+                            <tr>
+                                <td style="border: none; width: 50%;"><?php echo $texto_columna_fa1 . " - " . $fa_Col1; ?> </td>
+                                <td style="border: none; width: 50%;"><?php echo $texto_columna_fa2 . " - " . $fa_Col2; ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>∅</td>
+                    <td>
+                        <?php echo $ovcp; ?>
+                    </td>
+                    <td></td>
+                </tr>
+
 
             </tbody>
 

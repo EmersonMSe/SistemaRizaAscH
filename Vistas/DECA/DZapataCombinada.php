@@ -107,20 +107,6 @@ include_once "assets/views/nav.php";
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- 
-                                        <div class="row ">
-                                            <div class="col-12 text-center">
-                                                <label>Tipos de Zapata</label>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <select id="tipoDiseño" class="form-select" aria-label="Seleccionar tipo de diseño">
-                                                    <option value="1">Tipo 1</option>
-                                                    <option value="2">Tipo 2</option>
-                                                    <option value="3">Tipo 3</option>
-
-                                                </select>
-                                            </div>
-                                        </div> -->
 
                                         <div class="row mb-3 text-center">
                                             <div class="col-6">
@@ -224,7 +210,7 @@ include_once "assets/views/nav.php";
                                         </div>
 
                                         <div class="row mb-3 text-center">
-                                            <div class="col-md-6 ">
+                                            <div class="col-md-12 ">
                                                 <div class="col-12">
                                                     <label>Fluencia del acero</label>
                                                 </div>
@@ -238,7 +224,7 @@ include_once "assets/views/nav.php";
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 ">
+                                            <div class="col-md-12 ">
                                                 <div class="col-12">
                                                     <label>Resistencia a compresión del concreto</label>
                                                 </div>
@@ -254,7 +240,7 @@ include_once "assets/views/nav.php";
                                             </div>
                                         </div>
                                         <div class="row mb-3 text-center">
-                                            <div class="col-md-6 mb-3">
+                                            <div class="col-md-12 mb-3">
                                                 <div class="col-12">
                                                     <label>Profundidad de desplante</label>
                                                 </div>
@@ -268,7 +254,7 @@ include_once "assets/views/nav.php";
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 mb-3">
+                                            <div class="col-md-12 mb-3">
                                                 <div class="col-12">
                                                     <label></label>
                                                 </div>
@@ -399,7 +385,7 @@ include_once "assets/views/nav.php";
                                                 <label>Columna 2</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <select id="selectColumna1" class="form-select">
+                                                <select id="selectColumna1" name="selectColumna1" class="form-select">
                                                     <option value="fila1_col1">1.4CM+1.7CV</option>
                                                     <option value="fila2_col1">1.25(CM+CV)+Sx</option>
                                                     <option value="fila3_col1">1.25(CM+CV)-Sx</option>
@@ -412,7 +398,7 @@ include_once "assets/views/nav.php";
                                                 </select>
                                             </div>
                                             <div class="col-md-6">
-                                                <select class="form-select" id="selectColumna2">
+                                                <select class="form-select" id="selectColumna2" name="selectColumna2">
                                                     <option value="fila1_col2">1.4CM+1.7CV</option>
                                                     <option value="fila2_col2">1.25(CM+CV)+Sx</option>
                                                     <option value="fila3_col2">1.25(CM+CV)-Sx</option>
@@ -536,9 +522,38 @@ include_once "assets/views/nav.php";
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="row mb-3 text-center">
+
                                             <div class="col-md-6">
+                                                <select name="selectVFColumna1" id="selectVFColumna1" class="form-select">
+                                                    <option value="fila1_col1">1.4CM+1.7CV</option>
+                                                    <option value="fila2_col1">1.25(CM+CV)+Sx</option>
+                                                    <option value="fila3_col1">1.25(CM+CV)-Sx</option>
+                                                    <option value="fila4_col1">1.25(CM+CV)+Sy</option>
+                                                    <option value="fila5_col1">1.25(CM+CV)-Sy</option>
+                                                    <option value="fila6_col1">0.9CM+Sx</option>
+                                                    <option value="fila7_col1">0.9CM-Sx</option>
+                                                    <option value="fila8_col1">0.9CM+Sy</option>
+                                                    <option value="fila9_col1">0.9CM-Sx</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select class="form-select" name="selectVFColumna2" id="selectVFColumna2">
+                                                    <option value="fila1_col2">1.4CM+1.7CV</option>
+                                                    <option value="fila2_col2">1.25(CM+CV)+Sx</option>
+                                                    <option value="fila3_col2">1.25(CM+CV)-Sx</option>
+                                                    <option value="fila4_col2">1.25(CM+CV)+Sy</option>
+                                                    <option value="fila5_col2">1.25(CM+CV)-Sy</option>
+                                                    <option value="fila6_col2">0.9CM+Sx</option>
+                                                    <option value="fila7_col2">0.9CM-Sx</option>
+                                                    <option value="fila8_col2">0.9CM+Sy</option>
+                                                    <option value="fila9_col2">0.9CM-Sx</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="row mb-3 text-center">
+                                            <div class="col-md-12">
 
                                                 <div class="input-group">
                                                     <span class="input-group-text col-3">φ</span>
@@ -658,57 +673,20 @@ include_once "assets/views/nav.php";
                                             </div>
                                         </div>
                                         <div class="row mb-3 text-center">
-                                            <div class="col-6">
+                                            <div class="col-12">
                                                 <label>∅</label>
                                             </div>
-                                            <div class="col-6">
-                                                <label>Tipo de Columna y Factor α</label>
-                                            </div>
-                                            <div class="col-md-6">
+
+                                            <div class="col-md-12">
                                                 <div class="input-group">
                                                     <span class="input-group-text col-3">∅</span>
                                                     <input type="number" name="ovcp" class="form-control text-center col-12" id="ovcp" placeholder="0.85" step="any" value="0.85" min=" 0" required>
 
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <select name="fa_Col2" class="form-control" id="fa_Col2" required>
-                                                    <option value="40" selected>Columnas Interiores</option>
-                                                    <option value="30">Columnas de Borde</option>
-                                                    <option value="20">Columnas de Esquina</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3 text-center">
-
-                                            <div class="col-md-6">
-                                                <select name="selectVFColumna1" id="selectVFColumna1" class="form-select">
-                                                    <option value="fila1_col1">1.4CM+1.7CV</option>
-                                                    <option value="fila2_col1">1.25(CM+CV)+Sx</option>
-                                                    <option value="fila3_col1">1.25(CM+CV)-Sx</option>
-                                                    <option value="fila4_col1">1.25(CM+CV)+Sy</option>
-                                                    <option value="fila5_col1">1.25(CM+CV)-Sy</option>
-                                                    <option value="fila6_col1">0.9CM+Sx</option>
-                                                    <option value="fila7_col1">0.9CM-Sx</option>
-                                                    <option value="fila8_col1">0.9CM+Sy</option>
-                                                    <option value="fila9_col1">0.9CM-Sx</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <select class="form-select" name="selectVFColumna2" id="selectVFColumna2">
-                                                    <option value="fila1_col2">1.4CM+1.7CV</option>
-                                                    <option value="fila2_col2">1.25(CM+CV)+Sx</option>
-                                                    <option value="fila3_col2">1.25(CM+CV)-Sx</option>
-                                                    <option value="fila4_col2">1.25(CM+CV)+Sy</option>
-                                                    <option value="fila5_col2">1.25(CM+CV)-Sy</option>
-                                                    <option value="fila6_col2">0.9CM+Sx</option>
-                                                    <option value="fila7_col2">0.9CM-Sx</option>
-                                                    <option value="fila8_col2">0.9CM+Sy</option>
-                                                    <option value="fila9_col2">0.9CM-Sx</option>
-                                                </select>
-                                            </div>
 
                                         </div>
+
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="card-body">
@@ -733,12 +711,12 @@ include_once "assets/views/nav.php";
                     <div class="card-header">
                         <h3>Diseño</h3>
                     </div>
-                    <!-- <h2>Predimencionamiento</h2>
+                    <h2>Predimencionamiento</h2>
                     <div class="card">
                         <div class="d-flex justify-content-center">
                             <canvas id="predimencionamiento" width="1000" height="400"></canvas>
                         </div>
-                    </div> -->
+                    </div>
                     <h2>Verificación por cortante</h2>
 
                     <div class="card">
@@ -750,6 +728,12 @@ include_once "assets/views/nav.php";
                     <div class="card">
                         <div class="d-flex justify-content-center">
                             <canvas id="VC_flexion" width="1000" height="400"></canvas>
+                        </div>
+                    </div>
+                    <h2>Corte y Punzonamiento</h2>
+                    <div class="card">
+                        <div class="d-flex justify-content-center">
+                            <canvas id="corte_punzonamiento" width="1000" height="400"></canvas>
                         </div>
                     </div>
                 </div>
