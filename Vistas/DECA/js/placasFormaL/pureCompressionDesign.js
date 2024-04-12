@@ -35,18 +35,33 @@ export function dcpT1X(contenedor, initialData, formData, tableData1DC) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    width: '100%',
+    colHeaders: true,
+    preventOverflow: 'horizontal',
     colWidths: 100,
-    colHeaders: [
-      'Nivel',
-      'lc (m)',
-      't (m)',
-      'Ag (m²)',
-      'Casos para Definir el Factor de Longitud Efectiva "k"',
-      'k',
-      'ØPn (Ton)',
-      'Pu (Ton)',
-      'Verificación de la Compresión Pura',
+    nestedHeaders: [
+      [
+        'Nivel',
+        'lc',
+        't',
+        'Ag',
+        'Casos para Definir',
+        'k',
+        'ØPn',
+        'Pu',
+        'Verificación',
+      ],
+      [
+        '',
+        '(m)',
+        '(m)',
+        '(m²)',
+        'Factor de Longitud Efectiva "k"',
+        '',
+        '(Ton)',
+        '(Ton)',
+        'Compresión Pura',
+      ],
     ],
     columns: [
       { type: 'text', readOnly: true }, // Nivel
@@ -60,7 +75,7 @@ export function dcpT1X(contenedor, initialData, formData, tableData1DC) {
           'Muros Arriostrados No Restringidos',
           'Muros No Arriostrados',
         ],
-      }, // Casos para Definir el Factor de Longitud Efectiva "k"      
+      }, // Casos para Definir el Factor de Longitud Efectiva "k"
       { type: 'numeric', readOnly: true }, // k
       { type: 'numeric', readOnly: true }, // ØPn (Ton)
       { type: 'numeric', readOnly: true }, // Pu (Ton)
@@ -160,18 +175,33 @@ export function dcpT1Y(contenedor, initialData, formData, tableData1DC) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    width: '100%',
+    colHeaders: true,
+    preventOverflow: 'horizontal',
     colWidths: 100,
-    colHeaders: [
-      'Nivel',
-      'lc (m)',
-      't (m)',
-      'Ag (m²)',
-      'Casos para Definir el Factor de Longitud Efectiva "k"',
-      'k',
-      'ØPn (Ton)',
-      'Pu (Ton)',
-      'Verificación de la Compresión Pura',
+    nestedHeaders: [
+      [
+        'Nivel',
+        'lc',
+        't',
+        'Ag',
+        'Casos para Definir',
+        'k',
+        'ØPn',
+        'Pu',
+        'Verificación',
+      ],
+      [
+        '',
+        '(m)',
+        '(m)',
+        '(m²)',
+        'Factor de Longitud Efectiva "k"',
+        '',
+        '(Ton)',
+        '(Ton)',
+        'Compresión Pura',
+      ],
     ],
     columns: [
       { type: 'text', readOnly: true }, // Nivel

@@ -66,7 +66,7 @@ include_once "assets/views/header.php";
                                             <a href="#" class="dropdown__link">PLACAS EN C</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="dropdown__link">PLACAS EN L</a>
+                                            <a href="placasFormaL.php" class="dropdown__link">PLACAS EN L</a>
                                         </li>
                                         <li>
                                             <a href="#" class="dropdown__link">PLACAS EN T</a>

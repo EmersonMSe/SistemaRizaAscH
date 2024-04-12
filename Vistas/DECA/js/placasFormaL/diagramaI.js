@@ -43,7 +43,6 @@ export function diT1X(
       c >= cLimit ? 'Requiere ser confinado' : 'No requiere ser confinado';
 
     var dataRow = [
-      `Piso ${i + 1}`, //  Nivel
       lm, // lm
       hm, // hm
       as,
@@ -64,23 +63,43 @@ export function diT1X(
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
     colWidths: 100,
-    colHeaders: [
-      'lm (m)',
-      'hm (m)',
-      'As (cm²)',
-      "A's (cm²)",
-      'Pu (Ton)',
-      'pv',
-      'c1 (cm)',
-      'c2 (cm)',
-      'Ɛs',
-      'c3 (cm)',
-      'c (cm)',
-      'δu m)',
-      'C limite (cm)',
-      'Confinamiento de elemento de borde',
+    nestedHeaders: [
+      [
+        'lm',
+        'hm',
+        'As',
+        "A's",
+        'Pu',
+        'pv',
+        'c1',
+        'c2',
+        'Ɛs',
+        'c3',
+        'c',
+        'δu',
+        'C limite',
+        'Confinamiento',
+      ],
+      [
+        '(m)',
+        '(m)',
+        '(cm²)',
+        '(cm²)',
+        '(Ton)',
+        '',
+        '(cm)',
+        '(cm)',
+        '',
+        '(cm)',
+        '(cm)',
+        '(m)',
+        '(cm)',
+        'elemento de borde',
+      ],
     ],
     columns: [
       { type: 'numeric', readOnly: true }, // 'lm (m)',
@@ -260,23 +279,43 @@ function diT2X(
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
     colWidths: 100,
-    colHeaders: [
-      'zc (m)',
-      'Vu máx (Ton)',
-      'Mu máx (Ton.m)',
-      'Lo máx 1 (m)',
-      'Lo máx 2 (m)',
-      'Lo máx (m)',
-      'zcmáx 1 (m)',
-      'zcmáx 2 (m)',
-      'zcmáx (m)',
-      'Artículo 21.9.7.6.a. Verificación del Espesor de la Zona de Confinamiento',
-      's1 (cm)',
-      's2 (cm)',
-      's3 (cm)',
-      's (cm)',
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
+    nestedHeaders: [
+      [
+        'zc',
+        'Vu máx',
+        'Mu máx',
+        'Lo máx',
+        'Lo máx',
+        'Lo máx',
+        'zcmáx 1',
+        'zcmáx 2',
+        'zcmáx',
+        'Artículo 21.9.7.6.a. Verificación',
+        's1',
+        's2',
+        's3',
+        's',
+      ],
+      [
+        '(m)',
+        '(Ton)',
+        '(Ton.m)',
+        '(m)',
+        '(m)',
+        '(m)',
+        '(m)',
+        '(m)',
+        '(m)',
+        'Espesor de la Zona de Confinamiento',
+        '(cm)',
+        '(cm)',
+        '(cm)',
+        '(cm)',
+      ],
     ],
     columns: [
       { type: 'numeric', readOnly: true },
@@ -318,13 +357,13 @@ function diT3X(contenedor, formData) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
     colWidths: 100,
-    colHeaders: [
-      'Ly (m)',
-      'hm (m)',
-      'Ly calculado (m)',
-      'Verificación del ancho efectivo del Ala',
+    nestedHeaders: [
+      ['Ly', 'hm', 'Ly calculado', 'Verificación'],
+      ['(m)', '(m)', '(m)', 'ancho efectivo del Ala'],
     ],
     columns: [
       { type: 'numeric', readOnly: true },
@@ -378,7 +417,6 @@ export function diT1Y(
       c >= cLimit ? 'Requiere ser confinado' : 'No requiere ser confinado';
 
     var dataRow = [
-      `Piso ${i + 1}`, //  Nivel
       lm, // lm
       hm, // hm
       as,
@@ -399,23 +437,43 @@ export function diT1Y(
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
     colWidths: 100,
-    colHeaders: [
-      'lm (m)',
-      'hm (m)',
-      'As (cm²)',
-      "A's (cm²)",
-      'Pu (Ton)',
-      'pv',
-      'c1 (cm)',
-      'c2 (cm)',
-      'Ɛs',
-      'c3 (cm)',
-      'c (cm)',
-      'δu m)',
-      'C limite (cm)',
-      'Confinamiento de elemento de borde',
+    nestedHeaders: [
+      [
+        'lm',
+        'hm',
+        'As',
+        "A's",
+        'Pu',
+        'pv',
+        'c1',
+        'c2',
+        'Ɛs',
+        'c3',
+        'c',
+        'δu',
+        'C limite',
+        'Confinamiento',
+      ],
+      [
+        '(m)',
+        '(m)',
+        '(cm²)',
+        '(cm²)',
+        '(Ton)',
+        '',
+        '(cm)',
+        '(cm)',
+        '',
+        '(cm)',
+        '(cm)',
+        '(m)',
+        '(cm)',
+        'elemento de borde',
+      ],
     ],
     columns: [
       { type: 'numeric', readOnly: true }, // 'lm (m)',
@@ -595,23 +653,43 @@ function diT2Y(
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
     colWidths: 100,
-    colHeaders: [
-      'zc (m)',
-      'Vu máx (Ton)',
-      'Mu máx (Ton.m)',
-      'Lo máx 1 (m)',
-      'Lo máx 2 (m)',
-      'Lo máx (m)',
-      'zcmáx 1 (m)',
-      'zcmáx 2 (m)',
-      'zcmáx (m)',
-      'Artículo 21.9.7.6.a. Verificación del Espesor de la Zona de Confinamiento',
-      's1 (cm)',
-      's2 (cm)',
-      's3 (cm)',
-      's (cm)',
+    nestedHeaders: [
+      [
+        'zc',
+        'Vu máx',
+        'Mu máx',
+        'Lo máx',
+        'Lo máx',
+        'Lo máx',
+        'zcmáx 1',
+        'zcmáx 2',
+        'zcmáx',
+        'Artículo 21.9.7.6.a. Verificación',
+        's1',
+        's2',
+        's3',
+        's',
+      ],
+      [
+        '(m)',
+        '(Ton)',
+        '(Ton.m)',
+        '(m)',
+        '(m)',
+        '(m)',
+        '(m)',
+        '(m)',
+        '(m)',
+        'Espesor de la Zona de Confinamiento',
+        '(cm)',
+        '(cm)',
+        '(cm)',
+        '(cm)',
+      ],
     ],
     columns: [
       { type: 'numeric', readOnly: true },
@@ -653,13 +731,13 @@ function diT3Y(contenedor, formData) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
     colWidths: 100,
-    colHeaders: [
-      'Lx (m)',
-      'hm (m)',
-      'Ly calculado (m)',
-      'Verificación del ancho efectivo del Ala',
+    nestedHeaders: [
+      ['Lx', 'hm', 'Ly calculado', 'Verificación'],
+      ['(m)', '(m)', '(m)', 'ancho efectivo del Ala'],
     ],
     columns: [
       { type: 'numeric', readOnly: true },
@@ -689,9 +767,13 @@ export function diagramI(solicitacionesVarios) {
     var tableContainer1SC = document.createElement('div');
     var tableContainer1DI = document.createElement('div');
     var buttonD1 = document.createElement('button');
+    buttonD1.textContent = 'Generar gráfico Izquierdo';
+    
     var tableContainer2SC = document.createElement('div');
     var tableContainer2DI = document.createElement('div');
     var buttonD2 = document.createElement('button');
+    buttonD2.textContent = 'Generar gráfico Derecho';
+
     tableContainer1SC.id = `hotTableContainerISC${cont}`;
     tableContainer2SC.id = `hotTableContainerDSC${cont}`;
     tableContainer1DI.id = `hotTableContainerIDI${cont}`;
@@ -701,8 +783,8 @@ export function diagramI(solicitacionesVarios) {
 
     // Agregar clases, estilos o cualquier otro atributo necesario al nuevo div
     PairContainer.classList.add('d-flex', 'flex-column');
-    rowContainer1.classList.add('row', 'd-flex');
-    rowContainer2.classList.add('row', 'd-flex');
+    rowContainer1.classList.add('d-flex');
+    rowContainer2.classList.add('d-flex');
 
     PairContainer.id = `diagramsContainer${cont}`;
 
@@ -769,13 +851,13 @@ function soliciTabla(contenedor, solicitaciones) {
 
   var hot = Handsontable(contenedor, {
     data: dataModified,
-    rowHeaders: true,
+    colHeaders: true,
+    width: '45%',
+    preventOverflow: 'horizontal',
     colWidths: 100,
-    colHeaders: [
-      'Combinaciones de Carga',
-      'Pu (Ton)',
-      'Mux (Ton.m)',
-      'Muy (Ton.m)',
+    nestedHeaders: [
+      ['Combinaciones', 'Pu', 'Mux', 'Muy'],
+      ['Carga', '(Ton)', '(Ton.m)', '(Ton.m)'],
     ],
     columns: [
       { type: 'text', readOnly: true }, // 'Nivel',
@@ -811,16 +893,13 @@ function diagramaHot(
   ];
   var hot = Handsontable(contenedor, {
     data: dataDI,
-    rowHeaders: true,
+    colHeaders: true,
+    width: '45%',
+    preventOverflow: 'horizontal',
     colWidths: 100,
-    colHeaders: [
-      'Puntos',
-      'P (Ton)',
-      'M2 (Ton.m)',
-      'M3 (Ton.m)',
-      'P (Ton)',
-      'M2 (Ton.m)',
-      'M3 (Ton.m)',
+    nestedHeaders: [
+      ['Puntos', 'P', 'M2', 'M3', 'P', 'M2', 'M3'],
+      ['', '(Ton)', '(Ton.m)', '(Ton.m)', '(Ton)', '(Ton.m)', '(Ton.m)'],
     ],
     columns: [
       { type: 'numeric', readOnly: true },

@@ -659,7 +659,8 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
             /* ----Longitud Arriostrada------ */
             /* ----Dirección X X------ */
             var dataLAX = [
-                ['', '', '', '', '', '', '', '', ''],
+                ['', '', '', '', '', '', '', '', '', ''],
+                ['', '', '', '', '', '', '', '', '', ''],
             ];
 
             var containerLAX = document.getElementById('longitudArriostradaX');
@@ -671,32 +672,32 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                 colWidths: 100,
                 nestedHeaders: [
                     ['Nivel', {
-                        label: 'Altura Total "H" (m)',
+                        label: 'Altura Total',
                         colspan: 1,
                     }, {
-                        label: 'Cargas Amplificadas "Pu" (Ton)',
+                        label: 'Cargas Amplificadas',
                         colspan: 1
                     }, {
-                        label: 'ƩPu (Ton)',
+                        label: 'ƩPu',
                         colspan: 1
                     }, {
                         label: 'Norma E.030 Artículo 31',
                         colspan: 2,
                         align: 'center'
                     }, {
-                        label: 'Vux (Ton)',
+                        label: 'Vux',
                         colspan: 1
                     }, {
-                        label: 'Índice de Estabilidad "Q"',
+                        label: 'Índice de Estabilidad',
                         colspan: 1
                     }, {
-                        label: 'Artículo 10.11.3. Verificación del Arriostramiento',
+                        label: 'Artículo 10.11.3.',
                         colspan: 1
                     }, {
-                        label: 'Artículo 10.11.3. Tipo de Estructura',
+                        label: 'Artículo 10.11.3.',
                         colspan: 1
                     }],
-                    ['', '', '', '', {
+                    ['', '"H" (m)', '"Pu" (Ton)', '(Ton)', {
                         label: 'Δabsoluto (m)',
                         colspan: 1,
                         align: 'center'
@@ -704,7 +705,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                         label: 'relativo(m)',
                         colspan: 1,
                         align: 'center'
-                    }, '', '', '']
+                    }, '(Ton)', '"Q"', ' Verificación del Arriostramiento', 'Tipo de Estructura']
                 ],
                 collapsibleColumns: [{
                         row: -2,
@@ -722,6 +723,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
             /* ----Dirección Y Y------ */
             var dataLAY = [
                 ['', '', '', '', '', '', '', '', ''],
+                ['', '', '', '', '', '', '', '', ''],
             ];
 
             var containerLAY = document.getElementById('longitudArriostradaY');
@@ -733,32 +735,32 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                 colWidths: 100,
                 nestedHeaders: [
                     ['Nivel', {
-                        label: 'Altura Total "H" (m)',
+                        label: 'Altura Total',
                         colspan: 1,
                     }, {
-                        label: 'Cargas Amplificadas "Pu" (Ton)',
+                        label: 'Cargas Amplificadas',
                         colspan: 1
                     }, {
-                        label: 'ƩPu (Ton)',
+                        label: 'ƩPu',
                         colspan: 1
                     }, {
                         label: 'Norma E.030 Artículo 31',
                         colspan: 2,
                         align: 'center'
                     }, {
-                        label: 'Vux (Ton)',
+                        label: 'Vux',
                         colspan: 1
                     }, {
-                        label: 'Índice de Estabilidad "Q"',
+                        label: 'Índice de Estabilidad',
                         colspan: 1
                     }, {
-                        label: 'Artículo 10.11.3. Verificación del Arriostramiento',
+                        label: 'Artículo 10.11.3.',
                         colspan: 1
                     }, {
-                        label: 'Artículo 10.11.3. Tipo de Estructura',
+                        label: 'Artículo 10.11.3.',
                         colspan: 1
                     }],
-                    ['', '', '', '', {
+                    ['', '"H" (m)', '"Pu" (Ton)', '(Ton)', {
                         label: 'Δabsoluto (m)',
                         colspan: 1,
                         align: 'center'
@@ -766,19 +768,41 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                         label: 'relativo(m)',
                         colspan: 1,
                         align: 'center'
-                    }, '', '', '']
+                    }, '(Ton)', '"Q"', ' Verificación del Arriostramiento', 'Tipo de Estructura']
                 ],
-                collapsibleColumns: [{
-                        row: -2,
-                        col: 1,
-                        collapsible: false
-                    },
-                    {
-                        row: -1,
-                        col: 1,
-                        collapsible: false
-                    },
-                ],
+                afterChange: function(changes, source) {
+                    if (source == 'edit') {
+                        var hot = this;
+                        changes.forEach(function(change) {
+                            var row = change[0]
+                            var col = change[1]
+                            var newValue = change[3]
+                            if (col === 1) {
+                                hot.setDataAtCell(row, 7,
+                                    hot.getDataAtCell(row, 3) * hot.getDataAtCell(row, 5) /
+                                    ((hot.getDataAtCell(row, 6) * newValue)))
+                            }
+                            if (col == 2) {
+                                if (hot.countRows()) {
+                                    
+                                }
+                            }
+                        })
+                    }
+                },
+                afterPaste: function(data, coords) {
+                    data.forEach(function(rowData, i) {
+                        var startRow = coords[0].startRow;
+                        /* var endRow = coords[0].endRow; */
+                        var startCol = coords[0].startCol;
+                        var endCol = coords[0].endCol;
+                        let k = 0;
+                        for (let j = startCol; j <= endCol; j++) {
+                            hot.setDataAtCell(startRow + i, j, rowData[k]);
+                            k++;
+                        }
+                    });
+                },
                 licenseKey: 'non-commercial-and-evaluation'
             });
             /* ---------------------------------------- */
@@ -826,32 +850,6 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                         collapsible: false
                     },
                 ],
-                afterChange: function(changes, source) {
-                    if (source == 'edit') {
-                        var hot = this;
-                        changes.forEach(function(change) {
-                            var row = change[0]
-                            var col = change[1]
-                            var newValue = change[3]
-                            if(col === 2){
-                               hot.setDataAtCell(row, 6, hot.getDataAtCell(row, ))
-                            }
-                        })
-                    }
-                },
-                afterPaste: function(data, coords) {
-                    data.forEach(function(rowData, i) {
-                        var startRow = coords[0].startRow;
-                        /* var endRow = coords[0].endRow; */
-                        var startCol = coords[0].startCol;
-                        var endCol = coords[0].endCol;
-                        let k = 0;
-                        for (let j = startCol; j <= endCol; j++) {
-                            hot.setDataAtCell(startRow + i, j, rowData[k]);
-                            k++;
-                        }
-                    });
-                },
                 licenseKey: 'non-commercial-and-evaluation'
             });
 

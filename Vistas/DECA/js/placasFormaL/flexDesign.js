@@ -71,19 +71,24 @@ export function flexDesignT1X(contenedor, initialData, formData) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
     colWidths: 100,
-    colHeaders: [
-      'Nivel',
-      'lm (m)',
-      'h (m)',
-      'hm (m)',
-      'hm/lm',
-      'Tipo de Muro',
-      'Tipo de Falla Muro',
-      'Mu (Ton.m)',
-      'z (m)',
-      'As (cm²)',
+    nestedHeaders: [
+      ['Nivel', 'lm', 'h', 'hm', 'hm/lm', 'Tipo', 'Tipo', 'Mu', 'z', 'As'],
+      [
+        '',
+        '(m)',
+        '(m)',
+        '(m)',
+        '',
+        'Muro',
+        'Falla Muro',
+        '(Ton.m)',
+        '(m)',
+        '(cm²)',
+      ],
     ],
     columns: [
       { type: 'text', readOnly: true }, // Piso
@@ -255,8 +260,10 @@ export function flexDesignT2X(contenedor, initialData) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    colHeaders: true,
     colWidths: 100,
+    width: '100%',
+    preventOverflow: 'horizontal',
     colHeaders: [
       'Nivel',
       'Acero',
@@ -423,6 +430,7 @@ export function flexDesignT2X(contenedor, initialData) {
     },
     licenseKey: 'non-commercial-and-evaluation',
   });
+
   document
     .getElementById('saveDataBtnDF2X')
     .addEventListener('click', CheckData);
@@ -439,6 +447,8 @@ export function flexDesignT2X(contenedor, initialData) {
       }
       if (!allCellsFilled) {
         break;
+      } else {
+        alert('Guardado');
       }
     }
     /* if (allCellsFilled) {
@@ -492,20 +502,37 @@ export function flexDesignT3X(contenedor, initialData, formData) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
     colWidths: 100,
-    colHeaders: [
-      'Nivel',
-      'emín (m)',
-      'Verificación del Espesor Mínimo',
-      'ρinicial',
-      'N° de Capas',
-      'As inicial (cm²)',
-      'Acero',
-      'D (cm)',
-      'Área (cm²)',
-      's (cm)',
-      'Distribución de Refuerzo Inicial en el Núcleo',
+    width: '100%',
+    colHeaders: true,
+    preventOverflow: 'horizontal',
+    nestedHeaders: [
+      [
+        '',
+        'emín',
+        'Verificación',
+        'ρinicial',
+        'N°',
+        'As inicial',
+        'Acero',
+        'D',
+        'Área',
+        's',
+        'Distribución de Refuerzo',
+      ],
+      [
+        '',
+        '(m)',
+        'Espesor Mínimo',
+        '',
+        'Capas',
+        '(cm²)',
+        '',
+        '(cm)',
+        '(cm²)',
+        '(cm)',
+        'Inicial en el Núcleo',
+      ],
     ],
     columns: [
       { type: 'text', readOnly: true },
@@ -595,7 +622,12 @@ export function flexDesignT3X(contenedor, initialData, formData) {
               ) * 5
             );
           }
-          if(col == 9) hot.setDataAtCell(row, 10, `${hot.getDataAtCell(row, 6)} @ ${hot.getDataAtCell(row, 9)} cm`)
+          if (col == 9)
+            hot.setDataAtCell(
+              row,
+              10,
+              `${hot.getDataAtCell(row, 6)} @ ${hot.getDataAtCell(row, 9)} cm`
+            );
         });
       }
     },
@@ -630,6 +662,7 @@ export function flexDesignT3X(contenedor, initialData, formData) {
     solicitudCargaT3(contenedor3, solicitudCargaDT2, solicitudCargaDT2.length);
   } */
 }
+
 export function flexDesignT1Y(contenedor, initialData, formData) {
   var container = contenedor;
 
@@ -653,19 +686,24 @@ export function flexDesignT1Y(contenedor, initialData, formData) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
     colWidths: 100,
-    colHeaders: [
-      'Nivel',
-      'lm (m)',
-      'h (m)',
-      'hm (m)',
-      'hm/lm',
-      'Tipo de Muro',
-      'Tipo de Falla Muro',
-      'Mu (Ton.m)',
-      'z (m)',
-      'As (cm²)',
+    width: '100%',
+    colHeaders: true,
+    preventOverflow: 'horizontal',
+    nestedHeaders: [
+      ['Nivel', 'lm', 'h', 'hm', 'hm/lm', 'Tipo', 'Tipo', 'Mu', 'z', 'As'],
+      [
+        '',
+        '(m)',
+        '(m)',
+        '(m)',
+        '',
+        'Muro',
+        'Falla Muro',
+        '(Ton.m)',
+        '(m)',
+        '(cm²)',
+      ],
     ],
     columns: [
       { type: 'text', readOnly: true }, // Piso
@@ -830,21 +868,39 @@ export function flexDesignT2Y(contenedor, initialData) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    width: '100%',
+    colHeaders: true,
+    preventOverflow: 'horizontal',
     colWidths: 100,
-    colHeaders: [
-      'Nivel',
-      'Acero',
-      'D (cm)',
-      'Área (cm²)',
-      'N° Acero',
-      'Ø1/2"',
-      'Ø5/8"',
-      'Ø3/4"',
-      'Ø1"',
-      'Ascolocado (cm²)',
-      'Verificación de Acero Colocado',
-      'Distribución de Refuerzo Final en la Zona de Confinamiento',
+    nestedHeaders: [
+      [
+        'Nivel',
+        'Acero',
+        'D',
+        'Área',
+        'N°',
+        'Ø1/2"',
+        'Ø5/8"',
+        'Ø3/4"',
+        'Ø1"',
+        'Ascolocado',
+        'Verificación',
+        'Distribución de Refuerzo',
+      ],
+      [
+        '',
+        '',
+        '(cm)',
+        '(cm²)',
+        'Acero',
+        '',
+        '',
+        '',
+        '',
+        '(cm²)',
+        'Acero Colocado',
+        'Final en la Zona de Confinamiento',
+      ],
     ],
     columns: [
       { type: 'text', readOnly: true },
@@ -1003,6 +1059,37 @@ export function flexDesignT2Y(contenedor, initialData) {
     },
     licenseKey: 'non-commercial-and-evaluation',
   });
+
+  document
+    .getElementById('saveDataBtnDF2Y')
+    .addEventListener('click', CheckData);
+
+  function CheckData() {
+    var allCellsFilled = true;
+    dataTable2y = hot.getData();
+    for (var i = 0; i < dataTable2y.length; i++) {
+      for (var j = 0; j < dataTable2y[i].length; j++) {
+        if (dataTable2y[i][j] === null || dataTable2y[i][j] === '') {
+          allCellsFilled = false;
+          break;
+        }
+      }
+      if (!allCellsFilled) {
+        break;
+      } else {
+        alert('Guardado');
+      }
+    }
+    /* if (allCellsFilled) {
+      console.log('Datos de la tabla T1X:', tableData);
+      var flexDesingT2X = document.getElementById('flexDesingT2X');
+      flexDesignT2X(flexDesingT2X, tableData);
+      var flexDesingT3X = document.getElementById('flexDesingT3X');
+      flexDesignT3X(flexDesingT3X, tableData, formData);
+    } else {
+      alert('Hay celdas vacías');
+    } */
+  }
 }
 
 //Tabla Análisis en Dirección "2 x"
@@ -1044,20 +1131,37 @@ export function flexDesignT3Y(contenedor, initialData, formData) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    colHeaders: true,
     colWidths: 100,
-    colHeaders: [
-      'Nivel',
-      'emín (m)',
-      'Verificación del Espesor Mínimo',
-      'ρinicial',
-      'N° de Capas',
-      'As inicial (cm²)',
-      'Acero',
-      'D (cm)',
-      'Área (cm²)',
-      's (cm)',
-      'Distribución de Refuerzo Inicial en el Núcleo',
+    width: '100%',
+    preventOverflow: 'horizontal',
+    nestedHeaders: [
+      [
+        'Nivel',
+        'emín',
+        'Verificación',
+        'ρinicial',
+        'N°',
+        'As inicial',
+        'Acero',
+        'D',
+        'Área',
+        's',
+        'Distribución de Refuerzo',
+      ],
+      [
+        '',
+        '(m)',
+        'Espesor Mínimo',
+        '',
+        'Capas',
+        '(cm²)',
+        '',
+        '(cm)',
+        '(cm²)',
+        '(cm)',
+        'Inicial en el Núcleo',
+      ],
     ],
     columns: [
       { type: 'text', readOnly: true },
@@ -1147,7 +1251,12 @@ export function flexDesignT3Y(contenedor, initialData, formData) {
               ) * 5
             );
           }
-          if(col == 9) hot.setDataAtCell(row, 10, `${hot.getDataAtCell(row, 6)} @ ${hot.getDataAtCell(row, 9)} cm`)
+          if (col == 9)
+            hot.setDataAtCell(
+              row,
+              10,
+              `${hot.getDataAtCell(row, 6)} @ ${hot.getDataAtCell(row, 9)} cm`
+            );
         });
       }
     },

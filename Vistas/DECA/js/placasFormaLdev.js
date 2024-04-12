@@ -1,7 +1,6 @@
 import {
   solicitudCargaT1,
   solicitudCargaDT2,
-  solicitudCargaDT3,
 } from './placasFormaL/solicitudCarga.js';
 
 import {
@@ -270,9 +269,9 @@ document.addEventListener('DOMContentLoaded', function () {
               </div>
           </div>
           <div class="col-md-12 mx-auto text-center">
-              <label for="zcxDF">zCx</label>
+              <label for="zCxDF">zCx</label>
               <div class="input-group mb-2">
-                  <input type="number" name="zcxDF" class="form-control text-center" id="zcxDF" placeholder="1.20" min="0" step="any" value="1.2" required>
+                  <input type="number" name="zCxDF" class="form-control text-center" id="zCxDF" placeholder="1.20" min="0" step="any" value="1.2" required>
                   <div class="input-group-append">
                       <span class="input-group-text">m</span>
                   </div>
@@ -373,7 +372,7 @@ document.addEventListener('DOMContentLoaded', function () {
                       <option value="2">Compresión</option>
                       <option value="3">Deslizamiento</option>
                       <option value="4">Carga Puntual</option>
-                      <option value="0">Interacción</option>
+                      <option value="0">Integración</option>
                   </select>
               </div>
               <div id="generalSelectText">Ø ${generalSelect}</div>
@@ -471,57 +470,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //--------------Diseño por Flexión---------------------
 
-  // Ocultar/Mostrar el formulario y ajustar el tamaño de las columnas
-  function ocultarForm() {
-    const toggleFormButton = document.getElementById('toggleFormButton');
-    const formContainer = document.getElementById('formContainer');
-    const formColumn = document.getElementById('formColumn');
-    const resultadosContainer = document.getElementById('resultadosContainer');
-    const toggleIcon = toggleFormButton.querySelector('i');
-
-    // Función para cambiar las clases de Bootstrap y el ícono del botón
-    function toggleClasses() {
-      formColumn.classList.toggle('col-md-2');
-      formColumn.classList.toggle('col-md-1');
-      resultadosContainer.classList.toggle('col-md-10');
-      resultadosContainer.classList.toggle('col-md-11');
-      toggleIcon.classList.toggle('fa-chevron-left');
-      toggleIcon.classList.toggle('fa-chevron-right');
-    }
-
-    // Función para ocultar el formulario antes de imprimir
-    function hideFormBeforePrint() {
-      formContainer.style.display = 'none';
-      toggleIcon.classList.add('d-none');
-      if (formColumn.classList.contains('col-md-2')) {
-        toggleClasses();
-      }
-    }
-
-    // Función para restaurar la visibilidad del formulario después de imprimir
-    function showFormAfterPrint() {
-      // Esperar un breve período antes de restaurar las clases
-      setTimeout(function () {
-        formContainer.style.display = 'block';
-        toggleIcon.classList.remove('d-none');
-        toggleClasses();
-      }, 100); // Ajusta este valor según sea necesario
-    }
-
-    toggleFormButton.addEventListener('click', function () {
-      formContainer.style.display =
-        formContainer.style.display === 'none' ? 'block' : 'none';
-      toggleClasses();
-    });
-
-    // Agregar eventos para detectar cuando se imprime la página
-    window.addEventListener('beforeprint', hideFormBeforePrint);
-    window.addEventListener('afterprint', showFormAfterPrint);
-  }
-  ocultarForm();
-
   // form Flex Desing
-  var formContainer = document.getElementById('formContainer');
+  var formContainer = document.getElementById('formContainerDF');
   formContainer.innerHTML = formDF;
 
   //Cambios en el input Lx
@@ -532,7 +482,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ).toFixed(2);
     document.getElementById('lnucxDF').value = (
       parseFloat(this.value) -
-      2 * parseFloat(document.getElementById('zcxDF').value)
+      2 * parseFloat(document.getElementById('zCxDF').value)
     ).toFixed(2);
   });
 
@@ -610,7 +560,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     var sendInsteadFiltroTS2 = [
-      [1573.0, 15.26, 2.981],
+      [1573.00, 15.26, 2.981],
       [1246.4, 608.848, 23.586],
       [1408.222, -583.572, -18.691],
       [1208.982, 1682.383, 9.426],
@@ -650,8 +600,8 @@ document.addEventListener('DOMContentLoaded', function () {
       var contenedorX = document.getElementById('flexDesingT1X');
       var contenedorY = document.getElementById('flexDesingT1Y');
       /* flexDesignT1(contenedor, solicitudCargaDT3, formDataObject); */
-      flexDesignT1X(contenedorX, solicitudCargaDT3, formDataObject);
-      flexDesignT1Y(contenedorY, solicitudCargaDT3, formDataObject);
+      flexDesignT1X(contenedorX, sendInsteadDT3, formDataObject);
+      flexDesignT1Y(contenedorY, sendInsteadDT3, formDataObject);
       /* flexDesingT1 */
       /* dibujarLine(canva); */
     } else if (formDataObject.generalSelect == 0.85) {
@@ -663,8 +613,8 @@ document.addEventListener('DOMContentLoaded', function () {
       var contenedorX = document.getElementById('cutDesingT1X');
       var contenedorY = document.getElementById('cutDesingT1Y');
       /* flexDesignT1(contenedor, solicitudCargaDT3, formDataObject); */
-      cutDesignT1X(contenedorX, solicitudCargaDT3, formDataObject);
-      cutDesignT1Y(contenedorY, solicitudCargaDT3, formDataObject);
+      cutDesignT1X(contenedorX, sendInsteadDT3, formDataObject);
+      cutDesignT1Y(contenedorY, sendInsteadDT3, formDataObject);
       /* flexDesingT1 */
       /* dibujarLine(canva); */
       //--------------Envío de datos (contenedor, solicitaciones de carga, a Diseño por Corte)---------------------
@@ -672,9 +622,9 @@ document.addEventListener('DOMContentLoaded', function () {
       //------Envío de datos (contenedor, solicitaciones de carga, a Diagrama de interacción)--------------
       var contenedorX = document.getElementById('diT1X');
       var contenedorY = document.getElementById('diT1Y');
-      diT1X(
+/*       diT1X(
         contenedorX,
-        solicitudCargaDT3,
+        sendInsteadDT3,
         tableData1,
         dataTable2x,
         tableData3,
@@ -682,28 +632,28 @@ document.addEventListener('DOMContentLoaded', function () {
       );
       diT1Y(
         contenedorY,
-        solicitudCargaDT3,
+        sendInsteadDT3,
         tableData1Y,
         dataTable2y,
         tableData3Y,
         formDataObject
-      );
-      diagramI(filtroTS2);
+      ); */
+      diagramI(sendInsteadFiltroTS2);
       // diT1Y(contenedorY, sendInsteadDT3, formDataObject);
       //------Envío de datos (contenedor, solicitaciones de carga, a Diagrama de interacción)--------------
     } else if (formDataObject.generalSelect == 1) {
       //------Envío de datos (contenedor, solicitaciones de carga, a Verificación por Agrietamiento)--------------
       var contenedorX = document.getElementById('vaT1X');
       var contenedorY = document.getElementById('vaT1Y');
-      vaT1X(contenedorX, solicitudCargaDT3, formDataObject);
-      vaT1Y(contenedorY, solicitudCargaDT3, formDataObject);
+      vaT1X(contenedorX, sendInsteadDT3, formDataObject);
+      vaT1Y(contenedorY, sendInsteadDT3, formDataObject);
       //------Envío de datos (contenedor, solicitaciones de carga, a Verificación por Agrietamiento)--------------
     } else if (formDataObject.generalSelect == 2) {
       //------Envío de datos (contenedor, solicitaciones de carga, a Diseño de de compresión Pura)--------------
       var contenedorX = document.getElementById('dcpT1X');
       var contenedorY = document.getElementById('dcpT1Y');
-      dcpT1X(contenedorX, solicitudCargaDT3, formDataObject, tableData1);
-      dcpT1Y(contenedorY, solicitudCargaDT3, formDataObject, tableData1);
+      dcpT1X(contenedorX, sendInsteadDT3, formDataObject, tableData1);
+      dcpT1Y(contenedorY, sendInsteadDT3, formDataObject, tableData1);
       //------Envío de datos (contenedor, solicitaciones de carga, a Diseño de de compresión Pura)--------------
     } else if (formDataObject.generalSelect == 3) {
       //------Envío de datos (contenedor, solicitaciones de carga, a Diseño por Deslizamiento)--------------
@@ -711,7 +661,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var contenedorY = document.getElementById('ddT1Y');
       ddT1X(
         contenedorX,
-        solicitudCargaDT3,
+        sendInsteadDT3,
         formDataObject,
         tableData3,
         tableData3Y

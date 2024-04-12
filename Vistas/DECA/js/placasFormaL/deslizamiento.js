@@ -32,19 +32,35 @@ export function ddT1X(
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
     colWidths: 100,
-    colHeaders: [
-      'Nivel',
-      'Tipo de Concreto',
-      'λ',
-      'Casos según Artículo 11.7.4.3.',
-      'μ',
-      'Pcm (Ton)',
-      'Nu (Ton)',
-      'ρv',
-      'Av (cm²)',
-      'ØVn (Ton)',
+    nestedHeaders: [
+      [
+        'Nivel',
+        'Tipo',
+        'λ',
+        'Casos según',
+        'μ',
+        'Pcm',
+        'Nu',
+        'ρv',
+        'Av',
+        'ØVn',
+      ],
+      [
+        '',
+        'Concreto',
+        '',
+        ' Artículo 11.7.4.3.',
+        '',
+        '(Ton)',
+        '(Ton)',
+        '',
+        '(cm²)',
+        '(Ton)',
+      ],
     ],
     columns: [
       { type: 'text', readOnly: true }, // Nivel
@@ -221,18 +237,33 @@ function ddT2X(contenedor, solicitaciones, tabla1, formData) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
     colWidths: 100,
-    colHeaders: [
-      'Nivel',
-      'Ac (m²)',
-      'Vn máx 1 (Ton)',
-      'Vn máx 2 (Ton)',
-      'Vn máx (Ton)',
-      'Verificación del "Vn" Máximo',
-      'ØVn (Ton)',
-      'Vu máx (Ton)',
-      'Juntas de Construcción',
+    nestedHeaders: [
+      [
+        'Nivel',
+        'Ac',
+        'Vn máx 1',
+        'Vn máx 2',
+        'Vn máx',
+        'Verificación',
+        'ØVn',
+        'Vu máx',
+        'Juntas',
+      ],
+      [
+        '',
+        '(m²)',
+        '(Ton)',
+        '(Ton)',
+        '(Ton)',
+        '"Vn" Máximo',
+        '(Ton)',
+        '(Ton)',
+        'Construcción',
+      ],
     ],
     columns: [
       { type: 'text', readOnly: true }, // Nivel
@@ -288,19 +319,24 @@ export function ddT1Y(
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
     colWidths: 100,
-    colHeaders: [
-      'Nivel',
-      'Tipo de Concreto',
-      'λ',
-      'Casos según Artículo 11.7.4.3.',
-      'μ',
-      'Pcm (Ton)',
-      'Nu (Ton)',
-      'ρv',
-      'Av (cm²)',
-      'ØVn (Ton)',
+    nestedHeaders: [
+      ['Nivel', 'Tipo', 'λ', 'Casos', 'μ', 'Pcm', 'Nu', 'ρv', 'Av', 'ØVn'],
+      [
+        '',
+        'Concreto',
+        '',
+        'Artículo 11.7.4.3.',
+        '',
+        '(Ton)',
+        '(Ton)',
+        '',
+        '(cm²)',
+        '(Ton)',
+      ],
     ],
     columns: [
       { type: 'text', readOnly: true }, // Nivel
@@ -475,18 +511,33 @@ function ddT2Y(contenedor, solicitaciones, tabla1, formData) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
     colWidths: 100,
-    colHeaders: [
-      'Nivel',
-      'Ac (m²)',
-      'Vn máx 1 (Ton)',
-      'Vn máx 2 (Ton)',
-      'Vn máx (Ton)',
-      'Verificación del "Vn" Máximo',
-      'ØVn (Ton)',
-      'Vu máx (Ton)',
-      'Juntas de Construcción',
+    nestedHeaders: [
+      [
+        'Nivel',
+        'Ac',
+        'Vn máx 1',
+        'Vn máx 2',
+        'Vn máx',
+        'Verificación',
+        'ØVn',
+        'Vu máx',
+        'Juntas',
+      ],
+      [
+        '',
+        '(m²)',
+        '(Ton)',
+        '(Ton)',
+        '(Ton)',
+        '"Vn" Máximo',
+        '(Ton)',
+        '(Ton)',
+        'Construcción',
+      ],
     ],
     columns: [
       { type: 'text', readOnly: true }, // Nivel

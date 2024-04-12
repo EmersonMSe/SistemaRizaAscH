@@ -12,18 +12,23 @@ export function solicitudCargaT1(contenedor) {
   var container = contenedor;
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
     colWidths: 100,
-    colHeaders: [
-      'Nivel',
-      'Vx Piso (Ton)',
-      'Vx Elemento (Ton)',
-      'Ratio (Vx)',
-      'Verif. de Redundancia (Vx)',
-      'Vy Piso (Ton)',
-      'Vy Elemento (Ton)',
-      'Ratio (Vy)',
-      'Verif. de Redundancia (Vy)',
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
+    nestedHeaders: [
+      [
+        'Nivel',
+        'Vx Piso',
+        'Vx Elemento',
+        'Ratio',
+        'Verif. de Redundancia',
+        'Vy Piso',
+        'Vy Elemento',
+        'Ratio',
+        'Verif. de Redundancia',
+      ],
+      ['', '(Ton)', '(Ton)', '(Vx)', '(Vx)', '(Ton)', '(Ton)', '(Vy)', '(Vy)'],
     ],
     columns: [
       { type: 'text', readOnly: true }, // Nivel
@@ -188,24 +193,47 @@ export function solicitudCargaT2(contenedor, filas) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
     colWidths: 100,
-    colHeaders: [
-      'Piso',
-      'Placa',
-      'Combinaciones de Carga',
-      'Pu (Ton)',
-      'V2 (Ton)',
-      'V3 (Ton)',
-      'T (Ton.m)',
-      'M2 (Ton.m)',
-      'M3 (Ton.m)',
-      'Pux (Ton)',
-      'Vux (Ton)',
-      'Mux (Ton.m)',
-      'Puy (Ton)',
-      'Vuy (Ton)',
-      'Muy (Ton.m)',
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
+    height: '90vh',
+    preventOverflow: 'vertical',
+    nestedHeaders: [
+      [
+        'Piso',
+        'Placa',
+        'Combinaciones',
+        'Pu',
+        'V2',
+        'V3',
+        'T',
+        'M2',
+        'M3 ',
+        'Pux',
+        'Vux',
+        'Mux',
+        'Puy',
+        'Vuy',
+        'Muy',
+      ],
+      [
+        '',
+        '',
+        'Carga',
+        '(Ton)',
+        '(Ton)',
+        '(Ton)',
+        '(Ton.m)',
+        '(Ton.m)',
+        '(Ton.m)',
+        '(Ton)',
+        '(Ton)',
+        '(Ton.m)',
+        '(Ton)',
+        '(Ton)',
+        '(Ton.m)',
+      ],
     ],
     columns: [
       { type: 'text' }, // Piso
@@ -336,15 +364,13 @@ export function solicitudCargaT3(contenedor, initialData) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
     colWidths: 100,
-    colHeaders: [
-      'Nivel',
-      'Pu máx (Ton)',
-      'Vux máx (Ton)',
-      'Mux máx (Ton.m)',
-      'Vuy máx (Ton)',
-      'Muy máx (Ton.m)',
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
+    nestedHeaders: [
+      ['Nivel', 'Pu máx', 'Vux máx', 'Mux máx', 'Vuy máx', 'Muy máx'],
+      ['', '(Ton)', '(Ton)', '(Ton.m)', '(Ton)', '(Ton.m)'],
     ],
     columns: [
       { type: 'text', readOnly: true }, // Nivel
@@ -358,7 +384,7 @@ export function solicitudCargaT3(contenedor, initialData) {
     licenseKey: 'non-commercial-and-evaluation',
   });
 
-  document.getElementById('saveDataBtn3').addEventListener('click', saveDataT3);
+  //document.getElementById('saveDataBtn3').addEventListener('click', saveDataT3);
 
   function saveDataT3() {
     // Obtener los datos de la tabla
@@ -367,4 +393,5 @@ export function solicitudCargaT3(contenedor, initialData) {
     // Aquí puedes realizar alguna acción con los datos, como enviarlos al servidor o guardarlos en el almacenamiento local
     console.log('Datos de la tabla 3:', solicitudCargaDT3);
   }
+  setTimeout(saveDataT3, 1000);
 }

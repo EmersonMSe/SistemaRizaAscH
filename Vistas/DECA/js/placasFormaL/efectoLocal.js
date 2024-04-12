@@ -41,20 +41,37 @@ export function elT1(contenedor, formData, table1) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
     colWidths: 100,
-    colHeaders: [
-      'Nivel',
-      'lc (m)',
-      'emuro (m)',
-      'Casos para Definir el Factor de Longitud Efectiva "k"',
-      'k',
-      'Bviga (m)',
-      'Befectivo (m)',
-      'Ag (m²)',
-      'ØPn (Ton)',
-      'Pu (Ton)',
-      'Verificación del Espesor del Muro',
+    width: '100%',
+    colHeaders: true,
+    preventOverflow: 'horizontal',
+    nestedHeaders: [
+      [
+        'Nivel',
+        'lc',
+        'emuro',
+        'Casos para Definir',
+        'k',
+        'Bviga',
+        'Befectivo',
+        'Ag',
+        'ØPn',
+        'Pu',
+        'Verificación',
+      ],
+      [
+        '',
+        '(m)',
+        '(m)',
+        'Factor de Longitud Efectiva "k"',
+        '',
+        '(m)',
+        '(m)',
+        '(m²)',
+        '(Ton)',
+        '(Ton)',
+        'Espesor del Muro',
+      ],
     ],
     columns: [
       { type: 'text', readOnly: true }, // Nivel
@@ -146,7 +163,13 @@ export function elT1(contenedor, formData, table1) {
             );
           }
           if (col == 8) {
-            hot.setDataAtCell(row, 10, newValue >= hot.getDataAtCell(row, 9));
+            hot.setDataAtCell(
+              row,
+              10,
+              newValue >= hot.getDataAtCell(row, 9)
+                ? 'Sí cumple'
+                : 'No cumple, verificar'
+            );
           }
           if (col == 9) {
             hot.setDataAtCell(
@@ -215,11 +238,13 @@ function elT2(contenedor, initialData) {
 
   var hot = new Handsontable(container, {
     data: data,
-    rowHeaders: true,
+    colHeaders: true,
+    width: '100%',
+    preventOverflow: 'horizontal',
     colWidths: 100,
     colHeaders: [
       'Nivel',
-      '¿Se Aplica el Diseño?',
+      '¿Se Aplica Diseño?',
       'Bcol (m)',
       'Aplicación del Diseño según Artículo 21.9.3.5.',
     ],
