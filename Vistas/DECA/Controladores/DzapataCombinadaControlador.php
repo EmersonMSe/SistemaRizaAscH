@@ -1036,7 +1036,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Direccion XX
     // COL 1
 
-    $O_DIS_COL1 = 43.30;
+    // $O_DIS_COL1 = 43.30;
+    $O_DIS_COL1 = $OT_ULT;
     //lv
     $lv_sal_col1 = round($lv_col1 * $d_col1, 2);
 
@@ -1089,8 +1090,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // COL 2
-    $O_DIS_COL2 = 43.30;
-
+    // $O_DIS_COL2 = 43.30;
+    $O_DIS_COL2 = $OT_ULT2;
     //lv
     $lv_sal_col2 = $lv_col2 * $d_col2;
 
@@ -1302,7 +1303,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $P_COL2_CP = $CCC5_P2;
             $MX_COL2_CP = $CCC5_MX2;
             $MY_COL2_CP = $CCC5_MY2;
-            $texto_VFColumna2= "1.25(CM+CV)-Sy";
+            $texto_VFColumna2 = "1.25(CM+CV)-Sy";
         } elseif ($selectVFColumna2 === 'fila6_col2') {
             $P_COL2_CP = $CCC6_P2;
             $MX_COL2_CP = $CCC6_MX2;
@@ -1598,10 +1599,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <td></td>
                 </tr>
                 <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                    <td colspan="4">COMBINCACIÓN DE CARGAS EN LA COLUMNA 1</td>
+                    <td colspan="4">Combinación de cargas en la columna 1</td>
                 </tr>
                 <tr>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td>
@@ -1613,11 +1613,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </tr>
                         </table>
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Carga Muerta</td>
                     <td>CM</td>
-                    <td></td>
                     <td>
                         <table style="border: none; font-size: 11px; width: 100%;">
                             <tr>
@@ -1627,11 +1627,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </tr>
                         </table>
                     </td>
+                    <td></td>
+
                 </tr>
                 <tr>
                     <td>Carga Viva</td>
                     <td>CV</td>
-                    <td></td>
+
                     <td>
                         <table style="border: none; font-size: 11px; width: 100%;">
                             <tr>
@@ -1641,11 +1643,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </tr>
                         </table>
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Carga Sismo Ex</td>
                     <td>CSx</td>
-                    <td></td>
+
                     <td>
                         <table style="border: none; font-size: 11px; width: 100%;">
                             <tr>
@@ -1655,11 +1658,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </tr>
                         </table>
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Carga Sismo Ey</td>
                     <td>CSy</td>
-                    <td></td>
+
                     <td>
                         <table style="border: none; font-size: 11px; width: 100%;">
                             <tr>
@@ -1669,10 +1673,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </tr>
                         </table>
                     </td>
+                    <td></td>
                 </tr>
 
                 <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                    <td colspan="4">COMBINCACIÓN DE CARGAS EN LA COLUMNA 2</td>
+                    <td colspan="4">Combinación de cargas en la columna 2</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -1833,7 +1838,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <td>
                         <table style="border: none; font-size: 11px; width: 100%;">
                             <tr>
-                                <td style="border: none; width: 50%;"><?php echo $texto_VFColumna1 ; ?> </td>
+                                <td style="border: none; width: 50%;"><?php echo $texto_VFColumna1; ?> </td>
                                 <td style="border: none; width: 50%;"><?php echo $texto_VFColumna2; ?> </td>
                             </tr>
                         </table>
@@ -1967,7 +1972,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <tbody style="font-size: 11px;">
 
                 <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                    <td colspan="4">3.1 COMBINACIONES DE CARGAS DE SERVICIO</td>
+                    <td colspan="4">3.1 "Combinaciones de Cargas de Servicio</td>
                 </tr>
                 <tr>
                     <td>Descripción</td>
@@ -2163,7 +2168,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </td>
                 </tr>
                 <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                    <td colspan="4">3.2 COMBINACIONES DE CARGA ÚLTIMAS</td>
+                    <td colspan="4">3.2 Combinaciones de Carga Últimas</td>
                 </tr>
                 <tr>
                     <td>Descripción</td>
@@ -2482,7 +2487,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </tr>
 
                 <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                    <td colspan="4">3.3 PRESIONES EN EL SUELO EN CONDICIONES DE SERVICIO</td>
+                    <td colspan="4">3.3 Presiones en el Suelo en Condiciones de Servicio</td>
                 </tr>
                 <tr>
                     <td>Descripción</td>
@@ -2714,7 +2719,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </tr>
 
                 <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                    <td colspan="4">3.4 PRESIONES ÚLTIMOS DE DISEÑO</td>
+                    <td colspan="4">3.4 Presiones Últimos de Diseño</td>
                 </tr>
                 <tr>
                     <td style="vertical-align: middle;">Descripción</td>
@@ -3069,7 +3074,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </tr>
 
                 <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                    <td colspan="4">3.5 CALCULO DE LAS FUERZAS ULTIMAS EN LA BASE DE LA ZAPATA</td>
+                    <td colspan="4">3.5 Cálculo de las Fuerzas Últimas en la Base de la Zapata</td>
                 </tr>
                 <tr>
                     <td style="vertical-align: middle;">Descripción</td>
@@ -3189,7 +3194,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </tr>
 
                 <tr style="font-size: 13px; background-color: #a6b7c9; color: white; font-weight: bold;">
-                    <td colspan="4">3.6 VERIFICACIÓN DE EXCENTRICIDADES</td>
+                    <td colspan="4">3.6 Verificación de Excentricidades</td>
                 </tr>
                 <tr>
                     <td style="vertical-align: middle;">Descripción</td>
@@ -4059,7 +4064,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </tr>
                 <tr>
                     <td style="vertical-align: middle;">Factor de Dim de la Columna</td>
-                    <td>𝛽𝑐=</td>
+                    <td>𝛽𝑐</td>
                     <td>𝑡1/𝑡2
                     </td>
                     <td>

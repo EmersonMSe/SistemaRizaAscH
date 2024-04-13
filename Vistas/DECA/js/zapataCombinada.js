@@ -1,7 +1,7 @@
 $(document).ready(function () {
   //Grafica de predimencionamiento
 
-  dibujarCortePunzo();
+  
   // Llama a la función para generar el gráfico
 
   // Tabla de entrada de datos
@@ -86,6 +86,9 @@ $(document).ready(function () {
           document.getElementById("ObtenerResultados");
         resultadosContainer.innerHTML = data;
         obtenerPuntosCorte("fila1_col1", "fila1_col2");
+        dibujarCortePunzo();
+        vistaPlanta();
+         dibujarZapataIzquierda();
       })
       .catch((error) => {
         console.error("Error al enviar la solicitud Ajax", error);
@@ -107,7 +110,7 @@ $(document).ready(function () {
     // Llamar a una función y pasar los valores seleccionados como parámetros
     obtenerPuntosCorte(valorSelect1, valorSelect2);
   }
-  dibujarZapataIzquierda();
+ 
 });
 function dibujarZapataIzquierda() {
   var P_t1_col1 = parseFloat(document.getElementById("t1_col1").value);
@@ -383,11 +386,6 @@ function generarGraficoLinealCurvo(puntoY4, puntoY3) {
   VC_D58 = parseFloat(puntoY3);
   VC_D52 = VC_D32 / (1 + VC_H47 / (-1 * VC_D58));
   PX6 = parseFloat((VC_D52 + VC_B32).toFixed(4));
-  console.log("VC_D32: " + VC_D32);
-  console.log("VC_H47: " + VC_H47);
-  console.log("VC_D58: " + VC_D58);
-  console.log("VC_D52: " + VC_D52);
-  console.log("VC_B32: " + VC_B32);
 
   PX7 = 0.5 * t1_col1F + VC_D32;
   PX8 = 0.5 * t1_col1F + VC_D32;
@@ -395,17 +393,6 @@ function generarGraficoLinealCurvo(puntoY4, puntoY3) {
   PX11 = PX7 + VC_J32;
   PX9 = 0.25 * (PX11 - PX7) + PX7;
   PX10 = 0.5 * (PX11 - PX7) + PX8;
-  console.log("PX1: " + PX1);
-  console.log("PX2: " + PX2);
-  console.log("PX3: " + PX3);
-  console.log("PX4: " + PX4);
-  console.log("PX5: " + PX5);
-  console.log("PX6: " + PX6);
-  console.log("PX7: " + PX7);
-  console.log("PX8: " + PX8);
-  console.log("PX9: " + PX9);
-  console.log("PX10: " + PX10);
-  console.log("PX11: " + PX11);
 
   //
 
@@ -482,18 +469,6 @@ function generarGraficoLinealCurvo(puntoY4, puntoY3) {
   PY10 = parseFloat((-1 * OFF * F_AM46).toFixed(2));
   PY11 = parseFloat((-1 * OFF * F_AM47).toFixed(2));
 
-  console.log("PY1: " + PY1);
-  console.log("PY2: " + PY2);
-  console.log("PY3: " + PY3);
-  console.log("PY4: " + PY4);
-  console.log("PY5: " + PY5);
-  console.log("PY6: " + PY6);
-  console.log("PY7: " + PY7);
-  console.log("PY8: " + PY8);
-  console.log("PY9: " + PY9);
-  console.log("PY10: " + PY10);
-  console.log("PY11: " + PY11);
-
   // Datos de los puntos
   var data = [
     { x: PX1, y: PY1 },
@@ -549,7 +524,6 @@ function generarGraficoLinealCurvo(puntoY4, puntoY3) {
 }
 
 function dibujarCortePunzo() {
-
   //Datos necesarios
   var CP_t1_col1 = parseFloat(document.getElementById("t1_col1").value);
   var CP_t1_col2 = parseFloat(document.getElementById("t1_col2").value);
@@ -559,7 +533,8 @@ function dibujarCortePunzo() {
   var CPL = CPLe - 0.5 * CP_t1_col1 - 0.5 * CP_t1_col2;
   var CP_d_col1 = parseFloat(document.getElementById("dvc_col1").value);
   var CP_d_col2 = parseFloat(document.getElementById("dvc_col2").value);
-
+  var CP_m1 = parseFloat(document.getElementById("m1").value);
+  var CP_m2 = parseFloat(document.getElementById("m2").value);
 
   // Puntos X de la columna 1
   var COL1_PX1 = parseFloat((-0.5 * CPL).toFixed(3));
@@ -593,35 +568,6 @@ function dibujarCortePunzo() {
   var COL2_PY5 = parseFloat(COL2_PY4.toFixed(3));
   var COL2_PY6 = parseFloat(COL2_PY1.toFixed(3));
 
-  // Imprimir los valores por consola
-  console.log("COL1_PX1:", COL1_PX1);
-  console.log("COL1_PX2:", COL1_PX2);
-  console.log("COL1_PX3:", COL1_PX3);
-  console.log("COL1_PX4:", COL1_PX4);
-  console.log("COL1_PX5:", COL1_PX5);
-  console.log("COL1_PX6:", COL1_PX6);
-
-  console.log("COL1_PY1:", COL1_PY1);
-  console.log("COL1_PY2:", COL1_PY2);
-  console.log("COL1_PY3:", COL1_PY3);
-  console.log("COL1_PY4:", COL1_PY4);
-  console.log("COL1_PY5:", COL1_PY5);
-  console.log("COL1_PY6:", COL1_PY6);
-
-  console.log("COL2_PX1:", COL2_PX1);
-  console.log("COL2_PX2:", COL2_PX2);
-  console.log("COL2_PX3:", COL2_PX3);
-  console.log("COL2_PX4:", COL2_PX4);
-  console.log("COL2_PX5:", COL2_PX5);
-  console.log("COL2_PX6:", COL2_PX6);
-
-  console.log("COL2_PY1:", COL2_PY1);
-  console.log("COL2_PY2:", COL2_PY2);
-  console.log("COL2_PY3:", COL2_PY3);
-  console.log("COL2_PY4:", COL2_PY4);
-  console.log("COL2_PY5:", COL2_PY5);
-  console.log("COL2_PY6:", COL2_PY6);
-
   // Puntos X de la corte columna 1
   var CCOL1_PX1 = COL1_PX4;
   var CCOL1_PX2 = CCOL1_PX1;
@@ -653,34 +599,27 @@ function dibujarCortePunzo() {
   var CCOL2_PY4 = parseFloat((COL2_PY3 + (0.5 * CP_d_col2) / 100).toFixed(3));
   var CCOL2_PY5 = CCOL2_PY4;
   var CCOL2_PY6 = CCOL2_PY1;
-  // Imprimir los valores por consola
-  console.log("CCOL1_PX1:", CCOL1_PX1);
-  console.log("CCOL1_PX2:", CCOL1_PX2);
-  console.log("CCOL1_PX3:", CCOL1_PX3);
-  console.log("CCOL1_PX4:", CCOL1_PX4);
-  console.log("CCOL1_PX5:", CCOL1_PX5);
-  console.log("CCOL1_PX6:", CCOL1_PX6);
 
-  console.log("CCOL1_PY1:", CCOL1_PY1);
-  console.log("CCOL1_PY2:", CCOL1_PY2);
-  console.log("CCOL1_PY3:", CCOL1_PY3);
-  console.log("CCOL1_PY4:", CCOL1_PY4);
-  console.log("CCOL1_PY5:", CCOL1_PY5);
-  console.log("CCOL1_PY6:", CCOL1_PY6);
+  // Puntos X de la Zapata Izquierda
+  var Z_PX1 = parseFloat(COL1_PX3.toFixed(3));
+  var Z_PX2 = parseFloat(Z_PX1.toFixed(3));
+  var Z_PX3 = parseFloat(
+    (-0.5 * CPL - CP_t1_col1 + CPL + CP_t1_col1 + CP_t1_col2 + CP_m2).toFixed(3)
+  );
+  var Z_PX4 = parseFloat(Z_PX3.toFixed(3));
+  var Z_PX5 = parseFloat(Z_PX1.toFixed(3));
+  var Z_PX6 = parseFloat(Z_PX1.toFixed(3));
 
-  console.log("CCOL2_PX1:", CCOL2_PX1);
-  console.log("CCOL2_PX2:", CCOL2_PX2);
-  console.log("CCOL2_PX3:", CCOL2_PX3);
-  console.log("CCOL2_PX4:", CCOL2_PX4);
-  console.log("CCOL2_PX5:", CCOL2_PX5);
-  console.log("CCOL2_PX6:", CCOL2_PX6);
+  // Puntos Y de la Zapata Izquierda
+  var Z_PY1 = 0;
+  var Z_PY2 = parseFloat(
+    (Z_PY1 - 0.5 * (CP_m1 + CP_t2_col1 + CP_m1)).toFixed(3)
+  );
+  var Z_PY3 = parseFloat(Z_PY2.toFixed(3));
+  var Z_PY4 = parseFloat((Z_PY3 + (CP_m1 + CP_t2_col1 + CP_m1)).toFixed(3));
+  var Z_PY5 = parseFloat(Z_PY4.toFixed(3));
+  var Z_PY6 = parseFloat(Z_PY1.toFixed(3));
 
-  console.log("CCOL2_PY1:", CCOL2_PY1);
-  console.log("CCOL2_PY2:", CCOL2_PY2);
-  console.log("CCOL2_PY3:", CCOL2_PY3);
-  console.log("CCOL2_PY4:", CCOL2_PY4);
-  console.log("CCOL2_PY5:", CCOL2_PY5);
-  console.log("CCOL2_PY6:", CCOL2_PY6);
   var data = {
     datasets: [
       {
@@ -718,7 +657,7 @@ function dibujarCortePunzo() {
         tension: 0, // Esto asegura que las líneas sean rectas
       },
       {
-        label: "Corte Punzonamiento 1",
+        label: "Corte Columna 1",
         backgroundColor: "rgb(75, 192, 192)",
         borderColor: "rgb(75, 192, 192)",
         data: [
@@ -735,7 +674,7 @@ function dibujarCortePunzo() {
         tension: 0, // Esto asegura que las líneas sean rectas
       },
       {
-        label: "Corte Punzonamiento 2",
+        label: "Corte Columna 2",
         backgroundColor: "rgb(75, 192, 192)",
         borderColor: "rgb(75, 192, 192)",
         data: [
@@ -750,6 +689,23 @@ function dibujarCortePunzo() {
         showLine: true, // Mostrar líneas conectando los puntos
         fill: false,
         tension: 0, // Esto asegura que las líneas sean rectas
+      },
+      {
+        label: "Zapata",
+        backgroundColor: "rgb(75, 192, 192)",
+        borderColor: "rgb(75, 192, 192)",
+        data: [
+          { x: Z_PX1, y: Z_PY1 },
+          { x: Z_PX2, y: Z_PY2 },
+          { x: Z_PX3, y: Z_PY3 },
+          { x: Z_PX4, y: Z_PY4 },
+          { x: Z_PX5, y: Z_PY5 },
+          { x: Z_PX6, y: Z_PY6 },
+        ],
+        type: "scatter",
+        showLine: true,
+        fill: false,
+        tension: 0,
       },
     ],
   };
@@ -769,6 +725,150 @@ function dibujarCortePunzo() {
   };
   var ctx = document.getElementById("corte_punzonamiento").getContext("2d");
   // Crear el gráfico
+  var myChart = new Chart(ctx, {
+    type: "scatter",
+    data: data,
+    options: options,
+  });
+}
+function vistaPlanta() {
+  //Datos necesarios
+  var VP_t1_col1 = parseFloat(document.getElementById("t1_col1").value);
+  var VP_t1_col2 = parseFloat(document.getElementById("t1_col2").value);
+  var VP_t2_col1 = parseFloat(document.getElementById("t2_col1").value);
+  var VP_t2_col2 = parseFloat(document.getElementById("t2_col2").value);
+  var VPLe = parseFloat(document.getElementById("Le").value);
+  var VPL = VPLe - 0.5 * VP_t1_col1 - 0.5 * VP_t1_col2;
+  var VP_m2 = parseFloat(document.getElementById("m2").value);
+  var VP_m1 = parseFloat(document.getElementById("m1").value);
+
+  // Puntos X de la columna 1
+  var VP_COL1_PX1 = parseFloat((-0.5 * VPL).toFixed(3));
+  var VP_COL1_PX2 = parseFloat(VP_COL1_PX1.toFixed(3));
+  var VP_COL1_PX3 = parseFloat((VP_COL1_PX2 - VP_t1_col1).toFixed(3));
+  var VP_COL1_PX4 = parseFloat(VP_COL1_PX3.toFixed(3));
+  var VP_COL1_PX5 = parseFloat(VP_COL1_PX2.toFixed(3));
+  var VP_COL1_PX6 = parseFloat(VP_COL1_PX1.toFixed(3));
+
+  // Puntos Y de la columna 1
+  var VP_COL1_PY1 = parseFloat((0).toFixed(3));
+  var VP_COL1_PY2 = parseFloat((VP_COL1_PY1 + VP_t2_col1 * 0.5).toFixed(3));
+  var VP_COL1_PY3 = parseFloat(VP_COL1_PY2.toFixed(3));
+  var VP_COL1_PY4 = parseFloat((VP_COL1_PY3 - VP_t2_col1).toFixed(3));
+  var VP_COL1_PY5 = parseFloat(VP_COL1_PY4.toFixed(3));
+  var VP_COL1_PY6 = parseFloat(VP_COL1_PY1.toFixed(3));
+
+  // Puntos X de la columna 2
+  var VP_COL2_PX1 = parseFloat((0.5 * VPL).toFixed(3));
+  var VP_COL2_PX2 = parseFloat(VP_COL2_PX1.toFixed(3));
+  var VP_COL2_PX3 = parseFloat((VP_COL2_PX2 + VP_t1_col2).toFixed(3));
+  var VP_COL2_PX4 = parseFloat(VP_COL2_PX3.toFixed(3));
+  var VP_COL2_PX5 = parseFloat(VP_COL2_PX2.toFixed(3));
+  var VP_COL2_PX6 = parseFloat(VP_COL2_PX1.toFixed(3));
+
+  // Puntos Y de la columna 2
+  var VP_COL2_PY1 = parseFloat((0).toFixed(3));
+  var VP_COL2_PY2 = parseFloat((VP_COL2_PY1 + VP_t2_col2 * 0.5).toFixed(3));
+  var VP_COL2_PY3 = parseFloat(VP_COL2_PY2.toFixed(3));
+  var VP_COL2_PY4 = parseFloat((VP_COL2_PY3 - VP_t2_col2).toFixed(3));
+  var VP_COL2_PY5 = parseFloat(VP_COL2_PY4.toFixed(3));
+  var VP_COL2_PY6 = parseFloat(VP_COL2_PY1.toFixed(3));
+
+  // Puntos X de la Zapata Izquierda
+  var ZI_PX1 = parseFloat(VP_COL1_PX3.toFixed(3));
+  var ZI_PX2 = parseFloat(ZI_PX1.toFixed(3));
+  var ZI_PX3 = parseFloat(((-0.5 * VPL) - VP_t1_col1 + VPL + VP_t1_col1 + VP_t1_col2 + VP_m2).toFixed(3));
+  var ZI_PX4 = parseFloat(ZI_PX3.toFixed(3));
+  var ZI_PX5 = parseFloat(ZI_PX1.toFixed(3));
+  var ZI_PX6 = parseFloat(ZI_PX1.toFixed(3));
+
+  // Puntos Y de la Zapata Izquierda
+  var ZI_PY1 = 0;
+  var ZI_PY2 = parseFloat((ZI_PY1 -0.5 *(VP_m1 + VP_t2_col1 + VP_m1)).toFixed(3));
+  var ZI_PY3 = parseFloat(ZI_PY2.toFixed(3));
+  var ZI_PY4 = parseFloat((ZI_PY3 + (VP_m1 + VP_t2_col1 + VP_m1)).toFixed(3));
+  var ZI_PY5 = parseFloat(ZI_PY4.toFixed(3));
+  var ZI_PY6 = parseFloat(ZI_PY1.toFixed(3));
+
+  var data = {
+    datasets: [
+      {
+        label: "Columna 1",
+        backgroundColor: "rgb(255, 99, 132)",
+        borderColor: "rgb(255, 99, 132)",
+        data: [
+          { x: VP_COL1_PX1, y: VP_COL1_PY1 },
+          { x: VP_COL1_PX2, y: VP_COL1_PY2 },
+          { x: VP_COL1_PX3, y: VP_COL1_PY3 },
+          { x: VP_COL1_PX4, y: VP_COL1_PY4 },
+          { x: VP_COL1_PX5, y: VP_COL1_PY5 },
+          { x: VP_COL1_PX6, y: VP_COL1_PY6 },
+        ],
+        type: "scatter",
+        showLine: true,
+        fill: false,
+        tension: 0,
+      },
+      {
+        label: "Columna 2",
+        backgroundColor: "rgb(54, 162, 235)",
+        borderColor: "rgb(54, 162, 235)",
+        data: [
+          { x: VP_COL2_PX1, y: VP_COL2_PY1 },
+          { x: VP_COL2_PX2, y: VP_COL2_PY2 },
+          { x: VP_COL2_PX3, y: VP_COL2_PY3 },
+          { x: VP_COL2_PX4, y: VP_COL2_PY4 },
+          { x: VP_COL2_PX5, y: VP_COL2_PY5 },
+          { x: VP_COL2_PX6, y: VP_COL2_PY6 },
+        ],
+        type: "scatter",
+        showLine: true,
+        fill: false,
+        tension: 0,
+      },
+      {
+        label: "Zapata",
+        backgroundColor: "rgb(75, 192, 192)",
+        borderColor: "rgb(75, 192, 192)",
+        data: [
+          { x: ZI_PX1, y: ZI_PY1 },
+          { x: ZI_PX2, y: ZI_PY2 },
+          { x: ZI_PX3, y: ZI_PY3 },
+          { x: ZI_PX4, y: ZI_PY4 },
+          { x: ZI_PX5, y: ZI_PY5 },
+          { x: ZI_PX6, y: ZI_PY6 },
+        ],
+        type: "scatter",
+        showLine: true,
+        fill: false,
+        tension: 0,
+      },
+    ],
+  };
+
+  var options = {
+    scales: {
+      x: {
+        type: "linear",
+        position: "bottom",
+      },
+      y: {
+        type: "linear",
+        position: "left",
+      },
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: "Vista Planta",
+        font: {
+          size: 18,
+        },
+      },
+    },
+  };
+
+  var ctx = document.getElementById("vistaplanta").getContext("2d");
   var myChart = new Chart(ctx, {
     type: "scatter",
     data: data,

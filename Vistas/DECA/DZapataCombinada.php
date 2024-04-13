@@ -717,6 +717,11 @@ include_once "assets/views/nav.php";
                             <canvas id="predimencionamiento" width="1000" height="400"></canvas>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="d-flex justify-content-center">
+                            <canvas id="vistaplanta" width="1000" height="400"></canvas>
+                        </div>
+                    </div>
                     <h2>Verificación por cortante</h2>
 
                     <div class="card">
@@ -759,48 +764,7 @@ include_once "assets/views/nav.php";
     <script src="js/zapataCombinada.js"></script>
     <!-- 
 
-    <script type="text/javascript" src="grafica.js"></script> -->
-
-    <script>
-        // Datos de los puntos (x, y)
-        // Datos de los puntos (x, y)
-        var t1_col1 = document.getElementById('t1_col1').value;
-        var Le = document.getElementById('Le').value;
-        var m2 = document.getElementById('m2').value;
-        var t1_col2 = document.getElementById('t1_col2').value;
-
-        // Convertir los valores a números de punto flotante (float)
-        var t1_col1_float = parseFloat(t1_col1);
-        var Le_float = parseFloat(Le);
-        var m2_float = parseFloat(m2);
-        var t1_col2_float = parseFloat(t1_col2);
-
-        // Puntos en X
-        var puntoX1 = 0; // Supongamos que calculamos este punto dinámicamente
-        var puntoX2 = 0.5 * t1_col1_float;
-        var puntoX3 = puntoX2;
-        var puntoX4 = 0.5 * t1_col1_float + Le_float;
-        var puntoX5 = puntoX4;
-        var puntoX6 = puntoX4 + m2_float + 0.5 * t1_col2_float;
-
-        // Imprimir los valores en la consola
-        console.log("Punto X1:", puntoX1);
-        console.log("Punto X2:", puntoX2);
-        console.log("Punto X3:", puntoX3);
-        console.log("Punto X4:", puntoX4);
-        console.log("Punto X5:", puntoX5);
-        console.log("Punto X6:", puntoX6);
-
-        //puntos en Y
-
-
-        var puntoY1 = 0; // Supongamos que calculamos este punto dinámicamente
-        var puntoY2 = 0.5 * t1_col1_float;
-        var puntoY3 = puntoX2;
-        var puntoY4 = 0.5 * t1_col1_float + Le_float;
-        var puntoY5 = puntoX4;
-        var puntoY6 = 0;
-    </script>
+    
 </div>
 <?php
 include_once "assets/views/footer.php";
