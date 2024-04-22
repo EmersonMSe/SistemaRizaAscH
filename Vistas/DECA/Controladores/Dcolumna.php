@@ -26,6 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dataFromHandsontablesLAY = array();
     print_r($dataFromHandsontableLAX);
     print_r($dataFromHandsontableLAY);
+    $indiceQX = array();
+    $tipoEstructuraX = array();
+    $indiceQY = array();
+    $tipoEstructuraY = array();
+    $hx = array();
     $p = array();
     $vx = array();
     $vy = array();
@@ -35,6 +40,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $buttonmy = array();
 
 
+    for ($i = count($dataFromHandsontableLAX)-2; $i >= 0; $i--) {
+        $indiceQX[] = $dataFromHandsontableLAX[$i][7];
+        print_r($dataFromHandsontableLAX[$i][7]);
+    }
+    for ($i = count($dataFromHandsontableLAX)-2; $i >= 0; $i--) {
+        $tipoEstructuraX[] = $dataFromHandsontableLAX[$i][9];
+        print_r($dataFromHandsontableLAX[$i][9]);
+    }
+    for ($i = count($dataFromHandsontableLAY)-1; $i >= 0; $i--) {
+        $indiceQY[] = $dataFromHandsontableLAY[$i][7];
+        print_r($dataFromHandsontableLAY[$i][7]);
+    }
+    for ($i = count($dataFromHandsontableLAY)-1; $i >= 0; $i--) {
+        echo $i;
+        $tipoEstructuraY[] = $dataFromHandsontableLAY[$i][9];
+        print_r($dataFromHandsontableLAY[$i][9]);
+    }
+    for ($i = count($dataFromHandsontableLAX)-2; $i >= 0; $i--) {
+        $hx[] = $dataFromHandsontableLAX[$i][1];
+    }
     for ($i = 0; $i < count($dataFromHandsontable); $i++) {
         $p[] = $dataFromHandsontable[$i][2];
     }
@@ -860,8 +885,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                  
                     echo "<td style='vertical-align: middle;'>Dirección X-X</td>";
-                    echo "<td>$longq</td>";
-                    echo "<td>$tipDes</td>";
+                    echo "<td>$indiceQX[$piso_num]</td>";
+                    echo "<td>$tipoEstructuraX[$piso_num]</td>";
                     echo "<td>$RREX</td>";
                     echo "<td>$CDEZ</td>";
                     echo "<td>$H</td>";
@@ -872,8 +897,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         switch ($subfila) {
                             case 2:
                                 echo "<td style='vertical-align: middle;'>Dirección Y-Y</td>";
-                                echo "<td>$longqy</td>";
-                                echo "<td>$tipDes</td>";
+                                echo "<td>$indiceQY[$piso_num]</td>";
+                                echo "<td>$tipoEstructuraY[$piso_num]</td>";
                                 echo "<td>$RREX</td>";
                                 echo "<td>$CDEZ</td>";
                                 echo "<td>$H</td>";
@@ -975,17 +1000,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                          $calmmy=34-12*($m1tony/$m1tony);
                     }
 
-                    if ($tipDes="Con Desplazamiento Lateral") {
+                    if ($tipoEstructuraX[$piso_num]=="Con Desplazamiento Lateral") {
                         $veresbeltez="No Considerar Efectos de Esbeltez";
                     } else {
-                        if ($klu_value<=$calmmy) {
+                        if ($klu_value<=$calmm) {
                             $veresbeltez="No Considerar Efectos de Esbeltez";
                         } else {
                             $veresbeltez="Considerar Efectos de Esbeltez";
                         }
                     }
 
-                    if ($tipDes="Con Desplazamiento Lateral") {
+                    if ($tipoEstructuraY[$piso_num]=="Con Desplazamiento Lateral") {
                         $veresbeltezy="No Considerar Efectos de Esbeltez";
                     } else {
                         if ($kluy_value<=$calmmy) {
@@ -1001,40 +1026,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $datos_piso_vy = $pisos_datos_array_vy[$piso_num]['Datos'];
 
                     //XX
-                    if ($tipDes=="Sin Desplazamiento Lateral") {
+                    if ($tipoEstructuraX[$piso_num]=="Sin Desplazamiento Lateral") {
                         $bd=round(max(1.4*$datos_piso_p[0]+1.7*$datos_piso_p[1],1.25*($datos_piso_p[0]+$datos_piso_p[1]))/$valor_piso_actual,2,PHP_ROUND_HALF_UP);
                     } else {
                         $bd=round(max(1.4*$datos_piso_vx[0]+1.7*$datos_piso_vx[1],1.25*($datos_piso_vx[0]+$datos_piso_vx[1]))/$max_pisovux_value,2,PHP_ROUND_HALF_UP);
                     }
 
                     //YY
-                    if ($tipDes=="Sin Desplazamiento Lateral") {
+                    if ($tipoEstructuraY[$piso_num]=="Sin Desplazamiento Lateral") {
                         $bdy=round(max(1.4*$datos_piso_p[0]+1.7*$datos_piso_p[1],1.25*($datos_piso_p[0]+$datos_piso_p[1]))/$valor_piso_actualyy,2,PHP_ROUND_HALF_UP);
                     } else {
                         $bdy=round(max(1.4*$datos_piso_vy[0]+1.7*$datos_piso_vy[1],1.25*($datos_piso_vy[0]+$datos_piso_vy[1]))/$max_pisoVy_value,2,PHP_ROUND_HALF_UP);
                     }
 
                     ///////////////-XX-EL////////////////////
-                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                    if ($veresbeltez=="No Considerar Efectos de Esbeltez") {
                         $elton="-";
                     }else{
                         $ec=1500*sqrt($fc);
                         $elton=(0.4*$ec*$Igx/(1+$bd))/pow(10,7);
                     }
                     ///////////////-XX-pc////////////////////
-                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                    if ($veresbeltez=="No Considerar Efectos de Esbeltez") {
                         $pcton="-";
                     }else{
                         $pcton = (pow(pi(), 2) * $elton) / pow($CDEZ * $H, 2);
                     }
                     ///////////////-XX-m2min////////////////////
-                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                    if ($veresbeltez=="No Considerar Efectos de Esbeltez") {
                         $m2min="-";
                     }else{
                         $m2min = ($valor_piso_actual*(15+0.03*$H*1000)/1000);
                     }
                     ///////////////-XX-cm////////////////////
-                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                    if ($veresbeltez=="No Considerar Efectos de Esbeltez") {
                         $cm="-";
                     }else{
                         if (0.6+0.4*($m1ton/$m2ton)>=0.4) {
@@ -1044,7 +1069,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
                     }
                      ///////////////-XX-ns////////////////////
-                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                    if ($veresbeltez=="No Considerar Efectos de Esbeltez") {
                         $ns=1;
                     }else{
                         if ($cm/(1-($valor_piso_actual/(0.75*$pcton)))>=1) {
@@ -1058,7 +1083,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     //////////////------------------------//////////////////////
                     ///////////////-YY-EL////////////////////
-                    if ($veresbeltezy="No Considerar Efectos de Esbeltez") {
+                    if ($veresbeltezy=="No Considerar Efectos de Esbeltez") {
                         $eltony="-";
                     }else{
                         $ec=1500*sqrt($fc);
@@ -1066,20 +1091,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
 
                     ///////////////-YY-pc////////////////////
-                    if ($veresbeltezy="No Considerar Efectos de Esbeltez") {
+                    if ($veresbeltezy=="No Considerar Efectos de Esbeltez") {
                         $pctony="-";
                     }else{
-                        $pcton = (pow(pi(), 2) * $elton) / pow(1 * $$H, 2);
+                        $pctony = (pow(pi(), 2) * $eltony) / pow(1 * $H, 2);
                     }
 
                     ///////////////-XX-m2min////////////////////
-                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                    if ($veresbeltezy=="No Considerar Efectos de Esbeltez") {
                         $m2miny="-";
                     }else{
                         $m2miny = ($valor_piso_actualyy*(15+0.03*$H*1000)/1000);
                     }
                     ///////////////-XX-cm////////////////////
-                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                    if ($veresbeltezy=="No Considerar Efectos de Esbeltez") {
                         $cmy="-";
                     }else{
                         if (0.6+0.4*($m1tony/$m2tony)>=0.4) {
@@ -1089,11 +1114,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
                     }
                      ///////////////-XX-ns////////////////////
-                    if ($veresbeltez="No Considerar Efectos de Esbeltez") {
+                    if ($veresbeltezy=="No Considerar Efectos de Esbeltez") {
                         $nsy=1;
                     }else{
                         if ($cmy/(1-($valor_piso_actualyy/(0.75*$pctony)))>=1) {
-                            $nsy = $cm/(1-($valor_piso_actualyy/(0.75*$pctony)));
+                            $nsy = $cmy/(1-($valor_piso_actualyy/(0.75*$pctony)));
                         } else {
                             $nsy = 1;
                         }
@@ -1177,25 +1202,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Si es el inicio de un nuevo piso, generamos la fila del piso con rowspan=5
                     echo "<tr>";
                     echo "<th rowspan='5' style='vertical-align: middle;' scope='row'>Piso " . ($piso_num + 1) . "</th>";
-                    switch ($tipDes) {
+                    switch ($tipoEstructuraX[$piso_num]) {
                         case 'Sin Desplazamiento Lateral':
                             $kluart="-";
                             break;
                         
                         default:
-                            $kluart=$klu_value;
+                            //$kluart=$klu_value;
+                            $kluart = $klu_values[$piso_num];
                             break;
                     }
-                    switch ($tipDes) {
+                    switch ($tipoEstructuraY[$piso_num]) {
                         case 'Sin Desplazamiento Lateral':
                             $kluarty="-";
                             break;
                         
                         default:
-                            $kluarty=$kluy_value;
+                            $kluarty=$kluy_values[$piso_num];
                             break;
                     }
-                    switch ($tipDes) {
+                    switch ($tipoEstructuraX[$piso_num]) {
                         case 'Sin Desplazamiento Lateral':
                            $verez="Sin Desplazamiento Lateral";
                             break;
@@ -1208,7 +1234,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             }
                             break;
                     }
-                    switch ($tipDes) {
+                    switch ($tipoEstructuraY[$piso_num]) {
                         case 'Sin Desplazamiento Lateral':
                            $verezy="Sin Desplazamiento Lateral";
                             break;
@@ -1228,8 +1254,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             break;
                         
                         default:
-                            if (1/(1-$longq)>=1) {
-                                $os1=round(1/(1-$longq),2,PHP_ROUND_HALF_UP);
+                            if (1/(1-$indiceQX[$piso_num])>=1) {
+                                $os1=round(1/(1-$indiceQX[$piso_num]),2,PHP_ROUND_HALF_UP);
                             } else {
                                 $os1=1;
                             }
@@ -1241,8 +1267,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             break;
                         
                         default:
-                            if (1/(1-$longqy)>=1) {
-                                $os1y=round(1/(1-$longqy),2,PHP_ROUND_HALF_UP);
+                            if (1/(1-$indiceQY[$piso_num])>=1) {
+                                $os1y=round(1/(1-$indiceQY[$piso_num]),2,PHP_ROUND_HALF_UP);
                             } else {
                                 $os1y=1;
                             }
@@ -1316,7 +1342,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 } else {
                     $VerifiArt = "No Cumple,'<br>' Verificar";
                 }
-                echo "<td>$H</td>"; 
+                echo "<td>$hx[$piso_num]</td>"; 
                 echo "<td>$AAceroTotal</td>"; 
                 echo "<td>$AgL</td>"; 
                 echo "<td>$Pon</td>"; 

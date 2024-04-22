@@ -664,22 +664,23 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
             var tablex = []
             var tabley = []
             /* --- */
-            var dataLAX = [];
+            //var dataLAX = [];
             var h = 3.5;
             var pu = 25489.59
             var puS = pu
             var difAbs = 0.0062
             var difRel = difAbs
             var vux = 1903.49
-            var q = puS * difRel / (vux * h);
+            var q = parseFloat((puS * difRel / (vux * h)).toFixed(4));
             var verifArrios = q <= 0.06 ? 'Sí hay Arriostramiento' : 'No hay Arriostramiento'
             var tipoEs = verifArrios == 'Sí hay Arriostramiento' ? 'Sin desplazamiento lateral' : 'Con desplazamiento lateral'
-            dataLAX.push(['Piso 1', h, pu, puS, difAbs, difRel, vux, verifArrios, tipoEs]);
+            //dataLAX.push(['Piso último', h, pu, puS, difAbs, difRel, vux, q, verifArrios, tipoEs]);
             var containerLAX = document.getElementById('longitudArriostradaX');
-            var hotLAX = new Handsontable(containerLAX, {
-                data: dataLAX,
+            var hot = new Handsontable(containerLAX, {
+                data: [
+                    ['Piso último', '', '', '', '', '', '', '', '', '']
+                ],
                 colHeaders: true,
-                contextMenu: true,
                 colWidths: 100,
                 width: '100%',
                 preventOverflow: 'horizontal',
@@ -720,69 +721,47 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                         align: 'center'
                     }, '(Ton)', '"Q"', ' Verificación del Arriostramiento', 'Tipo de Estructura']
                 ],
-                collapsibleColumns: [{
-                        row: -2,
-                        col: 1,
-                        collapsible: false
+                columns: [{
+                        type: 'text',
+                        readOnly: true
+                    }, // 'Nivel',
+                    {
+                        type: 'numeric',
                     },
                     {
-                        row: -1,
-                        col: 1,
-                        collapsible: false
+                        type: 'numeric'
                     },
+                    {
+                        type: 'numeric',
+                        readOnly: true
+                    },
+                    {
+                        type: 'numeric'
+                    }, // 'hm (m)',
+                    {
+                        type: 'numeric',
+                        readOnly: true
+                    }, // 'Vua (Ton)',
+                    {
+                        type: 'numeric',
+                    },
+                    {
+                        type: 'numeric',
+                        readOnly: true
+                    },
+                    {
+                        type: 'text',
+                        readOnly: true
+                    },
+                    {
+                        type: 'text',
+                        readOnly: true
+                    }
                 ],
                 minSpareRows: 1,
-                afterChange: function(changes, source) {
-                    if (source == 'edit') {
-                        var hot = this;
-                        changes.forEach(function(change) {
-                            var row = change[0]
-                            var col = change[1]
-                            var newValue = change[3]
-                            if (col === 1) {
-                                hot.setDataAtCell(row, 7,
-                                    hot.getDataAtCell(row, 3) * hot.getDataAtCell(row, 5) /
-                                    ((hot.getDataAtCell(row, 6) * newValue)))
-                            }
-                            if (col == 2) {
-                                if (row == 0) {
-                                    hot.setDataAtCell(row, 3, newValue)
-                                } else {
-                                    hot.setDataAtCell(row, 3, hot.getDataAtCell(row - 1, 3) + hot.getDataAtCell(row, 2))
-                                }
-                            }
-                            if (col == 3) {
-                                hot.setDataAtCell(row, 7,
-                                    newValue * hot.getDataAtCell(row, 5) /
-                                    ((hot.getDataAtCell(row, 6) * hot.getDataAtCell(row, 1))))
-                            }
-                            if (col == 4) {
-                                if (row == countRows() - 2) {
-                                    hot.setDataAtCell(row, 5, newValue)
-                                } else {
-                                    hot.setDataAtCell(row, 5, newValue - hot.getDataAtCell(row + 1, 4))
-                                }
-                            }
-                            if (col == 5) {
-                                hot.setDataAtCell(row, 7,
-                                    hot.getDataAtCell(row, 3) * newValue /
-                                    ((hot.getDataAtCell(row, 6) * hot.getDataAtCell(row, 1))))
-                            }
-                            if (col == 6) {
-                                hot.setDataAtCell(row, 7,
-                                    hot.getDataAtCell(row, 3) * newValue /
-                                    ((newValue * hot.getDataAtCell(row, 1))))
-                            }
-                            if (col == 7) {
-                                newValue <= 0.06 ? 'Sí hay Arriostramiento' : 'No hay Arriostramiento'
-                            }
-                            if (col == 8) {
-                                newValue == 'Sí hay Arriostramiento' ? 'Sin desplazamiento lateral' : 'Con desplazamiento lateral'
-                            }
-                        })
-                    }
-                },
                 afterPaste: function(data, coords) {
+                    console.log(data); /* array de filas */
+                    console.log(coords); /* array con coordenadas de inicio y fin (col-row)*/
                     data.forEach(function(rowData, i) {
                         var startRow = coords[0].startRow;
                         /* var endRow = coords[0].endRow; */
@@ -790,15 +769,81 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                         var endCol = coords[0].endCol;
                         let k = 0;
                         for (let j = startCol; j <= endCol; j++) {
+                            //console.log('Fila:', startRow + i);
+                            //console.log('Columna:', j);
+                            //console.log('Dato:', rowData[k]);
+                            //console.log('indice' + k);
                             hot.setDataAtCell(startRow + i, j, rowData[k]);
                             k++;
                         }
                     });
                 },
+                afterChange: function(changes, source) {
+                    if (source == 'edit') {
+                        var hot = this;
+                        changes.forEach(function(change) {
+                            var row = change[0];
+                            var col = change[1];
+                            //var oldValue = change[2];
+                            var newValue = change[3];
+                            if (col === 1) {
+                                hot.setDataAtCell(row, 7,
+                                    parseFloat((hot.getDataAtCell(row, 3) * hot.getDataAtCell(row, 5) /
+                                        ((hot.getDataAtCell(row, 6) * newValue))).toFixed(4)));
+                            }
+                            if (col === 2) {
+                                if (row === 0) {
+                                    hot.setDataAtCell(row, 3, newValue)
+                                    return
+                                }
+                                //console.log(row, col)
+                                //console.log(hot.getDataAtCell(row - 1, 3), newValue)
+                                hot.setDataAtCell(row, 3, newValue + hot.getDataAtCell(row - 1, 3))
+                            }
+                            if (col == 3) {
+                                if (row + 2 < hot.countRows()) {
+                                    hot.setDataAtCell(
+                                        row + 1,
+                                        3,
+                                        newValue + hot.getDataAtCell(row + 1, 2)
+                                    );
+                                }
+                                //hot.setDataAtCell(row + 1, 3, hot.getDataAtCell(row + 1, 2) + newValue)
+                                hot.setDataAtCell(row, 7,
+                                    parseFloat((newValue * hot.getDataAtCell(row, 5) /
+                                        ((hot.getDataAtCell(row, 6) * hot.getDataAtCell(row, 1)))).toFixed(4)))
+                            }
+                            if (col == 4) {
+                                if (row + 2 == hot.countRows()) {
+                                    hot.setDataAtCell(row, 5, newValue)
+                                } else {
+                                    hot.setDataAtCell(row, 5, parseFloat((newValue - hot.getDataAtCell(row + 1, 4)).toFixed(4)))
+                                }
+                            }
+                            if (col == 5) {
+                                hot.setDataAtCell(row, 7,
+                                    parseFloat((hot.getDataAtCell(row, 3) * newValue /
+                                        ((hot.getDataAtCell(row, 6) * hot.getDataAtCell(row, 1)))).toFixed(4)))
+                            }
+                            if (col == 6) {
+                                hot.setDataAtCell(row, 7,
+                                    parseFloat(hot.getDataAtCell(row, 3) * hot.getDataAtCell(row, 5) /
+                                        ((newValue * hot.getDataAtCell(row, 1)))).toFixed(4))
+                            }
+                            if (col == 7) {
+                                hot.setDataAtCell(row, 8, newValue <= 0.06 ? 'Si hay Arriostramiento' : 'No hay Arriostramiento')
+                            }
+                            if (col == 8) {
+                                hot.setDataAtCell(row, 9, newValue == 'Si hay Arriostramiento' ? 'Sin Desplazamiento Lateral' : 'Con Desplazamiento Lateral')
+                            }
+                        })
+                    }
+                },
                 licenseKey: 'non-commercial-and-evaluation'
             });
+
             document.getElementById('guardarTablaX').addEventListener("click", function(e) {
-                tablex = hotLAX.getData()
+                tablex = hot.getData()
                 alert("Guardado, pase a la tabla dirección Y-Y")
                 /* ----Dirección Y Y------ */
                 var dataLAY = [];
@@ -810,10 +855,10 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                     var difAbs = 1
                     var difRel = difAbs
                     var vux = 1
-                    var q = puS * difRel / (vux * h);
-                    var verifArrios = q <= 0.06 ? 'Sí hay Arriostramiento' : 'No hay Arriostramiento'
-                    var tipoEs = verifArrios == 'Sí hay Arriostramiento' ? 'Sin desplazamiento lateral' : 'Con desplazamiento lateral'
-                    dataLAY.push([`Piso ${i + 1}`, h, pu, puS, difAbs, difRel, vux, verifArrios, tipoEs]);
+                    var q = parseFloat((puS * difRel / (vux * h)).toFixed(4));
+                    var verifArrios = q <= 0.06 ? 'Si hay Arriostramiento' : 'No hay Arriostramiento'
+                    var tipoEs = verifArrios == 'Si hay Arriostramiento' ? 'Sin Desplazamiento Lateral' : 'Con Desplazamiento Lateral'
+                    dataLAY.push([`Piso ${tablex.length - 1 - i}`, h, pu, puS, difAbs, difRel, vux, q, verifArrios, tipoEs]);
                 }
 
                 var containerLAY = document.getElementById('longitudArriostradaY');
@@ -861,6 +906,45 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                             align: 'center'
                         }, '(Ton)', '"Q"', ' Verificación del Arriostramiento', 'Tipo de Estructura']
                     ],
+                    columns: [{
+                            type: 'text',
+                            readOnly: true
+                        }, // 'Nivel',
+                        {
+                            type: 'numeric',
+                            readOnly: true
+                        },
+                        {
+                            type: 'numeric',
+                            readOnly: true
+                        },
+                        {
+                            type: 'numeric',
+                            readOnly: true
+                        },
+                        {
+                            type: 'numeric'
+                        }, // 'hm (m)',
+                        {
+                            type: 'numeric',
+                            readOnly: true
+                        }, // 'Vua (Ton)',
+                        {
+                            type: 'numeric',
+                        },
+                        {
+                            type: 'numeric',
+                            readOnly: true
+                        },
+                        {
+                            type: 'text',
+                            readOnly: true
+                        },
+                        {
+                            type: 'text',
+                            readOnly: true
+                        }
+                    ],
                     afterChange: function(changes, source) {
                         if (source == 'edit') {
                             var hot = this;
@@ -869,7 +953,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                                 var col = change[1]
                                 var newValue = change[3]
                                 if (col == 4) {
-                                    if (row == countRows() - 2) {
+                                    if (row == hot.countRows() - 2) {
                                         hot.setDataAtCell(row, 5, newValue)
                                     } else {
                                         hot.setDataAtCell(row, 5, newValue - hot.getDataAtCell(row + 1, 4))
@@ -877,19 +961,19 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                                 }
                                 if (col == 5) {
                                     hot.setDataAtCell(row, 7,
-                                        hot.getDataAtCell(row, 3) * newValue /
-                                        ((hot.getDataAtCell(row, 6) * hot.getDataAtCell(row, 1))))
+                                        parseFloat((hot.getDataAtCell(row, 3) * newValue /
+                                            ((hot.getDataAtCell(row, 6) * hot.getDataAtCell(row, 1)))).toFixed(4)))
                                 }
                                 if (col == 6) {
                                     hot.setDataAtCell(row, 7,
-                                        hot.getDataAtCell(row, 3) * newValue /
-                                        ((newValue * hot.getDataAtCell(row, 1))))
+                                        parseFloat((hot.getDataAtCell(row, 3) * hot.getDataAtCell(row, 5) /
+                                            ((newValue * hot.getDataAtCell(row, 1)))).toFixed(4)))
                                 }
                                 if (col == 7) {
-                                    newValue <= 0.06 ? 'Sí hay Arriostramiento' : 'No hay Arriostramiento'
+                                    hot.setDataAtCell(row, 8, newValue <= 0.06 ? 'Si hay Arriostramiento' : 'No hay Arriostramiento')
                                 }
                                 if (col == 8) {
-                                    newValue == 'Sí hay Arriostramiento' ? 'Sin desplazamiento lateral' : 'Con desplazamiento lateral'
+                                    hot.setDataAtCell(row, 9, newValue == 'Sí hay Arriostramiento' ? 'Sin desplazamiento lateral' : 'Con Desplazamiento Lateral')
                                 }
                             })
                         }
@@ -902,7 +986,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                             var endCol = coords[0].endCol;
                             let k = 0;
                             for (let j = startCol; j <= endCol; j++) {
-                                hot.setDataAtCell(startRow + i, j, rowData[k]);
+                                hotLAY.setDataAtCell(startRow + i, j, rowData[k]);
                                 k++;
                             }
                         });
@@ -924,7 +1008,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
             ];
 
             var container = document.getElementById('Scrga');
-            var hot = new Handsontable(container, {
+            var hot2 = new Handsontable(container, {
                 data: data,
                 rowHeaders: true,
                 colHeaders: true,
@@ -974,7 +1058,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
                 event.preventDefault();
 
                 // Obtén los datos de Handsontable y conviértelos a JSON
-                const tableData = hot.getData();
+                const tableData = hot2.getData();
                 const tableData2 = tablex;
                 const tableData3 = tabley;
                 const jsonData = JSON.stringify(tableData);
@@ -1026,7 +1110,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
             var ctx = document.getElementById("DIXXs");
             var myChart;
 
-            var hot = new Handsontable(container, {
+            var hotD = new Handsontable(container, {
                 data: dataFromHandsontable,
                 rowHeaders: true,
                 colHeaders: true,
@@ -1096,7 +1180,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
             ];
 
             var container = document.getElementById('diagramaex');
-            var hot = new Handsontable(container, {
+            var hotDX = new Handsontable(container, {
                 data: dataExcluidoX,
                 rowHeaders: true,
                 colHeaders: true,
@@ -1311,7 +1395,7 @@ if ($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2) {
             var ctx = document.getElementById("DIejey");
             var myChart;
 
-            var hot = new Handsontable(container, {
+            var hotIn = new Handsontable(container, {
                 data: dataFromHandsontableys,
                 rowHeaders: true,
                 colHeaders: true,
